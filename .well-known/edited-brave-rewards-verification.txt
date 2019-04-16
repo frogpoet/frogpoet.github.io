@@ -1,3 +1,0 @@
-This is a Brave Rewards publisher verification file.
-Domain: frogpoet.github.io 
-Token: 3ef63bd9400a3a2927f4677b9bae8e86945fad6487b7740218e231de78838525 
