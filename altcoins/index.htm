@@ -8,19 +8,50 @@
 		<script src="../libs/jquery.min.js"></script>
 		<script src="../libs/popper.min.js"></script>
 		<script src="../libs/bootstrap.min.js"></script>
+	<script>
+		function toggleVote(slug) {
+			try {
+				let id = "#" + slug + "-alert";
+				$(id).collapse('show');
+				setTimeout(function() {$(id).collapse('hide');}, 2000);
+
+			}
+			catch(e) {
+				alert('toggleVote: ' + e.message + ', slug = ' + slug);
+				throw(e);
+			}
+		}
+	</script>
   </head>
   <body style="padding-top: 80px;">
 	<div class="container">
 
       	<div class="alert alert-success" role="alert">
 		<h1 class="text-center">Altcoin Voting</h1>
-		<h4 class="text-center">Vote for which altcoin(s) you would like to be investigated in <a href="https://leanpub.com/coinspectre_2019_01" target="coinspectre">the latest CoinSpectre book</a></h4>
+		<h4 class="text-center">Vote for which altcoin(s) you would like to be researched in this month's <a href="https://leanpub.com/coinspectre_2019_01" target="coinspectre">Altcoin Investigation book (8-19)</a></h4>
       	</div>
 	<p>
-        Select any altcoin below to vote for it to be included in the next edition of CoinSpectre. Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.
+        Select any altcoin below to vote for it to be included in the next edition of this month's Altcoin Investigation.  Editions come out daily, if possible.  Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.  There may be a 24-hour delay between the casting of votes and resulting additions to the next edition.  Altcoins receiving the highest number of votes will be the ones included.
 	<div class="container"><table class="table table-bordered">
 	<tbody><tr class="table-warning"><th>Slug</th><th>Name</th><th>Category</th></tr>
-		<tr><td><button type="button" class="btn btn-primary" onclick="alert('click');">Slug</button></td><td>Name</td><td>Category</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('BIRD');">BIRD</button></td><td>Birdchain</td><td>Advertising</td></tr>
+		<tr><td id="BIRD-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for BIRD.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('LTK');">LTK</button></td><td>LinkToken</td><td>Distributed Resources</td></tr>
+		<tr><td id="LTK-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for LTK.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('OPNN');">OPNN</button></td><td>Opennity</td><td>Recruitment</td></tr>
+		<tr><td id="OPNN-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for OPNN.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('OSC');">OSC</button></td><td>Oasis City</td><td>Virtual Reality</td></tr>
+		<tr><td id="OSC-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for OSC.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('PCX');">PCX</button></td><td>ChainX</td><td>Blockchain Integration</td></tr>
+		<tr><td id="PCX-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for PCX.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('SWACE');">SWACE</button></td><td>Swace</td><td>Advertising</td></tr>
+		<tr><td id="SWACE-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for SWACE.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('WIN');">WIN</button></td><td>WINk</td><td>Gaming (Gambling)</td></tr>
+		<tr><td id="WIN-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for WIN.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('XCM');">XCM</button></td><td>CoinMetro Token</td><td>Cryptocurrency Investment</td></tr>
+		<tr><td id="XCM-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for XCM.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('XENO');">XENO</button></td><td>Xenoverse</td><td>Loans</td></tr>
+		<tr><td id="XENO-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for XENO.</td></tr>
 	</tbody></table></div>
 	</p>
     </div> <!-- container -->
