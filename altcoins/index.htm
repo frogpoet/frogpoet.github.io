@@ -20,6 +20,11 @@
 	<script>
 		function toggleVote(slug) {
 			try {
+				gtag('event', slug, {
+					'event_category' : 'vote',
+					'event_label' : 'vote',
+					'value': 1,
+				});
 				let id = "#" + slug + "-alert";
 				$(id).collapse('show');
 				setTimeout(function() {$(id).collapse('hide');}, 2000);
