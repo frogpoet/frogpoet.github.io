@@ -45,27 +45,37 @@
 		<h4 class="text-center">Vote for which altcoin(s) you would like to be researched in this month's <a href="https://leanpub.com/coinspectre_2019_01" target="coinspectre">Altcoin Investigation book (8-19)</a></h4>
       	</div>
 	<p>
-        Select any altcoin below to vote for it to be included in the next edition of this month's Altcoin Investigation.  Editions come out daily, if possible.  Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.  There may be a 24-hour delay between the casting of votes and resulting additions to the next edition.  Altcoins receiving the highest number of votes will be the ones included.
+        Select any altcoin below to vote for it to be included in the next edition of this month's Altcoin Investigation.  Editions come out daily, if possible.  Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.  There may be a 24-hour delay between the casting of votes and resulting additions to the next edition.  Altcoins receiving the highest number of votes will be the ones included.  If an altcoin button is disabled and the row has a grey background, then reseach on the altcoin has already been included in the book.
 	<div class="container"><table class="table table-bordered">
 	<tbody><tr class="table-warning"><th>Slug</th><th>Name</th><th>Category</th></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('BIRD');">BIRD</button></td><td>Birdchain</td><td>Advertising</td></tr>
-		<tr><td id="BIRD-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for BIRD.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('1UP');">1UP</button></td><td>Uptrennd</td><td>Social Media</td></tr>
+		<tr><td id="1UP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for 1UP.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('AGRO');">AGRO</button></td><td>Agrocoin</td><td>Agriculture</td></tr>
+		<tr><td id="AGRO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for AGRO.</td></tr>
+		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" onclick="">BIRD</button></td><td>Birdchain</td><td>Instant Messaging</td></tr>
+		<tr><td id="BIRD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BIRD.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('BOA');">BOA</button></td><td>BOSAGORA</td><td>Governance</td></tr>
+		<tr><td id="BOA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BOA.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('CCH');">CCH</button></td><td>Coinchase</td><td>Crowdfunding</td></tr>
+		<tr><td id="CCH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CCH.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('LTK');">LTK</button></td><td>LinkToken</td><td>Distributed Resources</td></tr>
-		<tr><td id="LTK-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for LTK.</td></tr>
+		<tr><td id="LTK-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LTK.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('OPNN');">OPNN</button></td><td>Opennity</td><td>Recruitment</td></tr>
-		<tr><td id="OPNN-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for OPNN.</td></tr>
+		<tr><td id="OPNN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for OPNN.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('OSC');">OSC</button></td><td>Oasis City</td><td>Virtual Reality</td></tr>
-		<tr><td id="OSC-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for OSC.</td></tr>
+		<tr><td id="OSC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for OSC.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('PCX');">PCX</button></td><td>ChainX</td><td>Blockchain Integration</td></tr>
-		<tr><td id="PCX-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for PCX.</td></tr>
+		<tr><td id="PCX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PCX.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('SWACE');">SWACE</button></td><td>Swace</td><td>Advertising</td></tr>
-		<tr><td id="SWACE-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for SWACE.</td></tr>
+		<tr><td id="SWACE-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SWACE.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('WIN');">WIN</button></td><td>WINk</td><td>Gaming (Gambling)</td></tr>
-		<tr><td id="WIN-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for WIN.</td></tr>
+		<tr><td id="WIN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for WIN.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('XAC');">XAC</button></td><td>General Attention Currency</td><td>Advertising</td></tr>
+		<tr><td id="XAC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XAC.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('XCM');">XCM</button></td><td>CoinMetro Token</td><td>Cryptocurrency Investment</td></tr>
-		<tr><td id="XCM-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for XCM.</td></tr>
+		<tr><td id="XCM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XCM.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('XENO');">XENO</button></td><td>Xenoverse</td><td>Loans</td></tr>
-		<tr><td id="XENO-alert" colspan="3" class="alert alert-warning fade collapse" role="alert">Vote cast for XENO.</td></tr>
+		<tr><td id="XENO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XENO.</td></tr>
 	</tbody></table></div>
 	</p>
     </div> <!-- container -->
