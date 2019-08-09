@@ -35,6 +35,28 @@
 				throw(e);
 			}
 		}
+		function changeSelectedMonth(yearMonth) {
+			try {
+				let prefixHref = "https://leanpub.com/coinspectre_";
+				let href = prefixHref + yearMonth;
+				let prevYearMonth = $('#monthSelectLink').attr("href").substring(prefixHref.length);
+				$('#monthSelectLink').attr("href", href);
+				let prefixCoins = "coins_";
+				let coins = "#" + prefixCoins + yearMonth;
+				let prevCoins = "#" + prefixCoins + prevYearMonth;
+				$(coins).collapse('toggle');
+				$(prevCoins).collapse('toggle');
+			}
+			catch(e) {
+				alert('changeSelectedMonth: ' + e.message + ", yearMonth = " + yearMonth);
+				throw(e);
+			}
+		}
+		(function() {
+			window.addEventListener('load', function() {
+				$('#coins_2019_08').collapse('show');
+			}, false);
+		})();
 	</script>
   </head>
   <body style="padding-top: 80px;">
@@ -42,24 +64,42 @@
 
       	<div class="alert alert-success" role="alert">
 		<h1 class="text-center">Altcoin Voting</h1>
-		<h4 class="text-center">Vote for which altcoin(s) you would like to be researched in this month's <a href="https://leanpub.com/coinspectre_2019_01" target="coinspectre">Altcoin Investigation book (8-19)</a></h4>
+		<h4 class="text-center">Vote for which altcoin(s) you would like to be researched in the selected month's <a id="monthSelectLink" href="https://leanpub.com/coinspectre_2019_08" target="coinspectre">Altcoin Investigation book</a></h4>
       	</div>
 	<p>
-        Select any altcoin below to vote for it to be included in the next edition of this month's Altcoin Investigation.  Editions come out daily, if possible.  Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.  There may be a 24-hour delay between the casting of votes and resulting additions to the next edition.  Altcoins receiving the highest number of votes will be the ones included.  If an altcoin button is disabled and the row has a grey background, then reseach on the altcoin has already been included in the book.
-	<div class="container"><table class="table table-bordered">
+        Select any altcoin below to vote for it to be included in the next edition of the selected month's Altcoin Investigation.  If the selected month is the current month, then editions come out daily, if possible.  Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.  There may be a 24-hour delay between the casting of votes and resulting additions to the next edition.  Altcoins receiving the highest number of votes will be the ones included.  If an altcoin button is disabled and the row has a grey background, then research on the altcoin has already been included in the book.
+	</p>
+	<p class="text-center">Select month: 
+	<select id="selectedMonth" class="custom-select" onchange="changeSelectedMonth(this.value);">
+		<option value="2019_08" selected>2019-08</option>
+		<option value="2019_01">2019-01</option>
+	</select>
+	</p>
+
+	<div id="coins_2019_08" class="collapse">
+	<table class="table table-bordered">
 	<tbody><tr class="table-warning"><th>Slug</th><th>Name</th><th>Category</th></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('1UP');">1UP</button></td><td>Uptrennd</td><td>Social Media</td></tr>
+
+		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" onclick="">1UP</button></td><td>Uptrennd</td><td>Social Media</td></tr>
 		<tr><td id="1UP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for 1UP.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('AGRO');">AGRO</button></td><td>Agrocoin</td><td>Agriculture</td></tr>
 		<tr><td id="AGRO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for AGRO.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('ASG');">ASG</button></td><td>Asgard</td><td>Environment</td></tr>
+		<tr><td id="ASG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ASG.</td></tr>
 		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" onclick="">BIRD</button></td><td>Birdchain</td><td>Instant Messaging</td></tr>
 		<tr><td id="BIRD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BIRD.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('BOA');">BOA</button></td><td>BOSAGORA</td><td>Governance</td></tr>
 		<tr><td id="BOA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BOA.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('CCH');">CCH</button></td><td>Coinchase</td><td>Crowdfunding</td></tr>
 		<tr><td id="CCH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CCH.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('HELP');">HELP</button></td><td>Helpico</td><td>Charity</td></tr>
+		<tr><td id="HELP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for HELP.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('LTK');">LTK</button></td><td>LinkToken</td><td>Distributed Resources</td></tr>
 		<tr><td id="LTK-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LTK.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('MCASH');">MCASH</button></td><td>Mcashchain</td><td>Cryptocurrencies</td></tr>
+		<tr><td id="MCASH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MCASH.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('MBN');">MBN</button></td><td>Membrana</td><td>Cryptocurrency Investment</td></tr>
+		<tr><td id="MBN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MBN.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('OPNN');">OPNN</button></td><td>Opennity</td><td>Recruitment</td></tr>
 		<tr><td id="OPNN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for OPNN.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('OSC');">OSC</button></td><td>Oasis City</td><td>Virtual Reality</td></tr>
@@ -76,8 +116,16 @@
 		<tr><td id="XCM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XCM.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('XENO');">XENO</button></td><td>Xenoverse</td><td>Loans</td></tr>
 		<tr><td id="XENO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XENO.</td></tr>
-	</tbody></table></div>
-	</p>
+	</tbody></table>
+	</div>
+
+	<div id="coins_2019_01" class="collapse">
+	<table class="table table-bordered">
+	<tbody><tr class="table-warning"><th>Slug</th><th>Name</th><th>Category</th></tr>
+		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" onclick="">TEST</button></td><td>test</td><td>Social Media</td></tr>
+		<tr><td id="test-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TEST.</td></tr>
+	</tbody></table>
+	</div>
     </div> <!-- container -->
   </body>
 </html>
