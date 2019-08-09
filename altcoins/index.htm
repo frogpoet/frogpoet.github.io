@@ -18,11 +18,22 @@
 			  gtag('config', 'UA-145159364-1');
 		</script>
 	<script>
+		function getSelectedYearMonth() {
+			try {
+				let prefixHref = "https://leanpub.com/coinspectre_";
+				let selectedYearMonth = $('#monthSelectLink').attr("href").substring(prefixHref.length);
+				return selectedYearMonth;
+			}
+			catch(e) {
+				alert('getSelectedYearMonth: ' + e.message);
+				throw(e);
+			}
+		} 
 		function toggleVote(slug) {
 			try {
 				gtag('event', slug, {
 					'event_category' : 'vote',
-					'event_label' : 'vote',
+					'event_label' : 'vote_' + getSelectedYearMonth(),
 					'value': 1,
 				});
 				let id = "#" + slug + "-alert";
@@ -39,7 +50,7 @@
 			try {
 				let prefixHref = "https://leanpub.com/coinspectre_";
 				let href = prefixHref + yearMonth;
-				let prevYearMonth = $('#monthSelectLink').attr("href").substring(prefixHref.length);
+				let prevYearMonth = getSelectedYearMonth();
 				$('#monthSelectLink').attr("href", href);
 				let prefixCoins = "coins_";
 				let coins = "#" + prefixCoins + yearMonth;
