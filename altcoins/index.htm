@@ -49,6 +49,20 @@
 				throw(e);
 			}
 		}
+		function toggleBook(bookCategory) {
+			try {
+				gtag('event', 'go_to_leanpub', {
+					'event_category' : 'book_' + bookCategory,
+					'event_label' : 'book_' + getSelectedYearMonth(),
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('toggleBook: ' + e.message + ', bookCategory = ' + bookCategory);
+				throw(e);
+			}
+		}
 		function changeSelectedMonth(yearMonth) {
 			try {
 				let prefixHref = getPrefixHref();
@@ -81,7 +95,7 @@
 
       	<div class="alert alert-success" role="alert">
 		<h1 class="text-center">Altcoin Voting</h1>
-		<h4 class="text-center">Vote for which altcoin(s) you would like to be researched in the selected month's <a id="monthSelectLink" href="" target="coinspectre">Altcoin Investigation book</a></h4>
+		<h4 class="text-center">Vote for which altcoin(s) you would like to be researched in the selected month's <a id="monthSelectLink" href="" target="coinspectre" onclick="toggleBook('altcoins');">Altcoin Investigation book</a></h4>
       	</div>
 	<p>
         Select any altcoin below to vote for it to be included in the next edition of the selected month's Altcoin Investigation.  If the selected month is the current month, then editions come out daily, if possible.  Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.  There may be a 24-hour delay between the casting of votes and resulting additions to the next edition.  Altcoins receiving the highest number of votes will be the ones included.  If an altcoin button is disabled and the row has a grey background, then research on the altcoin has already been included in the book.
