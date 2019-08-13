@@ -18,7 +18,7 @@
 			  gtag('config', 'UA-145159364-1');
 		</script>
 	<script>
-		function getPrefixHref() { return "https://leanpub.com/coinspectre_"; }
+		function getPrefixHref() { return "https://leanpub.com/altcoininvestigation_"; }
 		function getCurrentYearMonthDefault() { return "2019_08"; }
 
 		function getSelectedYearMonth() {
@@ -94,8 +94,9 @@
 	<div class="container">
 
       	<div class="alert alert-success" role="alert">
-		<h1 class="text-center">Altcoin Voting</h1>
-		<h4 class="text-center">Vote for which altcoin(s) you would like to be researched in the selected month's <a id="monthSelectLink" href="" target="coinspectre" onclick="toggleBook('altcoins');">Altcoin Investigation book</a></h4>
+		<h1 class="text-center">Altcoin Investigation</h1>
+		<h2 class="text-center">Voting Page</h2>
+		<h4 class="text-center">Vote for which altcoin(s) you would like to be researched in the selected month's <a id="monthSelectLink" href="" target="leanpub" onclick="toggleBook('altcoins');">Altcoin Investigation book</a> &LeftArrowBar; (this is the download link)</h4>
       	</div>
 	<p>
         Select any altcoin below to vote for it to be included in the next edition of the selected month's Altcoin Investigation.  If the selected month is the current month, then editions come out daily, if possible.  Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.  There may be a 24-hour delay between the casting of votes and resulting additions to the next edition.  Altcoins receiving the highest number of votes will be the ones included.  If an altcoin button is disabled and the row has a grey background, then research on the altcoin has already been included in the book.
@@ -103,7 +104,9 @@
 	<p class="text-center">Select month: 
 	<select id="selectedMonth" class="custom-select" onchange="changeSelectedMonth(this.value);">
 		<option value="2019_08" selected>2019-08</option>
+<!--
 		<option value="2019_01">2019-01</option>
+-->
 	</select>
 	</p>
 
@@ -151,7 +154,7 @@
 		<tr><td id="YTA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for YTA.</td></tr>
 	</tbody></table>
 	</div>
-
+<!--
 	<div id="coins_2019_01" class="collapse">
 	<table class="table table-bordered">
 	<tbody><tr class="table-warning"><th>Slug</th><th>Name</th><th>Category</th></tr>
@@ -159,6 +162,7 @@
 		<tr><td id="test-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TEST.</td></tr>
 	</tbody></table>
 	</div>
+-->
     </div> <!-- container -->
   </body>
 </html>
