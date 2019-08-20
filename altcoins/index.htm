@@ -99,7 +99,7 @@
 		<h4 class="text-center">Vote for which altcoin(s) you would like to be researched in the selected month's <a id="monthSelectLink" href="" target="leanpub" onclick="toggleBook('altcoins');">Altcoin Investigation book</a> &LeftArrowBar; (this is the download link)</h4>
       	</div>
 	<p>
-        Select any altcoin below to vote for it to be included in the next edition of the selected month's Altcoin Investigation.  If the selected month is the current month, then editions come out daily, if possible.  Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.  There may be a 24-hour delay between the casting of votes and resulting additions to the next edition.  Altcoins receiving the highest number of votes will be the ones included.  If an altcoin button is disabled and the row has a grey background, then research on the altcoin has already been included in the book.
+        Select any altcoin below to vote for it to be included in the next edition of the selected month's Altcoin Investigation.  If the selected month is the current month, then editions come out daily, if possible.  Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.  There may be a 24-hour delay between the casting of votes and resulting additions to the next edition.  Altcoins receiving the highest number of votes will be the ones included.  If an altcoin button is disabled and the row has a grey background, then research on the altcoin has already been included in the book.  If an altcoin button is disabled and the row has a bluish background, then research on the altcoin is currently in process.
 	</p>
 	<p class="text-center">Select month: 
 	<select id="selectedMonth" class="custom-select" onchange="changeSelectedMonth(this.value);">
@@ -133,6 +133,8 @@
 		<tr><td id="CCH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CCH.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('CUST');">CUST</button></td><td>Custody Token</td><td>Digital Asset Custody</td></tr>
 		<tr><td id="CUST-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CUST.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('DEEP');">DEEP</button></td><td>DeepCloud AI</td><td>Cloud Computing</td></tr>
+		<tr><td id="DEEP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DEEP.</td></tr>
 		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" onclick="">ENQ</button></td><td>Enecuum</td><td>Cryptocurrencies</td></tr>
 		<tr><td id="ENQ-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ENQ.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('EVT');">EVT</button></td><td>EveriToken</td><td>Cryptocurrencies</td></tr>
@@ -153,7 +155,7 @@
 		<tr><td id="OSC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for OSC.</td></tr>
 		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" onclick="">PCX</button></td><td>ChainX</td><td>Blockchain Integration</td></tr>
 		<tr><td id="PCX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PCX.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('SWACE');">SWACE</button></td><td>Swace</td><td>Advertising</td></tr>
+		<tr class="bg-info text-white"><td><button type="button" class="btn btn-primary btn-block disabled" onclick="">SWACE</button></td><td>Swace</td><td>Advertising</td></tr>
 		<tr><td id="SWACE-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SWACE.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" onclick="toggleVote('THAR');">THAR</button></td><td>Thar Token</td><td>Cryptocurrency Exchanges</td></tr>
 		<tr><td id="THAR-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for THAR.</td></tr>
