@@ -110,12 +110,9 @@
 	<p class="text-center">Select month: 
 	<select id="selectedMonth" class="custom-select" onchange="changeSelectedMonth(this.value);">
 		<option value="2019_08" selected>2019-08</option>
-<!--
-		<option value="2019_01">2019-01</option>
--->
+		<option value="2019_09">2019-09</option>
 	</select>
 	</p>
-	</div> <!-- container -->
 
 	<div id="coins_2019_08" class="collapse">
 	<table class="table table-bordered">
@@ -132,6 +129,8 @@
 		<tr><td id="BHT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BHT.</td></tr>
 		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">BIRD</button></td><td>Birdchain</td><td>Instant Messaging</td></tr>
 		<tr><td id="BIRD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BIRD.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BF');">BF</button></td><td>BitForex Token</td><td>Cryptocurrency Exchanges</td></tr>
+		<tr><td id="BF-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BF.</td></tr>
 		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">BOA</button></td><td>BOSAGORA</td><td>Governance</td></tr>
 		<tr><td id="BOA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BOA.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BOK');">BOK</button></td><td>Blockium</td><td>Gaming (Financial)</td></tr>
@@ -243,7 +242,8 @@
 		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">ZUC</button></td><td>ZeuxCoin</td><td>Financial Planning</td></tr>
 		<tr><td id="ZUC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ZUC.</td></tr>
 	</tbody></table>
-	</div>
+	</div> <!-- coins_2019_08 -->
+	</div> <!-- container -->
 <!--
 	<div id="coins_2019_01" class="collapse">
 	<table class="table table-bordered">
