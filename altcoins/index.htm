@@ -21,7 +21,7 @@
 		</script>
 	<script>
 		function getPrefixHref() { return "https://leanpub.com/altcoininvestigation_"; }
-		function getCurrentYearMonthDefault() { return "2019_08"; }
+		function getCurrentYearMonthDefault() { return "2019_09"; }
 
 		function getSelectedYearMonth() {
 			try {
@@ -109,8 +109,8 @@
 	</p>
 	<p class="text-center">Select month: 
 	<select id="selectedMonth" class="custom-select" onchange="changeSelectedMonth(this.value);">
-		<option value="2019_08" selected>2019-08</option>
-		<option value="2019_09">2019-09</option>
+		<option value="2019_08">2019-08</option>
+		<option value="2019_09" selected>2019-09</option>
 	</select>
 	</p>
 
@@ -247,12 +247,28 @@
 	<div id="coins_2019_09" class="collapse">
 	<table class="table table-bordered">
 	<tbody><tr class="table-warning"><th>Slug</th><th>Name</th><th>Category</th></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BDP');">BDP</button></td><td>BidiPass</td><td>Authentication</td></tr>
+		<tr><td id="BDP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BDP.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CBM');">CBM</button></td><td>CryptoBonusMiles</td><td>Loyalty Rewards</td></tr>
+		<tr><td id="CBM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CBM.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CRAD');">CRAD</button></td><td>CryptoAds Marketplace</td><td>Advertising</td></tr>
+		<tr><td id="CRAD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CRAD.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CRON');">CRON</button></td><td>Cryptocean</td><td>Financial Services</td></tr>
 		<tr><td id="CRON-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CRON.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MIX');">MIX</button></td><td>MixMarvel</td><td>Gaming</td></tr>
 		<tr><td id="MIX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MIX.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('SEAL');">SEAL</button></td><td>Sealchain</td><td>Cryptocurrencies</td></tr>
+		<tr><td id="SEAL-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SEAL.</td></tr>
 		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('STREAM');">STREAM</button></td><td>Streamit Coin</td><td>Content Distribution (Video)</td></tr>
 		<tr><td id="STREAM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for STREAM.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TAN');">TAN</button></td><td>Taklimakan Network</td><td>Content Distribution (Crypto)</td></tr>
+		<tr><td id="TAN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TAN.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('VIDY');">VIDY</button></td><td>VIDY</td><td>Advertising</td></tr>
+		<tr><td id="VIDY-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for VIDY.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('WBET');">WBET</button></td><td>Wavesbet</td><td>Gaming (Gambling)</td></tr>
+		<tr><td id="WBET-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for WBET.</td></tr>
+		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('YO');">YO</button></td><td>Yobit Token</td><td>Cryptocurrency Exchanges</td></tr>
+		<tr><td id="YO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for YO.</td></tr>
 	</tbody></table>
 	</div>
 
