@@ -10,6 +10,10 @@
 		<script src="../libs/jquery.min.js"></script>
 		<script src="../libs/popper.min.js"></script>
 		<script src="../libs/bootstrap.min.js"></script>
+<!--
+		<script src="./book_2019_08_status_2019_09_30_19_01_32.js"></script>
+		<script src="./book_2019_09_status_2019_09_30_18_57_37.js"></script>
+-->
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145159364-1"></script>
 		<script>
@@ -21,7 +25,9 @@
 		</script>
 	<script>
 		function getPrefixHref() { return "https://leanpub.com/altcoininvestigation_"; }
-		function getCurrentYearMonthDefault() { return "2019_09"; }
+		function getCurrentYearMonthDefault() { return "2019_10"; }
+
+		function safeLength(obj, objName) { return (obj == null) ? objName + " = " + obj : objName + ".length = " + obj.length;}
 
 		function getSelectedYearMonth() {
 			try {
@@ -82,8 +88,22 @@
 				throw(e);
 			}
 		}
+		function populateTable(divId, data) {
+			try {
+				for (let i=0; i<data.length; i++) {
+					$(divId).append("<tr><td><button type=\"button\" class=\"btn btn-primary btn-block\" style=\"cursor:pointer;\" onclick=\"toggleVote('" + data[i].slug + "');\">" + data[i].slug + "</button></td><td>" + data[i].name + "</td><td>" + data[i].category + "</td></tr>");
+					$(divId).append("<tr><td id=\"" + data[i].slug + "-alert\" colspan=\"3\" class=\"alert alert-warning fade collapse\" role=\"alert\">Vote cast for " + data[i].slug + ".</td></tr>");
+				}
+			}
+			catch(e) {
+				alert('populateTable: ' + e.message + ", divId = " + divId + ", " + safeLength(data, "data"));
+				throw(e);
+			}
+		}
 		(function() {
 			window.addEventListener('load', function() {
+//				populateTable("#coins_2019_08", status_2019_08);
+//				populateTable("#coins_2019_09", status_2019_09);
 				let coinsId = "#coins_" + getCurrentYearMonthDefault(); 
 				$(coinsId).collapse('show');
 				let href = getPrefixHref() + getCurrentYearMonthDefault();
@@ -98,286 +118,291 @@
       	<div class="alert alert-success" role="alert">
 		<h1 class="text-center">Altcoin Investigation</h1>
 		<h2 class="text-center">Voting Page</h2>
-		<h4 class="text-center">Vote for which altcoin(s) you would like to be researched in the selected month's <a id="monthSelectLink" href="" target="leanpub" onclick="toggleBook('altcoins');">Altcoin Investigation book</a> &LeftArrowBar; (this is the download link)</h4>
+		<h4 class="text-center">Vote for which altcoin(s) you would like to receive more research in the selected month's <a id="monthSelectLink" href="" target="leanpub" onclick="toggleBook('altcoins');">Altcoin Investigation book</a> &LeftArrowBar; (this is the download link)</h4>
       	</div>
 	<p>
-        Select the button for any altcoin below to vote for it to be included in the next edition of the selected month's Altcoin Investigation.  These are altcoins which reached
+        Select the button for any altcoin below to vote for it to be more extensively researched in the next edition of the selected month's Altcoin Investigation.  These are altcoins which reached
 	the milestone of being listed on CoinMarketCap&reg; during the selected month.
-	Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive information about the coin.
-	Only coins with the highest number of votes will be included in the book.
-	If an altcoin button is disabled and the row has a grey background, then research on the altcoin has already been included.
+	Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive more information about the coin.</p>
+	<p>If an altcoin button is disabled and the row has a grey background, then voting for the altcoin has temporarily been suspended so that other coins may be get a chance to receive more votes.
 	</p>
 	<p class="text-center">Select month: 
 	<select id="selectedMonth" class="custom-select" onchange="changeSelectedMonth(this.value);">
 		<option value="2019_08">2019-08</option>
-		<option value="2019_09" selected>2019-09</option>
+		<option value="2019_09">2019-09</option>
+		<option value="2019_10" selected>2019-10</option>
 	</select>
 	</p>
 
 	<div id="coins_2019_08" class="collapse">
 	<table class="table table-bordered">
-	<tbody><tr class="table-warning"><th>Slug</th><th>Name</th><th>Category</th></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">1UP</button></td><td>Uptrennd</td><td>Social Media</td></tr>
-		<tr><td id="1UP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for 1UP.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('AD');">AD</button></td><td>Asian Dragon</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="AD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for AD.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">AGRO</button></td><td>Agrocoin</td><td>Agriculture</td></tr>
-		<tr><td id="AGRO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for AGRO.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">ASG</button></td><td>Asgard</td><td>Environment</td></tr>
-		<tr><td id="ASG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ASG.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BHT');">BHT</button></td><td>BHEX Token</td><td>Cryptocurrency Exchanges</td></tr>
-		<tr><td id="BHT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BHT.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">BIRD</button></td><td>Birdchain</td><td>Instant Messaging</td></tr>
-		<tr><td id="BIRD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BIRD.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BF');">BF</button></td><td>BitForex Token</td><td>Cryptocurrency Exchanges</td></tr>
-		<tr><td id="BF-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BF.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">BOA</button></td><td>BOSAGORA</td><td>Governance</td></tr>
-		<tr><td id="BOA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BOA.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BOK');">BOK</button></td><td>Blockium</td><td>Gaming (Financial)</td></tr>
-		<tr><td id="BOK-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BOK.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BPRO');">BPRO</button></td><td>Bitcloud Pro</td><td>Cryptocurrency Investment</td></tr>
-		<tr><td id="BPRO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BPRO.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BYT');">BYT</button></td><td>Bayan Token</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="BYT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BYT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CCH');">CCH</button></td><td>Coinchase</td><td>Crowdfunding</td></tr>
-		<tr><td id="CCH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CCH.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('COCOS');">COCOS</button></td><td>Cocos-BCX</td><td>Gaming</td></tr>
-		<tr><td id="COCOS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for COCOS.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CUST');">CUST</button></td><td>Custody Token</td><td>Digital Asset Custody</td></tr>
-		<tr><td id="CUST-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CUST.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DAB');">DAB</button></td><td>DABANKING</td><td>Gaming</td></tr>
-		<tr><td id="DAB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DAB.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DEEP');">DEEP</button></td><td>DeepCloud AI</td><td>Cloud Computing</td></tr>
-		<tr><td id="DEEP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DEEP.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DEFI');">DEFI</button></td><td>Defi</td><td>Loans</td></tr>
-		<tr><td id="DEFI-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DEFI.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DYNMT');">DYNMT</button></td><td>Dynamite</td><td>Investment (Self-Destructing)</td></tr>
-		<tr><td id="DYNMT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DYNMT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('EM');">EM</button></td><td>Eminer</td><td>Bitcoin Mining</td></tr>
-		<tr><td id="EM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for EM.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">ENQ</button></td><td>Enecuum</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="ENQ-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ENQ.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">EVT</button></td><td>EveriToken</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="EVT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for EVT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('FO');">FO</button></td><td>FIBOS</td><td>Blockchain Development</td></tr>
-		<tr><td id="FO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for FO.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('FRM');">FRM</button></td><td>Ferrum Network</td><td>Blockchain Integration</td></tr>
-		<tr><td id="FRM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for FRM.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('FTT');">FTT</button></td><td>FTX Token</td><td>Cryptocurrency Derivative Exchanges</td></tr>
-		<tr><td id="FTT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for FTT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('GT');">GT</button></td><td>Gatechain Token</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="GT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for GT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('HELP');">HELP</button></td><td>Helpico</td><td>Charity</td></tr>
-		<tr><td id="HELP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for HELP.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('HINT');">HINT</button></td><td>Hintchain</td><td>Dining</td></tr>
-		<tr><td id="HINT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for HINT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('IOEX');">IOEX</button></td><td>ioeX</td><td>Internet of Things</td></tr>
-		<tr><td id="IOEX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for IOEX.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('KGC');">KGC</button></td><td>Krypton Galaxy Coin</td><td>Gaming</td></tr>
-		<tr><td id="KGC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for KGC.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('KICKS');">KICKS</button></td><td>SESSIA</td><td>Advertising</td></tr>
-		<tr><td id="KICKS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for KICKS.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LAD');">LAD</button></td><td>Ladder Network Token</td><td>Blockchain Integration</td></tr>
-		<tr><td id="LAD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LAD.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" role="button" onclick="toggleVote('LNX');">LNX</button></td><td>LNX Protocol</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="LNX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LNX.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LOL');">LOL</button></td><td>EMOGI Network</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="LOL-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LOL.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LOT');">LOT</button></td><td>Lukki Operating Token</td><td>Cryptocurrency Exchanges</td></tr>
-		<tr><td id="LOT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LOT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LTK');">LTK</button></td><td>LinkToken</td><td>Distributed Resources</td></tr>
-		<tr><td id="LTK-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LTK.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MCASH');">MCASH</button></td><td>Mcashchain</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="MCASH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MCASH.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MB8');">MB8</button></td><td>MB8 Coin</td><td>Loyalty Rewards</td></tr>
-		<tr><td id="MB8-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MB8.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MBN');">MBN</button></td><td>Membrana</td><td>Cryptocurrency Investment</td></tr>
-		<tr><td id="MBN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MBN.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MT');">MT</button></td><td>Monarch</td><td>Cryptocurrency Management</td></tr>
-		<tr><td id="MT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NYE');">NYE</button></td><td>NewYork Exchange</td><td>Stock Trading</td></tr>
-		<tr><td id="NYE-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NYE.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('OPNN');">OPNN</button></td><td>Opennity</td><td>Recruitment</td></tr>
-		<tr><td id="OPNN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for OPNN.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">OSC</button></td><td>Oasis City</td><td>Virtual Reality</td></tr>
-		<tr><td id="OSC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for OSC.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">PCX</button></td><td>ChainX</td><td>Blockchain Integration</td></tr>
-		<tr><td id="PCX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PCX.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PERL');">PERL</button></td><td>Perlin</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="PERL-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PERL.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PLA');">PLA</button></td><td>PLANET</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="PLA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PLA.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PLG');">PLG</button></td><td>Pledge Coin</td><td>Crowdfunding</td></tr>
-		<tr><td id="PLG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PLG.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('SON');">SON</button></td><td>Simone</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="SON-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SON.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">SWACE</button></td><td>Swace</td><td>Advertising</td></tr>
-		<tr><td id="SWACE-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SWACE.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('SXP');">SXP</button></td><td>Swipe</td><td>Cryptocurrency Management</td></tr>
-		<tr><td id="SXP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SXP.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('THAR');">THAR</button></td><td>Thar Token</td><td>Cryptocurrency Exchanges</td></tr>
-		<tr><td id="THAR-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for THAR.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TOKO');">TOKO</button></td><td>Tokoin</td><td>Business Profiles</td></tr>
-		<tr><td id="TOKO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TOKO.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TSHP');">TSHP</button></td><td>12Ships</td><td>Cryptocurrency Mining</td></tr>
-		<tr><td id="TSHP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TSHP.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('VID');">VID</button></td><td>VideoCoin</td><td>Content Distribution (Video)</td></tr>
-		<tr><td id="VID-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for VID.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">WIN</button></td><td>WINk</td><td>Gaming (Gambling)</td></tr>
-		<tr><td id="WIN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for WIN.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XAC');">XAC</button></td><td>General Attention Currency</td><td>Advertising</td></tr>
-		<tr><td id="XAC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XAC.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XCM');">XCM</button></td><td>CoinMetro Token</td><td>Cryptocurrency Investment</td></tr>
-		<tr><td id="XCM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XCM.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XENO');">XENO</button></td><td>Xenoverse</td><td>Loans</td></tr>
-		<tr><td id="XENO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XENO.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('xEUR');">xEUR</button></td><td>xEURO</td><td>Cryptocurrency Pegging</td></tr>
-		<tr><td id="xEUR-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for xEUR.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XLMX');">XLMX</button></td><td>Stellar Classic</td><td>Recruitment</td></tr>
-		<tr><td id="XLMX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XLMX.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('YTA');">YTA</button></td><td>YottaChain</td><td>Distributed Storage</td></tr>
-		<tr><td id="YTA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for YTA.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">ZNZ</button></td><td>ZENZO</td><td>Gaming</td></tr>
-		<tr><td id="ZNZ-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ZNZ.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">ZUC</button></td><td>ZeuxCoin</td><td>Financial Planning</td></tr>
-		<tr><td id="ZUC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ZUC.</td></tr>
+	<tbody><tr class="table-warning"><th>Slug</th><th><u>Name</u><br/>pages of research</th><th><u>Category</u><br/>promo video</th></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">1UP</button></td><td>Uptrennd<br/>7</td><td>Social Media<br/></td></tr>
+<tr><td id="1UP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for 1UP.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('AD');">AD</button></td><td>Asian Dragon<br/>0</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="AD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for AD.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">AGRO</button></td><td>Agrocoin<br/>14</td><td>Agriculture<br/><a href="https://www.youtube.com/watch?v=MLIC5UyGlcM?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="AGRO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for AGRO.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">ASG</button></td><td>Asgard<br/>9</td><td>Environment<br/><a href="https://youtu.be/9TGlKizeqCw?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="ASG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ASG.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BF');">BF</button></td><td>BitForex Token<br/>0</td><td>Cryptocurrency Exchanges<br/><a href="https://youtu.be/ZtTwQKbSwzg?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="BF-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BF.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BHT');">BHT</button></td><td>BHEX Token<br/>0</td><td>Cryptocurrency Exchanges<br/></td></tr>
+<tr><td id="BHT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BHT.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">BIRD</button></td><td>Birdchain<br/>14</td><td>Instant Messaging<br/></td></tr>
+<tr><td id="BIRD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BIRD.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">BOA</button></td><td>BOSAGORA<br/>7</td><td>Governance<br/></td></tr>
+<tr><td id="BOA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BOA.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BOK');">BOK</button></td><td>Blockium<br/>0</td><td>Gaming (Financial)<br/><a href="https://youtu.be/ZyKKexud2HE?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="BOK-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BOK.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BPRO');">BPRO</button></td><td>Bitcloud Pro<br/>0</td><td>Cryptocurrency Investment<br/></td></tr>
+<tr><td id="BPRO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BPRO.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BYT');">BYT</button></td><td>Bayan Token<br/>0</td><td>Cryptocurrencies<br/><a href="https://youtu.be/XJ7Rs3DSeA8?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="BYT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BYT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CCH');">CCH</button></td><td>Coinchase<br/>0</td><td>Crowdfunding<br/></td></tr>
+<tr><td id="CCH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CCH.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('COCOS');">COCOS</button></td><td>Cocos-BCX<br/>0</td><td>Gaming<br/><a href="https://youtu.be/KiKc3FG9Auc?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="COCOS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for COCOS.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CUST');">CUST</button></td><td>Custody Token<br/>0</td><td>Digital Asset Custody<br/></td></tr>
+<tr><td id="CUST-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CUST.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DAB');">DAB</button></td><td>DABANKING<br/>0</td><td>Gaming<br/></td></tr>
+<tr><td id="DAB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DAB.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DEEP');">DEEP</button></td><td>DeepCloud AI<br/>0</td><td>Cloud Computing<br/><a href="https://www.youtube.com/watch?v=_9BlCPz88MQ?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="DEEP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DEEP.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DEFI');">DEFI</button></td><td>Defi<br/>0</td><td>Loans<br/></td></tr>
+<tr><td id="DEFI-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DEFI.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DYNMT');">DYNMT</button></td><td>Dynamite<br/>0</td><td>Investment (Self-Destructing)<br/><a href="https://youtu.be/Vtk2-yhj27M?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="DYNMT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DYNMT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('EM');">EM</button></td><td>Eminer<br/>0</td><td>Bitcoin Mining<br/></td></tr>
+<tr><td id="EM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for EM.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">ENQ</button></td><td>Enecuum<br/>15</td><td>Cryptocurrencies<br/><a href="https://youtu.be/GpPAfyFqbAE?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="ENQ-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ENQ.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">EVT</button></td><td>EveriToken<br/>15</td><td>Cryptocurrencies<br/><a href="https://youtu.be/rY--zQMDHTE?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="EVT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for EVT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('FO');">FO</button></td><td>FIBOS<br/>0</td><td>Blockchain Development<br/></td></tr>
+<tr><td id="FO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for FO.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('FRM');">FRM</button></td><td>Ferrum Network<br/>0</td><td>Blockchain Integration<br/></td></tr>
+<tr><td id="FRM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for FRM.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('FTT');">FTT</button></td><td>FTX Token<br/>0</td><td>Cryptocurrency Derivative Exchanges<br/></td></tr>
+<tr><td id="FTT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for FTT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('GT');">GT</button></td><td>Gatechain Token<br/>0</td><td>Cryptocurrencies<br/><a href="https://www.youtube.com/watch?v=-tMcrh1S60Y?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="GT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for GT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('HELP');">HELP</button></td><td>Helpico<br/>0</td><td>Charity<br/></td></tr>
+<tr><td id="HELP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for HELP.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('HINT');">HINT</button></td><td>Hintchain<br/>0</td><td>Dining<br/><a href="https://youtu.be/phDz0W4jrlg?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="HINT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for HINT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('IOEX');">IOEX</button></td><td>ioeX<br/>0</td><td>Internet of Things<br/></td></tr>
+<tr><td id="IOEX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for IOEX.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('KGC');">KGC</button></td><td>Krypton Galaxy Coin<br/>0</td><td>Gaming<br/></td></tr>
+<tr><td id="KGC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for KGC.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('KICKS');">KICKS</button></td><td>SESSIA<br/>0</td><td>Advertising<br/><a href="https://youtu.be/Sg9tcM3N9YM?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="KICKS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for KICKS.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LAD');">LAD</button></td><td>Ladder Network Token<br/>0</td><td>Blockchain Integration<br/></td></tr>
+<tr><td id="LAD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LAD.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LNX');">LNX</button></td><td>LNX Protocol<br/>0</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="LNX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LNX.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LOL');">LOL</button></td><td>EMOGI Network<br/>0</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="LOL-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LOL.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LOT');">LOT</button></td><td>Lukki Operating Token<br/>0</td><td>Cryptocurrency Exchanges<br/></td></tr>
+<tr><td id="LOT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LOT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LTK');">LTK</button></td><td>LinkToken<br/>0</td><td>Distributed Resources<br/></td></tr>
+<tr><td id="LTK-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LTK.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MB8');">MB8</button></td><td>MB8 Coin<br/>0</td><td>Loyalty Rewards<br/><a href="https://www.youtube.com/watch?v=w7JP0BSxT4s?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="MB8-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MB8.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MBN');">MBN</button></td><td>Membrana<br/>0</td><td>Cryptocurrency Investment<br/></td></tr>
+<tr><td id="MBN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MBN.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MCASH');">MCASH</button></td><td>Mcashchain<br/>0</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="MCASH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MCASH.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MT');">MT</button></td><td>Monarch<br/>0</td><td>Cryptocurrency Management<br/><a href="https://youtu.be/-ayqyXP-ImA?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="MT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NYE');">NYE</button></td><td>NewYork Exchange<br/>0</td><td>Stock Trading<br/><a href="https://nyecoin.io//img/video.mp4?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="NYE-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NYE.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('OPNN');">OPNN</button></td><td>Opennity<br/>0</td><td>Recruitment<br/></td></tr>
+<tr><td id="OPNN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for OPNN.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">OSC</button></td><td>Oasis City<br/>16</td><td>Virtual Reality<br/></td></tr>
+<tr><td id="OSC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for OSC.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">PCX</button></td><td>ChainX<br/>7</td><td>Blockchain Integration<br/></td></tr>
+<tr><td id="PCX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PCX.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PERL');">PERL</button></td><td>Perlin<br/>0</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="PERL-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PERL.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PLA');">PLA</button></td><td>PLANET<br/>0</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="PLA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PLA.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PLG');">PLG</button></td><td>Pledge Coin<br/>0</td><td>Crowdfunding<br/><a href="https://youtu.be/J14mq-VhD9Y?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="PLG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PLG.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('SON');">SON</button></td><td>Simone<br/>0</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="SON-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SON.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">SWACE</button></td><td>Swace<br/>15</td><td>Advertising<br/><a href="https://youtu.be/UQwema1Zerg?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="SWACE-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SWACE.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('SXP');">SXP</button></td><td>Swipe<br/>0</td><td>Cryptocurrency Management<br/></td></tr>
+<tr><td id="SXP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SXP.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('THAR');">THAR</button></td><td>Thar Token<br/>0</td><td>Cryptocurrency Exchanges<br/></td></tr>
+<tr><td id="THAR-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for THAR.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TOKO');">TOKO</button></td><td>Tokoin<br/>0</td><td>Business Profiles<br/></td></tr>
+<tr><td id="TOKO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TOKO.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TSHP');">TSHP</button></td><td>12Ships<br/>0</td><td>Cryptocurrency Mining<br/><a href="https://youtu.be/4drXI3EdYX8?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="TSHP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TSHP.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('VID');">VID</button></td><td>VideoCoin<br/>0</td><td>Content Distribution (Video)<br/></td></tr>
+<tr><td id="VID-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for VID.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">WIN</button></td><td>WINk<br/>13</td><td>Gaming (Gambling)<br/></td></tr>
+<tr><td id="WIN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for WIN.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XAC');">XAC</button></td><td>General Attention Curr...<br/>0</td><td>Advertising<br/></td></tr>
+<tr><td id="XAC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XAC.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XCM');">XCM</button></td><td>CoinMetro Token<br/>0</td><td>Cryptocurrency Investment<br/></td></tr>
+<tr><td id="XCM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XCM.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XENO');">XENO</button></td><td>Xenoverse<br/>0</td><td>Loans<br/></td></tr>
+<tr><td id="XENO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XENO.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('xEUR');">xEUR</button></td><td>xEURO<br/>0</td><td>Cryptocurrency Pegging<br/></td></tr>
+<tr><td id="xEUR-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for xEUR.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XLMX');">XLMX</button></td><td>Stellar Classic<br/>0</td><td>Recruitment<br/></td></tr>
+<tr><td id="XLMX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XLMX.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('YTA');">YTA</button></td><td>YottaChain<br/>0</td><td>Distributed Storage<br/></td></tr>
+<tr><td id="YTA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for YTA.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">ZNZ</button></td><td>ZENZO<br/>10</td><td>Gaming<br/></td></tr>
+<tr><td id="ZNZ-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ZNZ.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">ZUC</button></td><td>ZeuxCoin<br/>24</td><td>Financial Planning<br/><a href="https://youtu.be/LcbwZ2Sv0IM?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="ZUC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ZUC.</td></tr>
 	</tbody></table>
 	</div> <!-- coins_2019_08 -->
 
 	<div id="coins_2019_09" class="collapse">
 	<table class="table table-bordered">
-	<tbody><tr class="table-warning"><th>Slug</th><th>Name</th><th>Category</th></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('3DC');">3DC</button></td><td>3DCoin</td><td>Virtual Reality</td></tr>
-		<tr><td id="3DC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for 3DC.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('ACU');">ACU</button></td><td>Aitheon</td><td>Artificial Intelligence</td></tr>
-		<tr><td id="ACU-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ACU.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">AMIO</button></td><td>Amino Network</td><td>Distributed Computation</td></tr>
-		<tr><td id="AMIO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for AMIO.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BAND');">BAND</button></td><td>Band Protocol</td><td>Data Marketplace</td></tr>
-		<tr><td id="BAND-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BAND.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BDP');">BDP</button></td><td>BidiPass</td><td>Authentication</td></tr>
-		<tr><td id="BDP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BDP.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BTCF');">BTCF</button></td><td>Bitcoin Fast</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="BTCF-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BTCF.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BUSD');">BUSD</button></td><td>Binance USD</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="BUSD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BUSD.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BXC');">BXC</button></td><td>BonusCloud</td><td>Distributed Computation</td></tr>
-		<tr><td id="BXC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BXC.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BXY');">BXY</button></td><td>Beaxy</td><td>Cryptocurrency Exchanges</td></tr>
-		<tr><td id="BXY-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BXY.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CBM');">CBM</button></td><td>CryptoBonusMiles</td><td>Loyalty Rewards</td></tr>
-		<tr><td id="CBM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CBM.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CRAD');">CRAD</button></td><td>CryptoAds Marketplace</td><td>Advertising</td></tr>
-		<tr><td id="CRAD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CRAD.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">CRON</button></td><td>Cryptocean</td><td>Financial Services</td></tr>
-		<tr><td id="CRON-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CRON.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CYBR');">CYBR</button></td><td>CYBR Token</td><td>Cybersecurity</td></tr>
-		<tr><td id="CYBR-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CYBR.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DFS');">DFS</button></td><td>Digital Fantasy Sports</td><td>Gaming (eSports)</td></tr>
-		<tr><td id="DFS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DFS.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DVP');">DVP</button></td><td>Decentralized Vulnerability Platform</td><td>Bug Bounties</td></tr>
-		<tr><td id="DVP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DVP.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('EC');">EC</button></td><td>Echoin</td><td>Energy</td></tr>
-		<tr><td id="EC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for EC.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('EGG');">EGG</button></td><td>Nestree</td><td>Instant Messaging</td></tr>
-		<tr><td id="EGG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for EGG.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('EMRX');">EMRX</button></td><td>Emirex Token</td><td>Cryptocurrency Exchanges</td></tr>
-		<tr><td id="EMRX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for EMRX.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('ETM');">ETM</button></td><td>En-Tan-Mo</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="ETM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ETM.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('FAB');">FAB</button></td><td>FABRK</td><td>Social Media</td></tr>
-		<tr><td id="FAB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for FAB.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('GAP');">GAP</button></td><td>GAPS</td><td>Gaming</td></tr>
-		<tr><td id="GAP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for GAP.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('GOM');">GOM</button></td><td>Gomics</td><td>Content Distribution (Comics)</td></tr>
-		<tr><td id="GOM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for GOM.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('HBAR');">HBAR</button></td><td>Hedera Hashgraph</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="HBAR-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for HBAR.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('HSN');">HSN</button></td><td>Hyper Speed Network</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="HSN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for HSN.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">IDEAL</button></td><td>IDEALCOIN</td><td>Social Media</td></tr>
-		<tr><td id="IDEAL-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for IDEAL.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('IDRT');">IDRT</button></td><td>Rupiah Token</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="IDRT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for IDRT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LHT');">LHT</button></td><td>LightHouse Token</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="LHT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LHT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LNO');">LNO</button></td><td>Livenodes</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="LNO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LNO.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MB');">MB</button></td><td>MineBee</td><td>Cryptocurrency Mining</td></tr>
-		<tr><td id="MB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MB.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MEXC');">MEXC</button></td><td>MEXC Token</td><td>Health Care</td></tr>
-		<tr><td id="MEXC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MEXC.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MIX');">MIX</button></td><td>MixMarvel</td><td>Gaming</td></tr>
-		<tr><td id="MIX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MIX.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MX');">MX</button></td><td>MX Token</td><td>Cryptocurrency Exchanges</td></tr>
-		<tr><td id="MX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MX.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NBX');">NBX</button></td><td>Netbox Coin</td><td>Web Browsing</td></tr>
-		<tr><td id="NBX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NBX.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NEWS');">NEWS</button></td><td>PUBLISH</td><td>Content Distribution (News)</td></tr>
-		<tr><td id="NEWS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NEWS.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NODE');">NODE</button></td><td>Whole Network</td><td>Data Marketplace</td></tr>
-		<tr><td id="NODE-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NODE.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NSS');">NSS</button></td><td>NSS Coin</td><td>Energy</td></tr>
-		<tr><td id="NSS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NSS.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NUSD');">NUSD</button></td><td>Neutral Dollar</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="NUSD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NUSD.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('OATH');">OATH</button></td><td>Oath Protocol</td><td>Dispute Resolution</td></tr>
-		<tr><td id="OATH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for OATH.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PAXG');">PAXG</button></td><td>PAX Gold</td><td>Precious Metals</td></tr>
-		<tr><td id="PAXG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PAXG.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PLAT');">PLAT</button></td><td>BitGuild PLAT</td><td>Gaming</td></tr>
-		<tr><td id="PLAT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PLAT.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PROB');">PROB</button></td><td>ProBit Token</td><td>Cryptocurrency Exchanges</td></tr>
-		<tr><td id="PROB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PROB.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('QQQ');">QQQ</button></td><td>Poseidon Network</td><td>Content Delivery Network</td></tr>
-		<tr><td id="QQQ-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for QQQ.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('RALLY');">RALLY</button></td><td>Rally</td><td>Social Media</td></tr>
-		<tr><td id="RALLY-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for RALLY.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('RBG');">RBG</button></td><td>Rankingball Gold</td><td>Gaming (eSports)</td></tr>
-		<tr><td id="RBG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for RBG.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('SEAL');">SEAL</button></td><td>Sealchain</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="SEAL-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SEAL.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('SOVE');">SOVE</button></td><td>Soverain</td><td>Cryptocurrency Management</td></tr>
-		<tr><td id="SOVE-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SOVE.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">STREAM</button></td><td>Streamit Coin</td><td>Content Distribution (Video)</td></tr>
-		<tr><td id="STREAM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for STREAM.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">TAN</button></td><td>Taklimakan Network</td><td>Content Distribution (Crypto)</td></tr>
-		<tr><td id="TAN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TAN.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TCH');">TCH</button></td><td>Tchain</td><td>Cloud Computing</td></tr>
-		<tr><td id="TCH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TCH.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TFB');">TFB</button></td><td>TrueFeedBack</td><td>Surveys</td></tr>
-		<tr><td id="TFB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TFB.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TLOS');">TLOS</button></td><td>Telos</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="TLOS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TLOS.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('UOS');">UOS</button></td><td>UOS Network</td><td>Reputation System</td></tr>
-		<tr><td id="UOS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for UOS.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('VENA');">VENA</button></td><td>VENA</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="VENA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for VENA.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('VIDY');">VIDY</button></td><td>VIDY</td><td>Advertising</td></tr>
-		<tr><td id="VIDY-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for VIDY.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">WBET</button></td><td>Wavesbet</td><td>Gaming (Gambling)</td></tr>
-		<tr><td id="WBET-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for WBET.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('X42');">X42</button></td><td>x42 Protocol</td><td>Cryptocurrencies</td></tr>
-		<tr><td id="X42-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for X42.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XCT');">XCT</button></td><td>xCrypt Token</td><td>Cryptocurrency Exchanges</td></tr>
-		<tr><td id="XCT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XCT.</td></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">XDB</button></td><td>DigitalBits</td><td>Loyalty Rewards</td></tr>
-		<tr><td id="XDB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XDB.</td></tr>
-		<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('YO');">YO</button></td><td>Yobit Token</td><td>Cryptocurrency Exchanges</td></tr>
-		<tr><td id="YO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for YO.</td></tr>
+	<tbody><tr class="table-warning"><th>Slug</th><th><u>Name</u><br/>pages of research</th><th><u>Category</u><br/>promo video</th></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('3DC');">3DC</button></td><td>3DCoin<br/>1</td><td>Virtual Reality<br/><a href="https://youtu.be/Mdgvp5NVq7I?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="3DC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for 3DC.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">ACU</button></td><td>Aitheon<br/>10</td><td>Artificial Intelligence<br/><a href="https://youtu.be/8pd9YLWVL6Y?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="ACU-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ACU.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">AMIO</button></td><td>Amino Network<br/>6</td><td>Distributed Computation<br/><a href="https://www.youtube.com/watch?v=2kA2e3VqaLs?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="AMIO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for AMIO.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BAND');">BAND</button></td><td>Band Protocol<br/>0</td><td>Data Marketplace<br/><a href="https://youtu.be/O5KpoWT4Gpw?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="BAND-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BAND.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BDP');">BDP</button></td><td>BidiPass<br/>0</td><td>Authentication<br/></td></tr>
+<tr><td id="BDP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BDP.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BTCF');">BTCF</button></td><td>Bitcoin Fast<br/>1</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="BTCF-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BTCF.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BUSD');">BUSD</button></td><td>Binance USD<br/>1</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="BUSD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BUSD.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BXC');">BXC</button></td><td>BonusCloud<br/>1</td><td>Distributed Computation<br/></td></tr>
+<tr><td id="BXC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BXC.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('BXY');">BXY</button></td><td>Beaxy<br/>1</td><td>Cryptocurrency Exchanges<br/></td></tr>
+<tr><td id="BXY-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for BXY.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CBM');">CBM</button></td><td>CryptoBonusMiles<br/>0</td><td>Loyalty Rewards<br/></td></tr>
+<tr><td id="CBM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CBM.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CIPX');">CIPX</button></td><td>Colletrix<br/>2</td><td>Intellectual Property<br/><a href="https://youtu.be/EhnzZpjcX8I?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="CIPX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CIPX.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CRAD');">CRAD</button></td><td>CryptoAds Marketplace<br/>0</td><td>Advertising<br/><a href="https://youtu.be/JWy6a3Am6oA?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="CRAD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CRAD.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">CRON</button></td><td>Cryptocean<br/>20</td><td>Financial Services<br/><a href="https://www.youtube.com/watch?v=nG2vhkbPOn8?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="CRON-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CRON.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CYBR');">CYBR</button></td><td>CYBR Token<br/>3</td><td>Cybersecurity<br/><a href="https://www.youtube.com/watch?v=oTiceGtpbX4&t=9s&utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="CYBR-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CYBR.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DFS');">DFS</button></td><td>Digital Fantasy Sports<br/>0</td><td>Gaming (eSports)<br/><a href="https://youtu.be/psL5cQ0JF6M?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="DFS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DFS.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('DVP');">DVP</button></td><td>Decentralized Vulnerability Platform<br/>0</td><td>Bug Bounties<br/></td></tr>
+<tr><td id="DVP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for DVP.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('EC');">EC</button></td><td>Echoin<br/>1</td><td>Energy<br/></td></tr>
+<tr><td id="EC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for EC.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('EGG');">EGG</button></td><td>Nestree<br/>0</td><td>Instant Messaging<br/></td></tr>
+<tr><td id="EGG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for EGG.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('EMRX');">EMRX</button></td><td>Emirex Token<br/>0</td><td>Cryptocurrency Exchanges<br/></td></tr>
+<tr><td id="EMRX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for EMRX.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('ETM');">ETM</button></td><td>En-Tan-Mo<br/>0</td><td>Cryptocurrencies<br/><a href="https://www.entanmo.com/video/1.mp4?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="ETM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for ETM.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('FAB');">FAB</button></td><td>FABRK<br/>0</td><td>Social Media<br/><a href="https://www.fabrk.io/assets/img/sizzle.mp4?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="FAB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for FAB.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('GAP');">GAP</button></td><td>GAPS<br/>1</td><td>Gaming<br/></td></tr>
+<tr><td id="GAP-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for GAP.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('GOM');">GOM</button></td><td>Gomics<br/>0</td><td>Content Distribution (Comics)<br/><a href="https://youtu.be/JIe3tRIDf_Q?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="GOM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for GOM.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('HBAR');">HBAR</button></td><td>Hedera Hashgraph<br/>0</td><td>Cryptocurrencies<br/><a href="https://youtu.be/tQ5BmzUoQuQ?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="HBAR-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for HBAR.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('HSN');">HSN</button></td><td>Hyper Speed Network<br/>0</td><td>Cryptocurrencies<br/><a href="http://1252536032.vod2.myqcloud.com/292d0ca7vodtranscq1252536032/f37e908c5285890789107201771/v.f40.mp4?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="HSN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for HSN.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">IDEAL</button></td><td>IDEALCOIN<br/>8</td><td>Social Media<br/><a href="https://idealcoin.io/v2/1843f87515cacefac823ac7f4a4e7906.mp4?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="IDEAL-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for IDEAL.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('IDRT');">IDRT</button></td><td>Rupiah Token<br/>1</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="IDRT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for IDRT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LHT');">LHT</button></td><td>LightHouse Token<br/>0</td><td>Cryptocurrencies<br/><a href="https://youtu.be/kFpl7c8M5U0?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="LHT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LHT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('LNO');">LNO</button></td><td>Livenodes<br/>0</td><td>Cryptocurrencies<br/><a href="https://youtu.be/GZMsng2cPa8?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="LNO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for LNO.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MB');">MB</button></td><td>MineBee<br/>0</td><td>Cryptocurrency Mining<br/></td></tr>
+<tr><td id="MB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MB.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MEXC');">MEXC</button></td><td>MEXC Token<br/>0</td><td>Health Care<br/></td></tr>
+<tr><td id="MEXC-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MEXC.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MIX');">MIX</button></td><td>MixMarvel<br/>0</td><td>Gaming<br/><a href="https://youtu.be/ih5rLHBjT0Q?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="MIX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MIX.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('MX');">MX</button></td><td>MX Token<br/>0</td><td>Cryptocurrency Exchanges<br/></td></tr>
+<tr><td id="MX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for MX.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NBX');">NBX</button></td><td>Netbox Coin<br/>0</td><td>Web Browsing<br/></td></tr>
+<tr><td id="NBX-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NBX.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NEWS');">NEWS</button></td><td>PUBLISH<br/>0</td><td>Content Distribution (News)<br/><a href="https://youtu.be/EiO4NO5zBCM?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="NEWS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NEWS.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NEXXO');">NEXXO</button></td><td>Nexxo<br/>1</td><td>Financial Services<br/><a href="https://www.youtube.com/watch?v=od_CUz40EDk&utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="NEXXO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NEXXO.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NODE');">NODE</button></td><td>Whole Network<br/>1</td><td>Data Marketplace<br/></td></tr>
+<tr><td id="NODE-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NODE.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NSS');">NSS</button></td><td>NSS Coin<br/>0</td><td>Energy<br/></td></tr>
+<tr><td id="NSS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NSS.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('NUSD');">NUSD</button></td><td>Neutral Dollar<br/>0</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="NUSD-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for NUSD.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('OATH');">OATH</button></td><td>Oath Protocol<br/>0</td><td>Dispute Resolution<br/></td></tr>
+<tr><td id="OATH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for OATH.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PAXG');">PAXG</button></td><td>PAX Gold<br/>1</td><td>Precious Metals<br/></td></tr>
+<tr><td id="PAXG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PAXG.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PLAT');">PLAT</button></td><td>BitGuild PLAT<br/>0</td><td>Gaming<br/></td></tr>
+<tr><td id="PLAT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PLAT.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('PROB');">PROB</button></td><td>ProBit Token<br/>0</td><td>Cryptocurrency Exchanges<br/></td></tr>
+<tr><td id="PROB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for PROB.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('QQQ');">QQQ</button></td><td>Poseidon Network<br/>0</td><td>Content Delivery Network<br/></td></tr>
+<tr><td id="QQQ-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for QQQ.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('RALLY');">RALLY</button></td><td>Rally<br/>1</td><td>Social Media<br/><a href="https://youtu.be/4ExppCBCnAw?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="RALLY-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for RALLY.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('RBG');">RBG</button></td><td>Rankingball Gold<br/>3</td><td>Gaming (eSports)<br/><a href="https://youtu.be/BA4VWOzHrrY?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="RBG-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for RBG.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('SEAL');">SEAL</button></td><td>Sealchain<br/>0</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="SEAL-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SEAL.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('SOVE');">SOVE</button></td><td>Soverain<br/>1</td><td>Cryptocurrency Management<br/></td></tr>
+<tr><td id="SOVE-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for SOVE.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">STREAM</button></td><td>Streamit Coin<br/>10</td><td>Content Distribution (Video)<br/><a href="https://youtu.be/ZtKs_-xNoEg?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="STREAM-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for STREAM.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">TAN</button></td><td>Taklimakan Network<br/>16</td><td>Content Distribution (Crypto)<br/><a href="https://youtu.be/eHcOxg89BwA?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="TAN-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TAN.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TCH');">TCH</button></td><td>Tchain<br/>0</td><td>Cloud Computing<br/></td></tr>
+<tr><td id="TCH-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TCH.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TFB');">TFB</button></td><td>TrueFeedBack<br/>1</td><td>Surveys<br/></td></tr>
+<tr><td id="TFB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TFB.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('TLOS');">TLOS</button></td><td>Telos<br/>0</td><td>Cryptocurrencies<br/><a href="https://youtu.be/fvsvzCL46eI?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="TLOS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TLOS.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('UOS');">UOS</button></td><td>UOS Network<br/>0</td><td>Reputation System<br/></td></tr>
+<tr><td id="UOS-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for UOS.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('VENA');">VENA</button></td><td>VENA<br/>0</td><td>Cryptocurrencies<br/><a href="https://vena.oss-cn-beijing.aliyuncs.com/en-video.mp4?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="VENA-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for VENA.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('VIDY');">VIDY</button></td><td>VIDY<br/>0</td><td>Advertising<br/><a href="https://youtu.be/fXjsPemZbmM?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="VIDY-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for VIDY.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">WBET</button></td><td>Wavesbet<br/>11</td><td>Gaming (Gambling)<br/></td></tr>
+<tr><td id="WBET-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for WBET.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('X42');">X42</button></td><td>x42 Protocol<br/>0</td><td>Cryptocurrencies<br/></td></tr>
+<tr><td id="X42-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for X42.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XCT');">XCT</button></td><td>xCrypt Token<br/>0</td><td>Cryptocurrency Exchanges<br/><a href="https://youtu.be/DGuslL6M_Fc?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="XCT-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XCT.</td></tr>
+<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">XDB</button></td><td>DigitalBits<br/>18</td><td>Loyalty Rewards<br/><a href="https://vimeo.com/301645548?utm_source=altcoininvestigation.com&utm_medium=referral" target="promo">Promo Video</a></td></tr>
+<tr><td id="XDB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XDB.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('XLAB');">XLAB</button></td><td>XcelToken Plus<br/>0</td><td>[]<br/></td></tr>
+<tr><td id="XLAB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for XLAB.</td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('YO');">YO</button></td><td>Yobit Token<br/>0</td><td>Cryptocurrency Exchanges<br/></td></tr>
+<tr><td id="YO-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for YO.</td></tr>
 	</tbody></table>
-	</div>
+	</div> <!-- coins_2019_09 -->
+
+	<div id="coins_2019_10" class="collapse">
+	<table class="table table-bordered">
+	<tbody><tr class="table-warning"><th>Slug</th><th><u>Name</u><br/>pages of research</th><th><u>Category</u><br/>promo video</th></tr>
+<tr><td><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('CB');">CB</button></td><td>COINBIG<br/>1</td><td>Cryptocurrency Exchanges<br/></td></tr>
+<tr><td id="CB-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for CB.</td></tr>
+	</tbody></table>
+	</div> <!-- coins_2019_10 -->
 
 	</div> <!-- container -->
-<!--
-	<div id="coins_2019_09" class="collapse">
-	<table class="table table-bordered">
-	<tbody><tr class="table-warning"><th>Slug</th><th>Name</th><th>Category</th></tr>
-		<tr class="bg-secondary text-white"><td><button type="button" class="btn btn-primary btn-block disabled" style="cursor:not-allowed;" onclick="">TEST</button></td><td>test</td></tr>
-		<tr><td id="test-alert" colspan=3 class="alert alert-warning fade collapse" role="alert">Vote cast for TEST.</td></tr>
-	</tbody></table>
-	</div>
--->
 
   </body>
 </html>
