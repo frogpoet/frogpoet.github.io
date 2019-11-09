@@ -86,8 +86,8 @@
 				let prevSoFar = "#" + prefixSoFar + prevYearMonth;
 				$(coins).collapse('toggle');
 				$(prevCoins).collapse('toggle');
-				$(soFar).collapse('toggle');
-				$(prevSoFar).collapse('toggle');
+//				$(soFar).collapse('toggle');
+//				$(prevSoFar).collapse('toggle');
 			}
 			catch(e) {
 				alert('changeSelectedMonth: ' + e.message + ", yearMonth = " + yearMonth);
@@ -149,12 +149,14 @@
 		<h4 class="text-center">Vote for which altcoin(s) you would like to receive more research in the selected month's <a id="monthSelectLink" href="" target="leanpub" onclick="toggleBook('altcoins');">Altcoin Investigation book</a> &LeftArrowBar; (this is the download link)</h4>
       	</div>
 	<p>
-	George (a.k.a., 'frogpoet') spends several hours a day doing his own research (DYOR) on altcoins which have been listed on CoinMarketCap&reg; during the current month.  He then
-	sells that research for five dollars.
+	The following coins first appeared on CoinMarketCap&reg; during the selected Year-Month combination. Vote for which of them
+	you would like to be objectively researched, or to have the research on them updated and increased, by selecting their
+	slug buttons as many times as you like.
 	</p>
 	<p>
-	Scroll down to vote for which coins you would like him to devote more time to.
+	Select the Download Link above to retrieve the research and support the researcher.
 	</p>
+<!--
 	<div id="sofar_2019_11" class="collapse">
 	<p>So far : 
 	<ol>
@@ -171,22 +173,15 @@
 <li>1 article about the coins shared by forum accounts is identified.</li>
 	</ol>
 	</p>
-	</div> <!-- sofar_2019_11 -->
+	</div>
 	<div id="sofar_2019_10" class="collapse">
-	</div> <!-- sofar_2019_10 -->
+	</div> 
 	<div id="sofar_2019_09" class="collapse">
-	</div> <!-- sofar_2019_09 -->
+	</div> 
 	<div id="sofar_2019_08" class="collapse">
-	</div> <!-- sofar_2019_08 -->
-	<p>
-	After voting, select the download link above to download the results
-	when they are ready. If you buy the current month's results before your votes are taken into account, you can receive free updates forever as the book changes by revisiting the
-	download link. You may want to bookmark this page to keep track of how the research progresses as the days go by.
-	</p>
-	<p>
-	Note that you can vote for as many coins as you want, as many times as you like, to accurately reflect your desire to receive more information about the coin.
-	Select the coin's slug to vote for it.
-	</p>
+	</div> 
+-->
+		
 	<p class="text-center">Select month: 
 	<select id="selectedMonth" class="custom-select" onchange="changeSelectedMonth(this.value);">
 		<option value="2019_11" selected>2019-11</option>
