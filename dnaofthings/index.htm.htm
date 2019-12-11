@@ -1,0 +1,156 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Vote for content to include in my musings about the DNA of Things (DOT).">
+	<title>DNA of Things - Voting | dnsofthings</title> 
+	  <link rel='stylesheet' type='text/css' href='../css/font-awesome.min.css'>
+		<link rel='stylesheet' type='text/css' href='../css/bootstrap.css'>
+	  	<link rel="shortcut icon" href="favicon.ico" />
+		<script src="../libs/d3.js"></script>
+		<script src="../libs/lodash.js"></script>
+		<script src="../libs/jquery.min.js"></script>
+		<script src="../libs/popper.min.js"></script>
+		<script src="../libs/bootstrap.min.js"></script>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154425646-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-154425646-1');
+		</script>
+	<script>
+		function getPrefixHref() { return "https://leanpub.com/dnaofthings_"; }
+		function getCurrentYearMonthDefault() { return "2019_12"; }
+
+		function safeLength(obj, objName) { return (obj == null) ? objName + " = " + obj : objName + ".length = " + obj.length;}
+
+		function getSelectedYearMonth() {
+			try {
+				let prefixHref = getPrefixHref();
+				let selectedYearMonth = $('#monthSelectLink').attr("href").substring(prefixHref.length);
+				return selectedYearMonth;
+			}
+			catch(e) {
+				alert('getSelectedYearMonth: ' + e.message);
+				throw(e);
+			}
+		} 
+		function toggleVote(topic) {
+			try {
+				gtag('event', topic, {
+					'event_category' : 'vote',
+					'event_label' : 'vote_' + getSelectedYearMonth(),
+					'value': 1,
+				});
+				let id = "#" + topic + "-alert";
+				$(id).collapse('show');
+				setTimeout(function() {$(id).collapse('hide');}, 2000);
+
+			}
+			catch(e) {
+				alert('toggleVote: ' + e.message + ', topic = ' + topic);
+				throw(e);
+			}
+		}
+		function toggleBook(bookCategory) {
+			try {
+				gtag('event', 'go_to_leanpub', {
+					'event_category' : 'book_' + bookCategory,
+					'event_label' : 'book_' + getSelectedYearMonth(),
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('toggleBook: ' + e.message + ', bookCategory = ' + bookCategory);
+				throw(e);
+			}
+		}
+		function changeSelectedMonth(yearMonth) {
+			try {
+				let prefixHref = getPrefixHref();
+				let href = prefixHref + yearMonth;
+				let prevYearMonth = getSelectedYearMonth();
+				$('#monthSelectLink').attr("href", href);
+				let prefixCoins = "coins_";
+				let coins = "#" + prefixCoins + yearMonth;
+				let prevCoins = "#" + prefixCoins + prevYearMonth;
+				$(coins).collapse('toggle');
+				$(prevCoins).collapse('toggle');
+			}
+			catch(e) {
+				alert('changeSelectedMonth: ' + e.message + ", yearMonth = " + yearMonth);
+				throw(e);
+			}
+		}
+		(function() {
+			window.addEventListener('load', function() {
+				let coinsId = "#coins_" + getCurrentYearMonthDefault(); 
+				$(coinsId).collapse('show');
+				let href = getPrefixHref() + getCurrentYearMonthDefault();
+				$('#monthSelectLink').attr("href", href);
+			}, false);
+		})();
+	</script>
+  </head>
+<!-- try popping this up : 
+<div class="ico-video" data-src="https://img.youtube.com/vi/ieSA4kXvMO4/maxresdefault.jpg" style="background-image: url(&quot;https://img.youtube.com/vi/ieSA4kXvMO4/0.jpg&quot;);">
+          <div class="overlay">
+            <label for="video" class="icon-play start-video-btn"></label>
+            <input id="video" type="checkbox" class="hidden" name="video">
+            <div class="video-modal">
+              <div class="video-modal-inner">
+                <div class="video-modal-header">
+                  <h5>Inlock</h5>
+                  <label for="video" class="icon-close stop-video-btn"></label>
+                </div>
+                <div class="iframe-wrapper">
+                  <iframe class="asset-video-inner" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://youtube.com/embed/ieSA4kXvMO4?enablejsapi=1" type="text/html" frameborder="0"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+</div>
+-->
+
+  <body style="padding-top: 20px;">
+	<div class="container">
+
+      	<div class="alert alert-success" role="alert">
+		<h1 class="text-center">DNA of Things</h1>
+		<h2 class="text-center">Voting Page</h2>
+		<h4 class="text-center">Vote for which topic(s) you would like to receive more research in the selected month's <a id="monthSelectLink" href="" target="leanpub" onclick="toggleBook('dnaofthings');">DNA of Things book</a> &LeftArrowBar; (this is the download link)</h4>
+      	</div>
+	<p>
+	The term "DNA-of-things" first appeared on December 9, 2019 in <a href="https://www.nature.com/articles/s41587-019-0356-z?utm_source=dnaofthings.org">this article in Nature Biotechnology</a>. <strong>SCROLL DOWN TO VOTE</strong> for which topic
+	pertaining to the dna-of-things you would like for me to research, by selecting their
+	abbreviations as many times as you like.
+	</p>
+	<p>
+	<strong>Select the Download Link above to retrieve the research</strong> and support the researcher.
+	</p>
+		
+	<p class="text-center">Select month: 
+	<select id="selectedMonth" class="custom-select" onchange="changeSelectedMonth(this.value);">
+<!--
+		<option value="2020_01">2020-01</option>
+-->
+		<option value="2019_12" selected>2019-12</option>
+	</select>
+	</p>
+
+	<div id="coins_2019_12" class="collapse">
+<div class="row bg-warning"><div class="col-3 border">Abbreviation</div><div class="col-3 border"><u>Topic</u></div><div class="col-6 border"><u>Pages of Research</u></div></div>
+<div class="row"><div class="col-3 border"><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('HX');">HX</button></div><div class="col-3 border">Haelixa</div><div class="col-6 border">0</div></div>
+<div class="row"><div id="HX-alert" class="col-12 alert alert-warning fade collapse" role="alert">Vote cast for Haelixa.</div></div>
+<div class="row"><div class="col-3 border"><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('ST');">ST</button></div><div class="col-3 border">Steganography</div><div class="col-6 border">0</div></div>
+<div class="row"><div id="ST-alert" class="col-12 alert alert-warning fade collapse" role="alert">Vote cast for Steganography.</div></div>
+	</div> <!-- coins_2019_12 -->
+
+	</div> <!-- container -->
+
+  </body>
+</html>
