@@ -1,1 +1,115 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="How much would you pay for an odd book?">
+	<title>Odd Writings | oddwritings.com</title> 
+	  <link rel='stylesheet' type='text/css' href='../css/font-awesome.min.css'>
+		<link rel='stylesheet' type='text/css' href='../css/bootstrap.css'>
+	  	<link rel="shortcut icon" href="favicon.ico" />
+		<script src="../libs/d3.js"></script>
+		<script src="../libs/lodash.js"></script>
+		<script src="../libs/jquery.min.js"></script>
+		<script src="../libs/popper.min.js"></script>
+		<script src="../libs/bootstrap.min.js"></script>
 
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154601907-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-154601907-1');
+		</script>
+	<script>
+		function toggleVote(topic) {
+			try {
+				gtag('event', topic, {
+					'event_category' : 'vote',
+					'event_label' : topic,
+					'value': 1,
+				});
+				$('#prices').collapse('hide');
+				let id = "#" + topic;
+				$(id).collapse('show');
+				let buttonId = "#btn_" + topic;
+				$('#downloadLink').collapse('show');
+			}
+			catch(e) {
+				alert('toggleVote: ' + e.message + ', topic = ' + topic);
+				throw(e);
+			}
+		}
+		function toggleBook(book) {
+			try {
+				gtag('event', 'go_to_leanpub', {
+					'event_category' : 'download',
+					'event_label' : book,
+					'value': 1,
+				});
+			}
+			catch(e) {
+				alert('toggleBook: ' + e.message + ', book = ' + book);
+				throw(e);
+			}
+		}
+		(function() {
+			window.addEventListener('load', function() {
+				$('#prices').collapse('show');
+			}, false);
+		})();
+	</script>
+  </head>
+
+  <body style="padding-top: 20px;">
+	<div class="container">
+
+      	<div class="alert alert-success" role="alert">
+		<h1 class="text-center">Odd Writings</h1>
+      	</div>
+	<p class="text-center">
+	How much money would you pay for a book of poetry written by an unknown author?
+	</p>
+
+	<div id="prices" class="collapse">
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('zero');">Nothing</button></div></div>
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('one');">$ 1</button></div></div>
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('two');">$ 2</button></div></div>
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('five');">$ 5</button></div></div>
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('ten');">$ 10</button></div></div>
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('sixteen');">$ 16.16</button></div></div>
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:pointer;" onclick="toggleVote('more');">More than $ 16.16</button></div></div>
+	</div>
+
+	<div id="zero" class="collapse">
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:not-allowed;" disabled>Nothing</button></div></div>
+	</div>
+	<div id="one" class="collapse">
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:not-allowed;" disabled>$ 1</button></div></div>
+	</div>
+	<div id="two" class="collapse">
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:not-allowed;" disabled>$ 2</button></div></div>
+	</div>
+	<div id="five" class="collapse">
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:not-allowed;" disabled>$ 5</button></div></div>
+	</div>
+	<div id="ten" class="collapse">
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:not-allowed;" disabled>$ 10</button></div></div>
+	</div>
+	<div id="sixteen" class="collapse">
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:not-allowed;" disabled>$ 16.16</button></div></div>
+	</div>
+	<div id="more" class="collapse">
+<div class="row"><div class="col-12 border"><button type="button" class="btn btn-primary btn-block" style="cursor:not-allowed;" disabled>More than $ 16.16</button></div></div>
+	</div>
+
+	<div id="downloadLink" class="collapse">
+	      	<div class="alert alert-success" role="alert">
+			<h4 class="col-12 text-center">Thanks for answering!  Here is a link to just such a book: <a id="leanpubLink" href="https://leanpub.com/raven" target="leanpub" onclick="toggleBook('raven');">Odd Writings book</a> &LeftArrowBar;</h4>
+		</div>
+	</div>
+
+	</div> <!-- container -->
+
+  </body>
+</html>
