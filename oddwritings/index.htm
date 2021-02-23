@@ -36,6 +36,32 @@
 				throw(e);
 			}
 		}
+		function journalClick(journal) {
+			try {
+				gtag('event', 'journalClick', {
+					'event_category' : 'journal_' + journal,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('journalClick: ' + e.message + ', journal = ' + journal);
+				throw(e);
+			}
+		}
+		function bioClick(site) {
+			try {
+				gtag('event', 'bioClick', {
+					'event_category' : 'bio_' + site,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('bioClick: ' + e.message + ', site = ' + site);
+				throw(e);
+			}
+		}
 		</script>
   </head>
 
@@ -119,10 +145,18 @@ Image courtesy of NASTER from Pixabay
 	<p/>
 -->
 	<p class="text-center">
-	I have been published in <a href="https://skywayjournal.wordpress.com/category/horror/" target="_blank">SkywayJournal</a>. (2021 - February) "Wood"
+	I have been published in <a 
+		onclick="journalClick('SkywayJournal');"
+		href="https://skywayjournal.wordpress.com/category/horror/" target="_blank">SkywayJournal
+	</a>. (2021 - February) "Wood"
 	</p>
 	<p class="text-center">
-	I have an author page on <a href="https://booksniffer.com/george-pestana/" target="_blank">BookSniffer</a>.
+<!-- referral click on author page doesn't seem to work yet on booksniffer -->
+<!--		href="http://bksnfr.me/George_Pestana" target="_blank">BookSniffer -->
+	I have an author page on <a 
+		onclick="bioClick('BookSniffer');"
+		href="https://booksniffer.com/george-pestana/" target="_blank">BookSniffer
+	</a>.
 	</p>
 	<p class="text-left">
 	I'm currently working on <u>Cressida</u>.  When completed it will contain 40 poems and at least 250 pages, with illustrations and commentary, and will cost $9.99 (for android, desktop, iOS, denver EBO, kindle, kobo, nook, palm, pdf, sony), or $14.99 (for paperback).<br/>
