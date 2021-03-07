@@ -36,6 +36,20 @@
 				throw(e);
 			}
 		}
+		function saleClick(book, store) {
+			try {
+				gtag('event', 'saleClick', {
+					'event_category' : 'book_' + book,
+					'event_label' : 'store_' + store,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('saleClick: ' + e.message + ', book = ' + book + ', store = ' + store);
+				throw(e);
+			}
+		}
 		function journalClick(journal) {
 			try {
 				gtag('event', 'journalClick', {
@@ -71,7 +85,10 @@
       	<div class="alert alert-success" role="alert">
 		<h1 class="text-center">Odd Writings</h1>
       	</div>
-	<p class="text-center"><strong>Poetry on Sale for Thinkers is <a href="https://www.smashwords.com/books/view/1017548">here on Smashwords</a>.</strong> 🠔 (press or click)</p>
+	<p class="text-center"><strong>Poetry on Sale for Thinkers is 
+<a href="https://www.smashwords.com/books/view/1017548"
+		 onclick="saleClick('bathysphere', 'smashwords');">
+here on Smashwords</a>.</strong> 🠔 (press or click)</p>
 	<p class="text-center"><strong>Scroll down to see non-sale poetry books.</strong></p>
 	<div class="card">
 		  <img class="card-img-top" src="img/ad_graphic.jpg" alt="Poetry for the Odd Mind">
