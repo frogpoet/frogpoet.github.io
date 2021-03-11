@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="poetry poems">
+	<title>Odd Writings | oddwritings.com</title> 
+	  <link rel='stylesheet' type='text/css' href='../css/font-awesome.min.css'>
+		<link rel='stylesheet' type='text/css' href='../css/bootstrap.css'>
+	  	<link rel="shortcut icon" href="favicon.ico" />
+		<script src="../libs/d3.js"></script>
+		<script src="../libs/lodash.js"></script>
+		<script src="../libs/jquery.min.js"></script>
+		<script src="../libs/popper.min.js"></script>
+		<script src="../libs/bootstrap.min.js"></script>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154601907-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-154601907-1');
+		</script>
+		<script>
+		function socialClick(site) {
+			try {
+				gtag('event', 'socialClick', {
+					'event_category' : 'site_' + site,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('socialClick: ' + e.message + ', site = ' + site);
+				throw(e);
+			}
+		}
+		</script>
+  </head>
+
+  <body style="padding-top: 20px;">
+	<div class="container">
+
+      	<div class="alert alert-success" role="alert">
+		<h1 class="text-center">NFT Ideas Online</h1>
+      	</div>
+	<div class="card">
+		  <img class="card-img-top" src="img/company_logo.jpg" alt="NFT Ideas Online">
+		  <div class="card-body">
+			<p class="card-text text-center">I like thinking of ways to use Non-Fungible Tokens to solve societal problems.</p>
+		  </div>
+	</div>
+	<p/>
+	<p class="text-center">More stuff coming soon...</p>
+	<hr/>
+	<p class="text-center">(my sister site is <a
+		onclick="socialClick('OddWritings');"
+		href="http://oddwritings.com">OddWritings.com</a>)
+	</p>
+	<p class="text-center"><a
+		onclick="socialClick('twitter');"
+		href="https://twitter.com/NftIdeas">Go to Twitter</a>)
+	</p>
+
+	</div> <!-- container -->
+  </body>
+</html>
