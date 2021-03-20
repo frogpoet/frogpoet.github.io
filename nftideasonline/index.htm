@@ -49,6 +49,34 @@
 				throw(e);
 			}
 		}
+		function refClick(example, ref) {
+			try {
+				gtag('event', 'refClick', {
+					'event_category' : 'example_' + example,
+					'event_label' : 'ref_' + ref,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('refClick: ' + e.message + ', example = ' + example + ', ref = ' + ref);
+				throw(e);
+			}
+		}
+		function nftClick(example, nft) {
+			try {
+				gtag('event', 'nftClick', {
+					'event_category' : 'example_' + example,
+					'event_label' : 'nft_' + nft,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('nftClick: ' + e.message + ', example = ' + example + ', nft = ' + nft);
+				throw(e);
+			}
+		}
 		$(document).ready(function() {
 			$('#dropdownMenuButton').on('click', function () {
 				navClick('navbar', 'Examples');
@@ -93,9 +121,27 @@
       	<div class="alert alert-success" role="alert">
 		<h5 class="text-center">Reducing the National Debt</h5>
       	</div>
-	
+
+	<p class="text-left"><strong>Reducing the National Debt</strong>. This problem is couched in terms of the United States, but the same problem and NFT strategy to mitigate the problem can apply to any country.</p>
+	<p class="text-left">A rising national debt eventually causes many issues, such as a reduced ability to invest in government infrastructure and programs, due to so much money being spent on the interest on the debt. (see <a href="https://www.crfb.org/blogs/cbo-consequences-growing-national-debt" target="_blank" onclick="refClick('debt', 'crfb.org');">Committee for a Responsible Federal Budget</a>)</p>
+	<p class="text-left">The CBO has listed 83 ways to reduce the debt (see <a href="https://www.cbo.gov/publication/56783" target="_blank" onclick="refClick('debt', 'cbo.gov');">Congressional Budget Office</a>). I believe that there could be an additional option : modifying the way that taxpayers can voluntary contribute towards debt reduction.</p>
+	<p class="text-left">Currently individuals can contribute to debt reduction by filling out <a href="https://pay.gov/public/form/start/23779454" target="_blank" onclick="refClick('debt', 'pay.gov');">this form on pay.gov</a>. (see <a href="https://www.fiscal.treasury.gov/public/gifts-to-government.html" target="_blank" onclick="refClick('debt', 'fiscal.treasury.gov');">Bureau of the Fiscal Service</a> and <a href="https://www.treasurydirect.gov/govt/resources/faq/faq_publicdebt.htm#DebtFinance" target="_blank" onclick="refClick('debt', 'treasurydirect.gov');">TreasuryDirect</a>).  According to IRS publication 526, this contribution is tax deductable (see <a href="https://www.irs.gov/publications/p526#en_US_2020_publink1000229643" target="_blank" onclick="refClick('debt', 'irs.gov');">item # 5 under Types of Qualified Organizations</a> in that publication).</p>
+	<p class="text-left">I propose adding this additional method of contributing to debt reduction:</p>
+	<ol>
+	<li>Whenever the president wants to make an announcement, he does so via tweeting it before going to the press.</li>
+	<li>As soon as he tweets, the tweet is automatically stored as an NFT. (<a href="https://www.cent.co/" target="_blank" onclick="refClick('debt', 'cent');">Cent</a>, a private company, already converts tweets into NFTs through their website <a href="https://v.cent.co/" target="_blank" onclick="refClick('debt', 'valuables');">Valuables</a>, although technically they don't create the NFT until someone places a bid on the tweet, I believe).</li>
+	<li>Collectors of items related to American history, or investors betting that the perceived significance of the announcement will increase over time, or individuals simply wanting to reduce the national debt, bid on the tweet.</li>
+	<li>Proceeds from the winning bid automatically get funneled to the existing payment mechanism used by pay.gov.</li>
+	</ol>
+	<p class="text-left">Future reselling of the NFT among collectors will have a percentage of the new resell price also go to pay down the debt, by the same mechanism.  Cent already does this, where 10 % of every subsequent sale goes to the original tweeter. (see "Where does the money go?" under the <a href="https://docs.google.com/document/d/1kBx-HXY8ow_7bElsJZ6Sk3r2V9cQjSRdWFyKCUXZtAs/edit" target="_blank" onclick="refClick('debt', 'valfaq');">Valuables FAQ</a>). This implies that for tax purposes, the gain or loss on the resale would be treated as a capital gain or loss, while the percentage going to the original tweeter can be deducted by the reseller as a tax donation.</p>
+	<p class="text-left">To enable this, Jack Dorsey's Twitter (or another company such as Cent or a competitor) would need to integrate functionality into Twitter to enable all of this to happen invisibly, so that the president could just make a tweet as normal with as little of his time wasted as possible; and the government site at pay.gov would need to automatically handle the incoming contributions.</p>
+	<p class="text-left">I believe that allowing people to reduce the debt this way would cause a large number of people to contribute to reducing the debt who would otherwise not do so, due to the satisfaction enjoyed by collectors and by investors betting on future increases in value.</p>
+	<p class="text-left">In addition, if the twitter identification of all bidders on the tweet (not just the winning bids) were to be tracked, then another company could set up a social network dedicated to people interested in activities involved in reducing the national debt. Acceptance into the social network would be restricted to those people who had made a bid on one of the president's tweets. The person could join the network by signing in with their twitter account, and then their twitter identity could be compared against the whitelist of previous bidders.  A desire to join this 'elite' (more-or-less) network could also convince people to make bids and hence drive up the price of the eventual winning bid, maximizing contributions towards reducing the debt.</p>
+	<p class="text-left">One of the activities of this social network could involve (among many other things) notifications of new tweets by the president, and the ability to immediately make bids on that new tweet.</p>
+	<p class="text-left">Note that the above mechanism could be generalized to other influential people (not just the president) espousing other causes (not just reducing the national debt), with the associated eligibility to join subject-specific social networks for bidders.</p>
+	<p class="text-center"><a href="https://t.co/vdITXESjBz?amp=1" target="_blank" onclick="nftClick('debt', 'valuables');">Here is the NFT of this idea on Valuables</a></p>
 	<p/>
-	<p class="text-center">More stuff coming soon...</p>
+	<p class="text-center">More categories (under the Examples: dropdown) coming soon...</p>
 	<hr/>
 	<p class="text-center">(my sister site is <a
 		onclick="socialClick('OddWritings');" target="_blank"
@@ -103,8 +149,10 @@
 	</p>
 	<p class="text-center"><a
 		onclick="socialClick('twitter');" target="_blank"
-		href="https://twitter.com/NftIdeas">Go to Twitter</a>)
+		href="https://twitter.com/NftIdeas">Go to my Twitter feed</a>
 	</p>
+	<hr/>
+	<p class="text-center font-italic">This website is powered by myself.</p>
 
 	</div> <!-- container -->
   </body>
