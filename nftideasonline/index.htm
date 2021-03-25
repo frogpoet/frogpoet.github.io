@@ -163,9 +163,42 @@
       	</div>
 
 	<p class="text-left"><strong>Authenticating News Footage</strong>. This problem is couched in terms of the news, but the same problem and NFT strategy to mitigate the problem can apply to any video footage.</p>
-	<p class="text-center">More stuff coming soon...</p>
+	<p class="text-left">Deepfakes can now be <a href="https://www.phonearena.com/news/smartphone-apps-can-help-you-create-deepfakes_id131019" target="_blank" onclick="refClick('news', 'phonearena.com');">easily created on iPhones</a>.</p>
+	<p class="text-left">In addition, deepfakes have been made of <a href="https://www.vice.com/en/article/jgedjb/the-first-use-of-deepfakes-in-indian-election-by-bjp" target="_blank" onclick="refClick('news', 'vice.com');">politicians saying things</a> which they never said in real life.</p>
+	<p class="text-left">Luckily, <a href="https://www.kaggle.com/c/deepfake-detection-challenge/discussion/121418" target="_blank" onclick="refClick('news', 'kaggle.com');">algorithms do exist</a> for automatically detecting whether a video is a deepfake. However, ways of <a href="https://www.sciencedaily.com/releases/2021/02/210208161927.htm" target="_blank" onclick="refClick('news', 'sciencedaily.com');">bypassing those algorithms</a> have been discovered, resulting in the algorithms needing to be modified to once again result in accurate detections. This results in a type of arms-race between deepfake producers and deepfake detectors, similar to the never-ending contest between virus writers and anti-virus programmers.</p>
+	<p class="text-left">I propose this idea:</p>
+	<ol>
+	<li>A new type of video camera is manufactured (call it C), targeted towards news reporters.</li>
+	<li>A new blockchain is created (call it B) which contains only NFTs representing news videos.</li>
+	<li>C contains within it a full node of B.</li>
+	<li>As an internet-of-things (IoT) device, each C can contact each other C in order to validate and maintain nodes of B. Hence, the blockchain is essentially housed within the fleet of cameras.  As new cameras get created, the blockchain gains nodes, thus becoming more secure.</li>
+	<li>Each C can also contact the GPS satellite system to retrieve its location on the earth, within GPS's accuracy limits of <a href="https://www.theverge.com/circuitbreaker/2017/9/25/16362296/gps-accuracy-improving-one-foot-broadcom" target="_blank" onclick="refClick('news', 'theverge.com');">about a foot</a></li>
+	<li>When C starts recording, the time and GPS coordinates are automatically noted by C</li>
+	<li>When C stops recording, the time and GPS coordinates are automatically noted by C</li>
+	<li>After recording, with no intervention from the camera operator, the camera :
+		<ol type="a">
+		<li>computes a hash from each still frame of the video, for a total of NS stills</li>
+		<li>computes the length of the video in seconds and divides by 5, for a total of NV video sub-sections</li>
+		<li>computes the number of stills for each video-subsection (NS / NV)</li>
+		<li>creates a merkle tree for each video-subsection from the hashes of its associated stills. it keeps only the root of the tree. This root value represents the hash of the 5-second clip</li>
+		<li>creates a 'master' merkle tree for the entire video made up of the merkle tree roots of each 5-second clip and stores this tree on-chain, along with the start and stop times and GPS coordinates both before and after the filming, and the unique id of the camera</li>
+		<li>broadcasts the node to other cameras</li>
+		<li>broadcasts the actual footage along with the (entire node of that footage? or just the 'master' merkle root node value?) to some decentralized file store (for example, <a href="https://www.arweave.org/" target="_blank" onclick="refClick('news', 'arweave.org');">Arweave</a>).</li>
+		</ol>
+	</li>
+	<li>When viewing news footage on a web page, a browser extension allows the user to click a 'validate' button beneath the clip</li>
+	<li>The browser verifies that the footage claims to be associated with a place and time on earth. It looks up the GPS coordinates of that claimed location</li>
+	<li>The browser verifies that the footage is a multiple of 5 seconds in length</li>
+	<li>For each 5 second multiple, the browser repeats steps a-d above.  It compares the hash against the hashes stored in the (nearest camera? arweave? a 3rd blockchain?)</li>
+	</ol>
+	<p class="text-left">I'm not sure yet where the hash for each 5-second multiple should be saved. In any case, the idea is that the film could be validated in 5 second sections at a time. After the end of the video, the 'master' merkle tree for the film on the page could be created. If the root matches one of the master roots on Arweave, then the user knows what he sees matches the entire footage. if the root doesn't match but the 5-second ones do in the same order, then the user knows the footage is valid but is incomplete (the beginning or the end is missing). If the 5-second ones match but are out of order, then the footage is valid but has had 5-second sections edited out.  If one of the 5 second sections does not match anything, it has been edited.</p>
+	<p class="text-left">Meanwhile, some people like collecting things about "occurrences," for example anything to do with a particular war, or a protest, or the actions of a leader. The NFTs used above to contribute to authentication could thus be 'bid on' as a further use case. Proceeds could go to fund something like <a href="https://rsf.org/en" target="_blank" onclick="refClick('news', 'rsf.org');">Reporters Without Borders</a>.</p>
+	<p class="text-left">Also note that competing camera makers could create C's above, so that competition can exist among the ways that the footage is validated, though they would need to speak the same language so that their footage and validations could be compared. This way someone could collect NFTs representing film footage of the same event, but filmed by different cameras from different news organizations.</p>
+
+<!--	<p class="text-center">More stuff coming soon...</p> -->
 	<p class="text-center"><a href="https://t.co/OebvzXi4e4?amp=1" target="_blank" onclick="nftClick('news', 'valuables');">Here is the NFT of this idea on Valuables</a></p>
 	<p class="text-center"><a href="https://www.reddit.com/r/tezos/comments/m8rw9s/news_as_an_nft_to_combat_fake_news/" target="_blank" onclick="stormClick('news', 'reddit');">Here is the brainstorming link to this idea on Reddit</a></p>
+	<p class="text-center">(Note : the above thread may not display my contributions to it yet, due to my reddit account being < 20 days old)</p>
 	<p/>
 
 	<p class="text-center">More categories (under the Examples: dropdown) coming soon...</p>
