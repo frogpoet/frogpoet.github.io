@@ -110,6 +110,7 @@
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Examples:</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'News');" href="#news">Authenticating News Footage</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Crime');" href="#crime">Dismantling Criminal Enterprises</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Debt');" href="#debt">Reducing the National Debt</a>
 				</div>
 			</nav>
@@ -194,11 +195,33 @@
 	<p class="text-left">I'm not sure yet where the hash for each 5-second multiple should be saved. In any case, the idea is that the film could be validated in 5 second sections at a time. After the end of the video, the 'master' merkle tree for the film on the page could be created. If the root matches one of the master roots on Arweave, then the user knows what he sees matches the entire footage. if the root doesn't match but the 5-second ones do in the same order, then the user knows the footage is valid but is incomplete (the beginning or the end is missing). If the 5-second ones match but are out of order, then the footage is valid but has had 5-second sections edited out.  If one of the 5 second sections does not match anything, it has been edited.</p>
 	<p class="text-left">Meanwhile, some people like collecting things about "occurrences," for example anything to do with a particular war, or a protest, or the actions of a leader. The NFTs used above to contribute to authentication could thus be 'bid on' as a further use case. Proceeds could go to fund something like <a href="https://rsf.org/en" target="_blank" onclick="refClick('news', 'rsf.org');">Reporters Without Borders</a>.</p>
 	<p class="text-left">Also note that competing camera makers could create C's above, so that competition can exist among the ways that the footage is validated, though they would need to speak the same language so that their footage and validations could be compared. This way someone could collect NFTs representing film footage of the same event, but filmed by different cameras from different news organizations.</p>
-
-<!--	<p class="text-center">More stuff coming soon...</p> -->
 	<p class="text-center"><a href="https://t.co/OebvzXi4e4?amp=1" target="_blank" onclick="nftClick('news', 'valuables');">Here is the NFT of this idea on Valuables</a></p>
-	<p class="text-center"><a href="https://www.reddit.com/r/tezos/comments/m8rw9s/news_as_an_nft_to_combat_fake_news/" target="_blank" onclick="stormClick('news', 'reddit');">Here is the brainstorming link to this idea on Reddit</a></p>
-	<p class="text-center">(Note : the above thread may not display my contributions to it yet, due to my reddit account being < 20 days old)</p>
+	<p/>
+
+	<p id="crime" class="mt-5"/>
+      	<div class="alert alert-success" role="alert">
+		<h5 class="text-center">Dismantling Criminal Enterprises</h5>
+      	</div>
+
+	<p class="text-left"><strong>Dismantling Criminal Enterprises</strong>. This problem is couched in terms of drug lords and the US government, but the same problem and NFT strategy to mitigate the problem can apply to any crime syndicates that amass personal wealth, and any nation that attempts to thwart them.</p>
+	<p class="text-left">Crime driven by the securing of territory in which illegal business can be done is a major source of violence in society today.  In addition it is one of the <a href="http://sites.fordschool.umich.edu/mjpa/files/2015/10/MJPA-Vol12-FINAL-Ch-5.pdf" target="_blank" onclick="refClick('crime', 'umich.edu');">indirect causes of increased illegal immigration</a> between countries.</p>
+	<p class="text-left">Currently, the Drug Enforcement Agency (DEA) establishes projects aimed towards the dismantlement (if sometimes only temporarily) of particular drug cartels, such as <a href="https://www.justice.gov/archive/usao/nys/pressreleases/September08/projectreckoningpr.pdf" target="_blank" onclick="refClick('crime', 'justice.gov_gulf');">Project Reckoning</a> (60 million dollars seized) against the Gulf Cartel/Los Zetas and <a href="https://www.justice.gov/opa/pr/hundreds-alleged-sinaloa-cartel-members-and-associates-arrested-nationwide-takedown-mexican" target="_blank" onclick="refClick('crime', 'justice.gov_sinaloa');">Operation Xcellerator</a> (59 million dollars seized) against the Sinaloa Cartel.</p>
+	<p class="text-left">The DEA receives resources for these projects from the <a href="https://www.dea.gov/organized-crime-drug-enforcement-task-force-ocdetf" target="_blank" onclick="refClick('crime', 'dea.gov_ocdetf');">Organized Crime Drug Enforcement Task Force (OCDETF)</a>; the OCDETF also establishes a list of members of the associated crime syndicate known as the Attorney General's Consolidated Priority Organization Target (CPOT) List.  I was not able to find this list on the internet, so it may be classified. However it perhaps may contain a subset of the DEA's <a href="https://www.dea.gov/fugitives/all" target="_blank" onclick="refClick('crime', 'dea.gov_fugitives');">All Fugitives</a> list. If it in fact is NOT classified, then it could perhaps be generated by reporting against the DEA's PTARRS database (see p.30 [pdf p.34] of the <a href="https://www.justice.gov/doj/page/file/1246751/download" target="_blank" onclick="refClick('crime', 'justice.gov_fy2021');">2021 Interagency Crime and Drug Enforcement Congressional Submission</a>).</p>
+	<p class="text-left">What if ordinary citizens could contribute towards anti-drug financing by bidding for a share of the as-yet-unknown amount of forfeited assets for a particular crime syndicate, before the operation has been concluded?</p>
+	<p class="text-left">I propose this idea:</p>
+	<ol>
+	<li>An NFT is generated for each member in either the CPOT list (if not classified) and/or the Fugitives List for those fugitives with a known association to a criminal enterprise</li>
+	<li>Collections of these NFTs would be organized according to criminal enterprise</li>
+	<li>Citizens could fund efforts against specific crime syndicates by bidding on their associated NFTs</li>
+	<li>Every time an NFT is resold, 10 % of the new bid goes towards the same funding effort, against the same syndicate</li>
+	<li>Once an operation is complete and the money is confiscated, a percentage of that money gets shared amongst the last holders of the NFTs</li>
+	</ol>
+	<p class="text-left">Doing this would allow people to help take down specific syndicates which may have affected them personally, while at the same time providing them with the possibility of gaining a profit should they resell their NFT at a higher value.</p>
+	<p class="text-left">One consequence of this strategy is that the OCDETF would need the ability to channel funds to various operations according to criminal syndicates, so that a citizen who bids on a member of for example the Sinaloa Cartel does not have his funds spent on an operation against the Gulf Cartel.</p>
+	<p class="text-left">Note that members of the criminal enterprises themselves may want to own their own NFTs. What better way to snub their nose at the DEA while displaying confidence in their own abilities than to provide the DEA their own funds with which to catch them, while at the same time providing themselves with insurance (assuming that they forever remain the highest bidder) should they actually get caught? (according to the above they would be eligible for a percentage of a fraction of the entire organization's forfeited dollar assets.) Alternatively they could invest heavily in NFTs belonging to competing criminal syndicates; this would indirectly help their own enterprises, while at the same time providing leverage with the DEA should they ever need to plea bargain.</p>
+	<p class="text-left">One might also wonder what the effect might be among criminals if their NFT is valued less than that of another member who is actually at a lower rank in the organization.  Indeed, the DEA itself might bid on some of the NFTs specifically to influence activity within the organization. This assumes of course that members of the crime syndicate are both aware of the collection of NFTs and interpret the "going rate" of their token as a reflection on their abilities.</p>
+<!--	<p class="text-center">More stuff coming soon...</p> -->
+<!--	<p class="text-center"><a href="" target="_blank" onclick="nftClick('crime', 'valuables');">Here is the NFT of this idea on Valuables</a></p> -->
 	<p/>
 
 	<p class="text-center">More categories (under the Examples: dropdown) coming soon...</p>
