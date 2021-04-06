@@ -76,13 +76,49 @@
 				throw(e);
 			}
 		}
+		function navClick(area, word) {
+			try {
+				gtag('event', 'navClick', {
+					'event_category' : 'area_' + area,
+					'event_label' : 'word_' + word,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('navClick: ' + e.message + ', area = ' + area + ', word = ' + word);
+				throw(e);
+			}
+		}
+		$(document).ready(function() {
+			$('#dropdownMenuButton').on('click', function () {
+				navClick('navbar', 'Books');
+    			});
+		});
 		</script>
   </head>
 
   <body style="padding-top: 20px;">
 	<div class="container">
 
-      	<div class="alert alert-success" role="alert">
+	<nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light">
+		<div id="navbarText" class="navbar-collapse"> <!--  class="collapse navbar-collapse" -->
+			<nav class="nav">
+				<a class="navbar-brand" href="#">Goto:</a>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="#bio" role="button" onclick="navClick('navbar', 'Bio');">Bio</a>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Books:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Apollos_Arrows');" href="#apollo">Apollo's Arrows</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Bathysphere');" href="#bathysphere">Bathysphere</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Breathing_in_Quarantine');" href="#breathing">Breathing in Quarantine</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Cressida');" href="#cressida">Cressida</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Raven');" href="#raven">Raven</a>
+				</div>
+			</nav>
+		</div>
+	</nav>
+
+      	<div class="alert alert-success mt-5" role="alert">
 		<h1 class="text-center">Odd Writings</h1>
       	</div>
 <!--
@@ -91,11 +127,12 @@
 		 onclick="saleClick('bathysphere', 'smashwords');">
 here on Smashwords</a>.</strong> 🠔 (press or click)</p>
 -->
-	<p class="text-center"><strong>Scroll down to see non-sale poetry books.</strong></p>
 	<div class="card">
 		  <img class="card-img-top" src="img/ad_graphic.jpg" alt="Poetry for the Odd Mind">
-		  <div class="card-body">
+		  <div class="card-body" id="bio">
 			<p class="card-text text-center">I like writing odd things.</p>
+			<p class="card-text text-left"><strong>Bio</strong>: I received a bachelor of science degree in computer science from the University of Texas while being a member of that university's Plan II Humanities Honors Program. I write poetry while basking in the aroma of my morning coffee in the weird city of Austin, Texas, and have a particular fondness for cats and eccentricities in general. This page describes books which I have self-published, along with links to the places where they can be purchased.</p>
+			<p class="card-text text-left">I have also been published in SkywayJournal (2021 - February) and Open Skies Quarterly (Volume 4).</p>
 		  </div>
 	</div>
 	<p/>
@@ -165,12 +202,6 @@ Image courtesy of NASTER from Pixabay
 	<p/>
 -->
 	<p class="text-center">
-	I have been published in <a 
-		onclick="journalClick('SkywayJournal');"
-		href="https://skywayjournal.wordpress.com/category/horror/" target="_blank">SkywayJournal
-	</a>. (2021 - February) "Wood"
-	</p>
-	<p class="text-center">
 <!-- referral click on author page doesn't seem to work yet on booksniffer -->
 <!--		href="http://bksnfr.me/George_Pestana" target="_blank">BookSniffer -->
 	I have an author page on <a 
@@ -178,13 +209,11 @@ Image courtesy of NASTER from Pixabay
 		href="https://booksniffer.com/george-pestana/" target="_blank">BookSniffer
 	</a>.
 	</p>
+	<div id="cressida"><p>&nbsp;</p><p>&nbsp;</p></div>	<!-- simulate mt-5 -->
 	<p class="text-left">
-	I'm currently working on <u>Cressida</u>.  When completed it will contain 40 poems and at least 250 pages, with illustrations and commentary, and will cost $9.99 (for android, desktop, iOS, denver EBO, kindle, kobo, nook, palm, pdf, sony), or $14.99 (for paperback).<br/>
+	I'm currently working on <strong>Cressida</strong>.  When completed it will contain 40 poems and at least 250 pages, with illustrations and commentary, and will cost $9.99 (for android, desktop, iOS, denver EBO, kindle, kobo, nook, palm, pdf, sony), or $14.99 (for paperback).<br/>
 	You can buy it now for $4.99 (pdf only) with free updates until it is complete.
 	</p>
-      	<div class="alert alert-success" role="alert">
-		<h2 class="text-center">Books for Purchase</h2>
-      	</div>
 	<p class="text-center"><strong>This book is in progress. Press or click the store name below (i.e. "Leanpub") for status info or purchase</strong>
 	</p>
 	<div class="card">
@@ -197,13 +226,11 @@ Leanpub</a> (pdf)</p>
 	</div>
 	<p/>
 
-	<p class="text-center"><strong>These books are complete. Press or click any of the store names below (i.e. "Apple Books") for info or purchase</strong>
-	</p>
 	<div class="row">
 
 	<!-- ================================== Breathing in Quarantine ============================= -->
 
-	<div class="border mx-auto my-2" style="border-width:10px !important;"><img src="img/breathing_in_quarantine.jpg" width="250px" height="382px"/><br/>
+	<div id="breathing" class="border mx-auto my-2" style="border-width:10px !important;"><img src="img/breathing_in_quarantine.jpg" width="250px" height="382px"/><br/>
 	<center>3 poems, 8 pages, Free</center><br/>
 
 	<a style="border-radius: 13px; width: 250px; height: 43px; overflow: hidden; display: inline-block;" href="https://books.apple.com/us/book/breathing-in-quarantine/id1506838578"
@@ -245,13 +272,12 @@ Leanpub</a> (pdf)</p>
 		 onclick="markClick('breathing', 'smashwords');">
 	<center>Smashwords<br/>(all except paperback and EBO)</center>
 	</a><br/><br/>
-
 	</div>
 
 	<!-- ================================== Apollos Arrows ============================= -->
 
 
-	<div class="border mx-auto my-2" style="border-width:10px !important;"><img src="img/apollos_arrows.jpg" width="250px" height="382px"/><br/>
+	<div id="apollo" class="border mx-auto my-2" style="border-width:10px !important;"><img src="img/apollos_arrows.jpg" width="250px" height="382px"/><br/>
 	<center>17 poems, 28 pages, 99 cents</center><br/>
 
 	<a style="border-radius: 13px; width: 250px; height: 43px; overflow: hidden; display: inline-block;" href="https://books.apple.com/us/book/apollos-arrows/id1506311890"
@@ -303,7 +329,7 @@ Leanpub</a> (pdf)</p>
 
 	<!-- ================================== Bathysphere ============================= -->
 
-	<div class="border mx-auto my-2" style="border-width:10px !important;"><img src="img/bathysphere.jpg" width="250px" height="382px"/><br/>
+	<div id="bathysphere" class="border mx-auto my-2" style="border-width:10px !important;"><img src="img/bathysphere.jpg" width="250px" height="382px"/><br/>
 	<center>60 poems, 127 pages, $9.99</center><br/>
 
 	<a style="border-radius: 13px; width: 250px; height: 43px; overflow: hidden; display: inline-block;" href="https://www.amazon.com/kindle/dp/B08FBP71JH/"
@@ -390,7 +416,7 @@ Leanpub</a> (pdf)</p>
 
 	<!-- ================================== Raven ============================= -->
 
-	<div class="border mx-auto my-2" style="border-width:10px !important;"><img src="img/raven.jpg" width="250px" height="382px"/><br/>
+	<div id="raven" class="border mx-auto my-2" style="border-width:10px !important;"><img src="img/raven.jpg" width="250px" height="382px"/><br/>
 	<center>1 poem, 39 pages, $5.17</center><br/>
 
 	<a style="border-radius: 13px; width: 250px; height: 43px; overflow: hidden; display: inline-block;" href="https://leanpub.com/raven"
