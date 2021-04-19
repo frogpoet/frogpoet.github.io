@@ -21,6 +21,16 @@
 
 			gtag('config', 'UA-154601907-1');
 		</script>
+		<style>
+			@media only screen and (orientation: landscape) {	
+				#raven1_large {display: inline;}
+				#raven1 {display: none;}
+			}
+			@media only screen and (orientation: portrait) {	
+				#raven1_large {display: none;}
+				#raven1 {display: inline;}
+			}
+		</style>
   </head>
 
   <body style="padding-top: 20px;">
@@ -30,7 +40,9 @@
 		<h1 class="text-center">Preview : Raven</h1>
       	</div>
 	<div class="card">
-		  <img class="card-img-top" src="../img/raven_1.jpg" alt="a path through the woods"><br/>
+		  <img id="raven1_large" class="card-img-top" src="../img/raven_1_large.jpg" alt="a path through the woods">
+		  <img id="raven1" class="card-img-top" src="../img/raven_1.jpg" alt="a path through the woods">
+		  <br/>
 	          <div class="text-center">Detail from an image by DarkWorkX on Pixabay</div><br/>
 	          <div class="text-center"><em>HOBBESIDIDUNCE [Aside] paths cerebral wrinkle</em></div>
 		  <div class="card-body">
