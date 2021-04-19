@@ -70,6 +70,19 @@
 				throw(e);
 			}
 		}
+		function previewClick(book) {
+			try {
+				gtag('event', 'previewClick', {
+					'event_category' : 'preview_' + book,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('previewClick: ' + e.message + ', book = ' + book);
+				throw(e);
+			}
+		}
 		function bioClick(site) {
 			try {
 				gtag('event', 'bioClick', {
@@ -268,7 +281,7 @@ Image courtesy of NASTER from Pixabay
 	<p class="text-center"><strong>This means that I can list your name as an editor, along with any link you like, to advertise what you do.</strong>
 	</p>
 	<div class="card">
-		  <div class="text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" onclick="navClick('cressida', 'Preview');" href="previews/cressida.htm">Preview...</a></div>
+		  <div class="text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" onclick="previewClick('cressida');" href="previews/cressida.htm">Preview...</a></div>
 		  <img class="card-img-top" src="img/cressida.jpg" alt="Cressida">
 		  <div class="card-body">
 			<p class="card-text text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" href="https://leanpub.com/cressida"
@@ -282,7 +295,7 @@ Leanpub...(pdf)</a></p>
 
 	<!-- ================================== Breathing in Quarantine ============================= -->
 
-	<div id="breathing" class="border mx-auto my-2" style="border-width:10px !important;"><div class="alert alert-success" role="alert"><h6 class="text-center">April 2020</h6></div><div class="text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" onclick="navClick('breathing', 'Preview');" href="previews/breathing.htm">Preview...</a></div><img src="img/breathing_in_quarantine.jpg" width="250px" height="382px"/><br/>
+	<div id="breathing" class="border mx-auto my-2" style="border-width:10px !important;"><div class="alert alert-success" role="alert"><h6 class="text-center">April 2020</h6></div><div class="text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" onclick="previewClick('breathing');" href="previews/breathing.htm">Preview...</a></div><img src="img/breathing_in_quarantine.jpg" width="250px" height="382px"/><br/>
 	<center>3 poems, 8 pages, Free</center><br/>
 
 	<a class="btn btn-lg btn-outline-primary btn-block" role="button" href="https://books.apple.com/us/book/breathing-in-quarantine/id1506838578"
@@ -329,7 +342,7 @@ Leanpub...(pdf)</a></p>
 	<!-- ================================== Apollos Arrows ============================= -->
 
 
-	<div id="apollo" class="border mx-auto my-2" style="border-width:10px !important;"><div class="alert alert-success" role="alert"><h6 class="text-center">May 2020</h6></div><div class="text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" onclick="navClick('apollo', 'Preview');" href="previews/apollo.htm">Preview...</a></div><img src="img/apollos_arrows.jpg" width="250px" height="382px"/><br/>
+	<div id="apollo" class="border mx-auto my-2" style="border-width:10px !important;"><div class="alert alert-success" role="alert"><h6 class="text-center">May 2020</h6></div><div class="text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" onclick="previewClick('apollo');" href="previews/apollo.htm">Preview...</a></div><img src="img/apollos_arrows.jpg" width="250px" height="382px"/><br/>
 	<center>17 poems, 28 pages, 99 cents</center><br/>
 
 	<a class="btn btn-lg btn-outline-primary btn-block" role="button" href="https://books.apple.com/us/book/apollos-arrows/id1506311890"
@@ -381,7 +394,7 @@ Leanpub...(pdf)</a></p>
 
 	<!-- ================================== Bathysphere ============================= -->
 
-	<div id="bathysphere" class="border mx-auto my-2" style="border-width:10px !important;"><div class="alert alert-success" role="alert"><h6 class="text-center">July 2020</h6></div><div class="text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" onclick="navClick('bathysphere', 'Preview');" href="previews/bathysphere.htm">Preview...</a></div><img src="img/bathysphere.jpg" width="250px" height="382px"/><br/>
+	<div id="bathysphere" class="border mx-auto my-2" style="border-width:10px !important;"><div class="alert alert-success" role="alert"><h6 class="text-center">July 2020</h6></div><div class="text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" onclick="previewClick('bathysphere');" href="previews/bathysphere.htm">Preview...</a></div><img src="img/bathysphere.jpg" width="250px" height="382px"/><br/>
 	<center>60 poems, 127 pages, $9.99</center><br/>
 
 	<a class="btn btn-lg btn-outline-primary btn-block" role="button" href="https://www.amazon.com/kindle/dp/B08FBP71JH/"
@@ -468,7 +481,7 @@ Leanpub...(pdf)</a></p>
 
 	<!-- ================================== Raven ============================= -->
 
-	<div id="raven" class="border mx-auto my-2" style="border-width:10px !important;"><div class="alert alert-success" role="alert"><h6 class="text-center">December 2019</h6></div><div class="text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" onclick="navClick('raven', 'Preview');" href="previews/raven.htm">Preview...</a></div><img src="img/raven.jpg" width="250px" height="382px"/><br/>
+	<div id="raven" class="border mx-auto my-2" style="border-width:10px !important;"><div class="alert alert-success" role="alert"><h6 class="text-center">December 2019</h6></div><div class="text-center"><a class="btn btn-lg btn-outline-primary btn-block" role="button" onclick="previewClick('raven');" href="previews/raven.htm">Preview...</a></div><img src="img/raven.jpg" width="250px" height="382px"/><br/>
 	<center>1 poem, 39 pages, $5.17</center><br/>
 
 	<a class="btn btn-lg btn-outline-primary btn-block" role="button" href="https://leanpub.com/raven"
