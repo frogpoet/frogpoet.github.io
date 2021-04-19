@@ -108,15 +108,38 @@
 			$('#dropdownMenuButton').on('click', function () {
 				navClick('navbar', 'Books');
     			});
+			$('#navbarText').collapse('show');
+			$('#shrinkButton').on('click', function () {
+				document.querySelector('#unshrinkButton').style.display = "inline";
+    			});
+			$('#unshrinkButton').on('click', function () {
+				document.querySelector('#unshrinkButton').style.display = "none";
+    			});
 		});
 		</script>
+		<!-- 280 = galaxy fold, 320 = iPhone 5, 360 = galaxy S5, Moto 4, 375 = iPhone 6,7,8,X -->
+		<style>
+			#shrinkButton {display: none;}
+			#unshrinkButton {display: none; position: fixed; z-index: 100; top: 15; left: 0}
+			@media only screen and (max-device-height: 280px) and (orientation: landscape) {	
+				#shrinkButton {display: inline;}
+			}
+			@media only screen and (max-device-height: 320px) and (orientation: landscape) {
+				#shrinkButton {display: inline;}
+			}
+			@media only screen and (max-device-height: 360px) and (orientation: landscape) {	
+				#shrinkButton {display: inline;}
+			}
+			@media only screen and (max-device-height: 375px) and (orientation: landscape) {	
+				#shrinkButton {display: inline;}
+			}
+		</style>
   </head>
-
   <body style="padding-top: 20px;">
 	<div class="container">
 
 	<nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light">
-		<div id="navbarText" class="navbar-collapse"> <!--  class="collapse navbar-collapse" -->
+		<div id="navbarText" class="collapse navbar-collapse">
 			<nav class="nav">
 				<a class="navbar-brand" href="#">Goto:</a>
 				<a class="nav-link btn btn-lg btn-outline-primary" href="#bio" role="button" onclick="navClick('navbar', 'Bio');">Bio</a>
@@ -128,9 +151,11 @@
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Cressida');" href="#cressida">Cressida</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Raven');" href="#raven">Raven</a>
 				</div>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="shrinkButton"><<</a>
 			</nav>
 		</div>
 	</nav>
+	<a class="btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="unshrinkButton">>></a>
 
       	<div class="alert alert-success mt-5" role="alert">
 		<h1 class="text-center">Odd Writings</h1>
