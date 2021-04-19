@@ -137,29 +137,22 @@
     			});
 		});
 		</script>
-		<!-- 280 = galaxy fold, 320 = iPhone 5, 360 = galaxy S5, Moto 4, 375 = iPhone 6,7,8,X -->
 		<style>
 			#shrinkButton {display: none;}
 			#unshrinkButton {display: none; position: fixed; z-index: 100; top: 15; left: 0}
 			@media only screen and (max-height: 511px) and (orientation: landscape) {	
 				#shrinkButton {display: inline;}
 			}
+			@media only screen and (orientation: landscape) {	
+				#longLogo {display: inline;}
+				#squareLogo {display: none;}
+			}
+			@media only screen and (orientation: portrait) {	
+				#longLogo {display: none;}
+				#squareLogo {display: inline;}
+			}
 		</style>
   </head>
-<!--
-			@media only screen and (max-device-height: 280px) and (orientation: landscape) {	
-				#shrinkButton {display: inline;}
-			}
-			@media only screen and (max-device-height: 320px) and (orientation: landscape) {
-				#shrinkButton {display: inline;}
-			}
-			@media only screen and (max-device-height: 360px) and (orientation: landscape) {	
-				#shrinkButton {display: inline;}
-			}
-			@media only screen and (max-device-height: 375px) and (orientation: landscape) {	
-				#shrinkButton {display: inline;}
-			}
--->
   <body style="padding-top: 20px;">
 	<div class="container">
 
@@ -192,7 +185,8 @@
 here on Smashwords</a>.</strong> 🠔 (press or click)</p>
 -->
 	<div class="card">
-		  <img class="card-img-top" src="img/ad_graphic.jpg" width="100%" height="100%" alt="Poetry for the Odd Mind">
+		  <img id="longLogo" class="card-img-top" src="img/ad_graphic.jpg" width="100%" height="100%" alt="Poetry for the Odd Mind">
+		  <img id="squareLogo" class="card-img-top" src="img/ad_graphic_square.jpg" width="100%" height="100%" alt="Poetry for the Odd Mind">
 		  <div class="card-body" id="bio">
 			<p class="card-text text-center">I like writing odd things.</p>
 			<p class="card-text text-left"><strong>Bio</strong>: I received a bachelor of science degree in computer science from the University of Texas while being a member of that university's Plan II Humanities Honors Program. I write poetry while basking in the aroma of my morning coffee in the weird city of Austin, Texas, and have a particular fondness for cats and eccentricities in general. This page allows one to sample books which I have published, and presents links to the places where they can be purchased.</p>
