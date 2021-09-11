@@ -1,1 +1,164 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="poem poems poetry NFTpoetry" />
+
+	<meta property="og:title" content="Haikus" />
+	<meta property="og:description" content="Poetry for the 0dd Mind in NFT format" />
+	<meta property="og:url" content="https://frogpoet.github.io/oddwritings/nfts/haikus/colors_of_defense" />
+	<meta property="og:type" content="website" />
+
+	<title>Haiku Colors of Defense | oddwritings.com</title> 
+	  <link rel='stylesheet' type='text/css' href='../css/font-awesome.min.css'>
+		<link rel='stylesheet' type='text/css' href='../../../../css/bootstrap.css'>
+	  	<link rel="shortcut icon" href="favicon.ico" />
+		<script src="../../../../libs/d3.js"></script>
+		<script src="../../../../libs/lodash.js"></script>
+		<script src="../../../../libs/jquery.min.js"></script>
+		<script src="../../../../libs/popper.min.js"></script>
+		<script src="../../../../libs/bootstrap.min.js"></script>
+		<script src="https://unpkg.com/embeddable-nfts/dist/nft-card.min.js"></script>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154601907-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-154601907-1');
+		</script>
+		<script>
+		function navClick(area, word) {
+			try {
+				gtag('event', 'navClick', {
+					'event_category' : 'area_' + area,
+					'event_label' : 'word_' + word,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('navClick: ' + e.message + ', area = ' + area + ', word = ' + word);
+				throw(e);
+			}
+		}
+		function socialClick(area, site) {
+			try {
+				gtag('event', 'socialClick', {
+					'event_category' : 'area_' + area,
+					'event_label' : 'site_' + site,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('socialClick: ' + e.message + ', area = ' + area + ', site = ' + site);
+				throw(e);
+			}
+		}
+		$(document).ready(function() {
+			$('#dropdownMenuButton').on('click', function () {
+				navClick('navbar', 'NFTs');
+    			});
+			$('#navbarText').collapse('show');
+			$('#shrinkButton').on('click', function () {
+				document.querySelector('#unshrinkButton').style.display = "inline";
+    			});
+			$('#unshrinkButton').on('click', function () {
+				document.querySelector('#unshrinkButton').style.display = "none";
+    			});
+		});
+		</script>
+		<style>
+			#shrinkButton {display: none;}
+			#unshrinkButton {display: none; position: fixed; z-index: 100; top: 15; left: 0}
+			@media only screen and (max-height: 511px) and (orientation: landscape) {	
+				#shrinkButton {display: inline;}
+			}
+			@media only screen and (orientation: landscape) {	
+				#longLogo {display: inline;}
+				#squareLogo {display: none;}
+			}
+			@media only screen and (orientation: portrait) {	
+				#longLogo {display: none;}
+				#squareLogo {display: inline;}
+			}
+		</style>
+  </head>
+  <body style="padding-top: 20px;">
+	<div class="container">
+
+	<nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light">
+		<div id="navbarText" class="collapse navbar-collapse">
+			<nav class="nav">
+				<a class="navbar-brand" href="#">Goto:</a>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="../../../../oddwritings/index.htm" role="button" onclick="navClick('navbar', 'Books');">Books</a>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">NFTs:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Colors_of_Defense');" href="#colors">Colors of Defense</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Eldritch_Sight');" href="../eldritch_sight/index.htm">Eldritch Sight</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Pray_the_universe');" href="../pray_the_universe/index.htm">Pray the Universe</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Therein_Cast');" href="../therein_cast_your_speech/index.htm">Therein Cast Your Speech</a>
+				</div>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="shrinkButton"><<</a>
+			</nav>
+		</div>
+	</nav>
+	<a class="btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="unshrinkButton">>></a>
+
+      	<div class="alert alert-success mt-5" role="alert">
+		<h1 class="text-center">Haikus as NFTs</h1>
+      	</div>
+
+	<h1 id="colors">&nbsp;</h1>
+	<h1 class="text-center">Colors of Defense</h1>
+
+
+	<nft-card
+		contractAddress="0x495f947276749ce646f68ac8c248420045cb7b5e"
+		tokenId="48289997999590210334063077456393509528592056807732048907342275353571611377665">
+	</nft-card>
+	<h3 class="text-center">Closeup:</h3>
+	<div class="card">
+		  <img id="longLogo" class="card-img-top" src="feline-4652359_1280.jpg" width="100%" height="100%" alt="colorful tigress">
+		  <img id="squareLogo" class="card-img-top" src="feline-4652359_1280.jpg" width="100%" height="100%" alt="colorful tigress">
+	</div>
+	<p/>
+	<p class="text-left">Background Art : <a href="https://pixabay.com/illustrations/feline-scrub-forest-nature-jungle-4652359/" target="_Pixabay">Hansuan_Fabregas on Pixabay</a></p>
+	<p class="text-left">Text : myself</p>
+	<p/>
+
+	<h3 class="text-center">More Info In Three Links:</h3>
+	<div class="card">
+		  <div class="card-body">
+		<p class="text-left"><a href="https://catholicgnosis.wordpress.com/2013/11/16/psychology-and-the-beam-in-the-eye-of-matthew-73/" target="_Blog">A beam in one's eye</a> is a paraphrase from the New Testament which has generated thought within Christian Platonism.</p>
+		<p class="text-left">As a verb, "to wrench" means to pull or twist, which might elicit a defensive reaction; while as a noun, <a href="https://home.howstuffworks.com/wrench.htm" target="_tool">"a wrench"</a> is a tool to tighten things.</p>
+		<p class="text-left">Regimental flags or standards, used in rallying-cries, are sometimes known as <a href="https://en.wikipedia.org/wiki/Military_colours,_standards_and_guidons" target="_Wikipedia">the colors</a>.</p>
+		<p class="text-left">I write this on the 20th anniversary of 9-11.</p>
+		</div>
+	</div>
+	<p/>
+
+	<p class="text-center">
+		Thanks for scrolling all the way to the bottom.  As a thank-you, here is a 3-D video of <a href="http://www.bbc.co.uk/indepthtoolkit/smallprox/include/datapres/idt/news-vj-video-embed-iframe/1.0.2/video_iframe.html#vpid=p076rk8c&amp;title=Notre-Dame%20before%20the%20fire%20in%20360%20video&amp;poster_image=https%3A%2F%2Fnews.files.bbci.co.uk%2Finclude%2Fnewsspec%2F23840%2Fassets%2Fapp-project-assets%2F360-video-notre-dame-paris.png&amp;autoplay=false&amp;include_preroll=false&amp;include_analytics=false&amp;responsive=true&amp;threeSixty=true&amp;kind=360">Notre-Dame Before the Fire</a>, thanks to the BBC.
+	</p>
+	<hr/>
+	<p class="text-center font-italic">This website is powered by myself.</p>
+	<p class="text-center">
+		<a href="https://www.facebook.com/0ddwritings" target="_blank" aria-label="Facebook: https://www.facebook.com/0ddwritings" onclick="socialClick('footer', 'facebook');">
+<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false"><path d="M12 2C6.5 2 2 6.5 2 12c0 5 3.7 9.1 8.4 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7C18.3 21.1 22 17 22 12c0-5.5-4.5-10-10-10z"></path></svg>
+		</a>
+		<a href="https://www.twitter.com/OddWritings" target="_blank" aria-label="Twitter: https://www.twitter.com/OddWritings" onclick="socialClick('footer', 'twitter');" >
+<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false"><path d="M22.23,5.924c-0.736,0.326-1.527,0.547-2.357,0.646c0.847-0.508,1.498-1.312,1.804-2.27 c-0.793,0.47-1.671,0.812-2.606,0.996C18.324,4.498,17.257,4,16.077,4c-2.266,0-4.103,1.837-4.103,4.103 c0,0.322,0.036,0.635,0.106,0.935C8.67,8.867,5.647,7.234,3.623,4.751C3.27,5.357,3.067,6.062,3.067,6.814 c0,1.424,0.724,2.679,1.825,3.415c-0.673-0.021-1.305-0.206-1.859-0.513c0,0.017,0,0.034,0,0.052c0,1.988,1.414,3.647,3.292,4.023 c-0.344,0.094-0.707,0.144-1.081,0.144c-0.264,0-0.521-0.026-0.772-0.074c0.522,1.63,2.038,2.816,3.833,2.85 c-1.404,1.1-3.174,1.756-5.096,1.756c-0.331,0-0.658-0.019-0.979-0.057c1.816,1.164,3.973,1.843,6.29,1.843 c7.547,0,11.675-6.252,11.675-11.675c0-0.178-0.004-0.355-0.012-0.531C20.985,7.47,21.68,6.747,22.23,5.924z"></path></svg>
+		</a>
+		<a href="https://www.instagram.com/0ddwritings" target="_blank" aria-label="Instagram: https://www.instagram.com/0ddwritings" onclick="socialClick('footer', 'instagram');">
+<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false"><path d="M12,4.622c2.403,0,2.688,0.009,3.637,0.052c0.877,0.04,1.354,0.187,1.671,0.31c0.42,0.163,0.72,0.358,1.035,0.673 c0.315,0.315,0.51,0.615,0.673,1.035c0.123,0.317,0.27,0.794,0.31,1.671c0.043,0.949,0.052,1.234,0.052,3.637 s-0.009,2.688-0.052,3.637c-0.04,0.877-0.187,1.354-0.31,1.671c-0.163,0.42-0.358,0.72-0.673,1.035 c-0.315,0.315-0.615,0.51-1.035,0.673c-0.317,0.123-0.794,0.27-1.671,0.31c-0.949,0.043-1.233,0.052-3.637,0.052 s-2.688-0.009-3.637-0.052c-0.877-0.04-1.354-0.187-1.671-0.31c-0.42-0.163-0.72-0.358-1.035-0.673 c-0.315-0.315-0.51-0.615-0.673-1.035c-0.123-0.317-0.27-0.794-0.31-1.671C4.631,14.688,4.622,14.403,4.622,12 s0.009-2.688,0.052-3.637c0.04-0.877,0.187-1.354,0.31-1.671c0.163-0.42,0.358-0.72,0.673-1.035 c0.315-0.315,0.615-0.51,1.035-0.673c0.317-0.123,0.794-0.27,1.671-0.31C9.312,4.631,9.597,4.622,12,4.622 M12,3 C9.556,3,9.249,3.01,8.289,3.054C7.331,3.098,6.677,3.25,6.105,3.472C5.513,3.702,5.011,4.01,4.511,4.511 c-0.5,0.5-0.808,1.002-1.038,1.594C3.25,6.677,3.098,7.331,3.054,8.289C3.01,9.249,3,9.556,3,12c0,2.444,0.01,2.751,0.054,3.711 c0.044,0.958,0.196,1.612,0.418,2.185c0.23,0.592,0.538,1.094,1.038,1.594c0.5,0.5,1.002,0.808,1.594,1.038 c0.572,0.222,1.227,0.375,2.185,0.418C9.249,20.99,9.556,21,12,21s2.751-0.01,3.711-0.054c0.958-0.044,1.612-0.196,2.185-0.418 c0.592-0.23,1.094-0.538,1.594-1.038c0.5-0.5,0.808-1.002,1.038-1.594c0.222-0.572,0.375-1.227,0.418-2.185 C20.99,14.751,21,14.444,21,12s-0.01-2.751-0.054-3.711c-0.044-0.958-0.196-1.612-0.418-2.185c-0.23-0.592-0.538-1.094-1.038-1.594 c-0.5-0.5-1.002-0.808-1.594-1.038c-0.572-0.222-1.227-0.375-2.185-0.418C14.751,3.01,14.444,3,12,3L12,3z M12,7.378 c-2.552,0-4.622,2.069-4.622,4.622S9.448,16.622,12,16.622s4.622-2.069,4.622-4.622S14.552,7.378,12,7.378z M12,15 c-1.657,0-3-1.343-3-3s1.343-3,3-3s3,1.343,3,3S13.657,15,12,15z M16.804,6.116c-0.596,0-1.08,0.484-1.08,1.08 s0.484,1.08,1.08,1.08c0.596,0,1.08-0.484,1.08-1.08S17.401,6.116,16.804,6.116z"></path></svg>
+		</a>
+	</p>
+
+	</div> <!-- container -->
+
+  </body>
+</html>
 
