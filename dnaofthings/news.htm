@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="News about the DNA of Things (DOT).">
+	<title>DNA of Things - News | dnaofthings</title> 
+	  <link rel='stylesheet' type='text/css' href='../css/font-awesome.min.css'>
+		<link rel='stylesheet' type='text/css' href='../css/bootstrap.css'>
+	  	<link rel="shortcut icon" href="favicon.ico" />
+		<script src="../libs/d3.js"></script>
+		<script src="../libs/lodash.js"></script>
+		<script src="../libs/jquery.min.js"></script>
+		<script src="../libs/popper.min.js"></script>
+		<script src="../libs/bootstrap.min.js"></script>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154425646-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-154425646-1');
+		</script>
+	<script>
+		$(document).ready(function() {
+			$('#dropdownMenuButton').on('click', function () {
+				navClick('navbar', 'Books');
+    			});
+			$('#navbarText').collapse('show');
+			$('#shrinkButton').on('click', function () {
+				document.querySelector('#unshrinkButton').style.display = "inline";
+    			});
+			$('#unshrinkButton').on('click', function () {
+				document.querySelector('#unshrinkButton').style.display = "none";
+    			});
+		});
+	</script>
+	<style>
+		#shrinkButton {display: none;}
+		#unshrinkButton {display: none; position: fixed; z-index: 100; top: 15; left: 0}
+		@media only screen and (max-height: 511px) and (orientation: landscape) {	
+			#shrinkButton {display: inline;}
+		}
+		@media only screen and (orientation: landscape) {	
+			#longLogo {display: inline;}
+			#squareLogo {display: none;}
+		}
+		@media only screen and (orientation: portrait) {	
+			#longLogo {display: none;}
+			#squareLogo {display: inline;}
+		}
+	</style>
+  </head>
+
+  <body style="padding-top: 20px;">
+	<div class="container">
+
+	<nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light">
+		<div id="navbarText" class="collapse navbar-collapse">
+			<nav class="nav">
+				<button class="btn btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="Hamburger_icon.svg" class="img-fluid img-thumbnail" alt="hamburger icon"></button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Voting Page');" href="index.htm.htm">Voting Page</a>
+				</div>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="shrinkButton"><<</a>
+			</nav>
+		</div>
+	</nav>
+	<a class="btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="unshrinkButton">>></a>
+
+      	<div class="alert alert-success mt-5" role="alert">
+		<h1 class="text-center">DNA of Things</h1>
+		<h2 class="text-center">News</h2>
+      	</div>
+	<p>
+	<div class="date">2021-12-01</div><div class="news"><a href="https://www.bbc.com/news/science-environment-59489560">BBC reports 100X increase in density</a> by Georgia Tech Research Institute</div>
+	<div class="date">2018-03-06</div><div class="news">Nature Biotechnology prints <a href="https://www.nature.com/articles/nbt.4079.epdf?sharing_token=O8OuKWDN9b2OeBtR6Htsb9RgN0jAjWel9jnR3ZoTv0NdgcrnphecmUtvf3blZJeitKriGuapchwXjTlWRDHpPYd0CF-B8luvfs2zi5EAjHbFdPLdMPvF1o790Vv8ojloZPTVfiSHVEPFpLotcx47rBu9-XL8dRawYbf42cFuxY-nvELls_b7iDXQ19fP_8zJc7mDYFC2nlbjyuOgKAoiQQ%3D%3D&tracking_referrer=dnaofthings.org">"Random access in large-scale DNA data storage"</a></div>
+	</p>
+
+	</div> <!-- container -->
+
+  </body>
+</html>
