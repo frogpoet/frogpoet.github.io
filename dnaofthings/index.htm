@@ -94,32 +94,53 @@
 				$('#monthSelectLink').attr("href", href);
 			}, false);
 		})();
+		$(document).ready(function() {
+			$('#dropdownMenuButton').on('click', function () {
+				navClick('navbar', 'Books');
+    			});
+			$('#navbarText').collapse('show');
+			$('#shrinkButton').on('click', function () {
+				document.querySelector('#unshrinkButton').style.display = "inline";
+    			});
+			$('#unshrinkButton').on('click', function () {
+				document.querySelector('#unshrinkButton').style.display = "none";
+    			});
+		});
 	</script>
+	<style>
+		#shrinkButton {display: none;}
+		#unshrinkButton {display: none; position: fixed; z-index: 100; top: 15; left: 0}
+		@media only screen and (max-height: 511px) and (orientation: landscape) {	
+			#shrinkButton {display: inline;}
+		}
+		@media only screen and (orientation: landscape) {	
+			#longLogo {display: inline;}
+			#squareLogo {display: none;}
+		}
+		@media only screen and (orientation: portrait) {	
+			#longLogo {display: none;}
+			#squareLogo {display: inline;}
+		}
+	</style>
   </head>
-<!-- try popping this up : 
-<div class="ico-video" data-src="https://img.youtube.com/vi/ieSA4kXvMO4/maxresdefault.jpg" style="background-image: url(&quot;https://img.youtube.com/vi/ieSA4kXvMO4/0.jpg&quot;);">
-          <div class="overlay">
-            <label for="video" class="icon-play start-video-btn"></label>
-            <input id="video" type="checkbox" class="hidden" name="video">
-            <div class="video-modal">
-              <div class="video-modal-inner">
-                <div class="video-modal-header">
-                  <h5>Inlock</h5>
-                  <label for="video" class="icon-close stop-video-btn"></label>
-                </div>
-                <div class="iframe-wrapper">
-                  <iframe class="asset-video-inner" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://youtube.com/embed/ieSA4kXvMO4?enablejsapi=1" type="text/html" frameborder="0"></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
-</div>
--->
 
   <body style="padding-top: 20px;">
 	<div class="container">
 
-      	<div class="alert alert-success" role="alert">
+	<nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light">
+		<div id="navbarText" class="collapse navbar-collapse">
+			<nav class="nav">
+				<button class="btn btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="Hamburger_icon.svg" class="img-fluid img-thumbnail" alt="hamburger icon"></button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'News');" href="news.htm">News</a>
+				</div>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="shrinkButton"><<</a>
+			</nav>
+		</div>
+	</nav>
+	<a class="btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="unshrinkButton">>></a>
+
+      	<div class="alert alert-success mt-5" role="alert">
 		<h1 class="text-center">DNA of Things</h1>
 		<h2 class="text-center">Voting Page</h2>
 		<h4 class="text-center">Vote for which topic(s) you would like to receive more research in the selected month's <a id="monthSelectLink" href="" target="leanpub" onclick="toggleBook('dnaofthings');">DNA of Things book</a> &LeftArrowBar; (this is the download link)</h4>
