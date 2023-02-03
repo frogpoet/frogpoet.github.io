@@ -69,8 +69,6 @@
 			$('#unshrinkButton').on('click', function () {
 				document.querySelector('#unshrinkButton').style.display = "none";
     			});
-			/* make z-index not interfere with 'fixed-top' bootstrap css classname by setting it less than 1030 */
-			$('.cent-collect-button.customize').css("z-index", "1020 !important");
 		});
 		</script>
 		<style>
@@ -87,6 +85,8 @@
 				#longLogo {display: none;}
 				#squareLogo {display: inline;}
 			}
+			/* make z-index not interfere with 'fixed-top' bootstrap css classname by setting it less than 1030 */
+			.cent-collect-button.customize { z-index: 1020 !important;}
 		</style>
   </head>
   <body style="padding-top: 20px;">
