@@ -2,7 +2,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="poem poems poetry" />
-
+<!-- ?collectManager=1 -->
 	<meta property="og:title" content="Poetry for Thinkers" />
 	<meta property="og:description" content="Poetry for the 0dd Mind." />
 	<meta property="og:image" content="https://frogpoet.github.io/oddwritings/img/january_2022.jpg" />
@@ -69,6 +69,8 @@
 			$('#unshrinkButton').on('click', function () {
 				document.querySelector('#unshrinkButton').style.display = "none";
     			});
+			/* make z-index not interfere with 'fixed-top' bootstrap css classname by setting it less than 1030 */
+			$('.cent-collect-button.customize').css("z-index", "1020 !important");
 		});
 		</script>
 		<style>
