@@ -44,6 +44,21 @@
 				throw(e);
 			}
 		}
+		function marketClick(blockchain, format, market) {
+			try {
+alert('this would go directly to the poem in ' + market);
+				gtag('event', 'marketClick', {
+					'event_category' : 'blockchain_' + blockchain,
+					'event_label' : 'market_' + market,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('marketClick: ' + e.message + ', blockchain = ' + blockchain + ', format = ' + format + ', market = ' + market);
+				throw(e);
+			}
+		}
 		function socialClick(area, site) {
 			try {
 				gtag('event', 'socialClick', {
@@ -124,12 +139,29 @@
 
 	<div class="card">
 		<div class="card-body">
-			<p class="card-text text-center">The digital collectible of this poem exists on separate blockchains; however, only one copy exists per blockchain, and the format in which the poem is presented differs for each blockchain.  Specifically: </p>
+			<p class="card-text text-center">The digital collectible of this poem exists on separate blockchains as follows: </p>
 			<ol>
-				<li><strong>Ethereum</strong> : the text by itself</li>
-				<li><strong>Tezos</strong> : a video of the poem, with graphics</li>
+				<li><strong>Tezos</strong> : the text by itself.
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownTezosText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">1 copy:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownTezosText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Tezos', 'text', 'Objkt');" target="_objkt" href="https://objkt.com/profile/tz1Y2HkxDQ3h665kgBaZivNYZWmpjRSqFTT6/created">Objkt</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Tezos', 'text', 'Typed.Art');" target="_typed" href="https://typed.art/@OddWritings">Typed.Art</a>
+				</div>
+				</li>
+				<li><strong>Tezos</strong> : a video of the poem, with graphics.
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownTezosVideo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">1 copy:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownTezosVideo">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Tezos', 'video', 'Objkt');" target="_objkt" href="https://objkt.com/profile/tz1Y2HkxDQ3h665kgBaZivNYZWmpjRSqFTT6/created">Objkt</a>
+				</div>
+				</li>
+				<li><strong>Ethereum</strong> : a video of the poem, with graphics.
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownEthereumVideo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">1 copy:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEthereumVideo">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'video', 'Coinbase');" target="_coinbase" href="https://nft.coinbase.com/@oddwritings?tab=Created">Coinbase</a>
+				</div>
+				</li>
 			</ol>
-			<p class="card-text text-center">The graphics from the video can be individually minted right here on this page.  Upon minting, they will exist on the <strong>Polygon</strong> chain, and are as follows:</p>
+			<p class="card-text text-center">The graphics from the video can be individually collected right here on this page.  Upon minting, they will exist on the <strong>Polygon</strong> chain, and are as follows:</p>
 			<img class="card-img-bottom" src="img/upon_the_death_of_a_friend_01.jpg" alt="repears in a field">
 			<hr/>
 			<img class="card-img-bottom" src="img/upon_the_death_of_a_friend_02.jpg" alt="bloody hanging sickles">
