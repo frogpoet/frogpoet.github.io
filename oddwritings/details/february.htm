@@ -47,7 +47,7 @@
 		}
 		function marketClick(blockchain, format, market, ready) {
 			try {
-if (!ready) alert('this would go directly to the poem in ' + market);
+if (!ready) alert('once listed, this would go directly to the poem in ' + market);
 				gtag('event', 'marketClick', {
 					'event_category' : 'blockchain_' + blockchain,
 					'event_label' : 'market_' + market,
@@ -118,14 +118,8 @@ if (!ready) alert('this would go directly to the poem in ' + market);
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Apollos_Arrows');" href="../index.htm#apollo">Apollo's Arrows</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Bathysphere');" href="../index.htm#bathysphere">Bathysphere</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Broken_Things');" href="../index.htm#broken">Broken Things</a>
-<!--
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Breathing_in_Quarantine');" href="../index.htm#breathing">Breathing in Quarantine</a>
--->
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Cressida');" href="../index.htm#cressida">Cressida</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Raven');" href="../index.htm#raven">Raven</a>
-<!--
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Other');" href="../rejectedpoet/index.htm">Other Stuff</a>
--->
 				</div>
 				<a class="nav-link btn btn-lg btn-outline-primary" href="../details/index.htm" role="button" onclick="navClick('navbar', 'NFTs');">NFTs</a>
 				<a class="nav-link btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="shrinkButton"><<</a>
@@ -140,8 +134,9 @@ if (!ready) alert('this would go directly to the poem in ' + market);
 
 	<div class="card">
 		<div class="card-body">
-			<p class="card-text text-center">The digital collectible of this poem will exist on separate blockchains as follows: </p>
+			<p class="card-text text-center">The digital collectible of this poem will exist on one or more blockchains as follows: </p>
 			<ol>
+<!--
 				<li><strong>Tezos</strong> : the text by itself.
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownTezosText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">1 copy:</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownTezosText">
@@ -149,12 +144,15 @@ if (!ready) alert('this would go directly to the poem in ' + market);
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Tezos', 'text', 'Typed.Art');" target="_typed" href="https://typed.art/@OddWritings">Typed.Art</a>
 				</div>
 				</li>
+-->
+<!--
 				<li><strong>Tezos</strong> : a video of the poem, with graphics.
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownTezosVideo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">1 copy:</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownTezosVideo">
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Tezos', 'video', 'Objkt');" target="_objkt" href="https://objkt.com/profile/tz1Y2HkxDQ3h665kgBaZivNYZWmpjRSqFTT6/created">Objkt</a>
 				</div>
 				</li>
+-->
 				<li><strong>Ethereum</strong> : the text by itself, as a jpeg.
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownEthereumText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">1 copy:</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEthereumText">
@@ -164,9 +162,12 @@ if (!ready) alert('this would go directly to the poem in ' + market);
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text as jpeg', 'Gem', true);" target="_gem" href="https://www.gem.xyz/asset/0x1f570d5840412a6621a5886729521529c7eaec48/2">Gem</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text as jpeg', 'LooksRare', true);" target="_looksrare" href="https://looksrare.org/collections/0x1F570d5840412A6621a5886729521529C7eaec48/2">LooksRare</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text as jpeg', 'Mint.Fun');" target="_mintfun" href="https://mint.fun/0x1f570d5840412a6621a5886729521529c7eaec48">Mint.Fun</a>
-
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text as jpeg', 'OpenSea', true);" target="_opensea" href="https://opensea.io/assets/ethereum/0x1f570d5840412a6621a5886729521529c7eaec48/2">OpenSea</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text as jpeg', 'Rarible', true);" target="_rarible" href="https://rarible.com/token/0x1f570d5840412a6621a5886729521529c7eaec48:2?tab=overview">Rarible</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text as jpeg', 'X2Y2', true);" target="_x2y2" href="https://x2y2.io/eth/0x1F570d5840412A6621a5886729521529C7eaec48/2">X2Y2</a>
 				</div>
 				</li>
+<!--
 				<li><strong>Ethereum</strong> : a video of the poem, with graphics.
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownEthereumVideo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">1 copy:</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEthereumVideo">
@@ -179,10 +180,10 @@ if (!ready) alert('this would go directly to the poem in ' + market);
 
 				</div>
 				</li>
+-->
 			</ol>
-			<p class="card-text text-center">The graphics from the video can be individually collected right here on this page.  Upon minting, they will exist on the <strong>Polygon</strong> chain, and are as follows:</p>
-			<p class="card-text text-center">--- not done yet ---</p>
 <!--			
+			<p class="card-text text-center">The graphics from the video can be individually collected right here on this page.  Upon minting, they will exist on the <strong>Polygon</strong> chain, and are as follows:</p>
 			<img class="card-img-bottom" src="img/upon_the_death_of_a_friend_01.jpg" alt="repears in a field">
 			<hr/>
 			<img class="card-img-bottom" src="img/upon_the_death_of_a_friend_02.jpg" alt="bloody hanging sickles">
