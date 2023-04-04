@@ -139,6 +139,8 @@ if (!ready) alert('once listed, this would go directly to the poem in ' + market
 				<li><strong>Ethereum</strong> : the text by itself, as a jpeg.
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownEthereumText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">1 copy:</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEthereumText">
+					<!-- note we display Coinbase twice, because with a shorter screen the top popup menu item gets hidden behind the navbar -->
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text as jpeg', 'Coinbase', true);" target="_coinbase" href="https://nft.coinbase.com/nft/ethereum/0x1f570d5840412a6621a5886729521529c7eaec48/2">Coinbase</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text as jpeg', 'Coinbase', true);" target="_coinbase" href="https://nft.coinbase.com/nft/ethereum/0x1f570d5840412a6621a5886729521529c7eaec48/2">Coinbase</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text as jpeg', 'Context', true);" target="_context" href="https://context.app/feed-items/evt_NDq8d11VrtqGLRjjnSEx_a?nft=0x1f570d5840412a6621a5886729521529c7eaec48%2F2">Context</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text as jpeg', 'Darkblock', true);" target="_darkblock" href="https://app.darkblock.io/platform/eth/nft/0x1f570d5840412a6621a5886729521529c7eaec48/2">Darkblock</a>
@@ -192,11 +194,13 @@ if (!ready) alert('once listed, this would go directly to the poem in ' + market
 -->
 			</ol>
 			<p class="card-text text-center">This means that <strong>there are a total of 3 copies</strong> of the poem, spread across the 
-					Ethereum, Polygon, and Tezos blockchains. <strong>THIS NUMBER MAY INCREASE</strong> (see below).</p>
+					Ethereum, Polygon, and Tezos blockchains. At least one copy has been sold, and so <strong>THIS NUMBER IS FROZEN</strong>.</p>
+<!--
 			<p class="card-text text-center">Note that the scarcity will decrease as I continue to add the poem to more blockchains, or make new versions of the poem in different representations (video versus text for example).  However, once ONE copy of the poem is sold, on ANY blockchain, I will no longer spread the poem onto other blockchains or mint new representations of the poem, such that the scarcity becomes frozen.</p>
 			<p class="card-text text-center">By purchasing this NFT, <strong>YOU AGREE</strong> to accept the definition of scarcity as defined on this page for this particular NFT.</p>
 			<p class="card-text text-center">This poem has not yet been sold, and hence the scarcity could decrease in future as I mint more copies.</p>
 			<p class="card-text text-center">Note also that regardless of whether scarcity is frozen, <strong>I may attach additional unlockable material to each NFT at any time, which will propagate to you (the owner)</strong> regardless of when you bought the NFT.  This means that this NFT could increase in value over time, regardless of scarcity.  To unlock material, view the NFT in the Darkblock marketplace.</p>
+-->
 			<p class="card-text text-center">Select a marketplace from any dropdown to see what the poem looks like on that marketplace.</p>
 <!--			
 			<p class="card-text text-center">The graphics from the video can be individually collected right here on this page.  Upon minting, they will exist on the <strong>Polygon</strong> chain, and are as follows:</p>
