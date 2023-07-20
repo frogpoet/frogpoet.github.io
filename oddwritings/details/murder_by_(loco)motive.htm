@@ -61,7 +61,7 @@ if (!ready) {alert('once listed, this would go directly to the poem in ' + marke
 		}
 		function nftBookClick(book, store, ready) {
 			try {
-if (!ready) {alert('coming soon'); return false;}
+if (!ready) {alert('coming in December 2023'); return false;}
 				gtag('event', 'nftBookClick', {
 					'event_category' : 'book_' + book,
 					'event_label' : 'store_' + store,
@@ -169,10 +169,10 @@ This Ethereum word-unit palindrome poem <a href="https://www.rattle.com/product/
 				<li><strong>Purchase the illustrated book</strong> : <br/>
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownBookText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookstore:</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBookText">
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'Amazon', false);" target="_amazon" href="">Amazon</a>
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'Apple', false);" target="_apple" href="https://books.apple.com/us/book/murder-by-(loco)motive/id9999999999">Apple</a>
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'B & Noble', false);" target="_bnoble" href="https://www.barnesandnoble.com/w/murder-by-(loco)motive-george-pestana/9999999999?ean=9999999999999">B & Noble</a>
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'Smashwords', false);" target="_smashwords" href="https://www.smashwords.com/books/9999999">Smashwords</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'Amazon', false);" href="">Amazon</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'Apple', true);" target="_apple" href="https://books.apple.com/us/book/x/id6451427673">Apple</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'B & Noble', true);" target="_bnoble" href="https://www.barnesandnoble.com/s/2940166083852">B & Noble</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'Smashwords', true);" target="_smashwords" href="https://www.smashwords.com/books/view/1425760">Smashwords</a>
 				</div>
 				</li>
 			</ol>
