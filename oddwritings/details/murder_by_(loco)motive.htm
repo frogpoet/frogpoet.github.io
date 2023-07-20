@@ -74,6 +74,21 @@ if (!ready) {alert('coming in December 2023'); return false;}
 				throw(e);
 			}
 		}
+		function nftChainClick(book, chain, ready) {
+			try {
+if (!ready) {alert('coming in the next few days'); return false;}
+				gtag('event', 'nftChainClick', {
+					'event_category' : 'book_' + book,
+					'event_label' : 'chain_' + chain,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('nftChainClick: ' + e.message + ', book = ' + book + ', chain = ' + chain);
+				throw(e);
+			}
+		}
 		function socialClick(area, site) {
 			try {
 				gtag('event', 'socialClick', {
@@ -155,7 +170,7 @@ This Ethereum word-unit palindrome poem <a href="https://www.rattle.com/product/
 			<p class="card-text text-center">This Ethereum word-unit palindrome poem explores the themes of murder, justice, free will and predestination.  Like all word-unit palindromes, it can be read both backwards and forwards word-by-word.  There is only one copy of the digital collectible.</p>
 			<ol>
 				<hr/>
-				<li><strong>Purchase or bid for the digital collectible</strong> : <br/>
+				<li><strong>Purchase or bid for the 1-of-1 full text digital collectible</strong> : <br/>
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownEthereumText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEthereumText">
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text', 'Coinbase', false);" target="_coinbase" href="https://nft.coinbase.com/nft/ethereum/0x1f570d5840412a6621a5886729521529c7eaec48/4">Coinbase</a>
@@ -173,6 +188,13 @@ This Ethereum word-unit palindrome poem <a href="https://www.rattle.com/product/
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'Apple', true);" target="_apple" href="https://books.apple.com/us/book/x/id6451427673">Apple</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'B & Noble', true);" target="_bnoble" href="https://www.barnesandnoble.com/s/2940166083852">B & Noble</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Murder_by_(Loco)motive', 'Smashwords', true);" target="_smashwords" href="https://www.smashwords.com/books/view/1425760">Smashwords</a>
+				</div>
+				</li>
+				<li><strong>Purchase or bid on images from the illustrated book</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownChain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chain:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownChain">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftChainClick('Murder_by_(Loco)motive', 'Polygon', false);" href="">Polygon</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftChainClick('Murder_by_(Loco)motive', 'Tezos', false);" href="">Tezos</a>
 				</div>
 				</li>
 			</ol>
