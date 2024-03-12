@@ -1,56 +1,53 @@
+
 <html>
   <head>
-	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="poem poems poetry" />
+<!-- ?collectManager=1 -->
+	<meta property="og:title" content="Poetry for Thinkers" />
+	<meta property="og:description" content="Poetry for the 0dd Mind." />
+	<meta property="og:image" content="https://frogpoet.github.io/oddwritings/img/january_2022.jpg" />
+	<meta property="og:url" content="https://frogpoet.github.io/oddwritings/details/upon_the_death_of_a_friend" />
+	<meta property="og:type" content="website" />
+
+	<title>Poetry Cards | oddwritings.com</title> 
 	  <link rel='stylesheet' type='text/css' href='css/font-awesome.min.css'>
 		<link rel='stylesheet' type='text/css' href='css/bootstrap.css'>
+	  	<link rel="shortcut icon" href="favicon.ico" />
 		<script src="libs/d3.js"></script>
 		<script src="libs/lodash.js"></script>
 		<script src="libs/jquery.min.js"></script>
 		<script src="libs/popper.min.js"></script>
 		<script src="libs/bootstrap.min.js"></script>
-	</head>
-  <body>
- 		<div class='container'>
-    <div class="alert alert-success" role="alert">
-	    <h1 class="text-center">Frogpoet's Blogs</h1>
+		<script src="https://unpkg.com/collect-button@latest/dist/button.js" async></script>
+
+		<style>
+			/* make z-index not interfere with 'fixed-top' bootstrap css classname by setting it less than 1030 */
+			.cent-collect-button.customize { z-index: 1020 !important;}
+		</style>
+  </head>
+  <body style="padding-top: 20px;">
+	<div class="container">
+
+      	<div class="alert alert-success mt-5" role="alert">
+		<h1 class="text-center">OddWritings<br/>Poetry Cards</h1>
+      	</div>
+
+	<div class="card">
+		<div class="card-body">
+			<p class="card-text text-center">Once a Poetry Card is sold out, it will be replaced by a new one.</p>
+			<img class="card-img-bottom" src="cent/panther.jpg" alt="we tread as panthers pardoned in the stone">
+			<hr/>
+<!--
+			<img class="card-img-bottom" src="cent/panther.jpg" alt="we tread as panthers pardoned in the stone">
+			<hr/>
+-->
 		</div>
-    <p>
-      This is a list of frogpoet's blogs.  If you read these blogs on a regular basis, and you use the Brave browser to generate income
-      in BAT by clicking on ads, consider contributing to the creator of these blogs by tipping in BAT.
-      <div class='container'><table class='table table-bordered'>
-				<tr class="table-warning"><th>Name</th><th>About</th><th>Last Edited</th></tr>
-				<tr><td><a href="f-star/index.htm">Journey to fstar (F*)</a></td><td>Hacker-proof Coding</td>
-					<td>2019-04-26</td></tr>
-      </table></div>
-    </p>
-    <div class="alert alert-info" role="alert">
-			<h3 class="text-center">Why am I writing the above blogs?</h3>
-		</div>
-  	<p>
-    	When learning a new programming language, I've often wondered what it would be like to maintain a journal summarizing what I
-    	had learned during each day. Doing this would serve to help cement what I had learned that day by forcing myself to rephrase my
-    	discoveries in my own words. At the same time, others who were interested in learning the same language might be interested in
-    	reading how I went about learning the language and even following along if they were so inclined. And since these blogs are hosted
-    	on github, there could be a one-to-one correspondence with learning exercises that I do and projects to demonstrate the actual
-    	source code, on my normal github page.
-  	</p>
-  	<p>
-    	Currently I am working on a few books on leanpub.com (see <a href="https://leanpub.com/raven/">here</a> for a book of poetry I am working on); leanpub lets
-    	people work on publishing something while allowing others to buy what has been written so far using paypal, then receiving free
-    	updates as the book proceeds along. This is similar to what these blogs with BAT being tipped to me might be like, except that someone
-    	who tips in BAT wouldn't know when an update to the work was done. My current thinking is that I will work on one or more of the
-			above blogs every
-    	day, and then at a certain time (one month? two months?) will transfer the existing blog entries to leanpub in the form of
-			one or more books.
-    	This would allow people who were following the blogs to buy a whole bunch of entries stuck together into one file, rather than
-    	clicking on a gazillion links trying to find some specific piece of information. 
-  	</p>
-    <p>
-      A special thanks goes out to <a href="https://chrisruppel.com/blog/brave-payments-github-pages/">Chris Ruppel</a> for his article
-      on how to set up a Github Page to be recognized by Brave!  At the time that I accessed the article, the steps outlined in it had
-			changed slightly, but they can still be followed - simply use the new name of the downloaded file, and add a channel to
-			represent the source of BAT income from your github blog.
-    </p>
-    </div> <!-- container -->
+	</div>
+	<hr/>
+	<p class="text-center font-italic">This website is powered by myself.</p>
+
+	</div> <!-- container -->
+
   </body>
 </html>
