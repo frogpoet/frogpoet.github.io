@@ -1,4 +1,3 @@
-
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -86,6 +85,24 @@ if (!ready) {alert('coming soon'); return false;}
 				throw(e);
 			}
 		}
+		function updateBlockchainDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownMenuBlockchain").innerHTML = itemClicked.innerHTML;
+				let choices = $('.blockchainChoice');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+			}
+			catch(e) {
+				alert('updateBlockchainDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
+				throw(e);
+			}
+		}
 		$(document).ready(function() {
 			$('#dropdownMenuButton').on('click', function () {
 				navClick('navbar', 'Books');
@@ -145,14 +162,22 @@ if (!ready) {alert('coming soon'); return false;}
 
 	<div class="card">
 		<div class="card-body">
-			<p class="card-text text-center"><strong>Primary Marketplace</strong> : <a href="https://oddwritings.cent.co/nft/27505" target="_cent">Cent</a>.</p>
+			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>3</strong>.</p>
 			<ol>
 				<hr/>
+				<li><strong>Primary Marketplaces</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Studio', true);" target="_studio" href="https://lamina1.com/item/0xab4d-fcb8c7-38443847552470832366080279536733575668191935470958333195795299347922563402184">Lamina1 - Studio (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Cent', true);" target="_cent" href="https://oddwritings.cent.co/nft/27505">Polygon - Cent (2)</a>
+				</div>
+				</li>
+
 				<li><strong>Secondary Marketplaces</strong> : <br/>
-				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownEthereumText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
-				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownEthereumText">
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text', 'OpenSea', true);" target="_opensea" href="https://opensea.io/collection/bf-addisyn">OpenSea</a>
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Ethereum', 'text', 'Rarible', true);" target="_rarible" href="https://rarible.com/collection/polygon/0x72a9b0b33af79d36222af9e5741e154c91fc0016/items">Rarible</a>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownSecondaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'OpenSea', true);" target="_opensea" href="https://opensea.io/collection/bf-addisyn">Polygon - OpenSea</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Rarible', true);" target="_rarible" href="https://rarible.com/collection/polygon/0x72a9b0b33af79d36222af9e5741e154c91fc0016/items">Polygon - Rarible</a>
 				</div>
 				</li>
 				<li><strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>
@@ -165,7 +190,34 @@ if (!ready) {alert('coming soon'); return false;}
 			<hr/>
 			<strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong>
 			<hr/>
-			<img class="card-img" src="img/Addisyn.jpg" alt="poem text"/>
+
+			<div id="blockchainImg">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Polygon
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuBlockchain">
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseLamina1Img" aria-expanded="false" aria-controls="collapseLamina1Img" onclick="updateBlockchainDropdown(this)">Lamina1</button>
+						<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapsePolygonImg" aria-expanded="false" aria-controls="collapsePolygonImg" onclick="updateBlockchainDropdown(this)">Polygon</button>
+					</div>
+				</div>
+				<br/>
+
+				<div class="card">
+					<div class="collapse" id="collapseLamina1Img" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/lamina1/Addisyn.jpg" alt="lamina1 poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse show" id="collapsePolygonImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/Addisyn.jpg" alt="polygon poem image"/>
+						</div>
+					</div>
+				</div>
+			</div>
 			<hr/>
 			<strong>Ruminations.</strong>
 			<hr/>
