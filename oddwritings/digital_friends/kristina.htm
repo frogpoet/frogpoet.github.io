@@ -1,0 +1,264 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="poem poems poetry" />
+	<meta property="og:title" content="Digital Friends - Kristina" />
+	<meta property="og:description" content="A short poem on eye candy." />
+	<meta property="og:image" content="https://frogpoet.github.io/oddwritings/digital_friends/img/Kristina.jpg" />
+	<meta property="og:url" content="https://frogpoet.github.io/oddwritings/digital_friends/kristina" />
+	<meta property="og:type" content="website" />
+
+	<title>BF_Kristina | oddwritings.com</title> 
+	  <link rel='stylesheet' type='text/css' href='../../css/font-awesome.min.css'>
+		<link rel='stylesheet' type='text/css' href='../../css/bootstrap.css'>
+	  	<link rel="shortcut icon" href="favicon.ico" />
+		<script src="../../libs/d3.js"></script>
+		<script src="../../libs/lodash.js"></script>
+		<script src="../../libs/jquery.min.js"></script>
+		<script src="../../libs/popper.min.js"></script>
+		<script src="../../libs/bootstrap.min.js"></script>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154601907-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-154601907-1');
+		</script>
+		<script>
+		function navClick(area, word) {
+			try {
+				gtag('event', 'navClick', {
+					'event_category' : 'area_' + area,
+					'event_label' : 'word_' + word,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('navClick: ' + e.message + ', area = ' + area + ', word = ' + word);
+				throw(e);
+			}
+		}
+		function marketClick(blockchain, format, market, ready) {
+			try {
+if (!ready) {alert('once listed, this would go directly to the poem in ' + market); return false;}
+				gtag('event', 'marketClick', {
+					'event_category' : 'blockchain_' + blockchain,
+					'event_label' : 'market_' + market,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('marketClick: ' + e.message + ', blockchain = ' + blockchain + ', format = ' + format + ', market = ' + market + ', ready = '+ ready);
+				throw(e);
+			}
+		}
+		function nftBookClick(book, store, ready) {
+			try {
+if (!ready) {alert('coming soon'); return false;}
+				gtag('event', 'nftBookClick', {
+					'event_category' : 'book_' + book,
+					'event_label' : 'store_' + store,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('nftBookClick: ' + e.message + ', book = ' + book + ', store = ' + store);
+				throw(e);
+			}
+		}
+		function socialClick(area, site) {
+			try {
+				gtag('event', 'socialClick', {
+					'event_category' : 'area_' + area,
+					'event_label' : 'site_' + site,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('socialClick: ' + e.message + ', area = ' + area + ', site = ' + site);
+				throw(e);
+			}
+		}
+		function updateBlockchainDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownMenuBlockchain").innerHTML = itemClicked.innerHTML;
+				let choices = $('.blockchainChoice');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+			}
+			catch(e) {
+				alert('updateBlockchainDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
+				throw(e);
+			}
+		}
+		$(document).ready(function() {
+			$('#dropdownMenuButton').on('click', function () {
+				navClick('navbar', 'Books');
+    			});
+			$('#navbarText').collapse('show');
+			$('#shrinkButton').on('click', function () {
+				document.querySelector('#unshrinkButton').style.display = "inline";
+    			});
+			$('#unshrinkButton').on('click', function () {
+				document.querySelector('#unshrinkButton').style.display = "none";
+    			});
+		});
+		</script>
+		<style>
+			#shrinkButton {display: none;}
+			#unshrinkButton {display: none; position: fixed; z-index: 100; top: 15; left: 0}
+			@media only screen and (max-height: 511px) and (orientation: landscape) {	
+				#shrinkButton {display: inline;}
+			}
+			@media only screen and (orientation: landscape) {	
+				#longLogo {display: inline;}
+				#squareLogo {display: none;}
+			}
+			@media only screen and (orientation: portrait) {	
+				#longLogo {display: none;}
+				#squareLogo {display: inline;}
+			}
+		</style>
+  </head>
+  <body style="padding-top: 20px;">
+	<div class="container">
+
+	<nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light">
+		<div id="navbarText" class="collapse navbar-collapse">
+			<nav class="nav">
+				<a class="navbar-brand" href="#">Goto:</a>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="../index.htm#bio" role="button" onclick="navClick('navbar', 'Bio');">Bio</a>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Books:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Apollos_Arrows');" href="../index.htm#apollo">Apollo's Arrows</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Bathysphere');" href="../index.htm#bathysphere">Bathysphere</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Broken_Things');" href="../index.htm#broken">Broken Things</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Cressida');" href="../index.htm#cressida">Cressida</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Raven');" href="../index.htm#raven">Raven</a>
+				</div>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="../details/index.htm" role="button" onclick="navClick('navbar', 'NFTs');">NFTs</a>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="shrinkButton"><<</a>
+			</nav>
+		</div>
+	</nav>
+	<a class="btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="unshrinkButton">>></a>
+
+      	<div class="alert alert-success mt-5" role="alert">
+		<h1 class="text-center">OddWritings<br/>Digital Friends - BF-Kristina</h1>
+      	</div>
+
+
+	<div class="card">
+		<div class="card-body">
+			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>5</strong>.</p>
+			<ol>
+				<hr/>
+				<li><strong>Primary Marketplaces</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Studio', true);" target="_studio" href="https://lamina1.com/item/0xab4d-fcb8c7-25161998415030798982254407411340373249382864047634654773823844956066211688474">Lamina1 - Studio (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Cent', true);" target="_cent" href="https://oddwritings.cent.co/nft/33963">Polygon - Cent (2)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Objkt', true);" target="_objkt" href="https://objkt.com/tokens/KT1P1MyShtipx9JhEEAvEzdEqoV2gUsbu7v6/3">Tezos - Objkt (2)</a>
+				</div>
+				</li>
+
+				<li><strong>Secondary Marketplaces</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownSecondaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'OpenSea', true);" target="_opensea" href="https://opensea.io/collection/bf-kristina">Polygon - OpenSea</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Rarible', true);" target="_rarible" href="https://rarible.com/collection/polygon/0x87ebc732322b32554f6ed8ba817fadde7f5418d5/items">Polygon - Rarible</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Objkt', true);" target="_objkt" href="https://objkt.com/tokens/KT1P1MyShtipx9JhEEAvEzdEqoV2gUsbu7v6/3">Tezos - Objkt</a>
+				</div>
+				</li>
+				<li><strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownBookText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookstore:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBookText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Kristina', 'Amazon', true);" target="_amazon" href="https://www.amazon.com/dp/B0CW1FSVBC">Amazon</a>
+				</div>
+				</li>
+			</ol>
+			<hr/>
+			<strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong>
+			<hr/>
+
+			<div id="blockchainImg">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Polygon
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuBlockchain">
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseLamina1Img" aria-expanded="false" aria-controls="collapseLamina1Img" onclick="updateBlockchainDropdown(this)">Lamina1</button>
+						<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapsePolygonImg" aria-expanded="false" aria-controls="collapsePolygonImg" onclick="updateBlockchainDropdown(this)">Polygon</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseTezosImg" aria-expanded="false" aria-controls="collapseTezosImg" onclick="updateBlockchainDropdown(this)">Tezos</button>
+					</div>
+				</div>
+				<br/>
+
+				<div class="card">
+					<div class="collapse" id="collapseLamina1Img" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/lamina1/Kristina.jpg" alt="lamina1 poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse show" id="collapsePolygonImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/Kristina.jpg" alt="polygon poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseTezosImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/tezos/Kristina.jpg" alt="tezos poem image"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<strong>Ruminations.</strong>
+			<hr/>
+			Where does the word "shiver" come from?<br/><br/>
+			"Shiver" as a verb meaning "to tremble or shake suddenly with cold" is of uncertain origin, but it probably <a href="https://www.etymonline.com/word/shiver" target="_etymonline">comes from a mix of Old English</a> <em>ceafl</em>, "jaw," and Old English <em>bifian</em>, "to tremble," appearing around 1400.  The noun meaning "a quivering motion" derives from it and appears in 1727. A second meaning of the noun is "a splinter or fragment," appearing around 1200, which possibly derives from a different Old English word.  The second verbal meaning "to break apart into many pieces" derives from this second noun, around 1350.  The OED lists <a href="https://www.oed.com/search/advanced/Meanings?textTermText0=shiver&textTermOpt0=WordPhrase&textTermExactMatch0=true" target="_oed">23 different meanings</a> for the word - 10 nouns and 13 verbs.  Obsolete meanings for the noun include "a loose fiber of undressed hemp; the breastplate of a plough;" obsolete verbal meanings are "to send down debris by crumbling; to cause a person to shake." The <a href="https://www.oed.com/dictionary/shiver_n1?tab=factsheet#22944629" target="_oed">earliest written use of the noun</a> is in 1275, in the writings of <a href="https://en.wikipedia.org/wiki/Layamon" target="_wikipedia">Layamon</a>, poet; <a href="https://www.oed.com/dictionary/shiver_v1?tab=factsheet#22945535" target="_oed">of the verb,</a> around 1200, in <a href="https://en.wikipedia.org/wiki/Trinity_Homilies" target="_wikipedia">Trinity College Homilies</a>.<br/>
+			<hr/>
+			<strong>Links.</strong>
+			<hr/>
+			<a href="https://creator.nightcafe.studio/creation/bH9Vr35XGGDBgqFIqDJ8?ru=OddWritings" target="_nightcafe">NightCafe Image Source</a><br/><br/>
+			<a href="https://x.com/OddWritings/status/1806735266364719239" target="_twitter">X (Twitter 1)</a><br/><br/>
+			<a href="https://x.com/OddWritings/status/1806735664714555499" target="_twitter">X (Twitter 2)</a><br/><br/>
+			<a href="https://www.instagram.com/p/C841YUqRMmZ/" target="_instagram">Instagram</a><br/><br/>
+			</p>
+		</div>
+	</div>
+
+	<hr/>
+	<p class="text-center font-italic">This website is powered by myself.</p>
+	<p class="text-center">
+		<a href="https://www.facebook.com/0ddwritings" target="_blank" aria-label="Facebook: https://www.facebook.com/0ddwritings" onclick="socialClick('footer', 'facebook');">
+<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false"><path d="M12 2C6.5 2 2 6.5 2 12c0 5 3.7 9.1 8.4 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7C18.3 21.1 22 17 22 12c0-5.5-4.5-10-10-10z"></path></svg>
+		</a>
+		<a href="https://www.twitter.com/OddWritings" target="_blank" aria-label="Twitter: https://www.twitter.com/OddWritings" onclick="socialClick('footer', 'twitter');" >
+<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false"><path d="M22.23,5.924c-0.736,0.326-1.527,0.547-2.357,0.646c0.847-0.508,1.498-1.312,1.804-2.27 c-0.793,0.47-1.671,0.812-2.606,0.996C18.324,4.498,17.257,4,16.077,4c-2.266,0-4.103,1.837-4.103,4.103 c0,0.322,0.036,0.635,0.106,0.935C8.67,8.867,5.647,7.234,3.623,4.751C3.27,5.357,3.067,6.062,3.067,6.814 c0,1.424,0.724,2.679,1.825,3.415c-0.673-0.021-1.305-0.206-1.859-0.513c0,0.017,0,0.034,0,0.052c0,1.988,1.414,3.647,3.292,4.023 c-0.344,0.094-0.707,0.144-1.081,0.144c-0.264,0-0.521-0.026-0.772-0.074c0.522,1.63,2.038,2.816,3.833,2.85 c-1.404,1.1-3.174,1.756-5.096,1.756c-0.331,0-0.658-0.019-0.979-0.057c1.816,1.164,3.973,1.843,6.29,1.843 c7.547,0,11.675-6.252,11.675-11.675c0-0.178-0.004-0.355-0.012-0.531C20.985,7.47,21.68,6.747,22.23,5.924z"></path></svg>
+		</a>
+		<a href="https://www.instagram.com/0ddwritings" target="_blank" aria-label="Instagram: https://www.instagram.com/0ddwritings" onclick="socialClick('footer', 'instagram');">
+<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false"><path d="M12,4.622c2.403,0,2.688,0.009,3.637,0.052c0.877,0.04,1.354,0.187,1.671,0.31c0.42,0.163,0.72,0.358,1.035,0.673 c0.315,0.315,0.51,0.615,0.673,1.035c0.123,0.317,0.27,0.794,0.31,1.671c0.043,0.949,0.052,1.234,0.052,3.637 s-0.009,2.688-0.052,3.637c-0.04,0.877-0.187,1.354-0.31,1.671c-0.163,0.42-0.358,0.72-0.673,1.035 c-0.315,0.315-0.615,0.51-1.035,0.673c-0.317,0.123-0.794,0.27-1.671,0.31c-0.949,0.043-1.233,0.052-3.637,0.052 s-2.688-0.009-3.637-0.052c-0.877-0.04-1.354-0.187-1.671-0.31c-0.42-0.163-0.72-0.358-1.035-0.673 c-0.315-0.315-0.51-0.615-0.673-1.035c-0.123-0.317-0.27-0.794-0.31-1.671C4.631,14.688,4.622,14.403,4.622,12 s0.009-2.688,0.052-3.637c0.04-0.877,0.187-1.354,0.31-1.671c0.163-0.42,0.358-0.72,0.673-1.035 c0.315-0.315,0.615-0.51,1.035-0.673c0.317-0.123,0.794-0.27,1.671-0.31C9.312,4.631,9.597,4.622,12,4.622 M12,3 C9.556,3,9.249,3.01,8.289,3.054C7.331,3.098,6.677,3.25,6.105,3.472C5.513,3.702,5.011,4.01,4.511,4.511 c-0.5,0.5-0.808,1.002-1.038,1.594C3.25,6.677,3.098,7.331,3.054,8.289C3.01,9.249,3,9.556,3,12c0,2.444,0.01,2.751,0.054,3.711 c0.044,0.958,0.196,1.612,0.418,2.185c0.23,0.592,0.538,1.094,1.038,1.594c0.5,0.5,1.002,0.808,1.594,1.038 c0.572,0.222,1.227,0.375,2.185,0.418C9.249,20.99,9.556,21,12,21s2.751-0.01,3.711-0.054c0.958-0.044,1.612-0.196,2.185-0.418 c0.592-0.23,1.094-0.538,1.594-1.038c0.5-0.5,0.808-1.002,1.038-1.594c0.222-0.572,0.375-1.227,0.418-2.185 C20.99,14.751,21,14.444,21,12s-0.01-2.751-0.054-3.711c-0.044-0.958-0.196-1.612-0.418-2.185c-0.23-0.592-0.538-1.094-1.038-1.594 c-0.5-0.5-1.002-0.808-1.594-1.038c-0.572-0.222-1.227-0.375-2.185-0.418C14.751,3.01,14.444,3,12,3L12,3z M12,7.378 c-2.552,0-4.622,2.069-4.622,4.622S9.448,16.622,12,16.622s4.622-2.069,4.622-4.622S14.552,7.378,12,7.378z M12,15 c-1.657,0-3-1.343-3-3s1.343-3,3-3s3,1.343,3,3S13.657,15,12,15z M16.804,6.116c-0.596,0-1.08,0.484-1.08,1.08 s0.484,1.08,1.08,1.08c0.596,0,1.08-0.484,1.08-1.08S17.401,6.116,16.804,6.116z"></path></svg>
+		</a>
+	</p>
+
+	</div> <!-- container -->
+
+  </body>
+</html>
