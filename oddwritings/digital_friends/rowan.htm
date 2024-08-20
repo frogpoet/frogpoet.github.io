@@ -162,7 +162,7 @@ if (!ready) {alert('coming soon'); return false;}
 
 	<div class="card">
 		<div class="card-body">
-			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>6</strong></p>
+			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>6</strong>, plus <a href="https://zora.co/collect/zora:0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/3?referrer=0x6ac32B97F7b6c8Ff1335293becf6183d3fC78676" target="_mint_num">these mints</a>.</p>
 			<ol>
 				<hr/>
 				<li><strong>Primary Marketplaces</strong> : <br/>
@@ -172,6 +172,10 @@ if (!ready) {alert('coming soon'); return false;}
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Studio', true);" target="_studio" href="https://lamina1.com/item/0xab4d-fcb8c7-87216075887198741961533613199585275867014633113686739650692112307060128044240">Lamina1 - Studio (1)</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Cent', true);" target="_cent" href="https://oddwritings.cent.co/nft/37219">Polygon - Cent (2)</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Objkt', true);" target="_objkt" href="https://objkt.com/tokens/KT1P1MyShtipx9JhEEAvEzdEqoV2gUsbu7v6/29?ref=tz1Y2HkxDQ3h665kgBaZivNYZWmpjRSqFTT6">Tezos - Objkt (2)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Zora', true);" target="_zora" href="https://zora.co/collect/zora:0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/3?referrer=0x6ac32B97F7b6c8Ff1335293becf6183d3fC78676">Zora - Zora.co (TBD after 3 days)</a>
+<!--
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'OpenSea_zora', true);" target="_OpenSea_zora" href="https://opensea.io/assets/zora/0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/3">Zora - OpenSea (x)</a>
+-->
 				</div>
 				</li>
 
@@ -184,7 +188,16 @@ if (!ready) {alert('coming soon'); return false;}
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'OpenSea_polygon', true);" target="_opensea_polygon" href="https://opensea.io/collection/bf-rowan">Polygon - OpenSea</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Rarible', true);" target="_rarible" href="https://rarible.com/collection/polygon/0xb610d56e28ff79bffc7a96c1703fd3863031328a/items">Polygon - Rarible</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Objkt', true);" target="_objkt" href="https://objkt.com/tokens/KT1P1MyShtipx9JhEEAvEzdEqoV2gUsbu7v6/29?ref=tz1Y2HkxDQ3h665kgBaZivNYZWmpjRSqFTT6">Tezos - Objkt</a>
+<!--
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'OpenSea_zora', true);" target="_OpenSea_zora" href="https://opensea.io/assets/zora/0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/3">Zora - OpenSea</a>
+-->
+<!--
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Zora', true);" target="_zora" href="https://zora.co/collect/zora:0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/3?referrer=0x6ac32B97F7b6c8Ff1335293becf6183d3fC78676">Uniswap via Zora.co</a>
+-->
 				</div>
+<!--
+<br/><a href="https://explorer.zora.energy/token/0x7180e7D2e78762dfF3737628a55A3A58e79F11aC?tab=holders" target="_zora_energy">Uniswap ERC20Z Info</a>
+-->
 				</li>
 				<li><strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownBookText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookstore:</button>
@@ -207,6 +220,7 @@ if (!ready) {alert('coming soon'); return false;}
 						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseLamina1Img" aria-expanded="false" aria-controls="collapseLamina1Img" onclick="updateBlockchainDropdown(this)">Lamina1</button>
 						<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapsePolygonImg" aria-expanded="false" aria-controls="collapsePolygonImg" onclick="updateBlockchainDropdown(this)">Polygon</button>
 						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseTezosImg" aria-expanded="false" aria-controls="collapseTezosImg" onclick="updateBlockchainDropdown(this)">Tezos</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseZoraImg" aria-expanded="false" aria-controls="collapseZoraImg" onclick="updateBlockchainDropdown(this)">Zora</button>
 					</div>
 				</div>
 				<br/>
@@ -236,6 +250,13 @@ if (!ready) {alert('coming soon'); return false;}
 					<div class="collapse" id="collapseTezosImg" data-parent="#blockchainImg">
 						<div class="card-body">
 							<img class="card-img" src="img/non-polygon/tezos/Rowan.jpg" alt="tezos poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseZoraImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/zora/Rowan.jpg" alt="zora poem image"/>
 						</div>
 					</div>
 				</div>
