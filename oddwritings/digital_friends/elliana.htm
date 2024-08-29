@@ -4,6 +4,8 @@
 	<meta name="description" content="poem poems poetry" />
 	<meta property="og:title" content="Digital Friends - Elliana" />
 	<meta property="og:description" content="A short poem on eye candy." />
+	<meta property="og:image" content="https://frogpoet.github.io/oddwritings/digital_friends/img/Elliana.jpg" />
+	<meta property="og:url" content="https://frogpoet.github.io/oddwritings/digital_friends/elliana" />
 	<meta property="og:type" content="website" />
 
 	<title>BF_Elliana | oddwritings.com</title> 
@@ -39,6 +41,36 @@
 				throw(e);
 			}
 		}
+		function marketClick(blockchain, format, market, ready) {
+			try {
+if (!ready) {alert('once listed, this would go directly to the poem in ' + market); return false;}
+				gtag('event', 'marketClick', {
+					'event_category' : 'blockchain_' + blockchain,
+					'event_label' : 'market_' + market,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('marketClick: ' + e.message + ', blockchain = ' + blockchain + ', format = ' + format + ', market = ' + market + ', ready = '+ ready);
+				throw(e);
+			}
+		}
+		function nftBookClick(book, store, ready) {
+			try {
+if (!ready) {alert('coming soon'); return false;}
+				gtag('event', 'nftBookClick', {
+					'event_category' : 'book_' + book,
+					'event_label' : 'store_' + store,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('nftBookClick: ' + e.message + ', book = ' + book + ', store = ' + store);
+				throw(e);
+			}
+		}
 		function socialClick(area, site) {
 			try {
 				gtag('event', 'socialClick', {
@@ -50,6 +82,24 @@
 			}
 			catch(e) {
 				alert('socialClick: ' + e.message + ', area = ' + area + ', site = ' + site);
+				throw(e);
+			}
+		}
+		function updateBlockchainDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownMenuBlockchain").innerHTML = itemClicked.innerHTML;
+				let choices = $('.blockchainChoice');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+			}
+			catch(e) {
+				alert('updateBlockchainDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
 				throw(e);
 			}
 		}
@@ -109,8 +159,119 @@
 		<h1 class="text-center">OddWritings<br/>Digital Friends - BF-Elliana</h1>
       	</div>
 
-	<p class="text-center">Details about Elliana are coming soon.<br/><br/>In the meantime, feel free to check out the <a href="http://oddwritings.com/digital_friends">Other Digital Friends</a>.</p>
 
+	<div class="card">
+		<div class="card-body">
+			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>8 + X</strong>.</p>
+			<ol>
+				<hr/>
+				<li><strong>Primary Marketplaces</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'OpenSea', true);" target="_opensea" href="https://opensea.io/assets/base/0x70cd7e6b96d7c5b977605646fa43ee5dad8604b6/25">Base - OpenSea (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Studio', true);" target="_studio" href="https://lamina1.com/item/0xab4d-fcb8c7-23690774731783849494114907443497571470458763705788733988038646126920048369590">Lamina1 - Studio (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Cent', true);" target="_cent" href="https://oddwritings.cent.co/nft/37712">Polygon - Cent (2)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Objkt', true);" target="_objkt" href="https://objkt.com/tokens/KT1P1MyShtipx9JhEEAvEzdEqoV2gUsbu7v6/35?ref=tz1Y2HkxDQ3h665kgBaZivNYZWmpjRSqFTT6">Tezos - Objkt (2)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Zora', true);" target="_zora" href="https://zora.co/collect/zora:0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/9?referrer=0x6ac32B97F7b6c8Ff1335293becf6183d3fC78676">Zora - Zora.co (2 + X)</a>
+				</div>
+				</li>
+
+				<li><strong>Secondary Marketplaces</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownSecondaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Magic Eden_base', true);" target="_magiceden_base" href="https://magiceden.io/collections/base/digital-friends-1">Base - Magic Eden</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'OpenSea_base', true);" target="_opensea_base" href="https://opensea.io/assets/base/0x70cd7e6b96d7c5b977605646fa43ee5dad8604b6/25">Base - OpenSea</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Magic Eden_polygon', true);" target="_magiceden_polygon" href="https://magiceden.io/collections/polygon/0x2ec0bc3e329c26a04812574f5108be6db8ed9aa6">Polygon - Magic Eden</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'OpenSea_polygon', true);" target="_opensea_polygon" href="https://opensea.io/collection/bf-elliana">Polygon - OpenSea</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Rarible', true);" target="_rarible" href="https://rarible.com/collection/polygon/0x2ec0bc3e329c26a04812574f5108be6db8ed9aa6/items">Polygon - Rarible</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Objkt', true);" target="_objkt" href="https://objkt.com/tokens/KT1P1MyShtipx9JhEEAvEzdEqoV2gUsbu7v6/35?ref=tz1Y2HkxDQ3h665kgBaZivNYZWmpjRSqFTT6">Tezos - Objkt</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'OpenSea_zora', true);" target="_OpenSea_zora" href="https://opensea.io/assets/zora/0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/9">Zora - OpenSea</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'TokenChat_zora', true);" target="_TokenChat_zora" href="https://tokenchat.co/collection/zora:0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/9">Zora - Token Chat</a>
+				</div>
+				</li>
+				<li><strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownBookText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookstore:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBookText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Elliana', 'Amazon', true);" target="_amazon" href="https://www.amazon.com/dp/B0CW1FSVBC">Amazon</a>
+				</div>
+				</li>
+			</ol>
+			<hr/>
+			<strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong>
+			<hr/>
+
+			<div id="blockchainImg">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Polygon
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuBlockchain">
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseBaseImg" aria-expanded="false" aria-controls="collapseBaseImg" onclick="updateBlockchainDropdown(this)">Base</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseLamina1Img" aria-expanded="false" aria-controls="collapseLamina1Img" onclick="updateBlockchainDropdown(this)">Lamina1</button>
+						<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapsePolygonImg" aria-expanded="false" aria-controls="collapsePolygonImg" onclick="updateBlockchainDropdown(this)">Polygon</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseTezosImg" aria-expanded="false" aria-controls="collapseTezosImg" onclick="updateBlockchainDropdown(this)">Tezos</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseZoraImg" aria-expanded="false" aria-controls="collapseZoraImg" onclick="updateBlockchainDropdown(this)">Zora</button>
+					</div>
+				</div>
+				<br/>
+
+				<div class="card">
+					<div class="collapse" id="collapseBaseImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/base/Elliana.jpg" alt="base poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseLamina1Img" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/lamina1/Elliana.jpg" alt="lamina1 poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse show" id="collapsePolygonImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/Elliana.jpg" alt="polygon poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseTezosImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/tezos/Elliana.jpg" alt="tezos poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseZoraImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/zora/Elliana.jpg" alt="zora poem image"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<strong>Ruminations.</strong>
+			<hr/>
+Ruminations coming soon.<br/>
+<!--
+			Where does the word "dwindle" come from?<br/><br/>
+			"Dwindle" as a verb meaning "to shrink or diminish" <a href="https://www.etymonline.com/word/dwindle" target="_etymonline">comes from Old English</a> <em>dwinan</em>, "to waste away or vanish," appearing in the 1590s.  The OED lists <a href="https://www.oed.com/search/advanced/Meanings?textTermText0=dwindle&textTermOpt0=WordPhrase&textTermExactMatch0=true" target="_oed">7 different meanings</a> for the word - 2 nouns and 5 verbs. The noun form acquired the meaning "the process of dwindling" in 1779, and "a shrunken object" in 1847. An obsolete meaning for the verb is "to shrink in fear."  The <a href="https://www.oed.com/dictionary/dwindle_n?tab=factsheet" target="_oed">earliest written use of the noun</a> is in 1779, in the writings of <a href="https://en.wikipedia.org/wiki/Samuel_Johnson" target="_wikipedia">Samuel Johnson</a>, lexicographer; <a href="https://www.oed.com/dictionary/dwindle_v?tab=factsheet" target="_oed">of the verb</a>, in 1598, in the writings of <a href="https://en.wikipedia.org/wiki/William_Shakespeare" target="_wikipedia">William Shakespeare</a>.<br/>
+-->
+			<hr/>
+			<strong>Links.</strong><br/><br/>(the total number of views from the links is a proxy for your probability of reselling the poem on the secondary market)
+			<hr/>
+			<a href="https://creator.nightcafe.studio/creation/dcbnIigyaOBVULV8xJ1Q?ru=OddWritings" target="_nightcafe">NightCafe Image Source</a><br/><br/>
+			<a href="https://x.com/OddWritings/status/1829259329616417223" target="_twitter">X (Twitter 1)</a><br/><br/>
+			<a href="https://x.com/OddWritings/status/1829259332313031019" target="_twitter">X (Twitter 2)</a><br/><br/>
+			<a href="https://www.instagram.com/p/C_RPP5qxDqs/" target="_instagram">Instagram</a><br/><br/>
+			<a href="https://hey.xyz/posts/0x01e18b-0x09" target="_hey">Hey (Lens)</a><br/><br/>
+			<a href="https://gallery.so/post/2lLv4H88AX4LFhggc13QZsQDbcm" target="_gallery">Gallery</a><br/><br/>
+			<a href="https://tokenchat.co/comment/0x7ba696e1c8c014a5a33cccebd8be463a919c614d7827468f76b6e22d78dccef4" target="_tokenchat">Token Chat</a><br/><br/>
+			</p>
+		</div>
+	</div>
 
 	<hr/>
 	<p class="text-center font-italic">This website is powered by myself.</p>
