@@ -4,6 +4,8 @@
 	<meta name="description" content="poem poems poetry" />
 	<meta property="og:title" content="Digital Friends - Hallie" />
 	<meta property="og:description" content="A short poem on eye candy." />
+	<meta property="og:image" content="https://frogpoet.github.io/oddwritings/digital_friends/img/Hallie.jpg" />
+	<meta property="og:url" content="https://frogpoet.github.io/oddwritings/digital_friends/hallie" />
 	<meta property="og:type" content="website" />
 
 	<title>BF_Hallie | oddwritings.com</title> 
@@ -39,6 +41,36 @@
 				throw(e);
 			}
 		}
+		function marketClick(blockchain, format, market, ready) {
+			try {
+if (!ready) {alert('once listed, this would go directly to the poem in ' + market); return false;}
+				gtag('event', 'marketClick', {
+					'event_category' : 'blockchain_' + blockchain,
+					'event_label' : 'market_' + market,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('marketClick: ' + e.message + ', blockchain = ' + blockchain + ', format = ' + format + ', market = ' + market + ', ready = '+ ready);
+				throw(e);
+			}
+		}
+		function nftBookClick(book, store, ready) {
+			try {
+if (!ready) {alert('coming soon'); return false;}
+				gtag('event', 'nftBookClick', {
+					'event_category' : 'book_' + book,
+					'event_label' : 'store_' + store,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('nftBookClick: ' + e.message + ', book = ' + book + ', store = ' + store);
+				throw(e);
+			}
+		}
 		function socialClick(area, site) {
 			try {
 				gtag('event', 'socialClick', {
@@ -50,6 +82,24 @@
 			}
 			catch(e) {
 				alert('socialClick: ' + e.message + ', area = ' + area + ', site = ' + site);
+				throw(e);
+			}
+		}
+		function updateBlockchainDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownMenuBlockchain").innerHTML = itemClicked.innerHTML;
+				let choices = $('.blockchainChoice');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+			}
+			catch(e) {
+				alert('updateBlockchainDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
 				throw(e);
 			}
 		}
@@ -109,8 +159,125 @@
 		<h1 class="text-center">OddWritings<br/>Digital Friends - BF-Hallie</h1>
       	</div>
 
-	<p class="text-center">Details about Hallie are coming soon.<br/><br/>In the meantime, feel free to check out the <a href="http://oddwritings.com/digital_friends">Other Digital Friends</a>.</p>
 
+	<div class="card">
+		<div class="card-body">
+			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>9 + X</strong>.</p>
+			<ol>
+				<hr/>
+				<li><strong>Primary Marketplaces</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Tradeport', true);" target="_tradeport" href="https://tradeport.xyz/aptos/collection/0x267faf32976c2e9b8f7f1f39636fb09a0735663ef33477e61c6ae4d35291ae79?tab=mint&mintTokenId=6e9a8ce7-38be-4849-8e8c-18c75d2c0114">Aptos - TradePort (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'OpenSea', true);" target="_opensea" href="https://opensea.io/assets/base/0x70cd7e6b96d7c5b977605646fa43ee5dad8604b6/28">Base - OpenSea (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Studio', true);" target="_studio" href="https://lamina1.com/item/0xab4d-fcb8c7-85710497893714085830458248200673230092131085042933008394535391251141728854501">Lamina1 - Studio (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Cent', true);" target="_cent" href="https://oddwritings.cent.co/nft/37860">Polygon - Cent (2)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Objkt', true);" target="_objkt" href="https://objkt.com/tokens/KT1P1MyShtipx9JhEEAvEzdEqoV2gUsbu7v6/38?ref=tz1Y2HkxDQ3h665kgBaZivNYZWmpjRSqFTT6">Tezos - Objkt (2)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Zora', true);" target="_zora" href="https://zora.co/collect/zora:0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/12?referrer=0x6ac32B97F7b6c8Ff1335293becf6183d3fC78676">Zora - Zora.co (2 + X)</a>
+				</div>
+				</li>
+
+				<li><strong>Secondary Marketplaces</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownSecondaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Rarible', true);" target="_rarible" href="https://rarible.com/oddwritings_aptos/created">Aptos - Rarible</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Wondoria', true);" target="_wondoria" href="https://wondoria.io/base/asset/0x70cd7e6b96d7c5b977605646fa43ee5dad8604b6:28">Base - Wondoria</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Magic Eden_polygon', true);" target="_magiceden_polygon" href="https://magiceden.io/collections/polygon/0x0614345c7c45d667463d5491d541395d60a846b1">Polygon - Magic Eden</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'OpenSea_zora', true);" target="_OpenSea_zora" href="https://opensea.io/assets/zora/0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/12">Zora - OpenSea</a>
+				</div>
+				</li>
+				<li><strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownBookText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookstore:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBookText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Hallie', 'Amazon', true);" target="_amazon" href="https://www.amazon.com/dp/B0CW1FSVBC">Amazon</a>
+				</div>
+				</li>
+			</ol>
+			<hr/>
+			<strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong>
+			<hr/>
+
+			<div id="blockchainImg">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Polygon
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuBlockchain">
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseAptosImg" aria-expanded="false" aria-controls="collapseAptosImg" onclick="updateBlockchainDropdown(this)">Aptos</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseBaseImg" aria-expanded="false" aria-controls="collapseBaseImg" onclick="updateBlockchainDropdown(this)">Base</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseLamina1Img" aria-expanded="false" aria-controls="collapseLamina1Img" onclick="updateBlockchainDropdown(this)">Lamina1</button>
+						<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapsePolygonImg" aria-expanded="false" aria-controls="collapsePolygonImg" onclick="updateBlockchainDropdown(this)">Polygon</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseTezosImg" aria-expanded="false" aria-controls="collapseTezosImg" onclick="updateBlockchainDropdown(this)">Tezos</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseZoraImg" aria-expanded="false" aria-controls="collapseZoraImg" onclick="updateBlockchainDropdown(this)">Zora</button>
+					</div>
+				</div>
+				<br/>
+
+				<div class="card">
+					<div class="collapse" id="collapseAptosImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/aptos/Hallie.jpg" alt="aptos poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseBaseImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/base/Hallie.jpg" alt="base poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseLamina1Img" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/lamina1/Hallie.jpg" alt="lamina1 poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse show" id="collapsePolygonImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/Hallie.jpg" alt="polygon poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseTezosImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/tezos/Hallie.jpg" alt="tezos poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseZoraImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/zora/Hallie.jpg" alt="zora poem image"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<strong>Ruminations.</strong>
+			<hr/>
+Ruminations coming soon.<br/>
+<!--
+			Where does the word "flourishing" come from?<br/><br/>
+			"Flourishing" <a href="https://www.etymonline.com/word/flourishing" target="_etymonline">comes from the Latin</a> <em>flos</em>, "a flower."  The OED lists <a href="https://www.oed.com/search/advanced/Meanings?textTermText0=flourishing&textTermOpt0=WordPhrase&textTermExactMatch0=true" target="_oed">13 different meanings</a> for the word - 7 adjectives and 6 nouns. The noun form meaning "a blossom" becomes obsolete by 1513, while the adjective form meaning "vibrating" (said of a spear) is no longer used by 1425.  Current meanings for the noun include "a thriving or prospering; a flower-like design; an ornamental covering; and the excrement of a deer (i.e. fumishing)."  Current meanings for the adjective include "verdant; eminent; vigorous; grandiloquent; and ostentatious."  The <a href="https://www.oed.com/dictionary/flourishing_n?tab=factsheet" target="_oed">earliest written use of the noun</a> is in 1303, in the writings of <a href="https://en.wikipedia.org/wiki/Robert_Mannyng" target="_wikipedia">Robert Mannyng</a>, historian and poet; <a href="https://www.oed.com/dictionary/flourishing_adj?tab=factsheet" target="_oed">of the adjective</a>, before 1340, in the writings of <a href="https://en.wikipedia.org/wiki/Richard_Rolle" target="_wikipedia">Richard Rolle</a>, religious writer and hermit.<br/>
+-->
+			<hr/>
+			<strong>Links.</strong><br/><br/>(the total number of views from the links is a proxy for your probability of reselling the poem on the secondary market)
+			<hr/>
+			<a href="https://creator.nightcafe.studio/creation/xC26p4cKtzhWE27Ljnvc?ru=OddWritings" target="_nightcafe">NightCafe Image Source</a><br/><br/>
+			<a href="https://x.com/OddWritings/status/1831164830780145809" target="_twitter">X (Twitter)</a><br/><br/>
+			<a href="https://bsky.app/profile/oddwritings.bsky.social/post/3l3ce524bni2v" target="_bluesky">Bluesky</a><br/><br/>
+			<a href="https://www.threads.net/@0ddwritings/post/C_gaL6_xN6H" target="_threads">Threads</a><br/><br/>
+			<a href="https://hey.xyz/posts/0x01e18b-0x0e" target="_hey">Hey (Lens)</a><br/><br/>
+			<a href="https://gallery.so/post/2lcZ7phpl1DUpX0zIpFtDPZHpWM" target="_gallery">Gallery 1</a><br/><br/>
+			<a href="https://gallery.so/OddWritings/token/2lcXuSdX1pEC9iLxthJ4t2afbtz" target="_gallery">Gallery 2</a><br/><br/>
+			<a href="https://tokenchat.co/comment/0xaa213d45446efcb8479c105a73770b88ff38f5593faf91c955a0df311402c09e" target="_tokenchat">Token Chat</a><br/><br/>
+			</p>
+		</div>
+	</div>
 
 	<hr/>
 	<p class="text-center font-italic">This website is powered by myself.</p>
