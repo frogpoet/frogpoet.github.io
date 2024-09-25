@@ -162,7 +162,7 @@ if (!ready) {alert('coming soon'); return false;}
 
 	<div class="card">
 		<div class="card-body">
-			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>8 + X</strong>.</p>
+			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>9 + X</strong>.</p>
 			<ol>
 				<hr/>
 				<li><strong>Primary Marketplaces</strong> : <br/>
@@ -172,6 +172,7 @@ if (!ready) {alert('coming soon'); return false;}
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'OpenSea', true);" target="_opensea" href="https://opensea.io/assets/base/0x70cd7e6b96d7c5b977605646fa43ee5dad8604b6/33">Base - OpenSea (1)</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Studio', true);" target="_studio" href="https://lamina1.com/item/0xab4d-fcb8c7-24039400385385465654426472955434194937029451978638414237385922278629178487387">Lamina1 - Studio (1)</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Cent', true);" target="_cent" href="https://oddwritings.cent.co/nft/38132">Polygon - Cent (2)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Exchange.art', true);" target="_exchange" href="https://exchange.art/single/HcCTawouvRgUjpUnLcEtNKvJpy9gVqnbYHXAgj3wgHsh">Solana - Exchange.Art (1)</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Objkt', true);" target="_objkt" href="https://objkt.com/tokens/KT1P1MyShtipx9JhEEAvEzdEqoV2gUsbu7v6/43?ref=tz1Y2HkxDQ3h665kgBaZivNYZWmpjRSqFTT6">Tezos - Objkt (2)</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Zora', true);" target="_zora" href="https://zora.co/collect/zora:0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/17?referrer=0x6ac32B97F7b6c8Ff1335293becf6183d3fC78676">Zora - Zora.co (1 + X)</a>
 				</div>
@@ -207,6 +208,7 @@ if (!ready) {alert('coming soon'); return false;}
 						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseBaseImg" aria-expanded="false" aria-controls="collapseBaseImg" onclick="updateBlockchainDropdown(this)">Base</button>
 						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseLamina1Img" aria-expanded="false" aria-controls="collapseLamina1Img" onclick="updateBlockchainDropdown(this)">Lamina1</button>
 						<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapsePolygonImg" aria-expanded="false" aria-controls="collapsePolygonImg" onclick="updateBlockchainDropdown(this)">Polygon</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseSolanaImg" aria-expanded="false" aria-controls="collapseSolanaImg" onclick="updateBlockchainDropdown(this)">Solana</button>
 						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseTezosImg" aria-expanded="false" aria-controls="collapseTezosImg" onclick="updateBlockchainDropdown(this)">Tezos</button>
 						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseZoraImg" aria-expanded="false" aria-controls="collapseZoraImg" onclick="updateBlockchainDropdown(this)">Zora</button>
 					</div>
@@ -238,6 +240,13 @@ if (!ready) {alert('coming soon'); return false;}
 					<div class="collapse show" id="collapsePolygonImg" data-parent="#blockchainImg">
 						<div class="card-body">
 							<img class="card-img" src="img/Luciana.jpg" alt="polygon poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse show" id="collapseSolanaImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/solana/Luciana.jpg" alt="solana poem image"/>
 						</div>
 					</div>
 				</div>
