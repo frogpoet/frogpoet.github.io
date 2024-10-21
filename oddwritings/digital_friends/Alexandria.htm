@@ -4,6 +4,8 @@
 	<meta name="description" content="poem poems poetry" />
 	<meta property="og:title" content="Digital Friends - Alexandria" />
 	<meta property="og:description" content="A short poem on eye candy." />
+	<meta property="og:image" content="https://frogpoet.github.io/oddwritings/digital_friends/img/Alexandria.jpg" />
+	<meta property="og:url" content="https://frogpoet.github.io/oddwritings/digital_friends/Alexandria" />
 	<meta property="og:type" content="website" />
 
 	<title>BF_Alexandria | oddwritings.com</title> 
@@ -39,6 +41,36 @@
 				throw(e);
 			}
 		}
+		function marketClick(blockchain, format, market, ready) {
+			try {
+if (!ready) {alert('once listed, this would go directly to the poem in ' + market); return false;}
+				gtag('event', 'marketClick', {
+					'event_category' : 'blockchain_' + blockchain,
+					'event_label' : 'market_' + market,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('marketClick: ' + e.message + ', blockchain = ' + blockchain + ', format = ' + format + ', market = ' + market + ', ready = '+ ready);
+				throw(e);
+			}
+		}
+		function nftBookClick(book, store, ready) {
+			try {
+if (!ready) {alert('coming soon'); return false;}
+				gtag('event', 'nftBookClick', {
+					'event_category' : 'book_' + book,
+					'event_label' : 'store_' + store,
+					'value': 1,
+				});
+
+			}
+			catch(e) {
+				alert('nftBookClick: ' + e.message + ', book = ' + book + ', store = ' + store);
+				throw(e);
+			}
+		}
 		function socialClick(area, site) {
 			try {
 				gtag('event', 'socialClick', {
@@ -50,6 +82,24 @@
 			}
 			catch(e) {
 				alert('socialClick: ' + e.message + ', area = ' + area + ', site = ' + site);
+				throw(e);
+			}
+		}
+		function updateBlockchainDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownMenuBlockchain").innerHTML = itemClicked.innerHTML;
+				let choices = $('.blockchainChoice');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+			}
+			catch(e) {
+				alert('updateBlockchainDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
 				throw(e);
 			}
 		}
@@ -109,8 +159,136 @@
 		<h1 class="text-center">OddWritings<br/>Digital Friends - BF-Alexandria</h1>
       	</div>
 
-	<p class="text-center">Details about Alexandria are coming soon.<br/><br/>In the meantime, feel free to check out the <a href="http://oddwritings.com/digital_friends">Other Digital Friends</a>.</p>
 
+	<div class="card">
+		<div class="card-body">
+			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>8 + X</strong>.</p>
+			<ol>
+				<hr/>
+				<li><strong>Primary Marketplaces</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Tradeport', true);" target="_tradeport" href="https://tradeport.xyz/aptos/collection/0x267faf32976c2e9b8f7f1f39636fb09a0735663ef33477e61c6ae4d35291ae79?tab=mint&mintTokenId=555f3114-2684-4806-9ff8-67081cfa6d58">Aptos - TradePort (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'OpenSea_base', true);" target="_opensea_base" href="https://opensea.io/assets/base/0x70cd7e6b96d7c5b977605646fa43ee5dad8604b6/48">Base - OpenSea (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Studio', true);" target="_studio" href="https://lamina1.com/item/0xab4d-fcb8c7-9500655992948508200949841963472747433645777603658511344794281476055614353345">Lamina1 - Studio (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'OpenSea_polygon', true);" target="_opensea_polygon" href="https://opensea.io/assets/matic/0xb752e3506298adaa0c66af3f1d4c4a1328b3d25e/6">Polygon - OpenSea (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Highlight', true);" target="_highlight" href="https://highlight.xyz/mint/shape:0x15F97EA79AddB64519d89C928841452e7d9E7f12:9?referrer=0x6ac32B97F7b6c8Ff1335293becf6183d3fC78676">Shape - Highlight (1)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Objkt', true);" target="_objkt" href="https://objkt.com/tokens/KT1P1MyShtipx9JhEEAvEzdEqoV2gUsbu7v6/58?ref=tz1Y2HkxDQ3h665kgBaZivNYZWmpjRSqFTT6">Tezos - Objkt (2)</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Zora', true);" target="_zora" href="https://zora.co/collect/zora:0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/32?referrer=0x6ac32B97F7b6c8Ff1335293becf6183d3fC78676">Zora - Zora.co (1 + X)</a>
+				</div>
+				</li>
+
+				<li><strong>Secondary Marketplaces</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownSecondaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Rarible_aptos', true);" target="_rarible_aptos" href="https://rarible.com/collection/aptos/0x267faf32976c2e9b8f7f1f39636fb09a0735663ef33477e61c6ae4d35291ae79/items">Aptos - Rarible</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Wondoria', true);" target="_wondoria" href="https://wondoria.io/base/asset/0x70cd7e6b96d7c5b977605646fa43ee5dad8604b6:48">Base - Wondoria</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Rarible_polygon', true);" target="_rarible_polygon" href="https://rarible.com/token/polygon/0xb752e3506298adaa0c66af3f1d4c4a1328b3d25e:6
+">Polygon - Rarible</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'Deca_tezos', true);" target="_Deca_tezos" href="https://deca.art/token/tezos/KT1P1MyShtipx9JhEEAvEzdEqoV2gUsbu7v6/58">Tezos - Deca</a>
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Secondary', 'text', 'OpenSea_zora', true);" target="_OpenSea_zora" href="https://opensea.io/assets/zora/0xe6724cb4150d10f1ce22d84b5f7b3d8da8393ae3/32">Zora - OpenSea</a>
+				</div>
+				</li>
+				<li><strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>
+				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownBookText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookstore:</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBookText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('Alexandria', 'Amazon', true);" target="_amazon" href="https://www.amazon.com/dp/B0CW1FSVBC">Amazon</a>
+				</div>
+				</li>
+			</ol>
+			<hr/>
+			<strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong>
+			<hr/>
+
+			<div id="blockchainImg">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Polygon
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuBlockchain">
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseAptosImg" aria-expanded="false" aria-controls="collapseAptosImg" onclick="updateBlockchainDropdown(this)">Aptos</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseBaseImg" aria-expanded="false" aria-controls="collapseBaseImg" onclick="updateBlockchainDropdown(this)">Base</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseLamina1Img" aria-expanded="false" aria-controls="collapseLamina1Img" onclick="updateBlockchainDropdown(this)">Lamina1</button>
+						<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapsePolygonImg" aria-expanded="false" aria-controls="collapsePolygonImg" onclick="updateBlockchainDropdown(this)">Polygon</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseShapeImg" aria-expanded="false" aria-controls="collapseShapeImg" onclick="updateBlockchainDropdown(this)">Shape</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseTezosImg" aria-expanded="false" aria-controls="collapseTezosImg" onclick="updateBlockchainDropdown(this)">Tezos</button>
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseZoraImg" aria-expanded="false" aria-controls="collapseZoraImg" onclick="updateBlockchainDropdown(this)">Zora</button>
+					</div>
+				</div>
+				<br/>
+
+				<div class="card">
+					<div class="collapse" id="collapseAptosImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/aptos/Alexandria.jpg" alt="aptos poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseBaseImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/base/Alexandria.jpg" alt="base poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseLamina1Img" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/lamina1/Alexandria.jpg" alt="lamina1 poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse show" id="collapsePolygonImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/Alexandria.jpg" alt="polygon poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseShapeImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/shape/Alexandria.jpg" alt="shape poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseTezosImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/tezos/Alexandria.jpg" alt="tezos poem image"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="collapse" id="collapseZoraImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/zora/Alexandria.jpg" alt="zora poem image"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<strong>Ruminations.</strong>
+			<hr/>
+			The word "boyne" has <a href="https://www.oed.com/search/advanced/Meanings?textTermText0=boyne&textTermOpt0=WordPhrase&textTermExactMatch0=true&tl=true" target="_oed">1 meaning</a> according to the OED, first coming into use <a href="https://www.oed.com/dictionary/boyne_n?tab=factsheet" target="_oed">in 1532</a>.<br/>
+			However, the word is also the name of a river in Ireland.<br/><br/>
+			<a href="https://archive.waterwaysireland.org/stories-and-exhibitions/story/18/the-tuatha-d-danann" target="_waterwaysireland">waterwaysireland.org states :</a><br/>
+			<p>
+			If you managed to catch and eat one of those salmon, you would be endowed with poetic inspiration and wisdom beyond compare. Now, the trouble was that this wisdom was not actually available. It was forbidden fruit, especially for females, which really annoyed Boann, a goddess of poetry and fertility in the stories of the Tuatha de Danaan. Seeking to boost her wisdom, she made her way to Connla’s Well and tasted the water. Then she overcooked it, challenging the power of the well by walking around it counterclockwise and reciting incantations. This is not recommended behaviour, especially if you’re a goddess in an ancient legend. It is not going to go well for you. Predictably, it didn’t pan out brilliantly for Boann. The waters rushed up from the well in a series of gigantic waves and scooped her up and forged a path to the sea. This was all too much for Boann herself who drowned in the course of it all and thus became one with the river.  The river would be named for her – the Boyne – and is now one of the most famous waterways in Ireland. It wends through the Boyne Valley, one of the most important prehistoric landscapes in the world, past the celebrated passage tombs of Newgrange, Knowth and Dowth. And thus, for the ancients, the Boyne was a river by which the spirits of the dead could enter the Otherworld.
+			</p>
+			<hr/>
+			<strong>Links.</strong><br/><br/>(the total number of views from the links is a proxy for your probability of reselling the poem on the secondary market)
+			<hr/>
+			<a href="https://creator.nightcafe.studio/creation/qakUBSPegkKszfHQPpa1?ru=OddWritings" target="_nightcafe">NightCafe Image Source</a><br/><br/>
+			<a href="https://x.com/OddWritings/status/1847049874262430051" target="_twitter">X (Twitter)</a><br/><br/>
+			<a href="https://bsky.app/profile/oddwritings.bsky.social/post/3l72bghza5y2p" target="_bluesky">Bluesky</a><br/><br/>
+			<a href="https://www.threads.net/@0ddwritings/post/DBZh98PRWAQ" target="_threads">Threads</a><br/><br/>
+			<a href="https://hey.xyz/posts/0x01e18b-0x37" target="_hey">Hey (Lens)</a><br/><br/>
+			<a href="https://gallery.so/post/2nlQcPMNgupBGf8u9FPKLpWMGsn" target="_gallery">Gallery 1</a><br/><br/>
+			<a href="https://gallery.so/OddWritings/token/2nlP6VkWlnRZE4Gi7kQr5HGI2jP" target="_gallery">Gallery 2</a><br/><br/>
+			</p>
+		</div>
+	</div>
 
 	<hr/>
 	<p class="text-center font-italic">This website is powered by myself.</p>
