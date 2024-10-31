@@ -162,12 +162,13 @@ if (!ready) {alert('coming soon'); return false;}
 
 	<div class="card">
 		<div class="card-body">
-			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>9 + X</strong>.</p>
+			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>10 + X</strong>.</p>
 			<ol>
 				<hr/>
 				<li><strong>Primary Marketplaces</strong> : <br/>
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">
+					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'MintPad', true);" target="_mintpad" href="https://on.mintpad.co/digital-friends-1-on-apechain/0">ApeChain - MintPad (1)</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Tradeport', true);" target="_tradeport" href="https://tradeport.xyz/aptos/collection/0x267faf32976c2e9b8f7f1f39636fb09a0735663ef33477e61c6ae4d35291ae79?tab=mint&mintTokenId=65ae5704-8f08-42a5-9c18-cc2ba64a92de">Aptos - TradePort (1)</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'OpenSea_base', true);" target="_opensea_base" href="https://opensea.io/assets/base/0x70cd7e6b96d7c5b977605646fa43ee5dad8604b6/52">Base - OpenSea (1)</a>
 					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'PropsOctane', true);" target="_propsoctane" href="https://fuel.props.app/projects/0x58bcad0d603da353782e33850546e0b46838aacb434af0dd6490c15c0ff0d53b">Fuel - Props Octane (1)</a>
@@ -207,6 +208,7 @@ if (!ready) {alert('coming soon'); return false;}
 					Polygon
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuBlockchain">
+						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseApeChainImg" aria-expanded="false" aria-controls="collapseApeChainImg" onclick="updateBlockchainDropdown(this)">ApeChain</button>
 						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseAptosImg" aria-expanded="false" aria-controls="collapseAptosImg" onclick="updateBlockchainDropdown(this)">Aptos</button>
 						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseBaseImg" aria-expanded="false" aria-controls="collapseBaseImg" onclick="updateBlockchainDropdown(this)">Base</button>
 						<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapseFuelImg" aria-expanded="false" aria-controls="collapseFuelImg" onclick="updateBlockchainDropdown(this)">Fuel</button>
@@ -219,6 +221,13 @@ if (!ready) {alert('coming soon'); return false;}
 				</div>
 				<br/>
 
+				<div class="card">
+					<div class="collapse" id="collapseApeChainImg" data-parent="#blockchainImg">
+						<div class="card-body">
+							<img class="card-img" src="img/non-polygon/apechain/Eliza.jpg" alt="apechain poem image"/>
+						</div>
+					</div>
+				</div>
 				<div class="card">
 					<div class="collapse" id="collapseAptosImg" data-parent="#blockchainImg">
 						<div class="card-body">
