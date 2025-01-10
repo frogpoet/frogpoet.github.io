@@ -19,62 +19,37 @@
 		<script src="../../libs/popper.min.js"></script>
 		<script src="../../libs/bootstrap.min.js"></script>
 
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154601907-1"></script>
 		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
 
-			gtag('config', 'UA-154601907-1');
-		</script>
-		<script>
-		function navClick(area, word) {
+		const info = [
+			{ "poem_name" : "We Stress", },
+		];
+
+		function displayInfo() {
 			try {
-				gtag('event', 'navClick', {
-					'event_category' : 'area_' + area,
-					'event_label' : 'word_' + word,
-					'value': 1,
-				});
-
+//throw new Error("test");
+				for (const datum of info) {
+					let poemNameUnder = datum.poem_name.toLowerCase().replace(/\s/g, "_");
+					let poemNameHref = poemNameUnder + '/' + poemNameUnder + '.htm';
+					let newHtml = '<div class="card"><div class="card-body"><h4 class="card-title text-center">'
+						+ '<a class="nav-link btn btn-lg btn-outline-primary" href="' + poemNameHref + '" role="button">' + datum.poem_name + '</a>'
+						+ '</h4></div></div>';
+					let targetElement = $('#cards');
+					targetElement.append(newHtml);
+				}			
 			}
 			catch(e) {
-				alert('navClick: ' + e.message + ', area = ' + area + ', word = ' + word);
+				alert('displayInfo: ' + e.message);
 				throw(e);
 			}
 		}
-		function detailClick(detail) {
-			try {
-				gtag('event', 'detailClick', {
-					'event_category' : 'detail_' + detail,
-					'value': 1,
-				});
 
-			}
-			catch(e) {
-				alert('detailClick: ' + e.message + ', detail = ' + detail);
-				throw(e);
-			}
-		}
-		function socialClick(area, site) {
-			try {
-				gtag('event', 'socialClick', {
-					'event_category' : 'area_' + area,
-					'event_label' : 'site_' + site,
-					'value': 1,
-				});
-
-			}
-			catch(e) {
-				alert('socialClick: ' + e.message + ', area = ' + area + ', site = ' + site);
-				throw(e);
-			}
-		}
 		$(document).ready(function() {
 			$('#dropdownMenuButton').on('click', function () {
 				navClick('navbar', 'Books');
     			});
 			$('#navbarText').collapse('show');
+			displayInfo();
 			$('#shrinkButton').on('click', function () {
 				document.querySelector('#unshrinkButton').style.display = "inline";
     			});
@@ -129,11 +104,9 @@
 		</div>
 	</div>
 
-	<div class="card">
-		<div class="card-body">
-			<h4 class="card-title text-center"><a class="nav-link btn btn-lg btn-outline-primary" href="we_stress/we_stress.htm" role="button" onclick="detailClick('detail', 'we_stress');">We Stress</a></h4>
-		</div>
+	<div id="cards">
 	</div>
+
 	<hr/>
 	<p class="text-center font-italic">This website is powered by myself.</p>
 	<p class="text-center">
@@ -152,4 +125,3 @@
 
   </body>
 </html>
-
