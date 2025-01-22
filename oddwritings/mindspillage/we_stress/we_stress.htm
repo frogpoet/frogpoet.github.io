@@ -17,74 +17,39 @@
 		<script src="../../../libs/jquery.min.js"></script>
 		<script src="../../../libs/popper.min.js"></script>
 		<script src="../../../libs/bootstrap.min.js"></script>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154601907-1"></script>
+
 		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
 
-			gtag('config', 'UA-154601907-1');
-		</script>
-		<script>
-		function navClick(area, word) {
+		const info = [
+			{ "poem_name" : "We Stress", "nfts" : 
+				[
+				{"blockchain" : "Ethereum", "copies" : "1", "primary" : "Foundation", "primaryUrl" : "https://foundation.app/mint/eth/0x1F570d5840412A6621a5886729521529C7eaec48/6", "secondary" : "OpenSea", "secondaryUrl" : "https://opensea.io/assets/ethereum/0x1f570d5840412a6621a5886729521529c7eaec48/6", "provenance" : "https://etherscan.io/nft/0x1F570d5840412A6621a5886729521529C7eaec48/6",},
+				]
+			},
+		];
+
+		function displayInfo() {
 			try {
-				gtag('event', 'navClick', {
-					'event_category' : 'area_' + area,
-					'event_label' : 'word_' + word,
-					'value': 1,
-				});
-
+//throw new Error("test");
+				for (const datum of info) {
+					for (const nft of datum.nfts) {
+						const { blockchain, copies, primary, primaryUrl } = nft;
+						let primaries = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">'
+							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button"'
+							+ ' target="_' + primary + '" href="' + primaryUrl + '">' + blockchain + ' - ' + primary + ' (' + copies + ')'
+							+ '</a>'
+							+ '</div>';
+						let targetElement = $('#primaries');
+						targetElement.append(primaries);
+					}
+				}
 			}
 			catch(e) {
-				alert('navClick: ' + e.message + ', area = ' + area + ', word = ' + word);
+				alert('displayInfo: ' + e.message);
 				throw(e);
 			}
 		}
-		function marketClick(blockchain, format, market, ready) {
-			try {
-if (!ready) {alert('once listed, this would go directly to the poem in ' + market); return false;}
-				gtag('event', 'marketClick', {
-					'event_category' : 'blockchain_' + blockchain,
-					'event_label' : 'market_' + market,
-					'value': 1,
-				});
 
-			}
-			catch(e) {
-				alert('marketClick: ' + e.message + ', blockchain = ' + blockchain + ', format = ' + format + ', market = ' + market + ', ready = '+ ready);
-				throw(e);
-			}
-		}
-		function nftBookClick(book, store, ready) {
-			try {
-if (!ready) {alert('coming soon'); return false;}
-				gtag('event', 'nftBookClick', {
-					'event_category' : 'book_' + book,
-					'event_label' : 'store_' + store,
-					'value': 1,
-				});
-
-			}
-			catch(e) {
-				alert('nftBookClick: ' + e.message + ', book = ' + book + ', store = ' + store);
-				throw(e);
-			}
-		}
-		function socialClick(area, site) {
-			try {
-				gtag('event', 'socialClick', {
-					'event_category' : 'area_' + area,
-					'event_label' : 'site_' + site,
-					'value': 1,
-				});
-
-			}
-			catch(e) {
-				alert('socialClick: ' + e.message + ', area = ' + area + ', site = ' + site);
-				throw(e);
-			}
-		}
 		function updateBlockchainDropdown(itemClicked) {
 			try {
 				document.getElementById("dropdownMenuBlockchain").innerHTML = itemClicked.innerHTML;
@@ -103,11 +68,13 @@ if (!ready) {alert('coming soon'); return false;}
 				throw(e);
 			}
 		}
+
 		$(document).ready(function() {
 			$('#dropdownMenuButton').on('click', function () {
 				navClick('navbar', 'Books');
     			});
 			$('#navbarText').collapse('show');
+			displayInfo();
 			$('#shrinkButton').on('click', function () {
 				document.querySelector('#unshrinkButton').style.display = "inline";
     			});
@@ -167,9 +134,10 @@ if (!ready) {alert('coming soon'); return false;}
 				<hr/>
 				<li><strong>Primary Marketplaces</strong> : <br/>
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
-				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="marketClick('Primary', 'text', 'Foundation', true);" target="_foundation" href="https://foundation.app/mint/eth/0x1F570d5840412A6621a5886729521529C7eaec48/6">Ethereum - Foundation (1)</a>
+
+				<div id="primaries">
 				</div>
+
 				</li>
 
 				<li><strong>Secondary Marketplaces</strong> : <br/>
