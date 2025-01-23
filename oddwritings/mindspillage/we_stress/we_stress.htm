@@ -32,26 +32,26 @@
 			try {
 //throw new Error("test");
 				for (const datum of info) {
+					let primariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">';
+					let secondariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">';
 					for (const nft of datum.nfts) {
 						const { blockchain, copies, primary, primaryUrl, secondary, secondaryUrl, provenance } = nft;
 
-						const primariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">'
+						primariesHtml = primariesHtml
 							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button"'
 							+ ' target="_' + primary + '" href="' + primaryUrl + '">' + blockchain + ' - ' + primary + ' (' + copies + ')'
-							+ '</a>'
-							+ '</div>';
-						const primariesElement = $('#primaries');
-						primariesElement.append(primariesHtml);
+							+ '</a>';
 
-						const secondariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">'
+						secondariesHtml = secondariesHtml
 							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button"'
 							+ ' target="_' + secondary + '" href="' + secondaryUrl + '">' + blockchain + ' - ' + secondary
-							+ '</a>'
-							+ '</div>';
-
-						const secondariesElement = $('#secondaries');
-						secondariesElement.append(secondariesHtml);
+							+ '</a>';
 					}
+					primariesHtml += '</div>';
+					secondariesHtml += '</div>';
+
+					$('#primaries').append(primariesHtml);
+					$('#secondaries').append(secondariesHtml);
 				}
 			}
 			catch(e) {
