@@ -23,10 +23,29 @@
 		const info = [
 			{ "poem_name" : "We Stress", "nfts" : 
 				[
-				{"blockchain" : "Ethereum", "copies" : "1", "primary" : "Foundation", "primaryUrl" : "https://foundation.app/mint/eth/0x1F570d5840412A6621a5886729521529C7eaec48/6", "secondary" : "OpenSea", "secondaryUrl" : "https://opensea.io/assets/ethereum/0x1f570d5840412a6621a5886729521529c7eaec48/6", "provenance" : "https://etherscan.io/nft/0x1F570d5840412A6621a5886729521529C7eaec48/6",},
+				{"blockchain" : "Ethereum", "copies" : "1", "primary" : "Foundation", "primaryUrl" : "https://foundation.app/mint/eth/0x1F570d5840412A6621a5886729521529C7eaec48/6", "secondary" : "OpenSea", "secondaryUrl" : "https://opensea.io/assets/ethereum/0x1f570d5840412a6621a5886729521529c7eaec48/6", "provenance" : "https://etherscan.io/nft/0x1F570d5840412A6621a5886729521529C7eaec48/6", "mediaType" : "text on image", "mediaUrl" : "we_stress_signed.jpg",},
 				]
 			},
 		];
+
+		function verifyRequiredValues(valueObject) {
+			try {
+				const allowableMediaTypes = ["text on image", "video"];
+
+				$.each(valueObject, function(key, value) {
+					if (typeof value === 'undefined') {
+						throw new Error(key + " cannot be undefined");
+					}
+					if ((key === "mediaType") && ($.inArray(value, allowableMediaTypes) == -1)) {
+						throw new Error(key + " must be one of these values : [" + allowableMediaTypes.toString() + "]");
+					}
+				});
+			}
+			catch(e) {
+				alert('verifyRequiredValues: ' + e.message + ', valueObject = ' + JSON.stringify(valueObject));
+				throw(e);
+			}
+		}
 
 		function displayInfo() {
 			try {
@@ -34,8 +53,12 @@
 				for (const datum of info) {
 					let primariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">';
 					let secondariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">';
+					let atLeastOneSecondary = false;
 					for (const nft of datum.nfts) {
-						const { blockchain, copies, primary, primaryUrl, secondary, secondaryUrl, provenance } = nft;
+						const { blockchain, copies, primary, primaryUrl, secondary, secondaryUrl, provenance, mediaType, mediaUrl } = nft;
+						verifyRequiredValues({"blockchain" : blockchain, "copies" : copies, "primary" : primary, "primaryUrl" : primaryUrl, "mediaType" : mediaType, "mediaUrl" : mediaUrl,});
+						if ((typeof secondary !== 'undefined') && (typeof secondaryUrl !== 'undefined')) { atLeastOneSecondary = true; }
+
 
 						primariesHtml = primariesHtml
 							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button"'
@@ -51,7 +74,13 @@
 					secondariesHtml += '</div>';
 
 					$('#primaries').append(primariesHtml);
-					$('#secondaries').append(secondariesHtml);
+					if (atLeastOneSecondary) {
+						secondariesHtml = '<li><strong>Secondary Marketplaces</strong> : <br/>'
+							+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownSecondaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>'
+							+ secondariesHtml
+							+ '</li>';
+						$('#secondaries').append(secondariesHtml);
+					}
 				}
 			}
 			catch(e) {
@@ -150,13 +179,9 @@
 
 				</li>
 
-				<li><strong>Secondary Marketplaces</strong> : <br/>
-				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownSecondaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
-
 				<div id="secondaries">
 				</div>
 
-				</li>
 				<li><strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>
 				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownBookText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookstore:</button>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBookText">
@@ -167,7 +192,6 @@
 			<hr/>
 			<strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong>
 			<hr/>
-
 			<div id="blockchainImg">
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
