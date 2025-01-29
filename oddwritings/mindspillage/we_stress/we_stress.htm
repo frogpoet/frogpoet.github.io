@@ -56,13 +56,19 @@
 					let atLeastOneSecondary = false;
 					for (const nft of datum.nfts) {
 						const { blockchain, copies, primary, primaryUrl, secondary, secondaryUrl, provenance, mediaType, mediaUrl } = nft;
-						verifyRequiredValues({"blockchain" : blockchain, "copies" : copies, "primary" : primary, "primaryUrl" : primaryUrl, "mediaType" : mediaType, "mediaUrl" : mediaUrl,});
+						verifyRequiredValues({"blockchain" : blockchain, "copies" : copies, "primary" : primary, "mediaType" : mediaType, "mediaUrl" : mediaUrl,});
 						if ((typeof secondary !== 'undefined') && (typeof secondaryUrl !== 'undefined')) { atLeastOneSecondary = true; }
 
+						let primaryDescription = blockchain + ' - ' + primary + ' (' + copies + ')';
+						let primaryDisabled = "";
+						if (typeof primaryUrl === 'undefined') {
+							primaryDescription += '<br/>(COMING SOON)';
+							primaryDisabled = " disabled";
+						}
 
 						primariesHtml = primariesHtml
-							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button"'
-							+ ' target="_' + primary + '" href="' + primaryUrl + '">' + blockchain + ' - ' + primary + ' (' + copies + ')'
+							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item' + primaryDisabled + '" role="button"'
+							+ ' target="_' + primary + '" href="' + primaryUrl + '">' + primaryDescription
 							+ '</a>';
 
 						secondariesHtml = secondariesHtml
