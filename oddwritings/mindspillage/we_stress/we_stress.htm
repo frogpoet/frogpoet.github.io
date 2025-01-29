@@ -79,7 +79,12 @@
 					primariesHtml += '</div>';
 					secondariesHtml += '</div>';
 
+					primariesHtml = '<li><strong>Primary Marketplaces</strong> : <br/>'
+						+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>'
+						+ primariesHtml
+						+ '</li>';
 					$('#primaries').append(primariesHtml);
+
 					if (atLeastOneSecondary) {
 						secondariesHtml = '<li><strong>Secondary Marketplaces</strong> : <br/>'
 							+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownSecondaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>'
@@ -177,13 +182,9 @@
 			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong>1</strong></p>
 			<ol>
 				<hr/>
-				<li><strong>Primary Marketplaces</strong> : <br/>
-				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>
 
 				<div id="primaries">
 				</div>
-
-				</li>
 
 				<div id="secondaries">
 				</div>
