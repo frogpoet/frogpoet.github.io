@@ -52,6 +52,9 @@
 //throw new Error("test");
 				for (const datum of info) {
 					const numCopies = datum.nfts.reduce((acc, curr) => acc + curr.copies, 0);
+					const numBlockchains = Array.from(datum.nfts.entries()).length;
+					const numBlockchainsHtml = 
+						(numBlockchains == 1) ? "1 Blockchain" : numBlockchains + " Blockchains";
 
 					let primariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">';
 					let secondariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">';
@@ -126,6 +129,7 @@
 					}
 
 					$('#numCopies').append(numCopies);
+					$('#numBlockchains').append(numBlockchainsHtml);
 
 					const mediaHtml = '<hr/><strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong><hr/>'
 							+ '<div id="blockchainMedia">'
@@ -241,7 +245,7 @@
 
 	<div class="card">
 		<div class="card-body">
-			<p class="card-text text-center"><strong>Total Copies Across Blockchains</strong> : <strong><span id="numCopies"></span></strong></p>
+			<p class="card-text text-center"><strong>Total Copies Across <span id="numBlockchains"></span></strong> : <strong><span id="numCopies"></span></strong></p>
 			<ol>
 				<hr/>
 
