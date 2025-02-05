@@ -21,7 +21,7 @@
 		<script>
 
 		const info = [
-			{ "poem_name" : "We Stress", "nfts" : 
+			{ "poemName" : "We Stress", "nfts" : 
 				[
 				{"blockchain" : "Ethereum", "copies" : 1, "primary" : "Foundation", "primaryUrl" : "https://foundation.app/mint/eth/0x1F570d5840412A6621a5886729521529C7eaec48/6", "secondary" : "OpenSea", "secondaryUrl" : "https://opensea.io/assets/ethereum/0x1f570d5840412a6621a5886729521529c7eaec48/6", "provenance" : "https://etherscan.io/nft/0x1F570d5840412A6621a5886729521529C7eaec48/6", "mediaType" : "text on image", "mediaUrl" : "we_stress_signed.jpg",},
 				]
@@ -128,6 +128,7 @@
 							+ '	</div>';
 					}
 
+					$('#poemName').append(datum.poemName);
 					$('#numCopies').append(numCopies);
 					$('#numBlockchains').append(numBlockchainsHtml);
 
@@ -239,7 +240,7 @@
 	<a class="btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="unshrinkButton">>></a>
 
       	<div class="alert alert-success mt-5" role="alert">
-		<h1 class="text-center">OddWritings<br/>Mindspillage - We Stress</h1>
+		<h1 class="text-center">OddWritings<br/>Mindspillage - <span id="poemName"></span></h1>
       	</div>
 
 
