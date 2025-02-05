@@ -22,7 +22,7 @@
 		<script>
 
 		const info = [
-			{ "poem_name" : "We Stress", "nfts" : 
+			{ "poemName" : "We Stress", "nfts" : 
 				[
 				{"blockchain" : "Ethereum", "copies" : 1, "primary" : "Foundation", "primaryUrl" : "https://foundation.app/mint/eth/0x1F570d5840412A6621a5886729521529C7eaec48/6", "secondary" : "OpenSea", "secondaryUrl" : "https://opensea.io/assets/ethereum/0x1f570d5840412a6621a5886729521529c7eaec48/6", "provenance" : "https://etherscan.io/nft/0x1F570d5840412A6621a5886729521529C7eaec48/6", "mediaType" : "text on image", "mediaUrl" : "we_stress_signed.jpg",},
 				]
@@ -33,10 +33,10 @@
 			try {
 //throw new Error("test");
 				for (const datum of info) {
-					let poemNameUnder = datum.poem_name.toLowerCase().replace(/\s/g, "_");
+					let poemNameUnder = datum.poemName.toLowerCase().replace(/\s/g, "_");
 					let poemNameHref = poemNameUnder + '/' + poemNameUnder + '.htm';
 					let newHtml = '<div class="card"><div class="card-body"><h4 class="card-title text-center">'
-						+ '<a class="nav-link btn btn-lg btn-outline-primary" href="' + poemNameHref + '" role="button">' + datum.poem_name + '</a>'
+						+ '<a class="nav-link btn btn-lg btn-outline-primary" href="' + poemNameHref + '" role="button">' + datum.poemName + '</a>'
 						+ '</h4></div></div>';
 					let targetElement = $('#cards');
 					targetElement.append(newHtml);
