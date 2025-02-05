@@ -53,7 +53,8 @@
 				for (const datum of info) {
 					let primariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">';
 					let secondariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">';
-					let mediaHtml = '';
+					let blockchainsHtml = '';
+					let cardsHtml = '';
 					let atLeastOneSecondary = false;
 					for (const [index, nft] of datum.nfts.entries()) {
 						const { blockchain, copies, primary, primaryUrl, secondary, secondaryUrl, provenance, mediaType, mediaUrl } = nft;
@@ -78,32 +79,55 @@
 							+ '</a>';
 
 						if (index == 0) {
-							mediaHtml = mediaHtml
-							+ '<hr/><strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong><hr/>'
-							+ '<div id="blockchainMedia">'
-							+ '	<div class="dropdown">'
+							blockchainsHtml = blockchainsHtml
 							+ '		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
 							+ blockchain
 							+ '		</button>'
 							+ '		<div class="dropdown-menu" aria-labelledby="dropdownMenuBlockchain">'
 							+ '			<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapse' + blockchain + 'Media" aria-expanded="false" aria-controls="collapse' + blockchain + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
-							+ '		</div>'
-							+ '	</div>'
-							+ '	<br/>';
+						} else {
+							blockchainsHtml = blockchainsHtml
+							+ '			<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapse' + blockchain + 'Media" aria-expanded="false" aria-controls="collapse' + blockchain + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
 						}
-						mediaHtml = mediaHtml
+
+						if (index == 0) {
+							cardsHtml = cardsHtml
 							+ '	<div class="card">'
 							+ '		<div class="collapse show" id="collapse' + blockchain + 'Media" data-parent="#blockchainMedia">'
-							+ '			<div class="card-body">'
-							+ '				<img class="card-img" src="' + mediaUrl + '" alt="' + blockchain + ' Poem Image"/>'
+							+ '			<div class="card-body">';
+						} else {
+							cardsHtml = cardsHtml
+							+ '	<div class="card">'
+							+ '		<div class="collapse" id="collapse' + blockchain + 'Media" data-parent="#blockchainMedia">'
+							+ '			<div class="card-body">';
+						}
+						switch (mediaType) {
+						case "text on image":
+						cardsHtml = cardsHtml
+							+ '				<img class="card-img" src="' + mediaUrl + '" alt="' + blockchain + ' Poem Image"/>';
+						break;
+						case "video":
+						cardsHtml = cardsHtml
+							+ '				<div class="embed-responsive embed-responsive-16by9">'
+							+ '					<iframe class="embed-responsive-item" src="' + mediaUrl + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+							+ '				</div>';
+						break;
+						default:
+							throw new Error("unimplemented media type : " + mediaType);
+						}
+						cardsHtml = cardsHtml
 							+ '			</div>'
 							+ '		</div>'
 							+ '	</div>';
-						if (index == Array.from(datum.nfts.entries()).length-1) {
-							mediaHtml = mediaHtml
-							+ '</div>';
-						}
 					}
+					const mediaHtml = '<hr/><strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong><hr/>'
+							+ '<div id="blockchainMedia">'
+							+ '	<div class="dropdown">'
+							+ blockchainsHtml
+							+ '	</div>'
+							+ '</div>'
+							+ '<br/>'
+							+ cardsHtml;
 
 					primariesHtml += '</div>';
 					secondariesHtml += '</div>';
