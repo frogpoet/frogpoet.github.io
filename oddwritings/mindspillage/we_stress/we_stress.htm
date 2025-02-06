@@ -24,7 +24,10 @@
 			{ "poemName" : "We Stress", "nfts" : 
 				[
 				{"blockchain" : "Ethereum", "copies" : 1, "primary" : "Foundation", "primaryUrl" : "https://foundation.app/mint/eth/0x1F570d5840412A6621a5886729521529C7eaec48/6", "secondary" : "OpenSea", "secondaryUrl" : "https://opensea.io/assets/ethereum/0x1f570d5840412a6621a5886729521529c7eaec48/6", "provenance" : "https://etherscan.io/nft/0x1F570d5840412A6621a5886729521529C7eaec48/6", "mediaType" : "text on image", "mediaUrl" : "we_stress_signed.jpg",},
-				]
+				], "books" :
+				[
+				{"bookStore" : "Amazon", "url" : "https://www.amazon.com/gp/product/B0DM2Q6DL9",},
+				],
 			},
 		];
 
@@ -58,9 +61,13 @@
 
 					let primariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">';
 					let secondariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">';
+					let bookStoresHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBookText">';
+
 					let blockchainsHtml = '';
 					let cardsHtml = '';
 					let atLeastOneSecondary = false;
+					let atLeastOneBookstore = false;
+
 					for (const [index, nft] of datum.nfts.entries()) {
 						const { blockchain, copies, primary, primaryUrl, secondary, secondaryUrl, provenance, mediaType, mediaUrl } = nft;
 						verifyRequiredValues({"blockchain" : blockchain, "copies" : copies, "primary" : primary, "mediaType" : mediaType, "mediaUrl" : mediaUrl,});
@@ -132,6 +139,24 @@
 					$('#numCopies').append(numCopies);
 					$('#numBlockchains').append(numBlockchainsHtml);
 
+					if (typeof datum.books !== 'undefined') {
+					for (const [index, book] of datum.books.entries()) {
+						let { bookStore, url } = book;
+						let bookStoreDisabled = "";
+						if (typeof bookStore !== 'undefined') atLeastOneBookstore = true;
+						if ((typeof bookStore !== 'undefined') && (typeof url === 'undefined')) {
+							bookStore += '<br/>(COMING SOON)';
+							bookStoreDisabled = " disabled";
+						}
+						if (typeof bookStore !== 'undefined') {
+							bookStoresHtml = bookStoresHtml
+							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item' + bookStoreDisabled + ' role="button"'
+							+ ' target="_' + bookStore + '" href="' + url + '">' + bookStore
+							+ '</a>';
+						}
+					}
+					}
+
 					const mediaHtml = '<hr/><strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong><hr/>'
 							+ '<div id="blockchainMedia">'
 							+ '	<div class="dropdown">'
@@ -143,6 +168,7 @@
 
 					primariesHtml += '</div>';
 					secondariesHtml += '</div>';
+					bookStoresHtml += '</div>';
 
 					primariesHtml = '<li><strong>Primary Marketplaces</strong> : <br/>'
 						+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>'
@@ -156,6 +182,13 @@
 							+ secondariesHtml
 							+ '</li>';
 						$('#secondaries').append(secondariesHtml);
+					}
+					if (atLeastOneBookstore) {
+						bookStoresHtml = '<li><strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>'
+							+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownBookText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookstore:</button>'
+							+ bookStoresHtml
+							+ '</li>';
+						$('#bookStores').append(bookStoresHtml);
 					}
 
 					$('#media').append(mediaHtml);
@@ -256,12 +289,8 @@
 				<div id="secondaries">
 				</div>
 
-				<li><strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>
-				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownBookText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookstore:</button>
-				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBookText">
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="nftBookClick('we_stress', 'Amazon', true);" target="_amazon" href="https://www.amazon.com/dp/B0DM2Q6DL9">Amazon</a>
+				<div id="bookStores">
 				</div>
-				</li>
 			</ol>
 
 			<div id="media">
