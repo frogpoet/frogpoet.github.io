@@ -33,14 +33,9 @@
 
 		function verifyRequiredValues(valueObject) {
 			try {
-				const allowableMediaTypes = ["text on image", "video"];
-
 				$.each(valueObject, function(key, value) {
 					if (typeof value === 'undefined') {
 						throw new Error(key + " cannot be undefined");
-					}
-					if ((key === "mediaType") && ($.inArray(value, allowableMediaTypes) == -1)) {
-						throw new Error(key + " must be one of these values : [" + allowableMediaTypes.toString() + "]");
 					}
 				});
 			}
