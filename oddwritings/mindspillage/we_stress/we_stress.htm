@@ -50,6 +50,22 @@
 			}
 		}
 
+		function verifyAcceptableValues(valueObject) {
+			try {
+				const allowableMediaTypes = ["text on image", "video"];
+
+				$.each(valueObject, function(key, value) {
+					if ((key === "mediaType") && (typeof value !== 'undefined') && ($.inArray(value, allowableMediaTypes) == -1)) {
+						throw new Error(key + " must be one of these values : [" + allowableMediaTypes.toString() + "]");
+					}
+				});
+			}
+			catch(e) {
+				alert('verifyAcceptableValues: ' + e.message + ', valueObject = ' + JSON.stringify(valueObject));
+				throw(e);
+			}
+		}
+
 		function displayInfo() {
 			try {
 //throw new Error("test");
@@ -65,12 +81,21 @@
 
 					let blockchainsHtml = '';
 					let cardsHtml = '';
+					let primaryDeployedBlockchain = '';
+					let atLeastOnePrimaryDeployed = false;
+					let atLeastOnePrimary = false;
 					let atLeastOneSecondary = false;
 					let atLeastOneBookstore = false;
 
 					for (const [index, nft] of datum.nfts.entries()) {
+						atLeastOnePrimary = true;
 						const { blockchain, copies, primary, primaryUrl, secondary, secondaryUrl, provenance, mediaType, mediaUrl } = nft;
-						verifyRequiredValues({"blockchain" : blockchain, "copies" : copies, "primary" : primary, "mediaType" : mediaType, "mediaUrl" : mediaUrl,});
+						verifyRequiredValues({"blockchain" : blockchain, "copies" : copies, "primary" : primary,});
+						verifyAcceptableValues({"mediaType" : mediaType, "mediaUrl" : mediaUrl,});
+						if ((typeof primaryUrl !== 'undefined') && (typeof mediaUrl !== 'undefined') && !atLeastOnePrimaryDeployed) {
+							atLeastOnePrimaryDeployed = true;
+							primaryDeployedBlockchain = blockchain;
+						}
 
 						let primaryDescription = blockchain + ' - ' + primary + ' (' + copies + ')';
 						let primaryDisabled = "";
@@ -92,29 +117,27 @@
 							+ '</a>';
 						}
 
-						if (index == 0) {
+						let isPreferredBlockchain = atLeastOnePrimaryDeployed && (primaryDeployedBlockchain == blockchain);
+						if (isPreferredBlockchain) {
 							blockchainsHtml = blockchainsHtml
-							+ '		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
-							+ blockchain
-							+ '		</button>'
-							+ '		<div class="dropdown-menu" aria-labelledby="dropdownMenuBlockchain">'
 							+ '			<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapse' + blockchain + 'Media" aria-expanded="false" aria-controls="collapse' + blockchain + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
-						} else {
+						} else if (typeof mediaType !== 'undefined') {
 							blockchainsHtml = blockchainsHtml
 							+ '			<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapse' + blockchain + 'Media" aria-expanded="false" aria-controls="collapse' + blockchain + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
 						}
 
-						if (index == 0) {
+						if (isPreferredBlockchain) {
 							cardsHtml = cardsHtml
 							+ '	<div class="card">'
 							+ '		<div class="collapse show" id="collapse' + blockchain + 'Media" data-parent="#blockchainMedia">'
 							+ '			<div class="card-body">';
-						} else {
+						} else if (typeof mediaType !== 'undefined') {
 							cardsHtml = cardsHtml
 							+ '	<div class="card">'
 							+ '		<div class="collapse" id="collapse' + blockchain + 'Media" data-parent="#blockchainMedia">'
 							+ '			<div class="card-body">';
 						}
+						if (typeof mediaType !== 'undefined') {
 						switch (mediaType) {
 						case "text on image":
 						cardsHtml = cardsHtml
@@ -133,6 +156,7 @@
 							+ '			</div>'
 							+ '		</div>'
 							+ '	</div>';
+						}
 					}
 
 					$('#poemName').append(datum.poemName);
@@ -157,25 +181,17 @@
 					}
 					}
 
-					const mediaHtml = '<hr/><strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong><hr/>'
-							+ '<div id="blockchainMedia">'
-							+ '	<div class="dropdown">'
-							+ blockchainsHtml
-							+ '	</div>'
-							+ '</div>'
-							+ '<br/>'
-							+ cardsHtml;
-
 					primariesHtml += '</div>';
 					secondariesHtml += '</div>';
 					bookStoresHtml += '</div>';
 
-					primariesHtml = '<li><strong>Primary Marketplaces</strong> : <br/>'
-						+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>'
-						+ primariesHtml
-						+ '</li>';
-					$('#primaries').append(primariesHtml);
-
+					if (atLeastOnePrimary) {
+						primariesHtml = '<li><strong>Primary Marketplaces</strong> : <br/>'
+							+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>'
+							+ primariesHtml
+							+ '</li>';
+						$('#primaries').append(primariesHtml);
+					}
 					if (atLeastOneSecondary) {
 						secondariesHtml = '<li><strong>Secondary Marketplaces</strong> : <br/>'
 							+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownSecondaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>'
@@ -190,8 +206,23 @@
 							+ '</li>';
 						$('#bookStores').append(bookStoresHtml);
 					}
-
-					$('#media').append(mediaHtml);
+					if (atLeastOnePrimaryDeployed) {
+						blockchainsHtml = '		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
+							+ primaryDeployedBlockchain
+							+ '		</button>'
+							+ '		<div class="dropdown-menu" aria-labelledby="dropdownMenuBlockchain">'
+							+ blockchainsHtml
+							+ '		</div>';
+						const mediaHtml = '<hr/><strong>SO WHAT DOES THIS POEM LOOK LIKE?</strong><hr/>'
+							+ '<div id="blockchainMedia">'
+							+ '	<div class="dropdown">'
+							+ blockchainsHtml
+							+ '	</div>'
+							+ '	<br/>'
+							+ cardsHtml
+							+ '</div>'
+						$('#media').append(mediaHtml);
+					}
 				}
 			}
 			catch(e) {
