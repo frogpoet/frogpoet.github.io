@@ -35,11 +35,15 @@
 		function displayInfo() {
 			try {
 //throw new Error("test");
+				const externalLink = ' <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.92857 21C4.40143 21 3.93857 20.8071 3.56571 20.4343C3.19286 20.0614 3 19.5986 3 19.0714V4.92857C3 4.40143 3.19286 3.93857 3.56571 3.56571C3.93857 3.19286 4.40143 3 4.92857 3H11.0357C11.3057 3 11.5371 3.09 11.7171 3.27C11.8971 3.45 12 3.68143 12 3.95143C12 4.22143 11.91 4.45286 11.7171 4.64571C11.5371 4.83857 11.3057 4.92857 11.0357 4.92857H4.92857V19.0714H19.0714V12.9643C19.0714 12.6943 19.1614 12.4629 19.3414 12.2829C19.5214 12.1029 19.7529 12 20.0229 12C20.2929 12 20.5243 12.09 20.7171 12.2829C20.91 12.4629 21 12.6943 21 12.9643V19.0714C21 19.5986 20.8071 20.0614 20.4343 20.4343C20.0614 20.8071 19.5986 21 19.0714 21H4.92857ZM19.0714 6.29143L10.1743 15.1886C9.98143 15.3814 9.75 15.4843 9.50571 15.4714C9.26143 15.4586 9.03 15.3557 8.83714 15.1629C8.64429 14.97 8.54143 14.7386 8.54143 14.4814C8.54143 14.2243 8.64429 13.9929 8.83714 13.8L17.7086 4.92857H15.5357C15.2657 4.92857 15.0343 4.83857 14.8543 4.65857C14.6743 4.47857 14.5714 4.24714 14.5714 3.97714C14.5714 3.70714 14.6614 3.47571 14.8543 3.28286C15.0343 3.09 15.2657 3 15.5357 3H21V8.46429C21 8.73429 20.91 8.96571 20.73 9.14571C20.55 9.32571 20.3186 9.42857 20.0486 9.42857C19.7786 9.42857 19.5471 9.33857 19.3543 9.14571C19.1614 8.96571 19.0714 8.73429 19.0714 8.46429V6.29143Z" fill="currentColor"></path></svg>';
+				
 				for (const datum of info) {
 					let poemNameUnder = datum.poemName.toLowerCase().replace(/\s/g, "_");
 					let poemNameHref = poemNameUnder + '/' + poemNameUnder + '.htm';
 					let newHtml = '<div class="card"><div class="card-body"><h4 class="card-title text-center">'
-						+ '<a class="nav-link btn btn-lg btn-outline-primary" href="' + poemNameHref + '" role="button">' + datum.poemName + '</a>'
+						+ '<a class="nav-link btn btn-lg btn-outline-primary" href="' + poemNameHref + '" role="button">'
+						+ datum.poemName + externalLink
+						+ '</a>'
 						+ '</h4></div></div>';
 					let targetElement = $('#cards');
 					targetElement.append(newHtml);
