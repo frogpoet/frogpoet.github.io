@@ -110,20 +110,23 @@
 						if (typeof primaryUrl === 'undefined') {
 							primaryDescription += '<br/>(COMING SOON)';
 							primaryDisabled = " disabled";
+						} else {
+							primaryDescription += externalLink;
 						}
 
 						primariesHtml = primariesHtml
 							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item' + primaryDisabled + '" role="button"'
 							+ ' target="_' + primary + '" href="' + primaryUrl + '">'
-							+ primaryDescription + externalLink
+							+ primaryDescription
 							+ '</a>';
 
+						let secondaryDescription = blockchain + ' - ' + secondary + externalLink;
 						if ((typeof secondary !== 'undefined') && (typeof secondaryUrl !== 'undefined')) {
 							atLeastOneSecondary = true;
 							secondariesHtml = secondariesHtml
 							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button"'
 							+ ' target="_' + secondary + '" href="' + secondaryUrl + '">'
-							+ blockchain + ' - ' + secondary + externalLink
+							+ secondaryDescription
 							+ '</a>';
 						}
 
@@ -181,18 +184,21 @@
 
 					if (typeof datum.books !== 'undefined') {
 					for (const [index, book] of datum.books.entries()) {
-						let { bookStore, url } = book;
+						const { bookStore, url } = book;
+						let bookStoreDescription = bookStore;
 						let bookStoreDisabled = "";
 						if (typeof bookStore !== 'undefined') atLeastOneBookstore = true;
 						if ((typeof bookStore !== 'undefined') && (typeof url === 'undefined')) {
-							bookStore += '<br/>(COMING SOON)';
+							bookStoreDescription += '<br/>(COMING SOON)';
 							bookStoreDisabled = " disabled";
+						} else {
+							bookStoreDescription += externalLink;
 						}
 						if (typeof bookStore !== 'undefined') {
 							bookStoresHtml = bookStoresHtml
 							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item' + bookStoreDisabled + ' role="button"'
 							+ ' target="_' + bookStore + '" href="' + url + '">'
-							+ bookStore + externalLink
+							+ bookStoreDescription
 							+ '</a>';
 						}
 					}
