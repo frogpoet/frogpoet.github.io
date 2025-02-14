@@ -27,6 +27,11 @@
 				], "books" :
 				[
 				{"bookStore" : "Amazon", "url" : "https://www.amazon.com/gp/product/B0DM2Q6DL9",},
+				], "links" :
+				[
+				{"platform" : "Hey", "url" : "https://hey.xyz/posts/0x01e18b-0x54",},
+				{"platform" : "Threads", "url" : "https://www.threads.net/@0ddwritings/post/DCFSqv2xyKC",},
+				{"platform" : "X", "url" : "https://x.com/OddWritings/status/1853942553684369663",},
 				],
 			},
 		];
@@ -89,11 +94,13 @@
 					let provenanceHtml = '';
 					let blockchainsHtml = '';
 					let cardsHtml = '';
+					let linksHtml = '';
 					let primaryDeployedBlockchain = '';
 					let atLeastOnePrimaryDeployed = false;
 					let atLeastOnePrimary = false;
 					let atLeastOneSecondary = false;
 					let atLeastOneBookstore = false;
+					let atLeastOneLink = false;
 
 					for (const [index, nft] of datum.nfts.entries()) {
 						atLeastOnePrimary = true;
@@ -204,6 +211,20 @@
 					}
 					}
 
+					if (typeof datum.links !== 'undefined') {
+					for (const [index, link] of datum.links.entries()) {
+						const { platform, url } = link;
+						let platformDescription = platform + externalLink;
+						if (typeof platform !== 'undefined') atLeastOneLink = true;
+						if (typeof platform !== 'undefined') {
+							linksHtml = linksHtml
+							+ '<a href="' + url + '" target="_' + platform + '">'
+							+ platformDescription
+							+ '</a><br/><br/>';
+						}
+					}
+					}
+
 					primariesHtml += '</div>';
 					secondariesHtml += '</div>';
 					bookStoresHtml += '</div>';
@@ -228,6 +249,13 @@
 							+ bookStoresHtml
 							+ '</li>';
 						$('#bookStores').append(bookStoresHtml);
+					}
+					if (atLeastOneLink) {
+						linksHtml = '<hr/>'
+							+ '<strong>Links.</strong><br/><br/>(the total number of views from the links is a proxy for your probability of reselling the poem on the secondary market)'
+							+ '<hr/>'
+							+ linksHtml;
+						$('#links').append(linksHtml);
 					}
 					if (atLeastOnePrimaryDeployed) {
 						blockchainsHtml = '		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
@@ -365,16 +393,9 @@
 			Where does the word "elder" come from?<br/><br/>
 			"Elder" as an adjective meaning "more old" <a href="https://www.etymonline.com/word/elder" target="_etymonline">comes from Old English</a> <em>eldra</em>, with the same meaning (which itself is the comparative of <em>eald</em>, "old").  The noun form meaning "elderly person" comes from the adjective and appears around 1200.  A second form of the noun, meaning "a type of berry tree," derives from the Old English <em>ellæn</em>, which means "elderberry tree."  This form appears around 1400. The OED lists <a href="https://www.oed.com/search/advanced/Meanings?textTermText0=elder&textTermOpt0=WordPhrase&textTermExactMatch0=true" target="_oed">24 different meanings</a> for the word - 14 nouns, 8 adjectives, and 2 verbs. The noun form acquires the meaning "the udder of a mare or cow" in 1673, and "the first player in a card game" in 1589. The adjective gains the meaning "earlier" in 1400 and the obsolete meaning "transferred" in 1719.  The verb can mean "to begin to show old age", appearing in 1876.  The <a href="https://www.oed.com/dictionary/elder_n2?tab=factsheet" target="_oed">earliest written use of the noun</a> meaning "a type of berry tree" is in 1673, in the writings of <a href="https://en.wikipedia.org/wiki/John_Ray" target="_wikipedia">John Ray</a>, theologian and naturalist.<br/>
 -->
-			<hr/>
-			<strong>Links.</strong><br/><br/>(the total number of views from the links is a proxy for your probability of reselling the poem on the secondary market)
-			<hr/>
-<!--
-			<a href="https://creator.nightcafe.studio/creation/vj41lNtI9AtPkVJjRxvB?ru=OddWritings" target="_nightcafe">NightCafe Image Source</a><br/><br/>
--->
-			<a href="https://x.com/OddWritings/status/1853942553684369663" target="_twitter">X (Twitter)</a><br/><br/>
-			<a href="https://hey.xyz/posts/0x01e18b-0x54" target="_hey">Hey (Lenster)</a><br/><br/>
-			<a href="https://www.threads.net/@0ddwritings/post/DCFSqv2xyKC" target="_threads">Threads</a><br/><br/>
-			</p>
+
+			<div id="links">
+			</div>
 		</div>
 	</div>
 <!--
