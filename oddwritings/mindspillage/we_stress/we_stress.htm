@@ -61,6 +61,16 @@
 			}
 		}
 
+		function getProvenanceId(blockchain) {
+			try {
+				return blockchain + 'Provenance';
+			}
+			catch(e) {
+				alert('getProvenanceId: ' + e.message + ', blockchain = ' + blockchain);
+				throw(e);
+			}
+		}
+
 		function displayInfo() {
 			try {
 //throw new Error("test");
@@ -76,6 +86,7 @@
 					let secondariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">';
 					let bookStoresHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBookText">';
 
+					let provenanceHtml = '';
 					let blockchainsHtml = '';
 					let cardsHtml = '';
 					let primaryDeployedBlockchain = '';
@@ -124,6 +135,12 @@
 							blockchainsHtml = blockchainsHtml
 							+ '			<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapse' + blockchain + 'Media" aria-expanded="false" aria-controls="collapse' + blockchain + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
 						}
+
+						let displayClass = (isPreferredBlockchain) ? "d-inline" : "d-none";
+						provenanceHtml = provenanceHtml
+							+ '<a id = "' + getProvenanceId(blockchain) + '" class="' + displayClass + '" target="_provenance" href="' + provenance + '">'
+							+ ' provenance' + externalLink
+							+ '</a>';
 
 						if (isPreferredBlockchain) {
 							cardsHtml = cardsHtml
@@ -210,6 +227,7 @@
 						blockchainsHtml = '		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
 							+ primaryDeployedBlockchain
 							+ '		</button>'
+							+ provenanceHtml
 							+ '		<div class="dropdown-menu" aria-labelledby="dropdownMenuBlockchain">'
 							+ blockchainsHtml
 							+ '		</div>';
@@ -236,11 +254,19 @@
 				document.getElementById("dropdownMenuBlockchain").innerHTML = itemClicked.innerHTML;
 				let choices = $('.blockchainChoice');
 				for (let i=0; i<choices.length; i++) {
+					const provenanceId = getProvenanceId(choices[i].innerText);
+					const provenanceElement = document.getElementById(provenanceId);
 					if (choices[i] === itemClicked) {
 						choices[i].classList.add("active");
+						if (!provenanceElement.href.endsWith("undefined")) {
+							provenanceElement.classList.add("d-inline");
+							provenanceElement.classList.remove("d-none");
+						}
 					}
 					else {
 						choices[i].classList.remove("active");
+						provenanceElement.classList.add("d-none");
+						provenanceElement.classList.remove("d-inline");
 					}
 				}
 			}
