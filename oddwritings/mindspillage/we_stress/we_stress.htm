@@ -27,6 +27,9 @@
 				], "books" :
 				[
 				{"bookStore" : "Amazon", "url" : "https://www.amazon.com/gp/product/B0DM2Q6DL9",},
+				], "metaverses" :
+				[
+				{"metaverse" : "Spatial", "url" : "https://www.spatial.io/s/Mindspillage-Poems-67b11828f59c2d746d8fddb7?share=3367699677692575645",},
 				], "links" :
 				[
 				{"platform" : "Hey", "url" : "https://hey.xyz/posts/0x01e18b-0x54",},
@@ -90,6 +93,7 @@
 					let primariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownPrimaryText">';
 					let secondariesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSecondaryText">';
 					let bookStoresHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownBookText">';
+					let metaversesHtml = '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMetaverseText">';
 
 					let provenanceHtml = '';
 					let blockchainsHtml = '';
@@ -100,6 +104,7 @@
 					let atLeastOnePrimary = false;
 					let atLeastOneSecondary = false;
 					let atLeastOneBookstore = false;
+					let atLeastOneMetaverse = false;
 					let atLeastOneLink = false;
 
 					for (const [index, nft] of datum.nfts.entries()) {
@@ -211,6 +216,28 @@
 					}
 					}
 
+					if (typeof datum.metaverses !== 'undefined') {
+					for (const [index, space] of datum.metaverses.entries()) {
+						const { metaverse, url } = space;
+						let metaverseDescription = metaverse;
+						let metaverseDisabled = "";
+						if (typeof metaverse !== 'undefined') atLeastOneMetaverse = true;
+						if ((typeof metaverse !== 'undefined') && (typeof url === 'undefined')) {
+							metaverseDescription += '<br/>(COMING SOON)';
+							metaverseDisabled = " disabled";
+						} else {
+							metaverseDescription += externalLink;
+						}
+						if (typeof metaverse !== 'undefined') {
+							metaversesHtml = metaversesHtml
+							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item' + metaverseDisabled + ' role="button"'
+							+ ' target="_' + metaverse + '" href="' + url + '">'
+							+ metaverseDescription
+							+ '</a>';
+						}
+					}
+					}
+
 					if (typeof datum.links !== 'undefined') {
 					for (const [index, link] of datum.links.entries()) {
 						const { platform, url } = link;
@@ -228,6 +255,7 @@
 					primariesHtml += '</div>';
 					secondariesHtml += '</div>';
 					bookStoresHtml += '</div>';
+					metaversesHtml += '</div>';
 
 					if (atLeastOnePrimary) {
 						primariesHtml = '<li><strong>Primary Marketplaces</strong> : <br/>'
@@ -249,6 +277,12 @@
 							+ bookStoresHtml
 							+ '</li>';
 						$('#bookStores').append(bookStoresHtml);
+					}
+					if (atLeastOneMetaverse) {
+						metaversesHtml = '<strong>View this poem in virtual reality</strong> : <br/>'
+							+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownMetaverse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Metaverse:</button>'
+							+ metaversesHtml;
+						$('#metaverses').append(metaversesHtml);
 					}
 					if (atLeastOneLink) {
 						linksHtml = '<hr/>'
@@ -385,6 +419,8 @@
 			</ol>
 
 			<div id="media">
+			</div>
+			<div id="metaverses">
 			</div>
 <!--
 			<hr/>
