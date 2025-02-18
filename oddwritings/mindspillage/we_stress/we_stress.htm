@@ -37,6 +37,7 @@
 				{"platform" : "Threads", "url" : "https://www.threads.net/@0ddwritings/post/DCFSqv2xyKC",},
 				{"platform" : "X", "url" : "https://x.com/OddWritings/status/1853942553684369663",},
 				],
+				"poemNote" : "This poem won 3rd place in the Poetry category for the 2024 Web3 Artist Awards.",
 			},
 		];
 
@@ -100,6 +101,7 @@
 					let blockchainsHtml = '';
 					let cardsHtml = '';
 					let linksHtml = '';
+					let noteHtml = '';
 					let primaryDeployedBlockchain = '';
 					let atLeastOnePrimaryDeployed = false;
 					let atLeastOnePrimary = false;
@@ -107,6 +109,7 @@
 					let atLeastOneBookstore = false;
 					let atLeastOneMetaverse = false;
 					let atLeastOneLink = false;
+					let noteExists = false;
 
 					for (const [index, nft] of datum.nfts.entries()) {
 						atLeastOnePrimary = true;
@@ -253,6 +256,11 @@
 					}
 					}
 
+					if (typeof datum.poemNote !== 'undefined') {
+						noteExists = true;
+						noteHtml = noteHtml + '<hr/><p>' + datum.poemNote + '</p>';
+					}
+
 					primariesHtml += '</div>';
 					secondariesHtml += '</div>';
 					bookStoresHtml += '</div>';
@@ -288,6 +296,9 @@
 							+ '<hr/>'
 							+ linksHtml;
 						$('#links').append(linksHtml);
+					}
+					if (noteExists) {
+						$('#note').append(noteHtml);
 					}
 					if (atLeastOnePrimaryDeployed) {
 						blockchainsHtml = '		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
@@ -427,6 +438,8 @@
 -->
 
 			<div id="links">
+			</div>
+			<div id="note">
 			</div>
 		</div>
 	</div>
