@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="poem poems poetry essays NFT NFTs" />
@@ -11,7 +12,7 @@
 	<title>We Stress | oddwritings.com</title> 
 	  <link rel='stylesheet' type='text/css' href='../../../css/font-awesome.min.css'>
 		<link rel='stylesheet' type='text/css' href='../../../css/bootstrap.css'>
-	  	<link rel="shortcut icon" href="favicon.ico" />
+	  	<link rel="shortcut icon" href="../favicon.ico" />
 		<script src="../../../libs/d3.js"></script>
 		<script src="../../../libs/lodash.js"></script>
 		<script src="../../../libs/jquery.min.js"></script>
@@ -258,24 +259,21 @@
 					metaversesHtml += '</div>';
 
 					if (atLeastOnePrimary) {
-						primariesHtml = '<li><strong>Primary Marketplaces</strong> : <br/>'
+						primariesHtml = '<strong>Primary Marketplaces</strong> : <br/>'
 							+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownPrimaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>'
-							+ primariesHtml
-							+ '</li>';
+							+ primariesHtml;
 						$('#primaries').append(primariesHtml);
 					}
 					if (atLeastOneSecondary) {
-						secondariesHtml = '<li><strong>Secondary Marketplaces</strong> : <br/>'
+						secondariesHtml = '<strong>Secondary Marketplaces</strong> : <br/>'
 							+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownSecondaryText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marketplace:</button>'
-							+ secondariesHtml
-							+ '</li>';
+							+ secondariesHtml;
 						$('#secondaries').append(secondariesHtml);
 					}
 					if (atLeastOneBookstore) {
-						bookStoresHtml = '<li><strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>'
+						bookStoresHtml = '<strong>Purchase the illustrated book in which this collectible appears</strong> : <br/>'
 							+ '<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownBookText" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookstore:</button>'
-							+ bookStoresHtml
-							+ '</li>';
+							+ bookStoresHtml;
 						$('#bookStores').append(bookStoresHtml);
 					}
 					if (atLeastOneMetaverse) {
@@ -405,7 +403,6 @@
 	<div class="card">
 		<div class="card-body">
 			<p class="card-text text-center"><strong>Total Copies Across <span id="numBlockchains"></span></strong> : <strong><span id="numCopies"></span></strong></p>
-			<ol>
 				<hr/>
 
 				<div id="primaries">
@@ -416,7 +413,6 @@
 
 				<div id="bookStores">
 				</div>
-			</ol>
 
 			<div id="media">
 			</div>
