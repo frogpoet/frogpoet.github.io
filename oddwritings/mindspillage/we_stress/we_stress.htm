@@ -36,8 +36,14 @@
 				{"platform" : "Hey", "url" : "https://hey.xyz/posts/0x01e18b-0x54",},
 				{"platform" : "Threads", "url" : "https://www.threads.net/@0ddwritings/post/DCFSqv2xyKC",},
 				{"platform" : "X", "url" : "https://x.com/OddWritings/status/1853942553684369663",},
-				],
+				], 
 				"poemNote" : "This poem won 3rd place in the Poetry category for the 2024 Web3 Artist Awards.",
+				"noteLinks" :
+				[
+				{"platform" : "Objkt (1)", "url" : "https://objkt.com/tokens/KT1NaHwsCVRbW18qE7wGLFenJAarpFUUzLe9/1",},
+				{"platform" : "Objkt (2)", "url" : "https://objkt.com/tokens/KT1Apg9CHdBJH3ZimFkCwEZ1PNgaXZUV1mhd/3",},
+				{"platform" : "X", "url" : "https://x.com/W3ArtistsAwards/status/1867747822482624520",},
+				],
 			},
 		];
 
@@ -102,6 +108,7 @@
 					let cardsHtml = '';
 					let linksHtml = '';
 					let noteHtml = '';
+					let noteLinksHtml = '';
 					let primaryDeployedBlockchain = '';
 					let atLeastOnePrimaryDeployed = false;
 					let atLeastOnePrimary = false;
@@ -110,6 +117,7 @@
 					let atLeastOneMetaverse = false;
 					let atLeastOneLink = false;
 					let noteExists = false;
+					let atLeastOneNoteLink = false;
 
 					for (const [index, nft] of datum.nfts.entries()) {
 						atLeastOnePrimary = true;
@@ -259,6 +267,20 @@
 					if (typeof datum.poemNote !== 'undefined') {
 						noteExists = true;
 						noteHtml = noteHtml + '<hr/><p>' + datum.poemNote + '</p>';
+
+						if (typeof datum.noteLinks !== 'undefined') {
+						for (const [index, link] of datum.noteLinks.entries()) {
+							const { platform, url } = link;
+							let platformDescription = platform + externalLink;
+							if (typeof platform !== 'undefined') atLeastOneNoteLink = true;
+							if (typeof platform !== 'undefined') {
+								noteLinksHtml = noteLinksHtml
+								+ '<a href="' + url + '" target="_' + platform + '">'
+								+ platformDescription
+								+ '</a><br/><br/>';
+							}
+						}
+						}
 					}
 
 					primariesHtml += '</div>';
@@ -299,6 +321,12 @@
 					}
 					if (noteExists) {
 						$('#note').append(noteHtml);
+						if (atLeastOneNoteLink) {
+							noteLinksHtml = '<br/>'
+								+ 'Sources:<br/><br/>'
+								+ noteLinksHtml;
+							$('#noteLinks').append(noteLinksHtml);
+						}
 					}
 					if (atLeastOnePrimaryDeployed) {
 						blockchainsHtml = '		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuBlockchain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
@@ -440,6 +468,8 @@
 			<div id="links">
 			</div>
 			<div id="note">
+			</div>
+			<div id="noteLinks">
 			</div>
 		</div>
 	</div>
