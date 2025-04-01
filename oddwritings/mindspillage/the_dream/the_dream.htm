@@ -24,11 +24,11 @@
 		const info = [
 			{ "poemName" : "The Dream", "nfts" : 
 				[
-				{"blockchain" : "Base", "copies" : 1, "primary" : "OpenSea", "primaryUrl" : undefined, "mediaType" : "video", "mediaUrl" : undefined, "provenance" : undefined,},
-				{"blockchain" : "Binance Smart Chain", "copies" : 1, "primary" : "Nfts2me<br/><em>Token Id # 1</em>", "primaryUrl" : undefined, "mediaType" : "video", "mediaUrl" : undefined, "provenance" : undefined,},
-				{"blockchain" : "Optimism", "copies" : 1, "primary" : "OpenSea", "primaryUrl" : undefined, "mediaType" : "video", "mediaUrl" : undefined, "provenance" : undefined,},
-				{"blockchain" : "Polygon", "copies" : 1, "primary" : "OpenSea", "primaryUrl" : undefined, "mediaType" : "video", "mediaUrl" : undefined, "provenance" : undefined,},
-				{"blockchain" : "Tezos", "copies" : 1, "primary" : "Objkt", "primaryUrl" : undefined, "mediaType" : "video", "mediaUrl" : undefined, "provenance" : undefined,},
+				{"blockchain" : "Base", "copies" : 1, "primary" : "OpenSea", "primaryUrl" : undefined, "mediaType" : "video", "mediaUrl" : "https://www.youtube.com/embed/8j0aeGOtpjw", "provenance" : undefined,},
+				{"blockchain" : "Binance Smart Chain", "copies" : 1, "primary" : "Nfts2me<br/><em>Token Id # 1</em>", "primaryUrl" : undefined, "mediaType" : "video", "mediaUrl" : "https://www.youtube.com/embed/8j0aeGOtpjw", "provenance" : undefined,},
+				{"blockchain" : "Optimism", "copies" : 1, "primary" : "OpenSea", "primaryUrl" : undefined, "mediaType" : "video", "mediaUrl" : "https://www.youtube.com/embed/8j0aeGOtpjw", "provenance" : undefined,},
+				{"blockchain" : "Polygon", "copies" : 1, "primary" : "OpenSea", "primaryUrl" : undefined, "mediaType" : "video", "mediaUrl" : "https://www.youtube.com/embed/8j0aeGOtpjw", "provenance" : undefined,},
+				{"blockchain" : "Tezos", "copies" : 1, "primary" : "Objkt", "primaryUrl" : "https://objkt.com/tokens/KT1Pxfczzj5YY6fbKn4jCigCHVUyLysn6Zix/5", "mediaType" : "video", "mediaUrl" : "https://www.youtube.com/embed/8j0aeGOtpjw", "provenance" : "https://tzkt.io/KT1Pxfczzj5YY6fbKn4jCigCHVUyLysn6Zix/tokens/5/transfers",},
 				], "books" :
 				[
 				{"bookStore" : "Amazon", "url" : "https://www.amazon.com/gp/product/B0DM2Q6DL9",},
@@ -47,12 +47,12 @@
 //				{"platform" : "Substack", "url" : undefined,},
 //				{"platform" : "Substack Note", "url" : undefined,},
 //				{"platform" : "Threads", "url" : undefined,},
-//				{"platform" : "X", "url" : undefined,},
-//				{"platform" : "X (Tezos Tuesday)", "url" : undefined,},
-//				{"platform" : "Youtube", "url" : undefined,},
+				{"platform" : "X", "url" : "https://x.com/OddWritings/status/1907182492161106028",},
+				{"platform" : "X (Tezos Tuesday)", "url" : "https://x.com/OddWritings/status/1907182979652386848",},
+				{"platform" : "Youtube", "url" : "https://youtu.be/8j0aeGOtpjw",},
 				],
 				"poemNote" : undefined,
-//				"poemNote" : "<strong>The Dream</strong><br/><br/>line 1<br/>line 2<br/><hr/><br/>This is an Elizabethan Sonnet.<br/><br/>For deeper understanding, consider reading William Golding's <u>Lord of the Flies</u> and John Bunyan's <u>Pilgrim's Progress</u>.<br/><br/>The video for this poem was created by generating one image in AI for each line of the poem, then blending them together with my voice reading the poem in the background.",
+				"poemNote" : "<strong>The Dream</strong><br/><br/>i hear the words<br/>i fall<br/><br/>to sleep<br/>until the mountains<br/>unfold<hr/><br/><br/>The video for this poem was created by generating one image in AI for each line of the poem, then blending them together with my voice reading the poem in the background.",
 				"noteLinks" :
 				[
 				{"platform" : "Image 1 with Prompt", "url" : "https://creator.nightcafe.studio/creation/jxasph1d3s2qDTMZ5VHm/video71-the-lights?ru=OddWritings",},
@@ -171,13 +171,14 @@
 							+ '</a>';
 						}
 
+						const blockchainId = blockchain.replace(/ /g, "_");
 						let isPreferredBlockchain = atLeastOnePrimaryDeployed && (primaryDeployedBlockchain == blockchain);
 						if (isPreferredBlockchain) {
 							blockchainsHtml = blockchainsHtml
-							+ '			<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapse' + blockchain + 'Media" aria-expanded="false" aria-controls="collapse' + blockchain + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
+							+ '			<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapse' + blockchainId + 'Media" aria-expanded="false" aria-controls="collapse' + blockchainId + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
 						} else if (typeof mediaType !== 'undefined') {
 							blockchainsHtml = blockchainsHtml
-							+ '			<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapse' + blockchain + 'Media" aria-expanded="false" aria-controls="collapse' + blockchain + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
+							+ '			<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapse' + blockchainId + 'Media" aria-expanded="false" aria-controls="collapse' + blockchainId + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
 						}
 
 						let displayClass = (isPreferredBlockchain) ? "d-inline" : "d-none";
@@ -189,12 +190,12 @@
 						if (isPreferredBlockchain) {
 							cardsHtml = cardsHtml
 							+ '	<div class="card">'
-							+ '		<div class="collapse show" id="collapse' + blockchain + 'Media" data-parent="#blockchainMedia">'
+							+ '		<div class="collapse show" id="collapse' + blockchainId + 'Media" data-parent="#blockchainMedia">'
 							+ '			<div class="card-body">';
 						} else if (typeof mediaType !== 'undefined') {
 							cardsHtml = cardsHtml
 							+ '	<div class="card">'
-							+ '		<div class="collapse" id="collapse' + blockchain + 'Media" data-parent="#blockchainMedia">'
+							+ '		<div class="collapse" id="collapse' + blockchainId + 'Media" data-parent="#blockchainMedia">'
 							+ '			<div class="card-body">';
 						}
 						if (typeof mediaType !== 'undefined') {
