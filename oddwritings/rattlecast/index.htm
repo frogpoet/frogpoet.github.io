@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="poem poems poetry rattle rattlecast prompt-lines" />
+
+	<title>RattleCast Prompt-Lines Database</title> 
+	  <link rel='stylesheet' type='text/css' href='../../css/font-awesome.min.css'>
+		<link rel='stylesheet' type='text/css' href='../../css/bootstrap.css'>
+	  	<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../../libs/d3.js"></script>
+		<script src="../../libs/lodash.js"></script>
+		<script src="../../libs/jquery.min.js"></script>
+		<script src="../../libs/popper.min.js"></script>
+		<script src="../../libs/bootstrap.min.js"></script>
+
+		<script>
+
+		const dateLastUpdated = "2025-03-31";
+
+		const info = [
+			{ "cast" : "287", "host" : "Lew Watts", "prompt" : "phobia you don't have but someone else does", "date" : "2025-03-30", "readings" : 
+				[
+					{ "poet" : "Hemat Malak", "title" : "How Crossed Scissors Cut", "url" : "https://youtu.be/wBAZu9YtIi4?t=5914",},
+					{ "poet" : "Amanda Harris", "title" : "Agoraphobia", "url" : "https://youtu.be/wBAZu9YtIi4?t=6094",},
+					{ "poet" : "Dick Westheimer", "title" : "The Great God Phobos Contends with Mother Love", "url" : "https://youtu.be/wBAZu9YtIi4?t=6161",},
+					{ "poet" : "Mike Bayles", "title" : "Fear of Breakdowns", "url" : "https://youtu.be/wBAZu9YtIi4?t=6380",},
+					{ "poet" : "Chelsea McClellan", "title" : "Dear Phobophobe", "url" : "https://youtu.be/wBAZu9YtIi4?t=6535",},
+					{ "poet" : "Meghan McDonald", "title" : "Knot to Entangle", "url" : "https://youtu.be/wBAZu9YtIi4?t=6759",},
+					{ "poet" : "Shawn Aveningo-Sanders", "title" : "An American Karen Has Atelophobia", "url" : "https://youtu.be/wBAZu9YtIi4?t=6998",},
+					{ "poet" : "Audrey Friedman", "title" : "Stakes", "url" : "https://youtu.be/wBAZu9YtIi4?t=7241",},
+					{ "poet" : "Nate Jacob", "title" : "Athazagoraphobia", "url" : "https://youtu.be/wBAZu9YtIi4?t=7443",},
+					{ "poet" : "Jared Campbell", "title" : "My Wife's Trypophobia", "url" : "https://youtu.be/wBAZu9YtIi4?t=7589",},
+					{ "poet" : "Tina Denetclaw", "title" : "I don't want to take the subway", "url" : "https://youtu.be/wBAZu9YtIi4?t=7783",},
+					{ "poet" : "Chelsea McGlynn", "title" : "Biology Lesson", "url" : "https://youtu.be/wBAZu9YtIi4?t=7993",},
+					{ "poet" : "Dennis Uzden", "title" : "Fraga Panophobia", "url" : "https://youtu.be/wBAZu9YtIi4?t=8108",},
+					{ "poet" : "Brian O'Sullivan", "title" : "Decideophobia", "url" : "https://youtu.be/wBAZu9YtIi4?t=8236",},
+					{ "poet" : "Rachel Greve", "title" : "Haptodysphoria", "url" : "https://youtu.be/wBAZu9YtIi4?t=8417",},
+					{ "poet" : "Kimberly Gibson-Tran", "title" : "Holes", "url" : "https://youtu.be/wBAZu9YtIi4?t=8571",},
+					{ "poet" : "Nivedita Karthik", "title" : "Nyctophobia", "url" : "https://youtu.be/wBAZu9YtIi4?t=8786",},
+					{ "poet" : "Ted Guevara", "title" : "The History of Grief", "url" : "https://youtu.be/wBAZu9YtIi4?t=8836",},
+					{ "poet" : "Zachary Honeycutt", "title" : "The Fear of Using Public Restrooms : A Villanelle Haibun", "url" : "https://youtu.be/wBAZu9YtIi4?t=9012",},
+				],
+			},
+		];
+
+		const allPromptsText = "All Prompts";
+		const allPoetsText = "All Poets";
+		const allReadingsText = "All Readings";
+
+		var currentPrompts = [];
+		var currentPoets = [];
+		var currentReadings = [];
+
+		function resetPrompts() {
+			try {
+				currentPrompts.length = 0;
+				const allPrompts = $.map(info, function(item) {
+							return item.prompt;
+				});
+				currentPrompts.push(allPromptsText);
+				$.merge(currentPrompts, allPrompts);
+			}
+			catch(e) {
+				alert('resetPrompts: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function resetPoets() {
+			try {
+				currentPoets.length = 0;
+				currentPoets.push(allPoetsText);
+				let allPoets = [];
+				for (const datum of info) {
+					for (const [index, reading] of datum.readings.entries()) {
+						if ($.inArray(reading.poet, allPoets) === -1) {
+							allPoets.push(reading.poet);
+						}
+					}
+				}
+				$.merge(currentPoets, allPoets);
+			}
+			catch(e) {
+				alert('resetPoets: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function resetReadings() {
+			try {
+				currentReadings.length = 0;
+				currentReadings.push(allReadingsText);
+				let allReadings = [];
+				for (const datum of info) {
+					for (const [index, reading] of datum.readings.entries()) {
+						allReadings.push(reading);
+					}
+				}
+				$.merge(currentReadings, allReadings);
+			}
+			catch(e) {
+				alert('resetReadings: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function displayVideo(url, videoId, buttonId) {
+			try {
+				const youtubeId = url.substring(url.lastIndexOf("/")).replace(/t=/g, "start=");
+				const embeddedYouTube = "https://www.youtube.com/embed" + youtubeId;
+				const videoHtml = '<div class="embed-responsive embed-responsive-16by9">'
+						+ '<iframe class="embed-responsive-item" src="' + embeddedYouTube + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+						+ '</div>';
+				$('#' + videoId).append(videoHtml);
+				$('#' + buttonId).addClass("disabled");
+				$('#' + buttonId).prop("disabled", true);
+			}
+			catch(e) {
+				alert('displayVideo: ' + e.message + ', url = ' + url + ', videoId = ' + videoId + ', buttonId = ' + buttonId);
+				throw(e);
+			}
+		}
+
+		function displayPrompts() {
+			try {
+				resetPrompts();
+				$('#numPrompts').append(Array.from(currentPrompts).length-1);
+
+				let promptsHtml = '<div class="dropdown"><button class="btn btn-secondary dropdown-toggle active" type="button" id="dropdownPrompts" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allPromptsText + '</button><div class="dropdown-menu" aria-labelledby="dropdownPrompts">';
+				for (const prompt of currentPrompts) {
+					promptsHtml = promptsHtml +
+						'<button class="dropdown-item promptChoice" type="button" onclick="updatePromptsDropdown(this)">' + prompt + '</button>';
+				}
+				promptsHtml += '</div></div>';
+				$('#prompts').append(promptsHtml);
+			}
+			catch(e) {
+				alert('displayPrompts: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function displayPoets() {
+			try {
+				resetPoets();
+				$('#numPoets').append(Array.from(currentPoets).length-1);
+
+				let poetsHtml = '<div class="dropdown"><button class="btn btn-secondary dropdown-toggle active" type="button" id="dropdownPoets" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allPoetsText + '</button><div class="dropdown-menu" aria-labelledby="dropdownPoets">';
+				for (const poet of currentPoets) {
+					poetsHtml = poetsHtml +
+						'<button class="dropdown-item poetChoice" type="button" onclick="updatePoetsDropdown(this)">' + poet + '</button>';
+				}
+				poetsHtml += '</div></div>';
+				$('#poets').append(poetsHtml);
+			}
+			catch(e) {
+				alert('displayPoets: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function displayReadings() {
+			try {
+//throw new Error("test");
+				currentReadings.length = 0;
+				for (const datum of info) {
+					const { cast, host, prompt, date } = datum;
+					for (const [index, reading] of datum.readings.entries()) {
+						const { poet, title, url } = reading;
+						if (($.inArray(prompt, currentPrompts) !== -1) && ($.inArray(poet, currentPoets) !== -1)) {
+							currentReadings.push({"cast" : cast, "host" : host, "prompt" : prompt, "date" : date, "poet" : poet, "title" : title, "url" : url});
+						}
+					}
+				}
+				let readingsHtml = '<div class="accordion" id="accordionReadings">';
+				$.each(currentPoets, function(index, poet) {
+					if (poet === allPoetsText) return;
+					let numReadingsForPoet = currentReadings.filter(function(reading) {return reading.poet === poet}).length;
+					const poetId = poet.replace(/ /g, "_").replace(/'/g, "_");
+					readingsHtml += '<div class="card">';
+					readingsHtml += '<div class="card-header" id="heading' + poetId + '">';
+					readingsHtml += '<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse' + poetId + '" aria-expanded="true" aria-controls="collapse' + poetId + '">';
+					readingsHtml += poet + ' (' + numReadingsForPoet + ')';
+					readingsHtml += '</button>';
+					readingsHtml += '</div>';
+
+					let readingCount = 0;
+					for (const reading of currentReadings) {
+						const { title, url } = reading;
+						const poetReading = reading.poet;
+						const buttonId = "button_" + poetId + readingCount;
+						const videoId = "video_" + poetId + readingCount++;
+						if (poetReading === poet) {
+							readingsHtml += '<div id="collapse' + poetId + '" class="collapse" aria-labelledby="heading' + poetId + '" data-parent="#accordionReadings">';
+							readingsHtml += '<div class="card-body">';
+							readingsHtml += '<button id="' + buttonId + '" class="btn btn-link btn-block text-left" type="button" onclick="displayVideo(\'' + reading.url + '\', \'' + videoId + '\', \'' + buttonId + '\');">' + title + '</button><div id="' + videoId + '"></div>';
+							readingsHtml += '</div>';
+							readingsHtml += '</div>';
+						}
+					}
+					readingsHtml += '</div>';
+				});
+				readingsHtml += '</div>';
+				$('#accordionReadings').remove();
+				$('#readings').append(readingsHtml);
+			}
+			catch(e) {
+				alert('displayReadings: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function updatePromptsDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownPrompts").innerHTML = itemClicked.innerHTML;
+				let choices = $('.promptChoice');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+				if (itemClicked.innerHTML === 'All Prompts') {
+					resetPrompts();
+				} else {
+					currentPrompts.length = 0;
+					currentPrompts.push(itemClicked.innerHTML);
+				}
+				displayReadings();
+			}
+			catch(e) {
+				alert('updatePromptsDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
+				throw(e);
+			}
+		}
+
+		function updatePoetsDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownPoets").innerHTML = itemClicked.innerHTML;
+				let choices = $('.poetChoice');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+				if (itemClicked.innerHTML === 'All Poets') {
+					resetPoets();
+				} else {
+					currentPoets.length = 0;
+					currentPoets.push(itemClicked.innerHTML);
+				}
+				displayReadings();
+			}
+			catch(e) {
+				alert('updatePoetsDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
+				throw(e);
+			}
+		}
+
+		$(document).ready(function() {
+			$('#dateLastUpdated').append(dateLastUpdated);
+			displayPrompts();
+			displayPoets();
+			resetReadings();
+			$('#numReadings').append(Array.from(currentReadings).length-1);
+			displayReadings();
+		});
+
+		</script>
+		<style>
+			.dropdown-menu {
+				max-height: 400px;
+				overflow-y: scroll;
+			}
+		</style>
+  </head>
+  <body style="padding-top: 20px;">
+	<div class="container">
+
+      	<div class="alert alert-success mt-5" role="alert">
+		<h1 class="text-center">RattleCast Prompt-Lines Database</h1>
+      	</div>
+
+
+	<div class="card">
+		<div class="card-body">
+			<p class="card-text text-center">Total Prompts in Database : <strong><span id="numPrompts"></span></strong></p>
+			<p class="card-text text-center">Total Poets in Database : <strong><span id="numPoets"></span></strong></p>
+			<p class="card-text text-center">Total Readings in Database : <strong><span id="numReadings"></span></strong></p>
+			<p class="card-text text-center">Date Last Updated : <strong><span id="dateLastUpdated"></span></strong></p>
+			<hr/>
+
+			<div id="prompts">
+			</div>
+			<br/>
+
+			<div id="poets">
+			</div>
+			<hr/>
+
+			<div id="readings">
+			</div>
+
+		</div>
+	</div>
+	</div>
+  </body>
+</html>
