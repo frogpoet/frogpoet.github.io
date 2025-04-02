@@ -19,7 +19,7 @@
 		const dateLastUpdated = "2025-04-01";
 
 		const info = [
-			{ "cast" : "286", "host" : "Tiana Clark", "prompt" : "Ekphrastic poem first and last name", "date" : "2025-03-23", "readings" : 
+			{ "cast" : "286", "host" : "Tiana Clark", "prompt" : "Ekphrastic poem first and last name", "promptAbbrev" : "ekphrastic", "date" : "2025-03-23", "readings" : 
 				[
 					{ "poet" : "Chelsea McClellan", "title" : "Ghost Pipe Flowers", "url" : "https://youtu.be/GnuiK39WmSg?t=5410",},
 					{ "poet" : "Shawn Aveningo-Sanders", "title" : "The BaroStim", "url" : "https://youtu.be/GnuiK39WmSg?t=5602",},
@@ -39,7 +39,7 @@
 					{ "poet" : "Brian O'Sullivan", "title" : "Come-all-ye", "url" : "https://youtu.be/GnuiK39WmSg?t=7907",},
 					{ "poet" : "Steve Horel", "title" : "Limbs", "url" : "https://youtu.be/GnuiK39WmSg?t=8072",},
 					{ "poet" : "Marcus Stevens", "title" : "Quick Knife", "url" : "https://youtu.be/GnuiK39WmSg?t=8207",},
-					{ "poet" : "Jeff Stumpo", "title" : "Side Effects of Searching for Myself", "url" : "https://youtu.be/GnuiK39WmSg?t=8499",},
+					{ "poet" : "JeFF Stumpo", "title" : "Side Effects of Searching for Myself", "url" : "https://youtu.be/GnuiK39WmSg?t=8499",},
 					{ "poet" : "Rachel Greve", "title" : "Tiger Lily Triolet", "url" : "https://youtu.be/GnuiK39WmSg?t=8657",},
 					{ "poet" : "Tina Denetclaw", "title" : "Ancient Grandfather's Whisper", "url" : "https://youtu.be/GnuiK39WmSg?t=8782",},
 					{ "poet" : "Christiana Doucette", "title" : "Bob Doucette's Hootenanny at Hickory Holler", "url" : "https://youtu.be/GnuiK39WmSg?t=8955",},
@@ -53,7 +53,7 @@
 
 				], 
 			},
-			{ "cast" : "287", "host" : "Lew Watts", "prompt" : "Phobia you don't have but someone else does", "date" : "2025-03-30", "readings" : 
+			{ "cast" : "287", "host" : "Lew Watts", "prompt" : "Phobia you don't have but someone else does", "promptAbbrev" : "phobia", "date" : "2025-03-30", "readings" : 
 				[
 					{ "poet" : "Hemat Malak", "title" : "How Crossed Scissors Cut", "url" : "https://youtu.be/wBAZu9YtIi4?t=5914",},
 					{ "poet" : "Amanda Harris", "title" : "Agoraphobia", "url" : "https://youtu.be/wBAZu9YtIi4?t=6094",},
@@ -144,7 +144,7 @@
 
 		function displayVideo(url, videoId, buttonId) {
 			try {
-				const youtubeId = url.substring(url.lastIndexOf("/")).replace(/t=/g, "start=");
+				const youtubeId = url.substring(url.lastIndexOf("/")).replace(/t=/g, "start=") + "&autoplay=1";
 				const embeddedYouTube = "https://www.youtube.com/embed" + youtubeId;
 				const videoHtml = '<div class="embed-responsive embed-responsive-16by9">'
 						+ '<iframe class="embed-responsive-item" src="' + embeddedYouTube + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
@@ -203,11 +203,11 @@
 				// merge info from rattlecast into each reading, even if a poet never gave a reading for the current prompt
 				currentReadings.length = 0;
 				for (const datum of info) {
-					const { cast, host, prompt, date } = datum;
+					const { cast, host, prompt, promptAbbrev, date } = datum;
 					for (const [index, reading] of datum.readings.entries()) {
 						const { poet, title, url } = reading;
 						if (($.inArray(prompt, currentPrompts) !== -1) && ($.inArray(poet, currentPoets) !== -1)) {
-							currentReadings.push({"cast" : cast, "host" : host, "prompt" : prompt, "date" : date, "poet" : poet, "title" : title, "url" : url});
+							currentReadings.push({"cast" : cast, "host" : host, "prompt" : prompt, "promptAbbrev" : promptAbbrev, "date" : date, "poet" : poet, "title" : title, "url" : url});
 						}
 					}
 				}
@@ -220,7 +220,7 @@
 						const poetId = poet.replace(/ /g, "_").replace(/'/g, "_");
 						readingsHtml += '<div class="card">';
 						readingsHtml += '<div class="card-header" id="heading' + poetId + '">';
-						readingsHtml += '<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse' + poetId + '" aria-expanded="true" aria-controls="collapse' + poetId + '">';
+						readingsHtml += '<button class="btn btn-link btn-block text-left dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse' + poetId + '" aria-expanded="true" aria-controls="collapse' + poetId + '">';
 						readingsHtml += poet + ' (' + numReadingsForPoet + ')';
 						readingsHtml += '</button>';
 						readingsHtml += '</div>';
@@ -228,13 +228,17 @@
 						readingsHtml += '<div id="collapse' + poetId + '" class="collapse" aria-labelledby="heading' + poetId + '" data-parent="#accordionReadings">';
 						let readingCount = 0;
 						for (const reading of currentReadings) {
-							const { title, url } = reading;
+							const { title, url, promptAbbrev, date } = reading;
 							const poetReading = reading.poet;
 							const buttonId = "button_" + poetId + readingCount;
 							const videoId = "video_" + poetId + readingCount++;
 							if (poetReading === poet) {
 								readingsHtml += '<div class="card-body">';
-								readingsHtml += '<button id="' + buttonId + '" class="btn btn-link btn-block text-left" type="button" onclick="displayVideo(\'' + reading.url + '\', \'' + videoId + '\', \'' + buttonId + '\');">  ' + title + '</button><div id="' + videoId + '"></div>';
+								if (currentPrompts[0] == allPromptsText) {
+									readingsHtml += '<div class="text-right">' + reading.promptAbbrev + '</div>';
+								}
+								readingsHtml += '<div class="text-right">' + reading.date + '</div>';
+								readingsHtml += '<button id="' + buttonId + '" class="btn btn-link btn-block text-left dropdown-toggle border" type="button" onclick="displayVideo(\'' + reading.url + '\', \'' + videoId + '\', \'' + buttonId + '\');">  ' + title + '</button><div id="' + videoId + '"></div>';
 								readingsHtml += '</div>';
 							}
 						}
