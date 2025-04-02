@@ -19,7 +19,7 @@
 		const dateLastUpdated = "2025-03-31";
 
 		const info = [
-			{ "cast" : "287", "host" : "Lew Watts", "prompt" : "phobia you don't have but someone else does", "date" : "2025-03-30", "readings" : 
+			{ "cast" : "287", "host" : "Lew Watts", "prompt" : "Phobia you don't have but someone else does", "date" : "2025-03-30", "readings" : 
 				[
 					{ "poet" : "Hemat Malak", "title" : "How Crossed Scissors Cut", "url" : "https://youtu.be/wBAZu9YtIi4?t=5914",},
 					{ "poet" : "Amanda Harris", "title" : "Agoraphobia", "url" : "https://youtu.be/wBAZu9YtIi4?t=6094",},
@@ -55,10 +55,11 @@
 		function resetPrompts() {
 			try {
 				currentPrompts.length = 0;
-				const allPrompts = $.map(info, function(item) {
+				let allPrompts = $.map(info, function(item) {
 							return item.prompt;
 				});
-				currentPrompts.push(allPromptsText);
+				allPrompts.sort((a, b) => a.localeCompare(b));
+				currentPrompts.unshift(allPromptsText);
 				$.merge(currentPrompts, allPrompts);
 			}
 			catch(e) {
@@ -70,7 +71,6 @@
 		function resetPoets() {
 			try {
 				currentPoets.length = 0;
-				currentPoets.push(allPoetsText);
 				let allPoets = [];
 				for (const datum of info) {
 					for (const [index, reading] of datum.readings.entries()) {
@@ -79,6 +79,8 @@
 						}
 					}
 				}
+				allPoets.sort((a, b) => a.localeCompare(b));
+				allPoets.unshift(allPoetsText);
 				$.merge(currentPoets, allPoets);
 			}
 			catch(e) {
@@ -90,13 +92,14 @@
 		function resetReadings() {
 			try {
 				currentReadings.length = 0;
-				currentReadings.push(allReadingsText);
 				let allReadings = [];
 				for (const datum of info) {
 					for (const [index, reading] of datum.readings.entries()) {
 						allReadings.push(reading);
 					}
 				}
+				allReadings.sort((a, b) => a.title.localeCompare(b.title));
+				allReadings.unshift(allReadingsText);
 				$.merge(currentReadings, allReadings);
 			}
 			catch(e) {
@@ -163,6 +166,7 @@
 		function displayReadings() {
 			try {
 //throw new Error("test");
+				// merge info from rattlecast into each reading, even if a poet never gave a reading for the current prompt
 				currentReadings.length = 0;
 				for (const datum of info) {
 					const { cast, host, prompt, date } = datum;
@@ -173,33 +177,35 @@
 						}
 					}
 				}
+				currentReadings.sort((a, b) => a.title.localeCompare(b.title));
 				let readingsHtml = '<div class="accordion" id="accordionReadings">';
 				$.each(currentPoets, function(index, poet) {
 					if (poet === allPoetsText) return;
 					let numReadingsForPoet = currentReadings.filter(function(reading) {return reading.poet === poet}).length;
-					const poetId = poet.replace(/ /g, "_").replace(/'/g, "_");
-					readingsHtml += '<div class="card">';
-					readingsHtml += '<div class="card-header" id="heading' + poetId + '">';
-					readingsHtml += '<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse' + poetId + '" aria-expanded="true" aria-controls="collapse' + poetId + '">';
-					readingsHtml += poet + ' (' + numReadingsForPoet + ')';
-					readingsHtml += '</button>';
-					readingsHtml += '</div>';
+					if (numReadingsForPoet > 0) {
+						const poetId = poet.replace(/ /g, "_").replace(/'/g, "_");
+						readingsHtml += '<div class="card">';
+						readingsHtml += '<div class="card-header" id="heading' + poetId + '">';
+						readingsHtml += '<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse' + poetId + '" aria-expanded="true" aria-controls="collapse' + poetId + '">';
+						readingsHtml += poet + ' (' + numReadingsForPoet + ')';
+						readingsHtml += '</button>';
+						readingsHtml += '</div>';
 
-					let readingCount = 0;
-					for (const reading of currentReadings) {
-						const { title, url } = reading;
-						const poetReading = reading.poet;
-						const buttonId = "button_" + poetId + readingCount;
-						const videoId = "video_" + poetId + readingCount++;
-						if (poetReading === poet) {
-							readingsHtml += '<div id="collapse' + poetId + '" class="collapse" aria-labelledby="heading' + poetId + '" data-parent="#accordionReadings">';
-							readingsHtml += '<div class="card-body">';
-							readingsHtml += '<button id="' + buttonId + '" class="btn btn-link btn-block text-left" type="button" onclick="displayVideo(\'' + reading.url + '\', \'' + videoId + '\', \'' + buttonId + '\');">' + title + '</button><div id="' + videoId + '"></div>';
-							readingsHtml += '</div>';
-							readingsHtml += '</div>';
+						readingsHtml += '<div id="collapse' + poetId + '" class="collapse" aria-labelledby="heading' + poetId + '" data-parent="#accordionReadings">';
+						let readingCount = 0;
+						for (const reading of currentReadings) {
+							const { title, url } = reading;
+							const poetReading = reading.poet;
+							const buttonId = "button_" + poetId + readingCount;
+							const videoId = "video_" + poetId + readingCount++;
+							if (poetReading === poet) {
+								readingsHtml += '<div class="card-body">';
+								readingsHtml += '<button id="' + buttonId + '" class="btn btn-link btn-block text-left" type="button" onclick="displayVideo(\'' + reading.url + '\', \'' + videoId + '\', \'' + buttonId + '\');">  ' + title + '</button><div id="' + videoId + '"></div>';
+								readingsHtml += '</div>';
+							}
 						}
+						readingsHtml += '</div></div>';
 					}
-					readingsHtml += '</div>';
 				});
 				readingsHtml += '</div>';
 				$('#accordionReadings').remove();
@@ -223,7 +229,7 @@
 						choices[i].classList.remove("active");
 					}
 				}
-				if (itemClicked.innerHTML === 'All Prompts') {
+				if (itemClicked.innerHTML === allPromptsText) {
 					resetPrompts();
 				} else {
 					currentPrompts.length = 0;
@@ -249,7 +255,7 @@
 						choices[i].classList.remove("active");
 					}
 				}
-				if (itemClicked.innerHTML === 'All Poets') {
+				if (itemClicked.innerHTML === allPoetsText) {
 					resetPoets();
 				} else {
 					currentPoets.length = 0;
@@ -277,6 +283,9 @@
 			.dropdown-menu {
 				max-height: 400px;
 				overflow-y: scroll;
+			}
+			.btn {
+				white-space: normal;		/* forces text wrapping to work */
 			}
 		</style>
   </head>
