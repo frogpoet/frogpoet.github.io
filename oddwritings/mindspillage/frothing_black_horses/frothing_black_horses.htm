@@ -212,11 +212,17 @@
 							+ '				<img class="card-img" src="' + mediaUrl + '" alt="' + blockchain + ' Poem Image"/>';
 						break;
 						case "video":
-						if (mediaUrl.endsWith(".mov")) {
+						const mimeType = (
+							(mediaUrl.endsWith(".mov")) ? "video/mp4" : (
+							(mediaUrl.endsWith(".webm")) ? "video/webm" : (
+							undefined
+							))
+						);
+						if ((mimeType == "video/mp4") || (mimeType == "video/webm")) {
 						cardsHtml = cardsHtml
 							+ '				<div class="embed-responsive embed-responsive-16by9">'
 							+ '<video class="embed-responsive-item" loop="" playsinline="" muted="" controls="" controlslist="nodownload"'
-							+ '<source src="' + mediaUrl + '" type="video/mp4">'
+							+ '<source src="' + mediaUrl + '" type="' + mimeType + '">'
 							+ '</video>'
 							+ '				</div>';
 						}
