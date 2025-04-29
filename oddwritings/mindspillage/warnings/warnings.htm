@@ -174,7 +174,7 @@
 						if (isPreferredBlockchain) {
 							blockchainsHtml = blockchainsHtml
 							+ '			<button class="dropdown-item blockchainChoice active" type="button" data-toggle="collapse" data-target="#collapse' + blockchain + 'Media" aria-expanded="false" aria-controls="collapse' + blockchain + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
-						} else if (typeof mediaType !== 'undefined') {
+						} else if (typeof mediaUrl !== 'undefined') {
 							blockchainsHtml = blockchainsHtml
 							+ '			<button class="dropdown-item blockchainChoice" type="button" data-toggle="collapse" data-target="#collapse' + blockchain + 'Media" aria-expanded="false" aria-controls="collapse' + blockchain + 'Media" onclick="updateBlockchainDropdown(this)">' + blockchain + '</button>'
 						}
@@ -190,13 +190,13 @@
 							+ '	<div class="card">'
 							+ '		<div class="collapse show" id="collapse' + blockchain + 'Media" data-parent="#blockchainMedia">'
 							+ '			<div class="card-body">';
-						} else if (typeof mediaType !== 'undefined') {
+						} else if (typeof mediaUrl !== 'undefined') {
 							cardsHtml = cardsHtml
 							+ '	<div class="card">'
 							+ '		<div class="collapse" id="collapse' + blockchain + 'Media" data-parent="#blockchainMedia">'
 							+ '			<div class="card-body">';
 						}
-						if (typeof mediaType !== 'undefined') {
+						if (typeof mediaUrl !== 'undefined') {
 						switch (mediaType) {
 						case "text on image":
 						cardsHtml = cardsHtml
