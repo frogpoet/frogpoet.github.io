@@ -206,14 +206,23 @@
 						const mimeType = (
 							(mediaUrl.endsWith(".mov")) ? "video/mp4" : (
 							(mediaUrl.endsWith(".webm")) ? "video/webm" : (
+							(mediaUrl.endsWith("/artifact")) ? "unknown" : (
 							undefined
-							))
+							)))
 						);
 						if ((mimeType == "video/mp4") || (mimeType == "video/webm")) {
 						cardsHtml = cardsHtml
 							+ '				<div class="embed-responsive embed-responsive-16by9">'
 							+ '<video class="embed-responsive-item" loop="" playsinline="" muted="" controls="" controlslist="nodownload"'
 							+ '<source src="' + mediaUrl + '" type="' + mimeType + '">'
+							+ '</video>'
+							+ '				</div>';
+						}
+						else if ((mimeType == "unknown")) {
+						cardsHtml = cardsHtml
+							+ '				<div class="embed-responsive embed-responsive-16by9">'
+							+ '<video class="embed-responsive-item" loop="" playsinline="" muted="" controls="" controlslist="nodownload"'
+							+ '<source src="' + mediaUrl + '">'
 							+ '</video>'
 							+ '				</div>';
 						}
