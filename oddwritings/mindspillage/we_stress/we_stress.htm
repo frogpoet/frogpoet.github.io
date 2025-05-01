@@ -191,11 +191,11 @@
 						break;
 						case "video":
 						const mimeType = (
-							(mediaUrl.endsWith(".mov")) ? "video/mp4" : (
+							((mediaUrl.endsWith(".mov") || mediaUrl.endsWith(".mp4")) ? "video/mp4" : (
 							(mediaUrl.endsWith(".webm")) ? "video/webm" : (
 							(mediaUrl.endsWith("/artifact")) ? "unknown" : (
 							undefined
-							)))
+							))))
 						);
 						if ((mimeType == "video/mp4") || (mimeType == "video/webm")) {
 						cardsHtml = cardsHtml
