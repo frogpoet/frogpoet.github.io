@@ -79,7 +79,7 @@
 
 		function verifyAcceptableValues(valueObject) {
 			try {
-				const allowableMediaTypes = ["text on image", "video"];
+				const allowableMediaTypes = ["text on image", "video", "interactive"];
 
 				$.each(valueObject, function(key, value) {
 					if ((key === "mediaType") && (typeof value !== 'undefined') && ($.inArray(value, allowableMediaTypes) == -1)) {
@@ -202,6 +202,12 @@
 						case "text on image":
 						cardsHtml = cardsHtml
 							+ '				<img class="card-img" src="' + mediaUrl + '" alt="' + blockchain + ' Poem Image"/>';
+						break;
+						case "interactive":
+						cardsHtml = cardsHtml
+							+ '				<div class="embed-responsive embed-responsive-16by9">'
+							+ '					<iframe class="embed-responsive-item" src="' + mediaUrl + '" title="Interactive Html" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+							+ '				</div>';
 						break;
 						case "video":
 						const mimeType = (
