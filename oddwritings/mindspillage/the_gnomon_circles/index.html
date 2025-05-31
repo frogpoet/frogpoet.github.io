@@ -1,0 +1,71 @@
+<!doctype html>
+<html class="js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="data:,">
+
+    <!-- Change the title and description to your project -->
+    <title>The Gnomon Circles</title>
+    <meta name="description" content="word-unit palindrome poem">
+    <!-- End title and description -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Format Stylesheets -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- End Format Stylesheets -->
+
+    <!-- Custom Stylesheets -->
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/preloader-themes.css">
+    <link rel="stylesheet" href="css/menu-themes.css">
+    <!-- End Custom Stylesheets -->
+
+  </head>
+
+  <body onload="load()">
+    <!-- Scripts -->
+    <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+    <script src="js/preload.js"></script>
+    <script src="js/main.js"></script>
+    <!-- End Scripts -->
+
+    <!-- Preloader -->
+    <div id="preloader" class="dark">
+      <div class="loader"></div>
+    </div>
+    <!-- End Preloader -->
+
+    <div id="container">
+
+      <!-- Menu - set location and style in the class section -->
+      <div id="menu" class="bottom dark background color-white-50"></div>
+      <!-- End Menu -->
+
+      <!-- Layers - stack assets in desired order from top to bottom, data-checked sets whether a layer is on by default -->
+      <div id="layers">
+<!--
+        <img id="text" class="contain" alt="vertical poem" data-checked="true" />
+        <img id="still_01" class="contain" alt="circular poem" data-checked="false" />
+        <video id="metamedia-video" class="contain" loop data-checked="false"></video>
+        <audio id="metamedia-sound" loop data-checked="false"></audio>
+-->
+
+        <!-- Video layers look like this (loop and class settings optional) -->
+        <video id="metamedia-video" class="cover opacity-50" loop data-checked="false"></video>	<!-- contain -->
+
+        <!-- Audio layers look like this (loop optional) -->
+        <audio id="metamedia-sound" loop data-checked="true"></audio>
+
+        <!-- Image layers look like this (class settings optional) -->
+        <img id="still_01" class="cover opacity-50" alt="image zero" data-checked="true" />
+        <img id="text" class="cover" alt="image one" data-checked="true" /> <!-- cover -->
+
+      </div>
+      <!-- End Layers -->
+
+    </div>
+  </body>
+</html>
