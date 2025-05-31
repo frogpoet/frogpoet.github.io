@@ -1,0 +1,15 @@
+.serif {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.sans-serif {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.monospace {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.shadow {
+  text-shadow: black 0.063rem 0 0.75rem;
+}

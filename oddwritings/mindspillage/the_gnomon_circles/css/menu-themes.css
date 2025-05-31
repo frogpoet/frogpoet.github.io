@@ -1,0 +1,36 @@
+#menu.light {
+  .checkbox span:first-child {
+    border: 0.063rem solid #ffffff;
+  }
+  .checkbox:hover span:first-child {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.6);
+  }
+  .checkbox-input:checked + .checkbox span:first-child {
+    background: rgb(255, 255, 255);
+    border-color: rgba(255, 255, 255, 0.6);
+    animation: zoom-in-out 0.3s ease;
+  }
+  .play-button {
+    fill: #ffffff;
+  }
+}
+
+#menu.dark {
+  .checkbox span:first-child {
+    border: 0.063rem solid #000000;
+  }
+  .checkbox:hover span:first-child {
+    border-color: #000000;
+    background: rgba(255, 255, 255, 0.6);
+  }
+  .checkbox-input:checked + .checkbox span:first-child {
+    background: rgb(0, 0, 0);
+    border-color: rgba(255, 255, 255, 0.6);
+    animation: zoom-in-out 0.3s ease;
+  }
+  .play-button {
+    fill: #000000;
+  }
+}
+

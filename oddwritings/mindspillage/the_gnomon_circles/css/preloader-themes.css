@@ -1,0 +1,16 @@
+#preloader.dark {
+  background-color: #000;
+  .loader {
+    border: 5px solid #404040;
+    border-top: 5px solid #ffffff;
+  }
+}
+
+#preloader.light {
+  background-color: #b4b4b4;
+  .loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #000000;
+  }
+}
+
