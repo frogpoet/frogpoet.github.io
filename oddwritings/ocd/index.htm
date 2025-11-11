@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="online-courses" />
+
+	<title>Online Courses Database</title> 
+	  <link rel='stylesheet' type='text/css' href='../../css/font-awesome.min.css'>
+		<link rel='stylesheet' type='text/css' href='../../css/bootstrap.css'>
+	  	<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../../libs/d3.js"></script>
+		<script src="../../libs/lodash.js"></script>
+		<script src="../../libs/jquery.min.js"></script>
+		<script src="../../libs/popper.min.js"></script>
+		<script src="../../libs/bootstrap.min.js"></script>
+
+		<script>
+
+// IT IS OK TO GLOBALLY SEARCH AND REPLACE "Course", "Lecture", "Subject"
+
+		const dateLastUpdated = "2025-10-28";
+// https://youtu.be/sbpCTjmw85g
+		const info = [
+			{ "cast" : "MIT 6.1200", "host" : "Zachary Abel", "thisCourse" : "Mathematics for Computer Science", "abbrevCourse" : "Mathematics for Computer Science", "date" : "2024-01-01", "youTubeList" : "PLUl4u3cNGP61VNvICqk2HXJTonnKgAc9d", "onlineSource" : "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/", "theseLectures" : 
+				[
+					{ "title" : "Video 1 : Predicates, Sets, and Proofs", "url" : "https://youtu.be/sbpCTjmw85g", "theseClips" : 
+						[
+						{ "thisSubject" : "Proof Definition", "start" : "8:30", "end" : "1:16:56",},
+						{ "thisSubject" : "Truth Determination", "start" : "9:10", "end" : "11:50",},
+						{ "thisSubject" : "Proof Mathematical", "start" : "11:50", "end" : "1:16:56",},
+						{ "thisSubject" : "Proposition Definition", "start" : "13:05", "end" : "49:10",},
+						{ "thisSubject" : "For All (Universal Quantifier)", "start" : "14:17", "end" : "14:25",},
+						{ "thisSubject" : "Set of Natural Numbers", "start" : "14:25", "end" : "14:57",},
+						{ "thisSubject" : "Predicate Definition", "start" : "16:07", "end" : "17:30",},
+						{ "thisSubject" : "Proposition Disproving", "start" : "17:35", "end" : "19:59",},
+						{ "thisSubject" : "Goldbach's Conjecture", "start" : "20:10", "end" : "22:24",},
+						{ "thisSubject" : "Predicate Definition", "start" : "22:45", "end" : "23:06",},
+						{ "thisSubject" : "Boolean Operators", "start" : "23:37", "end" : "32:25",},
+						{ "thisSubject" : "Operator NOT", "start" : "23:37", "end" : "24:59",},
+						{ "thisSubject" : "Truth Table NOT", "start" : "24:13", "end" : "24:59",},
+						{ "thisSubject" : "Operator AND", "start" : "24:59", "end" : "25:58",},
+						{ "thisSubject" : "Truth Table AND", "start" : "24:59", "end" : "25:58",},
+						{ "thisSubject" : "Operator OR", "start" : "25:58", "end" : "26:33",},
+						{ "thisSubject" : "Truth Table OR", "start" : "25:58", "end" : "26:21",},
+						{ "thisSubject" : "Operator AND", "start" : "26:33", "end" : "26:54",},
+						{ "thisSubject" : "Operator OR", "start" : "26:54", "end" : "27:18",},
+						{ "thisSubject" : "Operators vs Spoken Language", "start" : "27:18", "end" : "32:25",},
+						{ "thisSubject" : "Operator XOR", "start" : "28:13", "end" : "29:59",},
+						{ "thisSubject" : "Operator NAND", "start" : "29:59", "end" : "31:16",},
+						{ "thisSubject" : "Implication", "start" : "33:41", "end" : "49:10",},
+						{ "thisSubject" : "Truth Table Implication", "start" : "34:42", "end" : "39:51",},
+						{ "thisSubject" : "Operators vs Spoken Language", "start" : "39:51", "end" : "40:53",},
+						{ "thisSubject" : "Implication Rewriting", "start" : "46:12", "end" : "47:26",},
+						{ "thisSubject" : "Implication Converse", "start" : "47:39", "end" : "47:58",},
+						{ "thisSubject" : "Implication Contrapositive", "start" : "47:58", "end" : "48:08",},
+						{ "thisSubject" : "Implication Inverse", "start" : "48:08", "end" : "48:18",},
+						{ "thisSubject" : "Implication Rewriting", "start" : "48:18", "end" : "48:54",},
+						{ "thisSubject" : "Set Definition", "start" : "49:40", "end" : "1:01:45",},
+						{ "thisSubject" : "Set of Natural Numbers", "start" : "51:17", "end" : "51:28",},
+						{ "thisSubject" : "Set of Integers", "start" : "51:28", "end" : "51:49",},
+						{ "thisSubject" : "Set of Rationals", "start" : "51:51", "end" : "52:02",},
+						{ "thisSubject" : "Set of Real Numbers", "start" : "52:02", "end" : "52:09",},
+						{ "thisSubject" : "Set of Complex Numbers", "start" : "52:09", "end" : "52:20",},
+						{ "thisSubject" : "Empty Set", "start" : "52:28", "end" : "53:15",},
+						{ "thisSubject" : "Element Inclusion", "start" : "53:28", "end" : "54:08",},
+						{ "thisSubject" : "Element Inclusion", "start" : "54:30", "end" : "54:42",},
+						{ "thisSubject" : "Subset Definition", "start" : "54:42", "end" : "56:52",},
+						{ "thisSubject" : "Set Union", "start" : "57:02", "end" : "57:41",},
+						{ "thisSubject" : "Set Intersection", "start" : "57:41", "end" : "58:08",},
+						{ "thisSubject" : "Set Difference", "start" : "58:08", "end" : "58:39",},
+						{ "thisSubject" : "Empty Set", "start" : "58:56", "end" : "59:42",},
+						{ "thisSubject" : "Set Difference", "start" : "1:00:37", "end" : "1:01:45",},
+						{ "thisSubject" : "Set Builder Notation", "start" : "1:02:21", "end" : "1:03:33",},
+						{ "thisSubject" : "Tuple Definition", "start" : "1:03:33", "end" : "1:05:07",},
+						{ "thisSubject" : "Axiom Definition", "start" : "1:05:55", "end" : "1:16:56",},
+						{ "thisSubject" : "Axiom Set Contradictions", "start" : "1:07:07", "end" : "1:16:56",},
+						{ "thisSubject" : "Euclid's Parallel Postulate", "start" : "1:07:22", "end" : "1:09:46",},
+						{ "thisSubject" : "Spherical Geometry", "start" : "1:09:46", "end" : "1:11:09",},
+						{ "thisSubject" : "Hyperbolic Geometry", "start" : "1:11:09", "end" : "1:12:15",},
+						{ "thisSubject" : "Sets of Axioms", "start" : "1:12:23", "end" : "1:16:56",},
+						{ "thisSubject" : "Axiom Set Consistency", "start" : "1:13:01", "end" : "1:14:12",},
+						{ "thisSubject" : "Axiom Set Completeness", "start" : "1:14:12", "end" : "1:15:02",},
+						{ "thisSubject" : "Godel's Incompleteness Theorem", "start" : "1:15:02", "end" : "1:16:56",},
+						],
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 2 : Contradiction and Induction", "url" : "https://youtu.be/_NYsYuzMLs0", "theseClips" : 
+						[
+						{ "thisSubject" : "Proof Mathematical", "start" : "0:20", "end" : "1:19:30",},
+						{ "thisSubject" : "Logical Deductions", "start" : "0:29", "end" : "6:50",},
+						{ "thisSubject" : "Inference Rule", "start" : "1:08", "end" : "6:50",},
+						{ "thisSubject" : "Modus Ponens", "start" : "1:49", "end" : "2:31",},
+						{ "thisSubject" : "Modus Tollens", "start" : "2:33", "end" : "2:56",},
+						{ "thisSubject" : "Truth Table Inference", "start" : "3:20", "end" : "5:15",},
+						{ "thisSubject" : "Proof by Intimidation", "start" : "6:29", "end" : "6:50",},
+						{ "thisSubject" : "Proof Outlines", "start" : "8:19", "end" : "44:06",},
+						{ "thisSubject" : "Proof Outline for 'There exists'", "start" : "8:33", "end" : "13:05",},
+						],
+					},
+//		Proof Outline for 'There exists'	start : 8:33
+//		Proof Outline for 'There exists'	end : 13:05
+//		Proof Outline for 'For all'		start : 13:12
+//			QED definition			start : 17:18
+//			QED definition			end : 17:40
+//			Proof by Cases			start : 17:55
+//			Proof by Cases			end : 18:13
+//		Proof Outline for 'For all'		end : 18:13
+//		Proof Outline for Implication 		start : 18:23
+//			Proof Outline for Direct Proof	start : 18:23
+//			Proof Outline for Direct Proof	end : 21:48
+//			Proof Outline for Contrapositive	start : 21:55
+//				WTS definition			start : 24:53
+//				WTS definition			end : 25:52
+//			Proof Outline for Contrapositive	end : 26:47
+//			Proof Outline for Contradiction		start : 27:10
+//				BWOC definition			start : 31:18
+//				BWOC definition			end : 31:35
+//				=x= definition			start : 31:35
+//				=x= definition			end : 31:55
+//			Proof Outline for Contradiction		end : 37:10
+//			iff Definition				start : 40:11
+//			iff Definition				end : 41:21
+//		Proof Outline for Implication 		end : 44:06
+//	Proof by Induction	start : 46:18
+//		Induction Example n(n+1)/2	start : 46:18
+//			Sigma Notation		start : 48:04
+//			Sigma Notation		end : 49:08
+//			:= definition		start : 55:01
+//			:= definition		end : 55:18
+//		Induction Example n(n+1)/2	end : 58:01
+//		Principle of Induction		start : 58:01
+//		Principle of Induction		end : 1:00:30
+//		Induction Example n(n+1)/2	start : 1:01:09
+//		Induction Example n(n+1)/2	end : 1:05:25
+//		Induction Example L-trominoes	start : 1:06:00
+//		Induction Example L-trominoes	end : 1:19:30
+//	Proof by Induction	end : 1:19:30
+				], 
+			},
+			{ "cast" : "MIT 6.5630", "host" : "Yael T. Kalai", "thisCourse" : "Advanced Topics in Cryptography", "abbrevCourse" : "Advanced Topics in Cryptography", "date" : "2023-09-01", "youTubeList" : "PLUl4u3cNGP61EZllk7zwgvPbI4kbnKhWz", "onlineSource" : "https://ocw.mit.edu/courses/6-5630-advanced-topics-in-cryptography-fall-2023/", "theseLectures" : 
+				[
+					{ "title" : "Video 17 : BARGs Implies SNARGs and Connection to Non-Signaling PCPs, Part 2", "url" : "https://youtu.be/csRRQOyl5kM", "theseClips" : 
+						[
+						{ "thisSubject" : "SNARG Construction", "start" : "0:01", "end" : "3:06",},
+						{ "thisSubject" : "SNARG Analysis", "start" : "3:16", "end" : "1:09:00",},
+						{ "thisSubject" : "SNARG Adaptive Soundness", "start" : "4:38", "end" : "1:09:00",},
+						{ "thisSubject" : "SNARG Non-Adaptive Soundness", "start" : "5:51", "end" : "6:19",},
+						{ "thisSubject" : "SNARG Adaptive vs Non-Adaptive", "start" : "6:26", "end" : "7:00",},
+						{ "thisSubject" : "SNARG Local Soundness", "start" : "7:32", "end" : "1:09:00",},
+						{ "thisSubject" : "SNARG Local Consistency", "start" : "12:31", "end" : "13:42",},
+						{ "thisSubject" : "SNARG Non-Signaling", "start" : "13:47", "end" : "17:24",},
+						{ "thisSubject" : "SNARG Extractor (Local Assignment Generator)", "start" : "14:09", "end" : "14:21",},
+						{ "thisSubject" : "SNARG Extractor (Local Assignment Generator)", "start" : "19:40", "end" : "51:44",},
+						{ "thisSubject" : "SEH Extractor", "start" : "33:14", "end" : "37:11",},
+						{ "thisSubject" : "SNARG Local Consistency", "start" : "39:30", "end" : "46:45",},
+						{ "thisSubject" : "BARG Cheating Prover Construction", "start" : "41:45", "end" : "45:49",},
+						{ "thisSubject" : "BARG Semi-Adaptive Soundness", "start" : "42:07", "end" : "42:38",},
+						{ "thisSubject" : "SNARG Non-Signaling", "start" : "48:01", "end" : "51:44",},
+						{ "thisSubject" : "SEH Multiple Extractability", "start" : "49:01", "end" : "49:46",},
+						{ "thisSubject" : "SEH Non-Signaling", "start" : "51:09", "end" : "51:44",},
+						{ "thisSubject" : "SNARG Non-Deterministic Language Soundness", "start" : "54:27", "end" : "55:00",},
+						{ "thisSubject" : "SNARG Deterministic Language Soundness", "start" : "55:00", "end" : "1:08:10",},
+						{ "thisSubject" : "SNARG with Extended Circuit", "start" : "1:04:56", "end" : "1:08:10",},
+						{ "thisSubject" : "SNARG Extractor with Extended Circuit", "start" : "1:06:35", "end" : "1:08:10",},
+						{ "thisSubject" : "Interactive Proofs", "start" : "1:09:42", "end" : "1:14:15",},
+						]
+					},
+					{ "title" : "Video 16 : BARGs Implies SNARGs and Connection to Non-Signaling PCPs, Part 1", "url" : "https://youtu.be/nmuXpvSIm3k", "theseClips" : 
+						[
+						{ "thisSubject" : "SSB (Somewhere Statistical Binding Hash)", "start" : "1:50", "end" : "2:15",},
+						{ "thisSubject" : "SEH (Somewhere Extractable Hash)", "start" : "1:50", "end" : "2:15",},
+						{ "thisSubject" : "BARG (Batch Argument)", "start" : "2:22", "end" : "14:34",},
+						{ "thisSubject" : "Adaptive vs Non-Adaptive", "start" : "5:55", "end" : "6:12",},
+						{ "thisSubject" : "Semi-Adaptive Soundness", "start" : "6:38", "end" : "9:54",},
+						{ "thisSubject" : "Semi-Adaptive to Adaptive", "start" : "9:54", "end" : "14:29",},
+						{ "thisSubject" : "SEH (Somewhere Extractable Hash)", "start" : "14:53", "end" : "26:05",},
+						{ "thisSubject" : "Index Hiding", "start" : "20:57", "end" : "21:56",},
+						{ "thisSubject" : "Statistical Binding", "start" : "21:59", "end" : "26:05",},
+						{ "thisSubject" : "SEH Key Indistinguishability", "start" : "28:37", "end" : "29:47",},
+						{ "thisSubject" : "SEH Multiple Extractability", "start" : "29:47", "end" : "33:08",},
+						{ "thisSubject" : "Index-BARG", "start" : "33:43", "end" : "36:34",},
+						{ "thisSubject" : "CRS in BARG/SNARG", "start" : "36:34", "end" : "37:08",},
+						{ "thisSubject" : "SEH added to BARG", "start" : "37:08", "end" : "41:15",},
+						{ "thisSubject" : "BARG with SEH", "start" : "37:08", "end" : "41:15",},
+						{ "thisSubject" : "BARG without SEH", "start" : "41:15", "end" : "41:44",},
+						{ "thisSubject" : "SEH Construction with FHE", "start" : "41:56", "end" : "1:01:39",},
+						{ "thisSubject" : "SNARG Construction", "start" : "1:02:42", "end" : "1:27:27",},
+						{ "thisSubject" : "GKR vs SNARG", "start" : "1:06:21", "end" : "1:07:49",},
+						{ "thisSubject" : "CRS in BARG/SNARG", "start" : "1:11:03", "end" : "1:11:23",},
+						{ "thisSubject" : "Index Language in BARG", "start" : "1:24:14", "end" : "1:25:22",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 15 : Succinct Non-Interactive Arguments for Batch NP (BARGs) from LWE, Part 2", "url" : "https://youtu.be/p60ShJrbrf8", "theseClips" : 
+						[
+						{ "thisSubject" : "BARG (Batch Argument)", "start" : "0:01", "end" : "1:14:13",},
+						{ "thisSubject" : "Kilian-Micali Protocol with SNARG", "start" : "0:01", "end" : "1:14:13",},
+						{ "thisSubject" : "Searchable Relation", "start" : "1:54", "end" : "2:23",},
+						{ "thisSubject" : "BARG Optimisation", "start" : "6:46", "end" : "22:25",},
+						{ "thisSubject" : "Index-BARG", "start" : "8:13", "end" : "22:25",},
+						{ "thisSubject" : "Kilian-Micali Protocol with Index-BARG", "start" : "22:25", "end" : "1:14:13",},
+						{ "thisSubject" : "SSB with Local Opening", "start" : "38:52", "end" : "46:21",},
+						{ "thisSubject" : "Witness Concatenation", "start" : "47:05", "end" : "51:54",},
+						{ "thisSubject" : "PCP with Fast Online Verification", "start" : "56:27", "end" : "1:00:11",},
+						{ "thisSubject" : "Index-BARG Semi-Adaptive Soundness", "start" : "1:05:37", "end" : "1:14:13",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 14 : Succinct Non-Interactive Arguments for Batch NP (BARGs) from LWE, Part 1", "url" : "https://youtu.be/t3C6cpQlSvA", "theseClips" : 
+						[
+						{ "thisSubject" : "BARG (Batch Argument)", "start" : "0:23", "end" : "1:21:36",},
+						{ "thisSubject" : "Succinct Batch Arguments", "start" : "3:46", "end" : "4:32",},
+						{ "thisSubject" : "Proof Systems", "start" : "4:33", "end" : "6:09",},
+						{ "thisSubject" : "SNARG (Succinct Non-Interactive Argument)", "start" : "8:43", "end" : "10:26",},
+						{ "thisSubject" : "T-hard Language", "start" : "9:36", "end" : "9:54",},
+						{ "thisSubject" : "Kilian-Micali Protocol with BARG", "start" : "18:01", "end" : "32:38",},
+						{ "thisSubject" : "PCP (Probabilistically Checkable Proof)", "start" : "19:23", "end" : "24:35",},
+						{ "thisSubject" : "PCP Query", "start" : "26:27", "end" : "27:46",},
+						{ "thisSubject" : "Kilian-Micali Protocol with SNARG", "start" : "32:38", "end" : "1:21:36",},
+						{ "thisSubject" : "CIH (Correlation Intractable Hash)", "start" : "33:00", "end" : "35:14",},
+						{ "thisSubject" : "Public Coin Protocol", "start" : "35:34", "end" : "35:46",},
+						{ "thisSubject" : "Sparse Relation", "start" : "39:06", "end" : "40:04",},
+						{ "thisSubject" : "CIH Dependency on Sparse Relation", "start" : "40:04", "end" : "41:21",},
+						{ "thisSubject" : "SSB (Somewhere Statistical Binding Hash)", "start" : "48:27", "end" : "53:29",},
+						{ "thisSubject" : "SEH Key Indistinguishability", "start" : "51:15", "end" : "51:57",},
+						{ "thisSubject" : "Statistical Binding", "start" : "51:57", "end" : "53:29",},
+						{ "thisSubject" : "SSB with FHE", "start" : "56:44", "end" : "1:02:00",},
+						{ "thisSubject" : "FHE (Fully Homomorphic Encryption)", "start" : "57:05", "end" : "57:21",},
+						{ "thisSubject" : "Extraction Property", "start" : "1:00:21", "end" : "1:02:00",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 13 : Soundness of the Fiat-Shamir Paradigm in the Standard Model, Part 2", "url" : "https://youtu.be/GAF78dg8-nE", "theseClips" : 
+						[
+						{ "thisSubject" : "Fiat-Shamir", "start" : "0:01", "end" : "1:04:58",},
+						{ "thisSubject" : "NIZK (Zero-Knowledge Non-Interactive)", "start" : "1:40", "end" : "1:04:58",},
+						{ "thisSubject" : "CRS (Common Reference String)", "start" : "4:05", "end" : "4:34",},
+						{ "thisSubject" : "Fiat-Shamir Hash Function", "start" : "12:17", "end" : "23:22",},
+						{ "thisSubject" : "Fiat-Shamir Versus Zero-Knowledge", "start" : "24:06", "end" : "25:16",},
+						{ "thisSubject" : "CIH (Correlation Intractable Hash)", "start" : "30:06", "end" : "1:04:58",},
+						{ "thisSubject" : "Evasive or Sparse Language", "start" : "37:12", "end" : "37:46",},
+						{ "thisSubject" : "Searchable Relation", "start" : "40:18", "end" : "42:40",},
+						{ "thisSubject" : "SCP (Sum-Check Protocol)", "start" : "46:14", "end" : "50:09",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 12 : Soundness of the Fiat-Shamir Paradigm in the Standard Model, Part 1", "url" : "https://youtu.be/R2izY69q0m8", "theseClips" : 
+						[
+						{ "thisSubject" : "Zero-Knowledge Proof", "start" : "6:52", "end" : "1:33:39",},
+						{ "thisSubject" : "Fiat-Shamir", "start" : "12:06", "end" : "1:33:39",},
+						{ "thisSubject" : "NIZK (Zero-Knowledge Non-Interactive)", "start" : "18:01", "end" : "19:50",},
+						{ "thisSubject" : "Commitment with Trap Door", "start" : "29:30", "end" : "46:26",},
+						{ "thisSubject" : "Public Key Encryption", "start" : "31:58", "end" : "37:19",},
+						{ "thisSubject" : "Semantic Security", "start" : "34:51", "end" : "36:44",},
+						{ "thisSubject" : "Public Key Generation", "start" : "40:22", "end" : "42:13",},
+						{ "thisSubject" : "Public Key Randomness", "start" : "43:32", "end" : "45:04",},
+						{ "thisSubject" : "Fiat-Shamir Hash Function", "start" : "48:26", "end" : "1:33:39",},
+						{ "thisSubject" : "FHE (Fully Homomorphic Encryption)", "start" : "50:59", "end" : "56:57",},
+						{ "thisSubject" : "Circular Security", "start" : "1:30:24", "end" : "1:32:09",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 11 : Fiat-Shamir Paradigm and Zero-Knowledge Proofs, Part 2", "url" : "https://youtu.be/zEf_dECRUjY", "theseClips" : 
+						[
+						{ "thisSubject" : "Fiat-Shamir", "start" : "0:49", "end" : "1:08:58",},
+						{ "thisSubject" : "ROM (Random Oracle Model)", "start" : "0:49", "end" : "45:02",},
+						{ "thisSubject" : "Fiat-Shamir Breaking", "start" : "45:02", "end" : "53:12",},
+						{ "thisSubject" : "Zero-Knowledge Proof", "start" : "53:38", "end" : "1:08:58",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 10 : Fiat-Shamir Paradigm and Zero-Knowledge Proofs, Part 1", "url" : "https://youtu.be/yBOmyxg0sVM", "theseClips" : 
+						[
+						{ "thisSubject" : "Kilian-Micali Protocol", "start" : "1:29", "end" : "2:50",},
+						{ "thisSubject" : "Interactive Proofs", "start" : "6:03", "end" : "6:49",},
+						{ "thisSubject" : "CRHF (Collision Resistant Hash Function)", "start" : "8:25", "end" : "9:28",},
+						{ "thisSubject" : "Security Parameter", "start" : "9:54", "end" : "12:16",},
+						{ "thisSubject" : "Merkle Hash", "start" : "12:36", "end" : "34:34",},
+						{ "thisSubject" : "Hash Function with Local Opening", "start" : "13:18", "end" : "34:34",},
+						{ "thisSubject" : "CRHF (Collision Resistant Hash Function)", "start" : "18:23", "end" : "34:34",},
+						{ "thisSubject" : "Interactive Proofs", "start" : "35:09", "end" : "36:51",},
+						{ "thisSubject" : "Fiat-Shamir", "start" : "37:08", "end" : "1:32:45",},
+						{ "thisSubject" : "Identification Scheme", "start" : "38:16", "end" : "38:50",},
+						{ "thisSubject" : "Signature Scheme", "start" : "38:50", "end" : "39:17",},
+						{ "thisSubject" : "Public Coin Protocol", "start" : "40:19", "end" : "41:14",},
+						{ "thisSubject" : "Kilian-Micali Protocol", "start" : "45:33", "end" : "46:53",},
+						{ "thisSubject" : "Fiat-Shamir Breaking", "start" : "56:17", "end" : "1:02:06",},
+						{ "thisSubject" : "ROM (Random Oracle Model)", "start" : "1:02:17", "end" : "1:32:45",},
+						{ "thisSubject" : "Zero-Knowledge Proof", "start" : "1:07:15", "end" : "1:32:45",},
+						{ "thisSubject" : "Hamiltonian Cycles", "start" : "1:07:51", "end" : "1:09:09",},
+						{ "thisSubject" : "Proof of Knowledge", "start" : "1:30:37", "end" : "1:32:29",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 09 : The Kilian-Micali Protocol, Part 2", "url" : "https://youtu.be/iQBGzreBa0k", "theseClips" : 
+						[
+						{ "thisSubject" : "Arguments (Computationally Sound Proofs)", "start" : "0:26", "end" : "56:40",},
+						{ "thisSubject" : "Kilian-Micali Protocol", "start" : "3:39", "end" : "56:40",},
+						{ "thisSubject" : "CRHF with Local Opening", "start" : "12:05", "end" : "56:40",},
+						{ "thisSubject" : "CRHF (Collision Resistant Hash Function)", "start" : "12:59", "end" : "32:52",},
+						{ "thisSubject" : "Discrete Log Problem", "start" : "13:34", "end" : "18:26",},
+						{ "thisSubject" : "Merkle Hash", "start" : "35:03", "end" : "50:32",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 08 : The Kilian-Micali Protocol, Part 1", "url" : "https://youtu.be/OO2qyzBAD14", "theseClips" : 
+						[
+						{ "thisSubject" : "PCP (Probabilistically Checkable Proof)", "start" : "0:30", "end" : "14:00",},
+						{ "thisSubject" : "GKR Protocol", "start" : "1:17", "end" : "11:18",},
+						{ "thisSubject" : "Arguments (Computationally Sound Proofs)", "start" : "14:00", "end" : "1:44:34",},
+						{ "thisSubject" : "SAT (3SAT)", "start" : "18:42", "end" : "19:51",},
+						{ "thisSubject" : "Kilian-Micali Protocol", "start" : "30:49", "end" : "1:44:34",},
+						{ "thisSubject" : "CRHF with Local Opening", "start" : "33:03", "end" : "49:19",},
+						{ "thisSubject" : "Collision Resistant Hash Family", "start" : "33:03", "end" : "35:14",},
+						{ "thisSubject" : "Succinct Interactive Arguments", "start" : "51:00", "end" : "1:44:34",},
+						{ "thisSubject" : "PCP of Proximity", "start" : "1:05:37", "end" : "1:06:46",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 07 : PCP via GKR and Interactive Arguments, Part 2", "url" : "https://youtu.be/rdFIIHIjb7A", "theseClips" : 
+						[
+						{ "thisSubject" : "PCP (Probabilistically Checkable Proof)", "start" : "0:01", "end" : "26:15",},
+						{ "thisSubject" : "Low-Degree Test", "start" : "0:50", "end" : "8:45",},
+						{ "thisSubject" : "Doubly-Efficient Interactive Proofs", "start" : "18:22", "end" : "24:31",},
+						{ "thisSubject" : "Comparison of Proofs", "start" : "26:15", "end" : "27:52",},
+						{ "thisSubject" : "Arguments (Computationally Sound Proofs)", "start" : "28:01", "end" : "1:10:47",},
+						{ "thisSubject" : "Kilian-Micali Protocol", "start" : "35:07", "end" : "1:10:47",},
+						{ "thisSubject" : "Security Parameter", "start" : "37:37", "end" : "39:13",},
+						{ "thisSubject" : "Security Parameter Negligibility", "start" : "43:09", "end" : "44:04",},
+						{ "thisSubject" : "CRHF (Collision Resistant Hash Function)", "start" : "57:01", "end" : "1:05:18",},
+						{ "thisSubject" : "Security Parameter", "start" : "57:53", "end" : "58:30",},
+						{ "thisSubject" : "Hash Function with Local Opening", "start" : "1:06:06", "end" : "1:08:12",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 06 : PCP via GKR and Interactive Arguments, Part 1", "url" : "https://youtu.be/L8PXcZ2ExiU", "theseClips" : 
+						[
+						{ "thisSubject" : "PCP (Probabilistically Checkable Proof)", "start" : "2:22", "end" : "1:29:41",},
+						{ "thisSubject" : "Non-adaptivity", "start" : "13:27", "end" : "17:38",},
+						{ "thisSubject" : "SAT (3SAT)", "start" : "25:16", "end" : "28:53",},
+						{ "thisSubject" : "GKR Protocol", "start" : "28:47", "end" : "38:41",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 05 : Continuation of the GKR Protocol and Corollaries", "url" : "https://youtu.be/gp21TApWetE", "theseClips" : 
+						[
+						{ "thisSubject" : "Log-space Uniformity", "start" : "27:39", "end" : "1:21:46",},
+						{ "thisSubject" : "IP=PSPACE", "start" : "52:30", "end" : "1:21:46",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 04 : Doubly Efficient Interactive Proofs, Part 2", "url" : "https://youtu.be/Ob1fFHAXlJQ", "theseClips" : 
+						[
+						{ "thisSubject" : "Doubly-Efficient Interactive Proofs", "start" : "1:20", "end" : "42:29",},
+						{ "thisSubject" : "GKR Protocol", "start" : "1:20", "end" : "42:29",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 03 : Doubly Efficient Interactive Proofs, Part 1", "url" : "https://youtu.be/db1xAyO4YgM", "theseClips" : 
+						[
+						{ "thisSubject" : "Interactive Proofs", "start" : "0:01", "end" : "1:53:22",},
+						{ "thisSubject" : "SCP (Sum-Check Protocol)", "start" : "2:44", "end" : "3:36",},
+						{ "thisSubject" : "Doubly-Efficient Interactive Proofs", "start" : "4:30", "end" : "1:53:22",},
+						{ "thisSubject" : "LDE (Low-Degree Extension)", "start" : "5:39", "end" : "33:28",},
+						{ "thisSubject" : "Lagrange Interpolation Theorem", "start" : "12:39", "end" : "18:26",},
+						{ "thisSubject" : "GKR Protocol", "start" : "48:58", "end" : "1:53:22",},
+						{ "thisSubject" : "Log-space Uniformity", "start" : "50:43", "end" : "51:31",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 02 : Interactive Proofs and the Sum-Check Protocol, Part 2", "url" : "https://youtu.be/SRY3F9vtJHo", "theseClips" : 
+						[
+						{ "thisSubject" : "Interactive Proofs", "start" : "0:01", "end" : "1:31:16",},
+						{ "thisSubject" : "SCP (Sum-Check Protocol)", "start" : "0:01", "end" : "1:31:16",},
+						{ "thisSubject" : "Public Coin Protocol", "start" : "1:05", "end" : "7:01",},
+						{ "thisSubject" : "SAT (Sharp-SAT)", "start" : "10:08", "end" : "39:09",},
+						{ "thisSubject" : "Arithmetization", "start" : "14:22", "end" : "17:53",},
+						{ "thisSubject" : "Doubly-Efficient Interactive Proofs", "start" : "40:13", "end" : "1:06:10",},
+						{ "thisSubject" : "LDE (Low-Degree Extension)", "start" : "54:01", "end" : "1:06:10",},
+						]
+					},
+// ----------------------------------------------------------------------------------
+					{ "title" : "Video 01 : Interactive Proofs and the Sum-Check Protocol, Part 1", "url" : "https://youtu.be/iqSMRO78UD0", "theseClips" : 
+						[
+						{ "thisSubject" : "Interactive Proofs", "start" : "0:01", "end" : "1:31:16",},
+						{ "thisSubject" : "SCP (Sum-Check Protocol)", "start" : "40:30", "end" : "1:31:16",},
+						{ "thisSubject" : "NP class", "start" : "10:02", "end" : "11:46",},
+						{ "thisSubject" : "MA class", "start" : "15:31", "end" : "28:13",},
+						],
+					},
+// ----------------------------------------------------------------------------------
+				], 
+			},
+		];
+
+		const allCoursesText = "All Courses";
+		const allSubjectsText = "All Subjects";
+		const allLecturesText = "All Lectures";
+
+		var currentCourses = [];
+		var currentSubjects = [];
+		var currentLectures = [];
+
+		function resetCourses() {
+			try {
+				currentCourses.length = 0;
+				let allCourses = $.map(info, function(item) {
+							return item.thisCourse;
+				});
+				allCourses.sort((a, b) => a.localeCompare(b));
+				currentCourses.unshift(allCoursesText);
+				$.merge(currentCourses, allCourses);
+//				resetSubjects();
+			}
+			catch(e) {
+				alert('resetCourses: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function resetSubjects() {
+			try {
+				currentSubjects.length = 0;
+				let allSubjects = [];
+				for (const datum of info) {
+					for (const [index, thisLecture] of datum.theseLectures.entries()) {
+						for (const [index2, thisClip] of thisLecture.theseClips.entries()) {
+							if ($.inArray(thisClip.thisSubject, allSubjects) === -1) {
+								allSubjects.push(thisClip.thisSubject);
+							}
+						}
+					}
+				}
+				allSubjects.sort((a, b) => a.localeCompare(b));
+				allSubjects.unshift(allSubjectsText);
+				$.merge(currentSubjects, allSubjects);
+			}
+			catch(e) {
+				alert('resetSubjects: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function resetLectures() {
+			try {
+				currentLectures.length = 0;
+				let allLectures = [];
+				let allTitles = [];
+				for (const datum of info) {
+					for (const [index, thisLecture] of datum.theseLectures.entries()) {
+						if ($.inArray(thisLecture.title, allTitles) === -1) {
+							allTitles.push(thisLecture.title);
+							allLectures.push(thisLecture);
+						}
+					}
+				}
+				allLectures.sort((a, b) => a.title.localeCompare(b.title));
+				allLectures.unshift(allLecturesText);
+				$.merge(currentLectures, allLectures);
+			}
+			catch(e) {
+				alert('resetLectures: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function normalizeTime(time) {
+			try {
+				const numColons = time.split(':').length - 1;
+				if (numColons == 0) return "00:00:" + time;
+				if (numColons == 1) return "00:" + time;
+				return time;
+			}
+			catch(e) {
+				alert('normalizeTime: ' + e.message + ', time = ' + time);
+				throw(e);
+			}
+		}
+
+		function calculateDuration(start, end) {
+			try {
+				const normalizedStart = normalizeTime(start);
+				const normalizedEnd = normalizeTime(end);
+				const startDate = new Date(`1970-01-01 ${normalizedStart}`);
+				const endDate = new Date(`1970-01-01 ${normalizedEnd}`);
+				let distance = Math.abs(endDate - startDate);
+				const hours = Math.floor(distance / 3600000);
+				distance -= hours * 3600000;
+				const minutes = Math.floor(distance / 60000);
+				distance -= minutes * 60000;
+				const seconds = Math.floor(distance / 1000);
+				const duration = `${('0' + hours).slice(-2)}:${('0' + minutes).slice(-2)}:${('0' + seconds).slice(-2)}`;
+				return duration;
+			}
+			catch(e) {
+				alert('calculateDuration: ' + e.message + ', start = ' + start + ', end = ' + end);
+				throw(e);
+			}
+		}
+
+		function createClipUrl(url, start, end) {
+			try {
+				const hhmmssStart = calculateDuration('0', start);
+				const hhmmssEnd = calculateDuration('0', end);
+				const numSecsStart = parseInt(hhmmssStart.split(':')[0]) * 3600 + parseInt(hhmmssStart.split(':')[1]) * 60 + parseInt(hhmmssStart.split(':')[2]);
+				const numSecsEnd = parseInt(hhmmssEnd.split(':')[0]) * 3600 + parseInt(hhmmssEnd.split(':')[1]) * 60 + parseInt(hhmmssEnd.split(':')[2]);
+				return url + "?start=" + numSecsStart + "&end=" + numSecsEnd + "&autoplay=1";
+			}
+			catch(e) {
+				alert('createClipUrl: ' + e.message + ', url = ' + url + ', start = ' + start + ', end = ' + end);
+				throw(e);
+			}
+		}
+
+		function displayVideo(url, videoId, buttonId) {
+			try {
+				const youtubeId = url.substring(url.lastIndexOf("/"));
+//throw new Error(youtubeId);
+				const embeddedYouTube = "https://www.youtube.com/embed" + youtubeId;
+				const videoHtml = '<div class="embed-responsive embed-responsive-16by9">'
+						+ '<iframe class="embed-responsive-item" src="' + embeddedYouTube + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+
+						+ '</div>';
+
+				if ($('#' + videoId).children().length == 1) {
+					$('#' + videoId).children().first().remove();
+				}
+				$('#' + videoId).append(videoHtml);
+			}
+			catch(e) {
+				alert('displayVideo: ' + e.message + ', url = ' + url + ', videoId = ' + videoId + ', buttonId = ' + buttonId);
+				throw(e);
+			}
+		}
+
+		function displayCourses() {
+			try {
+				resetCourses();
+				$('#numCourses').append(Array.from(currentCourses).length-1);
+
+				let htmlCourse = '<div class="dropdown"><button class="btn btn-secondary dropdown-toggle active" type="button" id="dropdownCourses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allCoursesText + '</button><div class="dropdown-menu" aria-labelledby="dropdownCourses">';
+				for (const currCourse of currentCourses) {
+					htmlCourse = htmlCourse +
+						'<button class="dropdown-item choiceCourse" type="button" onclick="updateCoursesDropdown(this)">' + currCourse + '</button>';
+				}
+				htmlCourse += '</div></div>';
+				$('#idCourses').append(htmlCourse);
+			}
+			catch(e) {
+				alert('displayCourses: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function displaySubjects() {
+			try {
+				resetSubjects();
+				$('#numSubjects').append(Array.from(currentSubjects).length-1);
+
+				let htmlSubjects = '<div class="dropdown"><button class="btn btn-secondary dropdown-toggle active" type="button" id="dropdownSubjects" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allSubjectsText + '</button><div class="dropdown-menu" aria-labelledby="dropdownSubjects">';
+				for (const currSubject of currentSubjects) {
+					htmlSubjects = htmlSubjects +
+						'<button class="dropdown-item choiceSubject" type="button" onclick="updateSubjectsDropdown(this)">' + currSubject + '</button>';
+				}
+				htmlSubjects += '</div></div>';
+				$('#idSubjects').append(htmlSubjects);
+			}
+			catch(e) {
+				alert('displaySubjects: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function displayLectures() {
+			try {
+//throw new Error("test");
+				// merge info from the whole database into currentLectures, even if thisSubject is not associated with anyLecture for currentCourse
+				currentLectures.length = 0;
+				for (const datum of info) {
+					const { cast, host, thisCourse, abbrevCourse, date } = datum;
+					for (const [index, anyLecture] of datum.theseLectures.entries()) {
+						const { title, url } = anyLecture;
+						for (const [index2, thisClip] of anyLecture.theseClips.entries()) {
+							const { thisSubject, ts, duration, start, end } = thisClip;
+							const urlClip = createClipUrl(url, start, end);
+							if (($.inArray(thisCourse, currentCourses) !== -1) && ($.inArray(thisSubject, currentSubjects) !== -1)) {
+								currentLectures.push({"cast" : cast, "host" : host, "thisCourse" : thisCourse, "abbrevCourse" : abbrevCourse, "date" : date, "thisSubject" : thisSubject, "title" : title, "url" : urlClip, "duration" : duration, "start" : start, "end" : end,});
+							}
+						}
+					}
+				}
+				currentLectures.sort((a, b) => a.title.localeCompare(b.title));
+				let htmlLectures = '<div class="accordion" id="accordionLectures">';
+				$.each(currentSubjects, function(index, thisSubject) {
+					if (thisSubject === allSubjectsText) return;
+					let numLecturesForSubject = currentLectures.filter(function(thisLecture) {return thisLecture.thisSubject === thisSubject}).length;
+					if (numLecturesForSubject > 0) {
+						const idSubject = thisSubject.replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_");
+						htmlLectures += '<div class="card">';
+						htmlLectures += '<div class="card-header" id="heading' + idSubject + '">';
+						htmlLectures += '<button class="btn btn-link btn-block text-left dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse' + idSubject + '" aria-expanded="true" aria-controls="collapse' + idSubject + '">';
+						htmlLectures += thisSubject + ' (' + numLecturesForSubject + ')';
+						htmlLectures += '</button>';
+						htmlLectures += '</div>';
+
+						htmlLectures += '<div id="collapse' + idSubject + '" class="collapse" aria-labelledby="heading' + idSubject + '" data-parent="#accordionLectures">';
+						let countLectures = 0;
+						for (const thisLecture of currentLectures) {
+							const { title, url, abbrevCourse, date, duration, start, end } = thisLecture;
+							const lectureSubject = thisLecture.thisSubject;
+							const buttonId = "button_" + idSubject + countLectures;
+							const videoId = "video_" + idSubject + countLectures++;
+							const printableDuration = prettyPrintDuration(duration);
+							const printablestart = (typeof start === 'undefined') ? "" : start;
+							const printableend = (typeof end === 'undefined') ? "" : end;
+							const printableTimeRange = ((printablestart === "") || (printableend === "")) ? "" : "(" + printablestart + " to " + printableend + ")";
+							if (lectureSubject === thisSubject) {
+								htmlLectures += '<div class="card-body">';
+								if (currentCourses[0] == allCoursesText) {
+									htmlLectures += '<div class="text-right">' + thisLecture.abbrevCourse + '</div>';
+								}
+								htmlLectures += '<div class="text-right">' + thisLecture.date + '</div>';
+								htmlLectures += '<div class="text-left">' + printableDuration + ' ' + printableTimeRange + '</div>';
+								htmlLectures += '<button id="' + buttonId + '" class="btn btn-link btn-block text-left dropdown-toggle border" type="button" onclick="displayVideo(\'' + thisLecture.url + '\', \'' + videoId + '\', \'' + buttonId + '\');">  ' + title + '</button><div id="' + videoId + '"></div>';
+								htmlLectures += '</div>';
+							}
+						}
+						htmlLectures += '</div></div>';
+					}
+				});
+				htmlLectures += '</div>';
+				$('#accordionLectures').remove();
+				$('#idLectures').append(htmlLectures);
+			}
+			catch(e) {
+				alert('displayLectures: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function updateCoursesDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownCourses").innerHTML = itemClicked.innerHTML;
+				let choices = $('.choiceCourse');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+				if (itemClicked.innerHTML === allCoursesText) {
+					resetCourses();
+				} else {
+					currentCourses.length = 0;
+					currentCourses.push(itemClicked.innerHTML);
+				}
+//updateCurrentSubjects();
+				displayLectures();
+			}
+			catch(e) {
+				alert('updateCoursesDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
+				throw(e);
+			}
+		}
+/*
+		function updateCurrentSubjects() {
+			try {
+alert('current course: ' + currentCourses[0]);
+alert('current subject: ' + currentSubjects[0]);
+			}
+			catch(e) {
+				alert('updateCurrentSubjects: ' + e.message);
+				throw(e);
+			}
+		}
+*/
+		function updateSubjectsDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownSubjects").innerHTML = itemClicked.innerHTML;
+				let choices = $('.choiceSubject');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+				if (itemClicked.innerHTML === allSubjectsText) {
+					resetSubjects();
+				} else {
+					currentSubjects.length = 0;
+					currentSubjects.push(itemClicked.innerHTML);
+				}
+				displayLectures();
+			}
+			catch(e) {
+				alert('updateSubjectsDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
+				throw(e);
+			}
+		}
+
+		function prettyPrintInt(val, description) {
+			try {
+				if (val == 0) return "";
+				if (val == 1) return val + " " + description;
+				return val + " " + description + "s";
+			}
+			catch(e) {
+				alert('prettyPrintInt: ' + e.message + ', val = ' + val + ', description = ' + description);
+				throw(e);
+			}
+		}
+
+		function prettyPrintDuration(duration) {
+			try {
+				const hms = duration.split(':');
+				let hours = prettyPrintInt(parseInt(hms[0]), "hour");
+				if (hours !== "") hours += " ";
+				let mins = prettyPrintInt(parseInt(hms[1]), "min");
+				if (mins !== "") mins += " ";
+				let secs = prettyPrintInt(parseInt(hms[2]), "sec");
+				return (hours + mins + secs).trim();
+			}
+			catch(e) {
+				alert('prettyPrintDuration: ' + e.message + ', duration = ' + duration);
+				throw(e);
+			}
+		}
+
+		$(document).ready(function() {
+			for (const datum of info) {
+				for (const [index, thisLecture] of datum.theseLectures.entries()) {
+					for (const [index2, thisClip] of thisLecture.theseClips.entries()) {
+						thisClip.duration = calculateDuration(thisClip.start, thisClip.end);
+					}
+				}
+			}
+			$('#dateLastUpdated').append(dateLastUpdated);
+			displayCourses();
+			displaySubjects();
+			resetLectures();
+			$('#numLectures').append(Array.from(currentLectures).length-1);
+			displayLectures();
+		});
+
+		</script>
+		<style>
+			.dropdown-menu {
+				max-height: 400px;
+				overflow-y: scroll;
+			}
+			.btn {
+				white-space: normal;		/* forces text wrapping to work */
+			}
+		</style>
+  </head>
+  <body style="padding-top: 20px;">
+	<div class="container">
+
+      	<div class="alert alert-success mt-5" role="alert">
+		<h1 class="text-center">Online Courses Database</h1>
+      	</div>
+
+
+	<div class="card">
+		<div class="card-body">
+			<p class="card-text text-center">Total Courses in Database : <strong><span id="numCourses"></span></strong></p>
+			<p class="card-text text-center">Total Subjects in Database : <strong><span id="numSubjects"></span></strong></p>
+			<p class="card-text text-center">Total Videos in Database : <strong><span id="numLectures"></span></strong></p>
+			<p class="card-text text-center">Date Last Updated : <strong><span id="dateLastUpdated"></span></strong></p>
+			<hr/>
+
+			<div id="idCourses">
+			</div>
+			<br/>
+
+			<div id="idSubjects">
+			</div>
+			<hr/>
+
+			<div id="idLectures">
+			</div>
+		</div>
+	</div>
+	</div>
+  </body>
+</html>
