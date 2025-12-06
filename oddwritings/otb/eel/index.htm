@@ -25,11 +25,9 @@
 		const info = [
 			{ "collectionName" : "Epiphany at the End of Life", 
 			  "collectionNote" : "This collection represents one poem which consists of a series of stanzas, each of which can stand alone as a separate poem.<br/><br/>I will be minting the collection multiple times across different blockchains.  Even though the poem is the same, it will be represented differently in each blockchain, as described below.<br/><br/>In each collection, there is one NFT per stanza, and one NFT for the entire poem.  The last frame in each NFT displays the chain it was originally minted on, thus serving to make each NFT unique from the others even across chains.<br/><br/>As I mint the collection onto different blockchains, links to them will appear below.",
-				"collections" : 
+				"nfts" : 
 				[
-				{"blockchain" : "Base", "urlMarketplace" : "", "provenance" : "",},
-				{"blockchain" : "Ethereum", "urlMarketplace" : "", "provenance" : "",},
-				{"blockchain" : "Tezos", "urlMarketplace" : "", "provenance" : "",},
+				{"title" : "Part 1", "url" : "01/index.htm",},
 				],
 			},
 		];
@@ -42,17 +40,16 @@
 					const {collectionName, collectionNote} = datum;
 					$('#collectionName').append(collectionName);
 					$('#collectionNote').append(collectionNote);
-/*
-					let collectionNameUnder = datum.collectionName.toLowerCase().replace(/\s/g, "_");
-					let collectionNameHref = collectionNameUnder + '/' + collectionNameUnder + '.htm';
-					let newHtml = '<div class="card"><div class="card-body"><h4 class="card-title text-center">'
-						+ '<a class="nav-link btn btn-lg btn-outline-primary" href="' + collectionNameHref + '" role="button">'
-						+ datum.collectionName + externalLink
-						+ '</a>'
-						+ '</h4></div></div>';
-					let targetElement = $('#cards');
-					targetElement.append(newHtml);
-*/
+					for (const [index, nft] of datum.nfts.entries()) {
+						const {title, url} = nft;
+						let newHtml = '<div class="card"><div class="card-body"><h4 class="card-title text-center">'
+							+ '<a class="nav-link btn btn-lg btn-outline-primary" href="' + url + '" role="button">'
+							+ title + externalLink
+							+ '</a>'
+							+ '</h4></div></div>';
+						let targetElement = $('#cards');
+						targetElement.append(newHtml);
+					}
 				}			
 			}
 			catch(e) {
