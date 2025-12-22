@@ -26,8 +26,8 @@
 			  "poemPageHref" : "",
 			  "nfts" : 
 				[
-				{"blockchain" : "Base", "copies" : 10, "primary" : "NFT - nfts2me", "primaryUrl" : undefined, "secondary" : "NFT - OpenSea", "secondaryUrl" : undefined, "mediaType" : "text on image", "mediaUrl" : "artemis_base.jpg", "provenance" : undefined,},
-				{"blockchain" : "Base", "copies" : undefined, "primary" : "Zora Coin", "primaryUrl" : undefined, "secondary" : undefined, "secondaryUrl" : undefined, "mediaType" : "text on image", "mediaUrl" : "artemis_zora.jpg", "provenance" : undefined,},
+				{"blockchain" : "Base (NFT)", "copies" : 10, "primary" : "NFT - nfts2me", "primaryUrl" : undefined, "secondary" : "NFT - OpenSea", "secondaryUrl" : undefined, "mediaType" : "text on image", "mediaUrl" : "artemis_base.jpg", "provenance" : undefined,},
+				{"blockchain" : "Base (Zora Coin)", "copies" : undefined, "primary" : "Zora Coin", "primaryUrl" : "https://zora.co/coin/base:0x28586ee35ba09813dce5f65e3bca443645276c36?referrer=0x6ac32b97f7b6c8ff1335293becf6183d3fc78676", "mediaType" : "text on image", "mediaUrl" : "artemis_zora.jpg", "provenance" : "https://basescan.org/token/0x28586ee35ba09813dce5f65e3bca443645276c36",},
 				], "books" :
 				[
 				{"bookStore" : "Amazon", "url" : "https://www.amazon.com/dp/B0FLB9V3QZ",},
@@ -175,7 +175,7 @@
 								+ '</a>';
 						}
 
-						const blockchainId = blockchain.replace(/ /g, "_");
+						const blockchainId = blockchain.replace(/ /g, "_").replace(/\(/g, "_").replace(/\)/, "_");
 						let isPreferredBlockchain = atLeastOnePrimaryDeployed && (primaryDeployedBlockchain == blockchain);
 						if (isPreferredBlockchain) {
 							blockchainsHtml = blockchainsHtml
