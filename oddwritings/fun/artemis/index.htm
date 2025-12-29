@@ -36,8 +36,8 @@
 //				{"metaverse" : "Spatial", "url" : undefined,},
 				], "links" :
 				[
-//				{"platform" : "Bluesky", "url" : undefined,},
-//				{"platform" : "Facebook", "url" : undefined,},
+				{"platform" : "Bluesky", "url" : "https://bsky.app/profile/oddwritings.bsky.social/post/3maowtxpmbs23",},
+				{"platform" : "Facebook", "url" : "https://www.facebook.com/share/p/1aQZ736Gxn/",},
 //				{"platform" : "Facebook Reel", "url" : undefined,},
 //				{"platform" : "Hey", "url" : undefined,},
 //				{"platform" : "Instagram", "url" : undefined,},
@@ -46,15 +46,15 @@
 //				{"platform" : "Substack", "url" : undefined,},
 //				{"platform" : "Substack Note", "url" : undefined,},
 //				{"platform" : "Threads", "url" : undefined,},
-//				{"platform" : "X", "url" : undefined,},
+				{"platform" : "X", "url" : "https://x.com/OddWritings/status/2003614893765964072",},
 //				{"platform" : "X (NFT-centric)", "url" : undefined,},
 //				{"platform" : "Youtube", "url" : undefined,},
 				],
-				"poemNote" : undefined,
+				"poemNote" : "sunshine fingers<br/>through blonde<br/>tendrils<br/><br/>",
 //				"poemNote" : "<strong>United</strong><br/><br/>line 1<br/>line 2<br/><hr/><br/>This is an Elizabethan Sonnet.<br/><br/>For deeper understanding, consider reading William Golding's <u>Lord of the Flies</u> and John Bunyan's <u>Pilgrim's Progress</u>.<br/><br/>The video for this poem was created by generating one image in AI for each line of the poem, then blending them together with my voice reading the poem in the background.",
 				"noteLinks" :
 				[
-//				{"platform" : "Image with Prompt", "url" : "https://creator.nightcafe.studio/creation/eU8u64eZxB0t0f8E5n2u/video31-the-eagle?ru=OddWritings",},
+				{"platform" : "Image with Prompt", "url" : "https://creator.nightcafe.studio/creation/cqY90TNUZDNrjofwpwyy/artemis?ru=OddWritings",},
 				],
 			},
 		];
@@ -320,7 +320,7 @@
 
 					if (typeof datum.poemNote !== 'undefined') {
 						noteExists = true;
-						noteHtml = noteHtml + '<hr/><p>' + datum.poemNote + '</p>';
+						noteHtml = noteHtml + '<br/><p>' + datum.poemNote + '</p>';
 
 						if (typeof datum.noteLinks !== 'undefined') {
 						for (const [index, link] of datum.noteLinks.entries()) {
@@ -368,7 +368,8 @@
 					}
 					if (atLeastOneLink) {
 						linksHtml = '<hr/>'
-							+ '<strong>Links.</strong><br/><br/>(the total number of views from the links is a proxy for your probability of reselling the poem on the secondary market)'
+							+ '<strong>Links.</strong><br/>'
+//							+ '<br/>(the total number of views from the links is a proxy for your probability of reselling the poem on the secondary market)'
 							+ '<hr/>'
 							+ linksHtml;
 						$('#links').append(linksHtml);
@@ -376,8 +377,9 @@
 					if (noteExists) {
 						$('#note').append(noteHtml);
 						if (atLeastOneNoteLink) {
-							noteLinksHtml = '<br/>'
-								+ 'Sources:<br/><br/>'
+							noteLinksHtml = '<hr/>'
+								+ '<strong>Sources:</strong>'
+								+ '<hr/>'
 								+ noteLinksHtml;
 							$('#noteLinks').append(noteLinksHtml);
 						}
@@ -513,11 +515,11 @@
 			</div>
 			<div id="metaverses">
 			</div>
-			<div id="links">
-			</div>
 			<div id="note">
 			</div>
 			<div id="noteLinks">
+			</div>
+			<div id="links">
 			</div>
 		</div>
 	</div>
