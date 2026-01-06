@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="poem with pulsing letters">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Lips</title>
+		<style>
+			#poem {
+				color: white;
+				background-color: black;
+				font-size: 10vw;
+				text-align: center;
+			}
+			.verse {
+				color: green;
+			}
+			.pulse {
+				color: red;
+				animation: pulse-animation 2s infinite;
+				display: inline-block;
+			}
+
+			@keyframes pulse-animation {
+				0%, 100%	{
+					text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0076fe;
+						}
+				50% 	{
+					text-shadow: 0 0 10px #fff, 0 0 20px #0076fe, 0 0 30px #0076fe;
+					}
+			}
+			#f, #w {
+				animation-delay: 1s;
+			}
+		</style>
+	</head>
+	<div id="poem">
+		<p>lo<span class="verse">vers</span></p>
+		<p><span id="p" class="pulse">p</span>lo<span id="v" class="pulse">v</span>ers</p>
+		<p><span id="f" class="pulse">f</span>lo<span id="w" class="pulse">w</span><span class="verse">e</span>rs</p>
+	</div>
+</html>
