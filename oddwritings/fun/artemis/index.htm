@@ -438,9 +438,6 @@
 		}
 
 		$(document).ready(function() {
-			$('#dropdownMenuButton').on('click', function () {
-				navClick('navbar', 'Books');
-    			});
 			$('#navbarText').collapse('show');
 			displayInfo();
 			$('#shrinkButton').on('click', function () {
@@ -474,16 +471,9 @@
 		<div id="navbarText" class="collapse navbar-collapse">
 			<nav class="nav">
 				<a class="navbar-brand" href="#">Goto:</a>
-				<a class="nav-link btn btn-lg btn-outline-primary" href="../../index.htm#bio" role="button" onclick="navClick('navbar', 'Bio');">Bio</a>
-				<button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Books:</button>
-				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Apollos_Arrows');" href="../../index.htm#apollo">Apollo's Arrows</a>
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Bathysphere');" href="../../index.htm#bathysphere">Bathysphere</a>
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Broken_Things');" href="../../index.htm#broken">Broken Things</a>
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Cressida');" href="../../index.htm#cressida">Cressida</a>
-					<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button" onclick="navClick('navbar', 'Raven');" href="../../index.htm#raven">Raven</a>
-				</div>
-				<a class="nav-link btn btn-lg btn-outline-primary" href="../../details/index.htm" role="button" onclick="navClick('navbar', 'NFTs');">NFTs</a>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="../../index.htm#bio" role="button">Bio</a>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="../../index.htm#apollo" role="button">Books</a>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="../../details/index.htm" role="button">NFTs</a>
 				<a class="nav-link btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="shrinkButton"><<</a>
 			</nav>
 		</div>
