@@ -59,9 +59,6 @@
 		}
 
 		$(document).ready(function() {
-			$('#dropdownMenuButton').on('click', function () {
-				navClick('navbar', 'Books');
-    			});
 			$('#navbarText').collapse('show');
 			displayInfo();
 			$('#shrinkButton').on('click', function () {
@@ -95,9 +92,9 @@
 		<div id="navbarText" class="collapse navbar-collapse">
 			<nav class="nav">
 				<a class="navbar-brand" href="#">Goto:</a>
-				<a class="nav-link btn btn-lg btn-outline-primary" href="../index.htm#bio" role="button" onclick="navClick('navbar', 'Bio');">Bio</a>
-				<a class="nav-link btn btn-lg btn-outline-primary" href="../index.htm#apollo" role="button" onclick="navClick('navbar', 'Books');">Books</a>
-				<a class="nav-link btn btn-lg btn-outline-primary" href="../details/index.htm" role="button" onclick="navClick('navbar', 'NFTs');">NFTs</a>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="../index.htm#bio" role="button">Bio</a>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="../index.htm#apollo" role="button">Books</a>
+				<a class="nav-link btn btn-lg btn-outline-primary" href="../details/index.htm" role="button">NFTs</a>
 				<a class="nav-link btn btn-lg btn-outline-primary" href="#" role="button" data-toggle="collapse" data-target="#navbarText" id="shrinkButton"><<</a>
 			</nav>
 		</div>
