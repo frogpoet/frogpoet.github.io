@@ -18,11 +18,46 @@
 
 // IT IS OK TO GLOBALLY SEARCH AND REPLACE "Course", "Lecture", "Subject"
 
-		const dateLastUpdated = "2025-12-16";
+		const dateLastUpdated = "2026-01-13";
 
 		const info = [
 			{ "cast" : "MIT 6.1200", "host" : "Zachary Abel", "thisCourse" : "Mathematics for Computer Science", "abbrevCourse" : "Mathematics for Computer Science", "date" : "2024-01-01", "youTubeList" : "PLUl4u3cNGP61VNvICqk2HXJTonnKgAc9d", "onlineSource" : "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/", "theseLectures" : 
 				[
+					{ "title" : "Video 4 : State Machines", "url" : "https://youtu.be/gVdrFsnOo_s", "theseClips" : 
+						[
+						{ "thisSubject" : "State Machines", "start" : "0:14", "end" : "1:20:15",},
+						{ "thisSubject" : "State Machine Definition", "start" : "1:09", "end" : "2:30",},
+						{ "thisSubject" : "State Machine Example : Infinite Counter", "start" : "2:33", "end" : "4:48",},
+						{ "thisSubject" : "Set Builder Notation", "start" : "4:30", "end" : "4:48",},
+						{ "thisSubject" : "State Machine Execution Definition", "start" : "5:11", "end" : "7:18",},
+						{ "thisSubject" : "State Machine Reachability Definition", "start" : "7:18", "end" : "8:22",},
+						{ "thisSubject" : "State Machine Example : Eight Puzzle", "start" : "9:03", "end" : "57:05",},
+						{ "thisSubject" : "State Predicate Definition", "start" : "14:40", "end" : "15:50",},
+						{ "thisSubject" : "State Predicate Preserved Definition", "start" : "15:58", "end" : "16:28",},
+						{ "thisSubject" : "State Predicate Invariant Definition", "start" : "16:35", "end" : "18:17",},
+						{ "thisSubject" : "Induction Invariant Principle", "start" : "18:55", "end" : "29:20",},
+						{ "thisSubject" : "Induction Invariant Proof via Induction Axiom", "start" : "22:07", "end" : "29:20",},
+						{ "thisSubject" : "Invariance Proof Template", "start" : "29:32", "end" : "31:30",},
+						{ "thisSubject" : "Eight Puzzle State Predicate Definition", "start" : "32:58", "end" : "38:21",},
+						{ "thisSubject" : "Eight Puzzle Inverted Pair Definition", "start" : "33:20", "end" : "36:38",},
+						{ "thisSubject" : "Eight Puzzle Preserved Proof", "start" : "38:40", "end" : "51:14",},
+						{ "thisSubject" : "Eight Puzzle Invariant Proof", "start" : "51:14", "end" : "53:30",},
+						{ "thisSubject" : "Corollary Definition", "start" : "53:30", "end" : "53:52",},
+						{ "thisSubject" : "Eight Puzzle Preserved vs Invariant", "start" : "56:09", "end" : "57:05",},
+						{ "thisSubject" : "State Machine Example : Simple Sorter", "start" : "58:08", "end" : "1:20:15",},
+						{ "thisSubject" : "Simple Sorter Final State Definition", "start" : "1:03:03", "end" : "1:05:03",},
+						{ "thisSubject" : "State Machine Partially Correct Definition", "start" : "1:05:15", "end" : "1:05:42",},
+						{ "thisSubject" : "State Machine Termination Definition", "start" : "1:05:42", "end" : "1:07:30",},
+						{ "thisSubject" : "State Machine Correctness Definition", "start" : "1:08:09", "end" : "1:08:25",},
+						{ "thisSubject" : "State Machine Derived Variable Definition", "start" : "1:09:20", "end" : "1:11:30",},
+						{ "thisSubject" : "State Machine Derived Variable Strictly Decreasing Definition", "start" : "1:10:20", "end" : "1:10:57",},
+						{ "thisSubject" : "State Machine Termination Theorem", "start" : "1:11:45", "end" : "1:15:53",},
+						{ "thisSubject" : "Simple Sorter State Predicate Definition", "start" : "1:16:30", "end" : "1:17:04",},
+						{ "thisSubject" : "Simple Sorter Inverted Pair Definition", "start" : "1:17:04", "end" : "1:18:57",},
+						{ "thisSubject" : "Simple Sorter Termination Proof", "start" : "1:18:57", "end" : "1:20:15",},
+						],
+					},
+// ----------------------------------------------------------------------------------
 					{ "title" : "Video 3 : Casework and Strong Induction", "url" : "https://youtu.be/GOgA8JGUiwI", "theseClips" : 
 						[
 						{ "thisSubject" : "Proof Outlines Summary", "start" : "0:47", "end" : "4:26",},
@@ -554,7 +589,7 @@
 				resetCourses();
 				$('#numCourses').append(Array.from(currentCourses).length-1);
 
-				let htmlCourse = '<div class="dropdown"><button class="btn btn-secondary dropdown-toggle active" type="button" id="dropdownCourses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allCoursesText + '</button><div class="dropdown-menu" aria-labelledby="dropdownCourses">';
+				let htmlCourse = '<div class="dropdown"><button class="btn btn-secondary mr-2 dropdown-toggle active" type="button" id="dropdownCourses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allCoursesText + '</button><div class="dropdown-menu" aria-labelledby="dropdownCourses">';
 				for (const currCourse of currentCourses) {
 					htmlCourse = htmlCourse +
 						'<button class="dropdown-item choiceCourse" type="button" onclick="updateCoursesDropdown(this)">' + currCourse + '</button>';
@@ -776,6 +811,17 @@ alert('current subject: ' + currentSubjects[0]);
   <body style="padding-top: 20px;">
 	<div class="container">
 
+	<nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light">
+		<div id="navbarText" class="navbar-collapse collapse show" style="">
+			<nav class="nav">
+			<div id="idCourses">
+			</div>
+			<div id="idSubjects">
+			</div>
+			</nav>
+		</div>
+	</nav>
+
       	<div class="alert alert-success mt-5" role="alert">
 		<h1 class="text-center">Online Courses Database</h1>
       	</div>
@@ -787,14 +833,6 @@ alert('current subject: ' + currentSubjects[0]);
 			<p class="card-text text-center">Total Subjects in Database : <strong><span id="numSubjects"></span></strong></p>
 			<p class="card-text text-center">Total Videos in Database : <strong><span id="numLectures"></span></strong></p>
 			<p class="card-text text-center">Date Last Updated : <strong><span id="dateLastUpdated"></span></strong></p>
-			<hr/>
-
-			<div id="idCourses">
-			</div>
-			<br/>
-
-			<div id="idSubjects">
-			</div>
 			<hr/>
 
 			<div id="idLectures">
