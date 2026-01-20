@@ -18,11 +18,31 @@
 
 // IT IS OK TO GLOBALLY SEARCH AND REPLACE "Course", "Lecture", "Subject"
 
-		const dateLastUpdated = "2026-01-13";
+		const dateLastUpdated = "2026-01-19";
 
 		const info = [
 			{ "cast" : "MIT 6.1200", "host" : "Zachary Abel", "thisCourse" : "Mathematics for Computer Science", "abbrevCourse" : "Mathematics for Computer Science", "date" : "2024-01-01", "youTubeList" : "PLUl4u3cNGP61VNvICqk2HXJTonnKgAc9d", "onlineSource" : "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/", "theseLectures" : 
 				[
+					{ "title" : "Video 5 : Sums", "url" : "https://youtu.be/nqOPy2d6ihY?list=PLUl4u3cNGP61VNvICqk2HXJTonnKgAc9d", "theseClips" : 
+						[
+						{ "thisSubject" : "Sums", "start" : "1:00", "end" : "1:22:01",},
+						{ "thisSubject" : "Sums Lottery Example", "start" : "1:43", "end" : "18:45",},
+						{ "thisSubject" : "Sum Proof Perturbation Method", "start" : "11:52", "end" : "15:26",},
+						{ "thisSubject" : "Sums k^2 Example", "start" : "19:04", "end" : "34:50",},
+						{ "thisSubject" : "Sum Proof Ansatz Method", "start" : "19:04", "end" : "34:50",},
+						{ "thisSubject" : "Sums Nested J Example 1", "start" : "35:08", "end" : "38:56",},
+						{ "thisSubject" : "Sum Proof Double Sums Distribution Method", "start" : "35:08", "end" : "38:56",},
+						{ "thisSubject" : "Sums Nested J Example 2", "start" : "39:25", "end" : "44:50",},
+						{ "thisSubject" : "Sum Proof Double Sums Exchange Index Method", "start" : "40:19", "end" : "44:50",},
+						{ "thisSubject" : "Sums k^(1/2) Example", "start" : "46:40", "end" : "1:03:14",},
+						{ "thisSubject" : "Sum Proof Approximation Method", "start" : "47:49", "end" : "1:03:14",},
+						{ "thisSubject" : "Sum Proof Weakly Increasing Integral Method", "start" : "48:36", "end" : "1:00:52",},
+						{ "thisSubject" : "Sums 1/k Example", "start" : "1:03:53", "end" : "1:12:16",},
+						{ "thisSubject" : "Sum Proof Weakly Decreasing Integral Method", "start" : "1:05:54", "end" : "1:12:16",},
+						{ "thisSubject" : "Sums 1/(k^2) Example", "start" : "1:12:29", "end" : "1:22:01",},
+						],
+					},
+// ----------------------------------------------------------------------------------
 					{ "title" : "Video 4 : State Machines", "url" : "https://youtu.be/gVdrFsnOo_s", "theseClips" : 
 						[
 						{ "thisSubject" : "State Machines", "start" : "0:14", "end" : "1:20:15",},
@@ -646,7 +666,7 @@
 					if (thisSubject === allSubjectsText) return;
 					let numLecturesForSubject = currentLectures.filter(function(thisLecture) {return thisLecture.thisSubject === thisSubject}).length;
 					if (numLecturesForSubject > 0) {
-						const idSubject = thisSubject.replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_");	// regexp
+						const idSubject = thisSubject.replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_");	// regexp
 						htmlLectures += '<div class="card">';
 						htmlLectures += '<div class="card-header" id="heading' + idSubject + '">';
 						htmlLectures += '<button class="btn btn-link btn-block text-left dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse' + idSubject + '" aria-expanded="true" aria-controls="collapse' + idSubject + '">';
@@ -688,6 +708,37 @@
 				throw(e);
 			}
 		}
+/*
+		function updateCurrentSubjects() {
+			try {
+alert('current course: ' + currentCourses[0]);
+alert('current subject: ' + currentSubjects[0]);
+//updateLectures
+				currentSubjects.length = 0;
+				currentSubjects.push(allSubjectsText);
+alert('current subject: ' + currentSubjects[0]);
+
+				for (const datum of info) {
+					const { cast, host, thisCourse, abbrevCourse, date } = datum;
+					for (const [index, anyLecture] of datum.theseLectures.entries()) {
+						const { title, url } = anyLecture;
+						for (const [index2, thisClip] of anyLecture.theseClips.entries()) {
+							const { thisSubject, ts, duration, start, end } = thisClip;
+							const urlClip = createClipUrl(url, start, end);
+							if (($.inArray(thisCourse, currentCourses) !== -1) && ($.inArray(thisSubject, currentSubjects) === -1)) {
+								currentSubjects.push(thisSubject);
+							}
+						}
+					}
+				}
+
+			}
+			catch(e) {
+				alert('updateCurrentSubjects: ' + e.message);
+				throw(e);
+			}
+		}
+*/
 
 		function updateCoursesDropdown(itemClicked) {
 			try {
@@ -715,18 +766,7 @@
 				throw(e);
 			}
 		}
-/*
-		function updateCurrentSubjects() {
-			try {
-alert('current course: ' + currentCourses[0]);
-alert('current subject: ' + currentSubjects[0]);
-			}
-			catch(e) {
-				alert('updateCurrentSubjects: ' + e.message);
-				throw(e);
-			}
-		}
-*/
+
 		function updateSubjectsDropdown(itemClicked) {
 			try {
 				document.getElementById("dropdownSubjects").innerHTML = itemClicked.innerHTML;
