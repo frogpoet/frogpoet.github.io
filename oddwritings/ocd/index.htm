@@ -18,11 +18,51 @@
 
 // IT IS OK TO GLOBALLY SEARCH AND REPLACE "Course", "Lecture", "Subject"
 
-		const dateLastUpdated = "2026-01-19";
+		const dateLastUpdated = "2026-02-05";
 
 		const info = [
 			{ "cast" : "MIT 6.1200", "host" : "Zachary Abel", "thisCourse" : "Mathematics for Computer Science", "abbrevCourse" : "Mathematics for Computer Science", "date" : "2024-01-01", "youTubeList" : "PLUl4u3cNGP61VNvICqk2HXJTonnKgAc9d", "onlineSource" : "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/", "theseLectures" : 
 				[
+					{ "title" : "Video 6 : Asymptotics", "url" : "https://youtu.be/6dQQAn4L24s", "theseClips" : 
+						[
+						{ "thisSubject" : "Block Shifting Game", "start" : "0:43", "end" : "12:25",},
+						{ "thisSubject" : "Harmonic Number", "start" : "5:09", "end" : "5:22",},
+						{ "thisSubject" : "Harmonic Number Approximation", "start" : "6:00", "end" : "12:25",},
+						{ "thisSubject" : "Asymptotic Equivalence", "start" : "10:00", "end" : "10:40",},
+						{ "thisSubject" : "Squeeze Theorem", "start" : "11:37", "end" : "11:46",},
+						{ "thisSubject" : "Products", "start" : "12:40", "end" : "20:01",},
+						{ "thisSubject" : "n! As A Sum", "start" : "13:00", "end" : "14:02",},
+						{ "thisSubject" : "Sums ln(k) Approximation", "start" : "14:02", "end" : "15:30",},
+						{ "thisSubject" : "Sums k! Approximation", "start" : "15:38", "end" : "17:45",},
+						{ "thisSubject" : "Stirling's Approximation", "start" : "17:45", "end" : "20:01",},
+						{ "thisSubject" : "Swap Sort (Simple Sorter)", "start" : "20:22", "end" : "22:17",},
+						{ "thisSubject" : "Merge Sort Speed", "start" : "22:32", "end" : "22:55",},
+						{ "thisSubject" : "Asymptotics Motivation", "start" : "22:55", "end" : "31:56",},
+						{ "thisSubject" : "Big O Notation", "start" : "32:00", "end" : "56:20",},
+						{ "thisSubject" : "Big O Notation Example 1", "start" : "37:37", "end" : "40:05",},
+						{ "thisSubject" : "Big O Notation Example 2", "start" : "40:50", "end" : "43:03",},
+						{ "thisSubject" : "Big O Notation Example 3", "start" : "43:03", "end" : "45:06",},
+						{ "thisSubject" : "Big O Notation Example 4", "start" : "45:06", "end" : "46:56",},
+						{ "thisSubject" : "Big O in terms of Limits", "start" : "46:56", "end" : "52:57",},
+						{ "thisSubject" : "Big O in terms of Limits Example 1", "start" : "49:20", "end" : "50:18",},
+						{ "thisSubject" : "Big O in terms of Limits Example 2", "start" : "50:18", "end" : "51:50",},
+						{ "thisSubject" : "Big O in terms of Limits Example 3", "start" : "51:53", "end" : "52:57",},
+						{ "thisSubject" : "Big O Alternate Notations", "start" : "52:57", "end" : "54:31",},
+						{ "thisSubject" : "Big Omega Notation", "start" : "54:31", "end" : "56:20",},
+						{ "thisSubject" : "Asymptotic Symbols", "start" : "56:20", "end" : "1:09:42",},
+						{ "thisSubject" : "Theta Notation", "start" : "58:50", "end" : "59:40",},
+						{ "thisSubject" : "Asymptotic Equivalence vs Theta", "start" : "59:40", "end" : "1:06:03",},
+						{ "thisSubject" : "Little O Notation", "start" : "1:06:25", "end" : "1:07:36",},
+						{ "thisSubject" : "Little Omega Notation", "start" : "1:07:36", "end" : "1:08:18",},
+						{ "thisSubject" : "Asymptotic Equivalence vs Little O", "start" : "1:08:35", "end" : "1:09:42",},
+						{ "thisSubject" : "Lower Order Terms", "start" : "1:09:10", "end" : "1:09:42",},
+						{ "thisSubject" : "Asymptotic Notation vs Induction", "start" : "1:09:58", "end" : "1:15:35",},
+						{ "thisSubject" : "Induction with Asymptotics Example", "start" : "1:10:43", "end" : "1:15:35",},
+						{ "thisSubject" : "Asymptotic Implications", "start" : "1:15:55", "end" : "1:18:09",},
+						{ "thisSubject" : "Little O vs Big O", "start" : "1:15:55", "end" : "1:16:50",},
+						],
+					},
+// ----------------------------------------------------------------------------------
 					{ "title" : "Video 5 : Sums", "url" : "https://youtu.be/nqOPy2d6ihY", "theseClips" : 
 						[
 						{ "thisSubject" : "Sums", "start" : "1:00", "end" : "1:22:01",},
@@ -666,7 +706,7 @@
 					if (thisSubject === allSubjectsText) return;
 					let numLecturesForSubject = currentLectures.filter(function(thisLecture) {return thisLecture.thisSubject === thisSubject}).length;
 					if (numLecturesForSubject > 0) {
-						const idSubject = thisSubject.replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_");	// regexp
+						const idSubject = thisSubject.replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_").replace(/\!/g, "_");	// regexp
 						htmlLectures += '<div class="card">';
 						htmlLectures += '<div class="card-header" id="heading' + idSubject + '">';
 						htmlLectures += '<button class="btn btn-link btn-block text-left dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse' + idSubject + '" aria-expanded="true" aria-controls="collapse' + idSubject + '">';
