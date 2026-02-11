@@ -18,11 +18,30 @@
 
 // IT IS OK TO GLOBALLY SEARCH AND REPLACE "Course", "Lecture", "Subject"
 
-		const dateLastUpdated = "2026-02-05";
+		const dateLastUpdated = "2026-02-11";
 
 		const info = [
 			{ "cast" : "MIT 6.1200", "host" : "Zachary Abel", "thisCourse" : "Mathematics for Computer Science", "abbrevCourse" : "Mathematics for Computer Science", "date" : "2024-01-01", "youTubeList" : "PLUl4u3cNGP61VNvICqk2HXJTonnKgAc9d", "onlineSource" : "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/", "theseLectures" : 
 				[
+					{ "title" : "Video 7 : Recurrences", "url" : "https://youtu.be/PvuwfciiH2U", "theseClips" : 
+						[
+						{ "thisSubject" : "Recurrences", "start" : "0:20", "end" : "1:13:08",},
+						{ "thisSubject" : "Fibonacci Numbers", "start" : "0:38", "end" : "2:59",},
+						{ "thisSubject" : "Recursive Algorithms", "start" : "3:24", "end" : "1:10:11",},
+						{ "thisSubject" : "Towers of Hanoi", "start" : "3:42", "end" : "10:23",},
+						{ "thisSubject" : "Selection Sort", "start" : "20:55", "end" : "25:07",},
+						{ "thisSubject" : "Merge Sort n=2^k", "start" : "25:25", "end" : "52:15",},
+						{ "thisSubject" : "Merge Sort Speed n=2^k", "start" : "41:05", "end" : "52:15",},
+						{ "thisSubject" : "Recurrence Plug and Chug Method", "start" : "44:23", "end" : "52:15",},
+						{ "thisSubject" : "Merge Sort n!=2^k", "start" : "52:24", "end" : "1:10:11",},
+						{ "thisSubject" : "Floor and Ceiling Notation", "start" : "53:13", "end" : "53:27",},
+						{ "thisSubject" : "Merge Sort Speed n!=2^k", "start" : "53:13", "end" : "1:10:11",},
+						{ "thisSubject" : "Divide & Conquer Algorithms", "start" : "55:11", "end" : "56:04",},
+						{ "thisSubject" : "Master Theorem", "start" : "56:26", "end" : "1:10:11",},
+						{ "thisSubject" : "Recurrences Growth Rates", "start" : "1:10:32", "end" : "1:13:08",},
+						],
+					},
+// ----------------------------------------------------------------------------------
 					{ "title" : "Video 6 : Asymptotics", "url" : "https://youtu.be/6dQQAn4L24s", "theseClips" : 
 						[
 						{ "thisSubject" : "Block Shifting Game", "start" : "0:43", "end" : "12:25",},
@@ -706,7 +725,7 @@
 					if (thisSubject === allSubjectsText) return;
 					let numLecturesForSubject = currentLectures.filter(function(thisLecture) {return thisLecture.thisSubject === thisSubject}).length;
 					if (numLecturesForSubject > 0) {
-						const idSubject = thisSubject.replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_").replace(/\!/g, "_");	// regexp
+						const idSubject = thisSubject.replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_").replace(/\!/g, "_").replace(/\&/g, "_");	// regexp
 						htmlLectures += '<div class="card">';
 						htmlLectures += '<div class="card-header" id="heading' + idSubject + '">';
 						htmlLectures += '<button class="btn btn-link btn-block text-left dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse' + idSubject + '" aria-expanded="true" aria-controls="collapse' + idSubject + '">';
