@@ -24,7 +24,14 @@
 		const info = [
 			{ "poemName" : "Tsunami", "nfts" : 
 				[
-				{"blockchain" : "Base", "copies" : "unlimited", "primary" : "Zora", "primaryUrl" : "https://zora.co/coin/base:0xf42e075e5dbdc4378677209bd42171d85fc23455?referrer=0x6ac32b97f7b6c8ff1335293becf6183d3fc78676", "provenance" : "https://basescan.org/address/0xf42e075e5dbdc4378677209bd42171d85fc23455", "mediaType" : "text on image", "mediaUrl" : "tsunami_base.jpg",},
+				{"blockchain" : "Base", "copies" : "unlimited", "primary" : "Zora", "primaryUrl" : "https://zora.co/coin/base:0xf42e075e5dbdc4378677209bd42171d85fc23455?referrer=0x6ac32b97f7b6c8ff1335293becf6183d3fc78676",
+				"secondaries" : 
+				[
+				{"secondary" : "OpenSea", "secondaryUrl" : "https://opensea.io/token/base/0xf42e075e5dbdc4378677209bd42171d85fc23455?timeframe=one_day&candleSize=fifteen_minutes",},
+				{"secondary" : "Matcha", "secondaryUrl" : "https://matcha.xyz/tokens/base/0xf42e075e5dbdc4378677209bd42171d85fc23455",},
+				],
+				"provenance" : "https://basescan.org/token/0xf42e075e5dbdc4378677209bd42171d85fc23455",
+				"mediaType" : "text on image", "mediaUrl" : "tsunami_base.jpg",},
 				], "books" :
 				[
 				{"bookStore" : "Amazon", "url" : "https://www.amazon.com/dp/B0FLB9V3QZ",},
@@ -33,9 +40,12 @@
 //				{"metaverse" : "Spatial", "url" : "https://www.spatial.io/s/something?share=3367699677692575645",},
 				], "links" :
 				[
+				{"platform" : "Bubblemaps", "url" : "https://iframe.bubblemaps.io/map?chain=base&address=0xf42e075e5dbdc4378677209bd42171d85fc23455&partnerId=MEPFzGONpHyRb7DIadtA",},
 //				{"platform" : "Hey", "url" : "https://hey.xyz/posts/0x01e18b-0x54",},
+				{"platform" : "NightCafe", "url" : "https://creator.nightcafe.studio/creation/tKV8hhGFUFYLLGWY2anO/tsunami?ru=OddWritings",},
 //				{"platform" : "Pixelfed", "url" : "https://pixelfed.social/p/OddWritings/798668046798823573",},
 //				{"platform" : "Threads", "url" : "https://www.threads.net/@0ddwritings/post/DCFSqv2xyKC",},
+				{"platform" : "TokenChat", "url" : "https://tokenchat.co/collection/base:0xf42e075e5dbdc4378677209bd42171d85fc23455/",},
 				{"platform" : "X", "url" : "https://x.com/OddWritings/status/1953583764178899098",},
 //				{"platform" : "X - Nicole Tallman List", "url" : "https://x.com/OddWritings/status/1900275972676739541",},
 //				{"platform" : "X - Submission to NFT Budapest", "url" : "https://x.com/OddWritings/status/1894157533964619801",},
@@ -124,7 +134,7 @@
 
 					for (const [index, nft] of datum.nfts.entries()) {
 						atLeastOnePrimary = true;
-						const { blockchain, copies, primary, primaryUrl, secondary, secondaryUrl, provenance, mediaType, mediaUrl } = nft;
+						const { blockchain, copies, primary, primaryUrl, secondaries, secondary, secondaryUrl, provenance, mediaType, mediaUrl } = nft;
 						verifyRequiredValues({"blockchain" : blockchain, "copies" : copies, "primary" : primary,});
 						verifyAcceptableValues({"mediaType" : mediaType, "mediaUrl" : mediaUrl,});
 						if ((typeof primaryUrl !== 'undefined') && (typeof mediaUrl !== 'undefined') && !atLeastOnePrimaryDeployed) {
@@ -148,14 +158,19 @@
 							+ primaryDescription
 							+ '</a>';
 
-						let secondaryDescription = blockchain + ' - ' + secondary + externalLink;
-						if ((typeof secondary !== 'undefined') && (typeof secondaryUrl !== 'undefined')) {
-							atLeastOneSecondary = true;
-							secondariesHtml = secondariesHtml
-							+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button"'
-							+ ' target="_' + secondary + '" href="' + secondaryUrl + '">'
-							+ secondaryDescription
-							+ '</a>';
+						if (typeof secondaries !== 'undefined') {
+							for (const [index, item] of secondaries.entries()) {
+							const { secondary, secondaryUrl } = item;
+							let secondaryDescription = blockchain + ' - ' + secondary + externalLink;
+							if ((typeof secondary !== 'undefined') && (typeof secondaryUrl !== 'undefined')) {
+								atLeastOneSecondary = true;
+								secondariesHtml = secondariesHtml
+								+ '<a class="nav-link btn btn-lg btn-outline-primary dropdown-item" role="button"'
+								+ ' target="_' + secondary + '" href="' + secondaryUrl + '">'
+								+ secondaryDescription
+								+ '</a>';
+							}
+							}
 						}
 
 						let isPreferredBlockchain = atLeastOnePrimaryDeployed && (primaryDeployedBlockchain == blockchain);
@@ -349,7 +364,7 @@
 					}
 					if (atLeastOneLink) {
 						linksHtml = '<hr/>'
-							+ '<strong>Links.</strong><br/><br/>(the total number of views from the links is a proxy for your probability of reselling the poem on the secondary market)'
+							+ '<strong>Links.</strong><br/>' // (the total number of views from the links is a proxy for your probability of reselling the poem on the secondary market)'
 							+ '<hr/>'
 							+ linksHtml;
 						$('#links').append(linksHtml);
