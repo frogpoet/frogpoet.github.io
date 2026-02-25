@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="poem poems poetry rattle rattlecast prompt-lines" />
 
-	<title>RattleCast Prompt-Lines Database</title> 
+	<title>Rattle Tools</title> 
 	  <link rel='stylesheet' type='text/css' href='../../css/font-awesome.min.css'>
 		<link rel='stylesheet' type='text/css' href='../../css/bootstrap.css'>
 	  	<link rel="shortcut icon" href="../favicon.ico" />
@@ -344,6 +344,90 @@
 			displayReadings();
 		});
 
+		// -------------------------------------------
+		// Rattle Code Poem Tool - routines start here
+		// -------------------------------------------
+
+		function codePoem(rawPoem) {
+			try {
+				const lines = rawPoem.split(/\r?\n/);
+				let codedPoem = "";
+				for (const line of lines) {
+					if (line.trim().length == 0) {
+						codedPoem += "<div class=\"line\">&nbsp; </div>\n";
+					}
+					else {
+						codedPoem += "<div class=\"line\">" + line + "</div>\n";
+					}
+				}
+				return codedPoem;
+			}
+			catch(e) {
+				alert('codePoem: ' + e.message + ', rawPoem = ' + rawPoem);
+				throw(e);
+			}
+		}
+
+		function codePoemClick() {
+			try {
+				const rawPoemTextArea = document.getElementById("rawPoem");
+				const rawPoem = rawPoemTextArea.value;
+				if (rawPoem.trim().length == 0) {
+					alert("There's nothing to code. Please paste the poem into the first textbox first.");
+					return;
+				}
+				const codedPoem = codePoem(rawPoem);
+				const codedPoemTextArea = document.getElementById("codedPoem");
+				codedPoemTextArea.value = codedPoem;
+			}
+			catch(e) {
+				alert('codePoemClick: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function clearClick() {
+			try {
+				const rawPoemTextArea = document.getElementById("rawPoem");
+				rawPoemTextArea.value = "";
+			}
+			catch(e) {
+				alert('clearClick: ' + e.message);
+				throw(e);
+			}
+		}
+
+		async function copyToClipboard(codedPoem) {
+			try {
+				const copyToClipboardButton = document.getElementById("copyToClipboard");
+				await navigator.clipboard.writeText(codedPoem);
+				copyToClipboardButton.textContent = 'Copied!';
+				setTimeout(() => {
+					copyToClipboardButton.textContent = 'Copy to Clipboard';
+			        }, 1000);
+			}
+			catch(e) {
+				alert('copyToClipboard: ' + e.message + ', codedPoem = ' + codedPoem);
+				throw(e);
+			}
+		}
+
+		async function copyToClipboardClick() {
+			try {
+				const codedPoemTextArea = document.getElementById("codedPoem");
+				const codedPoem = codedPoemTextArea.value;
+				if (codedPoem.trim().length == 0) {
+					alert("There's nothing to copy to the clipboard. First, paste the poem into the first textbox and click on 'Code it'.");
+					return;
+				}
+				await copyToClipboard(codedPoem);
+			}
+			catch(e) {
+				alert('copyToClipboardClick: ' + e.message);
+				throw(e);
+			}
+		}
+
 		</script>
 		<style>
 			.dropdown-menu {
@@ -359,9 +443,38 @@
 	<div class="container">
 
       	<div class="alert alert-success mt-5" role="alert">
+		<h1 class="text-center">Rattle Tools</h1>
+      	</div>
+	<p>Please note that this website is not affiliated with Rattle&trade; Magazine or the RattleCast&trade; Prompt-Lines.  It is maintained by a fan of the RattleCast for the use of viewers and/or the editors of Rattle.</p>
+
+	<!------------------ ------------>
+
+      	<div class="alert alert-success mt-5" role="alert">
+		<h1 class="text-center">Rattle Poem Coding Tool</h1>
+      	</div>
+	<div class="form-group">
+		<div class="row">
+			<!-- col-6 takes up 50% (6/12 columns) -->
+			<div class="col-sm-6">
+				<label for="rawPoem">Paste the Poem Here</label>
+				<textarea id="rawPoem" class="form-control" rows="10"></textarea>
+				<button type="button" class="btn btn-primary" onclick="codePoemClick()">Code it</button>
+				<button type="button" class="btn btn-primary" onclick="clearClick()">Clear</button>
+			</div>
+			<!-- col-6 takes up 50% (6/12 columns) -->
+			<div class="col-sm-6">
+				<label for="codedPoem">Copy the Markup from Here</label>
+				<textarea id="codedPoem" class="form-control" rows="10"></textarea>
+				<button id="copyToClipboard" type="button" class="btn btn-primary" onclick="copyToClipboardClick()">Copy to Clipboard</button>
+			</div>
+		</div>
+	</div>
+
+	<!------------------ ------------>
+
+      	<div class="alert alert-success mt-5" role="alert">
 		<h1 class="text-center">RattleCast Prompt-Lines Database</h1>
       	</div>
-
 
 	<div class="card">
 		<div class="card-body">
