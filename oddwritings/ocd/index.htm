@@ -18,7 +18,10 @@
 
 // IT IS OK TO GLOBALLY SEARCH AND REPLACE "Course", "Lecture", "Subject"
 
-		const dateLastUpdated = "2026-02-17";
+		const dateLastUpdated = "2026-03-04";
+
+// info note : getFlattenedData assumes all of the property names within info are unique
+// info note : document.ready adds derived property names to info
 
 		const info = [
 			{ "cast" : "MIT 6.1200", "host" : "Zachary Abel", "thisCourse" : "Mathematics for Computer Science", "abbrevCourse" : "Mathematics for Computer Science", "date" : "2024-01-01", "youTubeList" : "PLUl4u3cNGP61VNvICqk2HXJTonnKgAc9d", "onlineSource" : "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/", "theseLectures" : 
@@ -575,69 +578,6 @@
 		var currentSubjects = [];
 		var currentLectures = [];
 
-		function resetCourses() {
-			try {
-				currentCourses.length = 0;
-				let allCourses = $.map(info, function(item) {
-							return item.thisCourse;
-				});
-				allCourses.sort((a, b) => a.localeCompare(b));
-				currentCourses.unshift(allCoursesText);
-				$.merge(currentCourses, allCourses);
-//				resetSubjects();
-			}
-			catch(e) {
-				alert('resetCourses: ' + e.message);
-				throw(e);
-			}
-		}
-
-		function resetSubjects() {
-			try {
-				currentSubjects.length = 0;
-				let allSubjects = [];
-				for (const datum of info) {
-					for (const [index, thisLecture] of datum.theseLectures.entries()) {
-						for (const [index2, thisClip] of thisLecture.theseClips.entries()) {
-							if ($.inArray(thisClip.thisSubject, allSubjects) === -1) {
-								allSubjects.push(thisClip.thisSubject);
-							}
-						}
-					}
-				}
-				allSubjects.sort((a, b) => a.localeCompare(b));
-				allSubjects.unshift(allSubjectsText);
-				$.merge(currentSubjects, allSubjects);
-			}
-			catch(e) {
-				alert('resetSubjects: ' + e.message);
-				throw(e);
-			}
-		}
-
-		function resetLectures() {
-			try {
-				currentLectures.length = 0;
-				let allLectures = [];
-				let allTitles = [];
-				for (const datum of info) {
-					for (const [index, thisLecture] of datum.theseLectures.entries()) {
-						if ($.inArray(thisLecture.title, allTitles) === -1) {
-							allTitles.push(thisLecture.title);
-							allLectures.push(thisLecture);
-						}
-					}
-				}
-				allLectures.sort((a, b) => a.title.localeCompare(b.title));
-				allLectures.unshift(allLecturesText);
-				$.merge(currentLectures, allLectures);
-			}
-			catch(e) {
-				alert('resetLectures: ' + e.message);
-				throw(e);
-			}
-		}
-
 		function normalizeTime(time) {
 			try {
 				const numColons = time.split(':').length - 1;
@@ -707,203 +647,43 @@
 			}
 		}
 
-		function displayCourses() {
+		function displayCoursesDropdown() {
 			try {
-				resetCourses();
-				$('#numCourses').append(Array.from(currentCourses).length-1);
-
-				let htmlCourse = '<div class="dropdown"><button class="btn btn-secondary mr-2 dropdown-toggle active" type="button" id="dropdownCourses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allCoursesText + '</button><div class="dropdown-menu" aria-labelledby="dropdownCourses">';
-				for (const currCourse of currentCourses) {
-					htmlCourse = htmlCourse +
-						'<button class="dropdown-item choiceCourse" type="button" onclick="updateCoursesDropdown(this)">' + currCourse + '</button>';
-				}
-				htmlCourse += '</div></div>';
-				$('#idCourses').append(htmlCourse);
+				let filteredItems = getCourses();
+				filteredItems.sort((a, b) => a.localeCompare(b));
+				filteredItems.unshift(allCoursesText);
+				setCoursesInDom(filteredItems);
 			}
 			catch(e) {
-				alert('displayCourses: ' + e.message);
+				alert('displayCoursesDropdown: ' + e.message);
 				throw(e);
 			}
 		}
 
-		function displaySubjects() {
+		function displayLecturesDropdown(chosenCourses) {
 			try {
-				resetSubjects();
-				$('#numSubjects').append(Array.from(currentSubjects).length-1);
-
-				let htmlSubjects = '<div class="dropdown"><button class="btn btn-secondary dropdown-toggle active" type="button" id="dropdownSubjects" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allSubjectsText + '</button><div class="dropdown-menu" aria-labelledby="dropdownSubjects">';
-				for (const currSubject of currentSubjects) {
-					htmlSubjects = htmlSubjects +
-						'<button class="dropdown-item choiceSubject" type="button" onclick="updateSubjectsDropdown(this)">' + currSubject + '</button>';
-				}
-				htmlSubjects += '</div></div>';
-				$('#idSubjects').append(htmlSubjects);
+				let filteredItems = getLecturesForCourses(chosenCourses);
+				filteredItems.sort((a, b) => a.localeCompare(b));
+				filteredItems.unshift(allLecturesText);
+				setLecturesInDom(chosenCourses, filteredItems);
 			}
 			catch(e) {
-				alert('displaySubjects: ' + e.message);
+				alert('displayLecturesDropdown: ' + e.message + ', chosenCourses = [' + chosenCourses + ']');
 				throw(e);
 			}
 		}
 
-		function displayLectures() {
+		function displaySubjectsDropdown(chosenCourses, chosenLectures) {
 			try {
-//throw new Error("test");
-				// merge info from the whole database into currentLectures, even if thisSubject is not associated with anyLecture for currentCourse
-				currentLectures.length = 0;
-				for (const datum of info) {
-					const { cast, host, thisCourse, abbrevCourse, date } = datum;
-					for (const [index, anyLecture] of datum.theseLectures.entries()) {
-						const { title, url } = anyLecture;
-						for (const [index2, thisClip] of anyLecture.theseClips.entries()) {
-							const { thisSubject, ts, duration, start, end } = thisClip;
-							const urlClip = createClipUrl(url, start, end);
-							if (($.inArray(thisCourse, currentCourses) !== -1) && ($.inArray(thisSubject, currentSubjects) !== -1)) {
-								currentLectures.push({"cast" : cast, "host" : host, "thisCourse" : thisCourse, "abbrevCourse" : abbrevCourse, "date" : date, "thisSubject" : thisSubject, "title" : title, "url" : urlClip, "duration" : duration, "start" : start, "end" : end,});
-							}
-						}
-					}
-				}
-				currentLectures.sort((a, b) => a.title.localeCompare(b.title));
-				let htmlLectures = '<div class="accordion" id="accordionLectures">';
-				$.each(currentSubjects, function(index, thisSubject) {
-					if (thisSubject === allSubjectsText) return;
-					let numLecturesForSubject = currentLectures.filter(function(thisLecture) {return thisLecture.thisSubject === thisSubject}).length;
-					if (numLecturesForSubject > 0) {
-						const idSubject = thisSubject.replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_").replace(/\!/g, "_").replace(/\&/g, "_");	// regexp
-						htmlLectures += '<div class="card">';
-						htmlLectures += '<div class="card-header" id="heading' + idSubject + '">';
-						htmlLectures += '<button class="btn btn-link btn-block text-left dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse' + idSubject + '" aria-expanded="true" aria-controls="collapse' + idSubject + '">';
-						htmlLectures += thisSubject + ' (' + numLecturesForSubject + ')';
-						htmlLectures += '</button>';
-						htmlLectures += '</div>';
-
-						htmlLectures += '<div id="collapse' + idSubject + '" class="collapse" aria-labelledby="heading' + idSubject + '" data-parent="#accordionLectures">';
-						let countLectures = 0;
-						for (const thisLecture of currentLectures) {
-							const { title, url, abbrevCourse, date, duration, start, end } = thisLecture;
-							const lectureSubject = thisLecture.thisSubject;
-							const buttonId = "button_" + idSubject + countLectures;
-							const videoId = "video_" + idSubject + countLectures++;
-							const printableDuration = prettyPrintDuration(duration);
-							const printablestart = (typeof start === 'undefined') ? "" : start;
-							const printableend = (typeof end === 'undefined') ? "" : end;
-							const printableTimeRange = ((printablestart === "") || (printableend === "")) ? "" : "(" + printablestart + " to " + printableend + ")";
-							if (lectureSubject === thisSubject) {
-								htmlLectures += '<div class="card-body">';
-								if (currentCourses[0] == allCoursesText) {
-									htmlLectures += '<div class="text-right">' + thisLecture.abbrevCourse + '</div>';
-								}
-								htmlLectures += '<div class="text-right">' + thisLecture.date + '</div>';
-								htmlLectures += '<div class="text-left">' + printableDuration + ' ' + printableTimeRange + '</div>';
-								htmlLectures += '<button id="' + buttonId + '" class="btn btn-link btn-block text-left dropdown-toggle border" type="button" onclick="displayVideo(\'' + thisLecture.url + '\', \'' + videoId + '\', \'' + buttonId + '\');">  ' + title + '</button><div id="' + videoId + '"></div>';
-								htmlLectures += '</div>';
-							}
-						}
-						htmlLectures += '</div></div>';
-					}
-				});
-				htmlLectures += '</div>';
-				$('#accordionLectures').remove();
-				$('#idLectures').append(htmlLectures);
+				let filteredItems = getSubjectsForLectures(chosenCourses, chosenLectures);
+				// remove duplicates
+				filteredItems = [...new Set(filteredItems)];
+				filteredItems.sort((a, b) => a.localeCompare(b));
+				filteredItems.unshift(allSubjectsText);
+				setSubjectsInDom(chosenLectures, filteredItems);
 			}
 			catch(e) {
-				alert('displayLectures: ' + e.message);
-				throw(e);
-			}
-		}
-/*
-		function updateCurrentSubjects() {
-			try {
-alert('current course: ' + currentCourses[0]);
-alert('current subject: ' + currentSubjects[0]);
-//updateLectures
-				currentSubjects.length = 0;
-				currentSubjects.push(allSubjectsText);
-alert('current subject: ' + currentSubjects[0]);
-
-				for (const datum of info) {
-					const { cast, host, thisCourse, abbrevCourse, date } = datum;
-					for (const [index, anyLecture] of datum.theseLectures.entries()) {
-						const { title, url } = anyLecture;
-						for (const [index2, thisClip] of anyLecture.theseClips.entries()) {
-							const { thisSubject, ts, duration, start, end } = thisClip;
-							const urlClip = createClipUrl(url, start, end);
-							if (($.inArray(thisCourse, currentCourses) !== -1) && ($.inArray(thisSubject, currentSubjects) === -1)) {
-								currentSubjects.push(thisSubject);
-							}
-						}
-					}
-				}
-
-			}
-			catch(e) {
-				alert('updateCurrentSubjects: ' + e.message);
-				throw(e);
-			}
-		}
-*/
-
-		function updateCoursesDropdown(itemClicked) {
-			try {
-				document.getElementById("dropdownCourses").innerHTML = itemClicked.innerHTML;
-				let choices = $('.choiceCourse');
-				for (let i=0; i<choices.length; i++) {
-					if (choices[i] === itemClicked) {
-						choices[i].classList.add("active");
-					}
-					else {
-						choices[i].classList.remove("active");
-					}
-				}
-				if (itemClicked.innerHTML === allCoursesText) {
-					resetCourses();
-				} else {
-					currentCourses.length = 0;
-					currentCourses.push(itemClicked.innerHTML);
-				}
-//updateCurrentSubjects();
-				displayLectures();
-			}
-			catch(e) {
-				alert('updateCoursesDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
-				throw(e);
-			}
-		}
-
-		function updateSubjectsDropdown(itemClicked) {
-			try {
-				document.getElementById("dropdownSubjects").innerHTML = itemClicked.innerHTML;
-				let choices = $('.choiceSubject');
-				for (let i=0; i<choices.length; i++) {
-					if (choices[i] === itemClicked) {
-						choices[i].classList.add("active");
-					}
-					else {
-						choices[i].classList.remove("active");
-					}
-				}
-				if (itemClicked.innerHTML === allSubjectsText) {
-					resetSubjects();
-				} else {
-					currentSubjects.length = 0;
-					currentSubjects.push(itemClicked.innerHTML);
-				}
-				displayLectures();
-			}
-			catch(e) {
-				alert('updateSubjectsDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
-				throw(e);
-			}
-		}
-
-		function prettyPrintInt(val, description) {
-			try {
-				if (val == 0) return "";
-				if (val == 1) return val + " " + description;
-				return val + " " + description + "s";
-			}
-			catch(e) {
-				alert('prettyPrintInt: ' + e.message + ', val = ' + val + ', description = ' + description);
+				alert('displaySubjectsDropdown: ' + e.message + ', chosenCourses = [' + chosenCourses + '], chosenLectures = [' + chosenLectures + ']');
 				throw(e);
 			}
 		}
@@ -924,21 +704,656 @@ alert('current subject: ' + currentSubjects[0]);
 			}
 		}
 
+		function displayLectureClipCards() {
+			try {
+				const chosenCourse = document.querySelector('.choiceCourse.active').innerHTML;
+				const chosenLecture = document.querySelector('.choiceLecture.active').innerHTML;
+				const chosenSubject = document.querySelector('.choiceSubject.active').innerHTML;
+
+				const flattenedData = getFlattenedData([chosenCourse], [chosenLecture], [chosenSubject]);
+
+				let htmlClipCards = '<div class="accordion" id="accordionClipCards">';
+
+				flattenedData.sort((a, b) => a.thisSubject.localeCompare(b.thisSubject));
+				let displayedCards = [];
+				for (const flattenedDatum of flattenedData) {
+					if (!displayedCards.includes(flattenedDatum.thisSubject)) {
+						displayedCards = displayedCards.concat(flattenedDatum.thisSubject);
+
+						const filteredLecturesForSubject = flattenedData.filter(function(obj) {return flattenedDatum.thisSubject === obj.thisSubject});
+						const numFilteredLecturesForSubject = filteredLecturesForSubject.length;
+
+						const idSubject = flattenedDatum.thisSubject.replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_").replace(/\!/g, "_").replace(/\&/g, "_");	// regexp
+						htmlClipCards += '<div class="card">';
+						htmlClipCards += '<div class="card-header" id="heading' + idSubject + '">';
+						htmlClipCards += '<button class="btn btn-link btn-block text-left dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse' + idSubject + '" aria-expanded="true" aria-controls="collapse' + idSubject + '">';
+						htmlClipCards += flattenedDatum.thisSubject + ' (' + numFilteredLecturesForSubject + ')';
+						htmlClipCards += '</button>';
+						htmlClipCards += '</div>';
+						htmlClipCards += '<div id="collapse' + idSubject + '" class="collapse" aria-labelledby="heading' + idSubject + '" data-parent="#accordionClipCards">';
+						for (let i = 0; i < numFilteredLecturesForSubject; i++) {
+							const buttonId = "button_" + idSubject + i;
+							const videoId = "video_" + idSubject + i;
+							const printableDuration = prettyPrintDuration(filteredLecturesForSubject[i].duration);
+							const printablestart = (typeof filteredLecturesForSubject[i].start === 'undefined') ? "" : filteredLecturesForSubject[i].start;
+							const printableend = (typeof filteredLecturesForSubject[i].end === 'undefined') ? "" : filteredLecturesForSubject[i].end;
+							const printableTimeRange = ((printablestart === "") || (printableend === "")) ? "" : "(" + printablestart + " to " + printableend + ")";
+							htmlClipCards += '<div class="card-body">';
+							htmlClipCards += '<div class="text-right">' + filteredLecturesForSubject[i].abbrevCourse + '</div>';
+							htmlClipCards += '<div class="text-right">' + filteredLecturesForSubject[i].date + '</div>';
+							htmlClipCards += '<div class="text-left">' + printableDuration + ' ' + printableTimeRange + '</div>';
+							htmlClipCards += '<button id="' + buttonId + '" class="btn btn-link btn-block text-left dropdown-toggle border" type="button" onclick="displayVideo(\'' + filteredLecturesForSubject[i].urlClip + '\', \'' + videoId + '\', \'' + buttonId + '\');">  ' + filteredLecturesForSubject[i].title + '</button><div id="' + videoId + '"></div>';
+							htmlClipCards += '</div>';
+						}
+						htmlClipCards += '</div></div>';
+					}
+				}
+				htmlClipCards += '</div>';
+				$('#idClipCards').html(htmlClipCards);
+			}
+			catch(e) {
+				alert('displayLectureClipCards: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function setCoursesInDom(chosenItems) {
+			try {
+				let htmlDropdown = '<div class="dropdown"><button class="btn btn-secondary mr-2 dropdown-toggle active" type="button" id="dropdownCourses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allCoursesText + '</button><div class="dropdown-menu" aria-labelledby="dropdownCourses">';
+				for (const currItem of chosenItems) {
+					htmlDropdown = htmlDropdown +
+						'<button class="dropdown-item choiceCourse" type="button" onclick="updateCoursesDropdown(this)">' + currItem + '</button>';
+				}
+				htmlDropdown += '</div></div>';
+				$('#idCourses').html(htmlDropdown);
+			}
+			catch(e) {
+				alert('setCoursesInDom: ' + e.message + ', chosenItems = [' + chosenItems + ']');
+				throw(e);
+			}
+		}
+
+		function setLecturesInDom(chosenCourses, chosenLectures) {
+			try {
+				let htmlDropdown = '<div class="dropdown"><button class="btn btn-secondary mr-2 dropdown-toggle active" type="button" id="dropdownLectures" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allLecturesText + '</button><div class="dropdown-menu" aria-labelledby="dropdownLectures">';
+				for (const chosenLecture of chosenLectures) {
+					htmlDropdown = htmlDropdown +
+						'<button class="dropdown-item choiceLecture" type="button" onclick="updateLecturesDropdown(this)">' + chosenLecture + '</button>';
+				}
+				htmlDropdown += '</div></div>';
+				$('#idLectures').html(htmlDropdown);
+			}
+			catch(e) {
+				alert('setLecturesInDom: ' + e.message + ', chosenCourses = [' + chosenCourses + '], chosenLectures = [' + chosenLectures + ']');
+				throw(e);
+			}
+		}
+
+		function setSubjectsInDom(chosenLectures, chosenSubjects) {
+			try {
+				let htmlDropdown = '<div class="dropdown"><button class="btn btn-secondary mr-2 dropdown-toggle active" type="button" id="dropdownSubjects" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' + allSubjectsText + '</button><div class="dropdown-menu" aria-labelledby="dropdownSubjects">';
+				for (const chosenSubject of chosenSubjects) {
+					htmlDropdown = htmlDropdown +
+						'<button class="dropdown-item choiceSubject" type="button" onclick="updateSubjectsDropdown(this)">' + chosenSubject + '</button>';
+				}
+				htmlDropdown += '</div></div>';
+				$('#idSubjects').html(htmlDropdown);
+			}
+			catch(e) {
+				alert('setSubjectsInDom: ' + e.message + ', chosenLectures = [' + chosenLectures + '], chosenSubjects = [' + chosenSubjects + ']');
+				throw(e);
+			}
+		}
+
+		function updateCoursesDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownCourses").innerHTML = itemClicked.innerHTML;
+				let choices = $('.choiceCourse');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+				displayLecturesDropdown([itemClicked.innerHTML]);
+				displaySubjectsDropdown([itemClicked.innerHTML], [allLecturesText]);
+				$('.choiceLecture')[0].classList.add("active");
+				$('.choiceSubject')[0].classList.add("active");
+
+				displayLectureClipCards();
+			}
+			catch(e) {
+				alert('updateCoursesDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
+				throw(e);
+			}
+		}
+
+		function updateLecturesDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownLectures").innerHTML = itemClicked.innerHTML;
+				let choices = $('.choiceLecture');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+				const chosenCourse = document.querySelector('.choiceCourse.active').innerHTML;
+				displaySubjectsDropdown([chosenCourse], [itemClicked.innerHTML]);
+				$('.choiceSubject')[0].classList.add("active");
+				displayLectureClipCards();
+			}
+			catch(e) {
+				alert('updateLecturesDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
+				throw(e);
+			}
+		}
+
+		function updateSubjectsDropdown(itemClicked) {
+			try {
+				document.getElementById("dropdownSubjects").innerHTML = itemClicked.innerHTML;
+				let choices = $('.choiceSubject');
+				for (let i=0; i<choices.length; i++) {
+					if (choices[i] === itemClicked) {
+						choices[i].classList.add("active");
+					}
+					else {
+						choices[i].classList.remove("active");
+					}
+				}
+				displayLectureClipCards();
+			}
+			catch(e) {
+				alert('updateSubjectsDropdown: ' + e.message + ', itemClicked.innerHTML = ' + itemClicked.innerHTML);
+				throw(e);
+			}
+		}
+
+		function prettyPrintInt(val, description) {
+			try {
+				if (val == 0) return "";
+				if (val == 1) return val + " " + description;
+				return val + " " + description + "s";
+			}
+			catch(e) {
+				alert('prettyPrintInt: ' + e.message + ', val = ' + val + ', description = ' + description);
+				throw(e);
+			}
+		}
+
+		function getNumAllCourses() {
+			try {
+				return getCourses().length;
+			}
+			catch(e) {
+				alert('getNumAllCourses: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function getNumAllLectures() {
+			try {
+				let numLectures = 0;
+				for (const datum of info) {
+					numLectures += Array.from(datum.theseLectures.entries()).length;
+				}
+				return numLectures;
+			}
+			catch(e) {
+				alert('getNumAllLectures: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function getNumAllUniqueSubjects() {
+			try {
+				// we need to remove duplicate subjects, so we can't just rely on lengths 
+				let allSubjects = [];
+				for (const datum of info) {
+					for (const [index, thisLecture] of datum.theseLectures.entries()) {
+						for (const [index2, thisClip] of thisLecture.theseClips.entries()) {
+							if ($.inArray(thisClip.thisSubject, allSubjects) === -1) {
+								allSubjects.push(thisClip.thisSubject);
+							}
+						}
+					}
+				}
+				return allSubjects.length;
+			}
+			catch(e) {
+				alert('getNumAllUniqueSubjects: ' + e.message);
+				throw(e);
+			}
+		}
+
 		$(document).ready(function() {
 			for (const datum of info) {
 				for (const [index, thisLecture] of datum.theseLectures.entries()) {
 					for (const [index2, thisClip] of thisLecture.theseClips.entries()) {
 						thisClip.duration = calculateDuration(thisClip.start, thisClip.end);
+						thisClip.urlClip = createClipUrl(thisLecture.url, thisClip.start, thisClip.end);
 					}
 				}
 			}
 			$('#dateLastUpdated').append(dateLastUpdated);
-			displayCourses();
-			displaySubjects();
-			resetLectures();
-			$('#numLectures').append(Array.from(currentLectures).length-1);
-			displayLectures();
+			displayCoursesDropdown();
+			displayLecturesDropdown(getCourses());
+			displaySubjectsDropdown(getCourses(), getLecturesForCourses(getCourses()));
+			$('.choiceCourse')[0].classList.add("active");
+			$('.choiceLecture')[0].classList.add("active");
+			$('.choiceSubject')[0].classList.add("active");
+
+			$('#numCourses').append(getNumAllCourses());
+			$('#numLectures').append(getNumAllLectures());
+			$('#numSubjects').append(getNumAllUniqueSubjects());
+
+			displayLectureClipCards();
 		});
+
+		function getCourses() {
+			try {
+				return $.map(info, function(item) {return item.thisCourse;});
+			}
+			catch(e) {
+				alert('getCourses: ' + e.message);
+				throw(e);
+			}
+		}
+		function regressionGetCourses() {
+			try {
+				// --------- only possible test case
+				let expected = info.length;
+				let allCourses = getCourses();
+				if (allCourses.length !== expected) throw new Error('expected ' + expected + ' for all courses, found ' + allCourses.length);
+				expected = 'Advanced Topics in Cryptography';
+				if (allCourses[info.length-1] !== expected) throw new Error('expected ' + expected + ' for last course, found ' + allCourses[info.length-1]);
+			}
+			catch(e) {
+				alert('regressionGetCourses: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function getLecturesForCourses(chosenCourses) {
+			try {
+				let filteredLectures = [];
+				for (const chosenCourse of chosenCourses) {
+					for (const datum of info) {
+						const { cast, host, thisCourse, abbrevCourse, date, theseLectures } = datum;
+						if ((chosenCourse === allCoursesText) || (chosenCourse === thisCourse)) {
+							filteredLectures = filteredLectures.concat(theseLectures.map(eachLecture => eachLecture.title));
+						}
+					}
+				}
+				return filteredLectures;
+			}
+			catch(e) {
+				alert('getLecturesForCourses: ' + e.message + ', chosenCourses = [' + chosenCourses + ']');
+				throw(e);
+			}
+		}
+		function regressionGetLecturesForCourses() {
+			try {
+				// --------- all courses
+				let chosenCourses = [allCoursesText];
+				let expected = getNumAllLectures();
+				let filteredLectures = getLecturesForCourses(chosenCourses);
+				if (filteredLectures.length !== expected) throw new Error('expected ' + expected + ' for all courses, found ' + filteredLectures.length);
+
+				// --------- one course
+				chosenCourses = ['Advanced Topics in Cryptography'];
+				expected = 17;
+				filteredLectures = getLecturesForCourses(chosenCourses);
+				if (filteredLectures.length !== expected) throw new Error('expected ' + expected + ' for specific course, found ' + filteredLectures.length);
+				expected = 'Video 17 : BARGs Implies SNARGs and Connection to Non-Signaling PCPs, Part 2';
+				if (filteredLectures[0] !== expected) throw new Error('expected ' + expected + ' for specific course, found ' + filteredLectures[0]);
+			}
+			catch(e) {
+				alert('regressionGetLecturesForCourses: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function getSubjectsForLectures(chosenCourses, chosenLectures) {
+			try {
+				let filteredSubjects = [];
+				for (const chosenCourse of chosenCourses) {
+					for (const chosenLecture of chosenLectures) {
+						for (const datum of info) {
+							const { cast, host, thisCourse, abbrevCourse, date, theseLectures } = datum;
+							if ((chosenCourse === allCoursesText) || (chosenCourse === thisCourse)) {
+								for (const thisLecture of theseLectures) {
+									const { title, url, theseClips } = thisLecture;
+									if ((chosenLecture === allLecturesText) || (chosenLecture === title)) {
+										filteredSubjects = filteredSubjects.concat(theseClips.map(eachClip => eachClip.thisSubject));
+									}
+								}
+							}
+						}
+					}
+				}
+				return filteredSubjects;
+			}
+			catch(e) {
+				alert('getSubjectsForLectures: ' + e.message + ', chosenCourses = [' + chosenCourses + '], chosenLectures = [' + chosenLectures + ']');
+				throw(e);
+			}
+		}
+		function regressionGetSubjectsForLectures() {
+			try {
+				// --------- all courses, all lectures (enumerated)
+				let chosenCourses = getCourses();
+				let chosenLectures = getLecturesForCourses([allCoursesText]);
+				let filteredSubjects = getSubjectsForLectures(chosenCourses, chosenLectures);
+				// remove duplicates
+				filteredSubjects = [...new Set(filteredSubjects)];
+
+				let expected = getNumAllUniqueSubjects();
+				if (filteredSubjects.length !== expected) throw new Error('expected ' + expected + ' for all courses, all lectures (enumerated), found ' + filteredSubjects.length);
+
+				// --------- all courses, all lectures
+				chosenCourses = [allCoursesText];
+				chosenLectures = [allLecturesText];
+				filteredSubjects = getSubjectsForLectures(chosenCourses, chosenLectures);
+				// remove duplicates
+				filteredSubjects = [...new Set(filteredSubjects)];
+				expected = getNumAllUniqueSubjects();
+				if (filteredSubjects.length !== expected) throw new Error('expected ' + expected + ' for all courses, all lectures, found ' + filteredSubjects.length);
+
+				// --------- all courses, one lecture (with 3 duplicate subjects)
+				chosenCourses = [allCoursesText];
+				chosenLectures = ['Video 17 : BARGs Implies SNARGs and Connection to Non-Signaling PCPs, Part 2'];
+				filteredSubjects = getSubjectsForLectures(chosenCourses, chosenLectures);
+				expected = 22;
+				if (filteredSubjects.length !== expected) throw new Error('expected ' + expected + ' for all courses, one lecture, found ' + filteredSubjects.length);
+				expected = 'SNARG Construction';
+				if (filteredSubjects[0] !== expected) throw new Error('expected ' + expected + ' for specific lecture, found ' + filteredSubjects[0]);
+
+				// --------- one course, all lectures (enumerated)
+				chosenCourses = ['Advanced Topics in Cryptography'];
+				chosenLectures = getLecturesForCourses(chosenCourses);
+				filteredSubjects = getSubjectsForLectures(chosenCourses, chosenLectures);
+				expected = 166;
+				if (filteredSubjects.length !== expected) throw new Error('expected ' + expected + ' for all courses, one lecture, found ' + filteredSubjects.length);
+				expected = 'SNARG Construction';
+				if (filteredSubjects[0] !== expected) throw new Error('expected ' + expected + ' for specific lecture, found ' + filteredSubjects[0]);
+
+				// --------- one course, all lectures
+				chosenCourses = ['Advanced Topics in Cryptography'];
+				chosenLectures = [allLecturesText];
+				filteredSubjects = getSubjectsForLectures(chosenCourses, chosenLectures);
+				expected = 166;
+				if (filteredSubjects.length !== expected) throw new Error('expected ' + expected + ' for all courses, one lecture, found ' + filteredSubjects.length);
+				expected = 'SNARG Construction';
+				if (filteredSubjects[0] !== expected) throw new Error('expected ' + expected + ' for specific lecture, found ' + filteredSubjects[0]);
+
+				// --------- one course, one lecture (with 3 duplicate subjects)
+				chosenCourses = ['Advanced Topics in Cryptography'];
+				chosenLectures = ['Video 17 : BARGs Implies SNARGs and Connection to Non-Signaling PCPs, Part 2'];
+				filteredSubjects = getSubjectsForLectures(chosenCourses, chosenLectures);
+				expected = 22;
+				if (filteredSubjects.length !== expected) throw new Error('expected ' + expected + ' for all courses, one lecture, found ' + filteredSubjects.length);
+				expected = 'SNARG Construction';
+				if (filteredSubjects[0] !== expected) throw new Error('expected ' + expected + ' for specific lecture, found ' + filteredSubjects[0]);
+			}
+			catch(e) {
+				alert('regressionGetSubjectsForLectures: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function getUniqueObjects(flattenedArrayOfObjects) {
+			try {
+				const result = flattenedArrayOfObjects.filter((thing, index, self) =>
+							index === self.findIndex((t) => {
+								const keys = Object.keys(t);
+								let equality = true;
+								for (const key of keys) {
+									equality = (equality && (t[key] === thing[key]));
+								}
+								return equality;
+							})
+						);
+				return result;
+			}
+			catch(e) {
+				alert('getUniqueObjects: ' + e.message + ', flattenedArrayOfObjects = ' + JSON.stringify(flattenedArrayOfObjects));
+				throw(e);
+			}
+		}
+		function regressionGetUniqueObjects() {
+			try {
+				// --------- input is empty
+				let input = [];
+				let uniqueObjects = getUniqueObjects(input);
+				let expected = 0;
+				if (uniqueObjects.length !== expected) throw new Error('expected ' + expected + ' for empty input, found ' + uniqueObjects.length);
+
+				// --------- input is has one null value
+				input = [{"key" : null}];
+				uniqueObjects = getUniqueObjects(input);
+				expected = 1;
+				if (uniqueObjects.length !== expected) throw new Error('expected ' + expected + ' for one null value, found ' + uniqueObjects.length);
+
+				// --------- input is has one undefined value
+				input = [{"key" : undefined}];
+				uniqueObjects = getUniqueObjects(input);
+				expected = 1;
+				if (uniqueObjects.length !== expected) throw new Error('expected ' + expected + ' for one undefined value, found ' + uniqueObjects.length);
+
+				// --------- input is has one defined value
+				input = [{"key" : "value"}];
+				uniqueObjects = getUniqueObjects(input);
+				expected = 1;
+				if (uniqueObjects.length !== expected) throw new Error('expected ' + expected + ' for one defined value, found ' + uniqueObjects.length);
+
+				// --------- input is has two defined unequal values
+				input = [{"key" : "value1"}, {"key" : "value2"}];
+				uniqueObjects = getUniqueObjects(input);
+				expected = 2;
+				if (uniqueObjects.length !== expected) throw new Error('expected ' + expected + ' for two defined unequal values, found ' + uniqueObjects.length);
+
+				// --------- input is has two defined equal values
+				input = [{"key" : "value1"}, {"key" : "value1"}];
+				uniqueObjects = getUniqueObjects(input);
+				expected = 1;
+				if (uniqueObjects.length !== expected) throw new Error('expected ' + expected + ' for two defined equal values, found ' + uniqueObjects.length);
+
+				// --------- input is has multiple keys with only the second value unequal
+				input = [{"key1" : "value1", "key2" : "value2"}, {"key1" : "value1", "key2" : "value3"}];
+				uniqueObjects = getUniqueObjects(input);
+				expected = 2;
+				if (uniqueObjects.length !== expected) throw new Error('expected ' + expected + ' for multiple keys with only the second value unequal, found ' + uniqueObjects.length);
+
+				// --------- input is has multiple keys with all values equal
+				input = [{"key1" : "value1", "key2" : "value2"}, {"key1" : "value1", "key2" : "value2"}];
+				uniqueObjects = getUniqueObjects(input);
+				expected = 1;
+				if (uniqueObjects.length !== expected) throw new Error('expected ' + expected + ' for multiple keys with all values equal, found ' + uniqueObjects.length);
+			}
+			catch(e) {
+				alert('regressionGetUniqueObjects: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function getFlattenedData(chosenCourses, chosenLectures, chosenSubjects) {
+			try {
+				let flattenedData = [];
+				for (const chosenCourse of chosenCourses) {
+					for (const datum of info) {
+						const { theseLectures, ...strippedCourseData } = datum;
+						if ((chosenCourse === allCoursesText) || (chosenCourse === strippedCourseData.thisCourse)) {
+							for (const chosenLecture of chosenLectures) {
+								for (const thisLecture of theseLectures) {
+									const { theseClips, ...strippedLectureData } = thisLecture;
+									if ((chosenLecture === allLecturesText) || (chosenLecture === strippedLectureData.title)) {
+										let startSubjects = [];
+										for (const chosenSubject of chosenSubjects) {
+											for (const thisClip of theseClips) {
+												if ((chosenSubject === allSubjectsText) || (chosenSubject === thisClip.thisSubject)) {
+													const startSubject = {"start" : thisClip.start, "thisSubject" : thisClip.thisSubject};
+													// a subject can appear more than one time in a lecture, but if so
+													// it must have different start times
+													if (!startSubjects.includes(JSON.stringify(startSubject))) {
+														startSubjects = startSubjects.concat(JSON.stringify(startSubject));
+														const flattenedLectureSubject = {...strippedLectureData, ...thisClip};
+														const flattenedCourseLectureSubject = {...strippedCourseData, ...flattenedLectureSubject};
+														flattenedData = flattenedData.concat(flattenedCourseLectureSubject);
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				return flattenedData;
+			}
+			catch(e) {
+				alert('getFlattenedData: ' + e.message + ', chosenCourses = [' + chosenCourses + '], chosenLectures = [' + chosenLectures + '], chosenSubjects = [' + chosenSubjects + ']');
+				throw(e);
+			}
+		}
+		function regressionGetFlattenedData() {
+			try {
+				const expectedNumProperties = 14;
+
+				// --------- two courses, two lectures in 2nd course, two subjects in 2nd lecture only (enumerated)
+				let chosenCourses = ['Mathematics for Computer Science', 'Advanced Topics in Cryptography'];
+				let chosenLectures = ['Video 14 : Succinct Non-Interactive Arguments for Batch NP (BARGs) from LWE, Part 1', 'Video 13 : Soundness of the Fiat-Shamir Paradigm in the Standard Model, Part 2'];
+				let chosenSubjects = ['Evasive or Sparse Language', 'Searchable Relation'];
+				let flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+//for (let i=0; i<flattenedData.length; i++)  
+//console.log(JSON.stringify(flattenedData[i]));
+				let expected = chosenSubjects.length;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, two subjects in 2nd lecture only (enumerated), found ' + flattenedData.length);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, two subjects in 2nd lecture only (enumerated), found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- two courses, two lectures in 2nd course, two subjects but one belongs in wrong lecture (enumerated)
+				chosenCourses = ['Mathematics for Computer Science', 'Advanced Topics in Cryptography'];
+				chosenLectures = ['Video 14 : Succinct Non-Interactive Arguments for Batch NP (BARGs) from LWE, Part 1', 'Video 13 : Soundness of the Fiat-Shamir Paradigm in the Standard Model, Part 2'];
+				chosenSubjects = ['Evasive or Sparse Language', 'Circular Security'];	// Circular Security belongs in lecture 12
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+				expected = 1;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, two subjects but one belongs in wrong lecture (enumerated), found ' + flattenedData.length);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, two subjects but one belongs in wrong lecture (enumerated), found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- two courses, two lectures in 2nd course, two subjects with first in first lecture, second in second (enumerated)
+				chosenCourses = ['Mathematics for Computer Science', 'Advanced Topics in Cryptography'];
+				chosenLectures = ['Video 14 : Succinct Non-Interactive Arguments for Batch NP (BARGs) from LWE, Part 1', 'Video 13 : Soundness of the Fiat-Shamir Paradigm in the Standard Model, Part 2'];
+				chosenSubjects = ['SSB with FHE', 'Evasive or Sparse Language'];
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+				expected = 2;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, two subjects with first in first lecture, second in second (enumerated), found ' + flattenedData.length);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, two subjects with first in first lecture, second in second (enumerated), found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- two courses, two lectures in 2nd course, one subject which exists once in both lectures (enumerated)
+				chosenCourses = ['Mathematics for Computer Science', 'Advanced Topics in Cryptography'];
+				chosenLectures = ['Video 14 : Succinct Non-Interactive Arguments for Batch NP (BARGs) from LWE, Part 1', 'Video 13 : Soundness of the Fiat-Shamir Paradigm in the Standard Model, Part 2'];
+				chosenSubjects = ['CIH (Correlation Intractable Hash)'];
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+				expected = 2;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, one subject which exists once in both lectures (enumerated), found ' + flattenedData.length);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, one subject which exists once in both lectures (enumerated), found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- two courses, two lectures in 2nd course, one duplicate subject which exists once in both lectures (enumerated)
+				chosenCourses = ['Mathematics for Computer Science', 'Advanced Topics in Cryptography'];
+				chosenLectures = ['Video 14 : Succinct Non-Interactive Arguments for Batch NP (BARGs) from LWE, Part 1', 'Video 13 : Soundness of the Fiat-Shamir Paradigm in the Standard Model, Part 2'];
+				chosenSubjects = ['CIH (Correlation Intractable Hash)', 'CIH (Correlation Intractable Hash)'];
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+				expected = 2;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, one duplicate subject which exists once in both lectures (enumerated), found ' + flattenedData.length);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, one duplicate subject which exists once in both lectures (enumerated), found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- two courses, two lectures in 2nd course, two subjects with first in second lecture, second in first (enumerated)
+				chosenCourses = ['Mathematics for Computer Science', 'Advanced Topics in Cryptography'];
+				chosenLectures = ['Video 14 : Succinct Non-Interactive Arguments for Batch NP (BARGs) from LWE, Part 1', 'Video 13 : Soundness of the Fiat-Shamir Paradigm in the Standard Model, Part 2'];
+				chosenSubjects = ['Evasive or Sparse Language', 'SSB with FHE'];
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+				expected = 2;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, two subjects with first in second lecture, second in first (enumerated), found ' + flattenedData.length);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, two subjects with first in second lecture, second in first (enumerated), found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- all courses, all lectures, all subjects
+				chosenCourses = [allCoursesText];
+				chosenLectures = [allLecturesText];
+				chosenSubjects = [allSubjectsText];
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+
+				expected = getSubjectsForLectures(chosenCourses, chosenLectures).length;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for all courses, all lectures, found ' + flattenedData.length);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for all courses, all lectures, all subjects, found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- two courses, two lectures in 2nd course, all subjects (enumerated)
+				chosenCourses = ['Mathematics for Computer Science', 'Advanced Topics in Cryptography'];
+				chosenLectures = ['Video 14 : Succinct Non-Interactive Arguments for Batch NP (BARGs) from LWE, Part 1', 'Video 13 : Soundness of the Fiat-Shamir Paradigm in the Standard Model, Part 2'];
+				chosenSubjects = getSubjectsForLectures(chosenCourses, chosenLectures);
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+				expected = chosenSubjects.length;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, all subjects (enumerated), found ' + flattenedData.length);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for two courses, two lectures in 2nd course, all subjects (enumerated), found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- all courses, all lectures, all subjects (enumerated)
+				chosenCourses = getCourses();
+				chosenLectures = getLecturesForCourses(chosenCourses);
+				chosenSubjects = getSubjectsForLectures(chosenCourses, chosenLectures);
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+
+				expected = getUniqueObjects(flattenedData).length;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' unique items for all courses, all lectures, all subjects (enumerated), found ' + flattenedData.length);
+				expected = chosenSubjects.length;	// these have duplicates, which should still work
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for all courses, all lectures, all subjects (enumerated), found ' + flattenedData.length);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for all courses, all subjects (enumerated), found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- all courses, one lecture, all subjects (with 3 duplicate subjects)
+				chosenCourses = [allCoursesText];
+				chosenLectures = ['Video 17 : BARGs Implies SNARGs and Connection to Non-Signaling PCPs, Part 2'];
+				chosenSubjects = [allSubjectsText];
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+				expected = 22;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for all courses, one lecture, all subjects, found ' + flattenedData.length);
+				expected = 'SNARG Construction';
+				if (flattenedData[0].thisSubject !== expected) throw new Error('expected ' + expected + ' for all courses, one lecture, all subjects, found ' + flattenedData[0].title);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for all courses, one lecture, all subjects, found ' + Object.keys(flattenedData[0]).length);
+			}
+			catch(e) {
+				alert('regressionGetFlattenedData: ' + e.message);
+				throw(e);
+			}
+		}
+
+		function regressionTest() {
+			try {
+				// do not change the order of these, as later tests depend on calling previously tested functions to set up the test with enumerated arrays
+				regressionGetCourses();
+				regressionGetLecturesForCourses();
+				regressionGetSubjectsForLectures();
+				regressionGetUniqueObjects();
+				regressionGetFlattenedData();
+				alert('tests passed');
+			}
+			catch(e) {
+				alert('regressionTest: ' + e.message);
+				throw(e);
+			}
+		}
 
 		</script>
 		<style>
@@ -957,7 +1372,12 @@ alert('current subject: ' + currentSubjects[0]);
 	<nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light">
 		<div id="navbarText" class="navbar-collapse collapse show" style="">
 			<nav class="nav">
+<!--
+<button class="btn btn-secondary mr-2" type="button" onclick="regressionTest()">Test</button>
+-->
 			<div id="idCourses">
+			</div>
+			<div id="idLectures">
 			</div>
 			<div id="idSubjects">
 			</div>
@@ -978,7 +1398,7 @@ alert('current subject: ' + currentSubjects[0]);
 			<p class="card-text text-center">Date Last Updated : <strong><span id="dateLastUpdated"></span></strong></p>
 			<hr/>
 
-			<div id="idLectures">
+			<div id="idClipCards">
 			</div>
 		</div>
 	</div>
