@@ -18,7 +18,7 @@
 
 // IT IS OK TO GLOBALLY SEARCH AND REPLACE "Course", "Lecture", "Subject"
 
-		const dateLastUpdated = "2026-07-19";
+		const dateLastUpdated = "2026-07-25";
 
 // info note : getFlattenedData assumes all of the property names within info are unique
 // info note : document.ready adds derived property names to info
@@ -26,6 +26,51 @@
 		const info = [
 			{ "cast" : "MIT 6.1200", "host" : "Zachary Abel", "thisCourse" : "Mathematics for Computer Science", "abbrevCourse" : "Mathematics for Computer Science", "date" : "2024-01-01", "youTubeList" : "PLUl4u3cNGP61VNvICqk2HXJTonnKgAc9d", "onlineSource" : "https://ocw.mit.edu/courses/6-1200j-mathematics-for-computer-science-spring-2024/", "theseLectures" : 
 				[
+					{ "title" : "Video 15 : Relations and Counting", "url" : "https://youtu.be/gwOxD51n3nc", "theseClips" : 
+						[
+						{ "thisSubject" : "Relations & Counting", "start" : "0:30", "end" : "1:18:30",},
+						{ "thisSubject" : "Relations", "start" : "0:30", "end" : "52:29",},
+						{ "thisSubject" : "Relation Definition", "start" : "0:51", "end" : "5:42",},
+						{ "thisSubject" : "Relation Notation", "start" : "5:52", "end" : "8:22",},
+						{ "thisSubject" : "Relation as Function", "start" : "9:28", "end" : "13:48",},
+						{ "thisSubject" : "Total Definition for Relations", "start" : "13:48", "end" : "17:17",},
+						{ "thisSubject" : "Total Definition for Functions", "start" : "17:17", "end" : "18:28",},
+						{ "thisSubject" : "Partial Definition for Functions", "start" : "18:28", "end" : "19:25",},
+						{ "thisSubject" : "Injective vs Surjective", "start" : "21:22", "end" : "23:26",},
+						{ "thisSubject" : "Injective Definition for Relations", "start" : "21:22", "end" : "22:02",},
+						{ "thisSubject" : "Surjective Definition for Relations", "start" : "22:02", "end" : "22:21",},
+						{ "thisSubject" : "Total Injection Theorem", "start" : "23:55", "end" : "25:35",},
+						{ "thisSubject" : "Surjective Function Theorem", "start" : "25:42", "end" : "26:48",},
+						{ "thisSubject" : "Bijection Definition", "start" : "26:56", "end" : "27:36",},
+						{ "thisSubject" : "Bijection Theorem", "start" : "27:36", "end" : "27:58",},
+						{ "thisSubject" : "Binary Relation Definition", "start" : "28:23", "end" : "30:44",},
+						{ "thisSubject" : "Directed Graph Definition", "start" : "28:23", "end" : "29:43",},
+						{ "thisSubject" : "Relations as Graphs", "start" : "31:47", "end" : "34:30",},
+						{ "thisSubject" : "Equivalence Relation Definition", "start" : "34:41", "end" : "40:23",},
+						{ "thisSubject" : "Relation Reflexivity", "start" : "36:32", "end" : "37:57",},
+						{ "thisSubject" : "Relation Symmetry", "start" : "37:00", "end" : "37:45",},
+						{ "thisSubject" : "Relation Transitivity", "start" : "37:53", "end" : "38:46",},
+						{ "thisSubject" : "Relation Partition Definition", "start" : "40:33", "end" : "43:46",},
+						{ "thisSubject" : "WPO (Weak Partial Order)", "start" : "44:03", "end" : "52:29",},
+						{ "thisSubject" : "Antisymmetry for Relations", "start" : "46:26", "end" : "47:24",},
+						{ "thisSubject" : "Walks, WPOs, and DAGs", "start" : "48:11", "end" : "49:28",},
+						{ "thisSubject" : "Comparable Definition for Relations", "start" : "49:47", "end" : "51:14",},
+						{ "thisSubject" : "Total Definition for WPO", "start" : "51:27", "end" : "52:29",},
+						{ "thisSubject" : "Counting", "start" : "52:54", "end" : "1:18:30",},
+						{ "thisSubject" : "Counting Definition", "start" : "52:54", "end" : "54:31",},
+						{ "thisSubject" : "Counting via Bijections", "start" : "54:31", "end" : "57:16",},
+						{ "thisSubject" : "Counting Motivation", "start" : "58:08", "end" : "58:47",},
+						{ "thisSubject" : "Counting Techniques", "start" : "59:00", "end" : "1:18:30",},
+						{ "thisSubject" : "Product Rule", "start" : "59:06", "end" : "1:01:49",},
+						{ "thisSubject" : "Binary Sequence Definition", "start" : "1:00:48", "end" : "1:01:19",},
+						{ "thisSubject" : "Bijection Rule", "start" : "1:02:05", "end" : "1:05:44",},
+						{ "thisSubject" : "Sum Rule", "start" : "1:06:02", "end" : "1:07:03",},
+						{ "thisSubject" : "Counting Example #1", "start" : "1:07:15", "end" : "1:13:15",},
+						{ "thisSubject" : "Generalized Product Rule", "start" : "1:13:23", "end" : "1:18:30",},
+						{ "thisSubject" : "Counting Example #2", "start" : "1:13:29", "end" : "1:15:39",},
+						],
+					},
+// ----------------------------------------------------------------------------------
 					{ "title" : "Video 14 : Digraphs and DAGs", "url" : "https://youtu.be/E33i67e_X9Q", "theseClips" : 
 						[
 						{ "thisSubject" : "Graph Theory", "start" : "0:31", "end" : "1:18:55",},
@@ -895,7 +940,7 @@
 						const filteredLectures = flattenedArrayOfObjects.filter(function(obj) {return flattenedDatum[propertyName] === obj[propertyName]});
 						const numFilteredLectures = filteredLectures.length;
 
-						const idProperty = flattenedDatum[propertyName].replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_").replace(/\!/g, "_").replace(/\&/g, "_");	// regexp
+						const idProperty = flattenedDatum[propertyName].replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_").replace(/\!/g, "_").replace(/\&/g, "_").replace(/,/g, "_");	// regexp
 						htmlClipCards += '<div class="card">';
 						htmlClipCards += '<div class="card-header" id="heading' + idProperty + '">';
 						htmlClipCards += '<button class="btn btn-link btn-block text-left dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse' + idProperty + '" aria-expanded="true" aria-controls="collapse' + idProperty + '">';
