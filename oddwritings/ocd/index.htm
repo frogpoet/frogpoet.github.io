@@ -960,7 +960,7 @@
 						const filteredLectures = flattenedArrayOfObjects.filter(function(obj) {return flattenedDatum[propertyName] === obj[propertyName]});
 						const numFilteredLectures = filteredLectures.length;
 
-						const idProperty = flattenedDatum[propertyName].replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_").replace(/\!/g, "_").replace(/\&/g, "_").replace(/,/g, "_");	// regexp
+						const idProperty = flattenedDatum[propertyName].replace(/ /g, "_").replace(/'/g, "_").replace(/\(/g, "_").replace(/\)/g, "_").replace(/=/g, "_").replace(/\//g, "_").replace(/\+/g, "_").replace(/\:/g, "_").replace(/\^/g, "_").replace(/\!/g, "_").replace(/\&/g, "_").replace(/,/g, "_").replace(/#/g, "_");	// regexp
 						htmlClipCards += '<div class="card">';
 						htmlClipCards += '<div class="card-header" id="heading' + idProperty + '">';
 						htmlClipCards += '<button class="btn btn-link btn-block text-left dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse' + idProperty + '" aria-expanded="true" aria-controls="collapse' + idProperty + '">';
