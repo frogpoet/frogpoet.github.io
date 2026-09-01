@@ -18,7 +18,7 @@
 
 // IT IS OK TO GLOBALLY SEARCH AND REPLACE "Course", "Lecture", "Subject"
 
-		const dateLastUpdated = "2026-08-31";
+		const dateLastUpdated = "2026-09-01";
 
 // info note : getFlattenedData assumes all of the property names within info are unique
 // info note : document.ready adds derived property names to info
@@ -1581,6 +1581,65 @@
 			}
 		}
 
+		function decodeEntities(str) {
+			try {
+				const entityMap = {
+					'&amp;': '&',
+					'&lt;': '<',
+					'&gt;': '>',
+				};
+				return str.replace(/&[a-zA-Z0-9#]+;/g, (match) => entityMap[match] || match);		// regexp. click subject dropdown to test
+			}
+			catch(e) {
+				alert('decodeEntities: ' + e.message + ', str = ' + str);
+				throw(e);
+			}
+		}
+		function regressionDecodeEntities() {
+			try {
+				// --------- input is the empty string
+				let input = "";
+				let decodedEntities = decodeEntities(input);
+				let expected = "";
+				if (decodedEntities !== expected) throw new Error('expected ' + expected + ' for empty string, found ' + decodedEntities);
+
+				// --------- input has no character entity
+				input = "subject";
+				decodedEntities = decodeEntities(input);
+				expected = "subject";
+				if (decodedEntities !== expected) throw new Error('expected ' + expected + ' for no character entity, found ' + decodedEntities);
+
+				// --------- input has two character entities
+				input = "one &amp; two &amp; three";
+				decodedEntities = decodeEntities(input);
+				expected = "one & two & three";
+				if (decodedEntities !== expected) throw new Error('expected ' + expected + ' for two character entities, found ' + decodedEntities);
+
+				// --------- input has one ampersand
+				input = "Relations &amp; Counting";
+				decodedEntities = decodeEntities(input);
+				expected = "Relations & Counting";
+				if (decodedEntities !== expected) throw new Error('expected ' + expected + ' for one ampersand, found ' + decodedEntities);
+
+				// --------- input has one less-than
+				input = "Independence with &lt;2 Events";
+				decodedEntities = decodeEntities(input);
+				expected = "Independence with <2 Events";
+				if (decodedEntities !== expected) throw new Error('expected ' + expected + ' for one less-than, found ' + decodedEntities);
+
+				// --------- input has one greater-than
+				input = "Independence with &gt;2 Events";
+				decodedEntities = decodeEntities(input);
+				expected = "Independence with >2 Events";
+				if (decodedEntities !== expected) throw new Error('expected ' + expected + ' for one greater-than, found ' + decodedEntities);
+
+			}
+			catch(e) {
+				alert('regressionDecodeEntities: ' + e.message);
+				throw(e);
+			}
+		}
+
 		function getFlattenedData(chosenCourses, chosenLectures, chosenSubjects) {
 			try {
 				let flattenedData = [];
@@ -1593,8 +1652,9 @@
 									const { theseClips, ...strippedLectureData } = thisLecture;
 									if ((chosenLecture === allLecturesText) || (chosenLecture === strippedLectureData.title)) {
 										let startSubjects = [];
-										for (const chosenSubject of chosenSubjects) {
+										for (let chosenSubject of chosenSubjects) {
 											for (const thisClip of theseClips) {
+												chosenSubject = decodeEntities(chosenSubject);
 												if ((chosenSubject === allSubjectsText) || (chosenSubject === thisClip.thisSubject)) {
 													const startSubject = {"start" : thisClip.start, "thisSubject" : thisClip.thisSubject};
 													// a subject can appear more than one time in a lecture, but if so
@@ -1729,9 +1789,33 @@
 				expected = 22;
 				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for all courses, one lecture, all subjects, found ' + flattenedData.length);
 				expected = 'SNARG Construction';
-				if (flattenedData[0].thisSubject !== expected) throw new Error('expected ' + expected + ' for all courses, one lecture, all subjects, found ' + flattenedData[0].title);
+				if (flattenedData[0].thisSubject !== expected) throw new Error('expected ' + expected + ' for all courses, one lecture, all subjects, found ' + flattenedData[0].thisSubject);
 				expected = expectedNumProperties;
 				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for all courses, one lecture, all subjects, found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- one course, one lecture, one subject with no character entities (enumerated)
+				chosenCourses = ['Mathematics for Computer Science'];
+				chosenLectures = ['Video 15 : Relations and Counting'];
+				chosenSubjects = ['Sum Rule'];
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+				expected = 1;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for one course, one lecture, one subject with no character entities (enumerated), found ' + flattenedData.length);
+				expected = 'Sum Rule';
+				if (flattenedData[0].thisSubject !== expected) throw new Error('expected ' + expected + ' for one course, one lecture, one subject with no character entities (enumerated), found ' + flattenedData[0].thisSubject);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for one course, one lecture, one subject with no character entities (enumerated), found ' + Object.keys(flattenedData[0]).length);
+
+				// --------- one course, one lecture, one subject with one character entity (enumerated)
+				chosenCourses = ['Mathematics for Computer Science'];
+				chosenLectures = ['Video 15 : Relations and Counting'];
+				chosenSubjects = ['Relations &amp; Counting'];
+				flattenedData = getFlattenedData(chosenCourses, chosenLectures, chosenSubjects);
+				expected = 1;
+				if (flattenedData.length !== expected) throw new Error('expected ' + expected + ' for one course, one lecture, one subject with one character entity (enumerated), found ' + flattenedData.length);
+				expected = 'Relations & Counting';
+				if (flattenedData[0].thisSubject !== expected) throw new Error('expected ' + expected + ' for one course, one lecture, one subject with one character entity (enumerated), found ' + flattenedData[0].thisSubject);
+				expected = expectedNumProperties;
+				if (Object.keys(flattenedData[0]).length != expected) throw new Error('expected ' + expected + ' for one course, one lecture, one subject with one character entity (enumerated), found ' + Object.keys(flattenedData[0]).length);
 			}
 			catch(e) {
 				alert('regressionGetFlattenedData: ' + e.message);
@@ -1746,6 +1830,7 @@
 				regressionGetLecturesForCourses();
 				regressionGetSubjectsForLectures();
 				regressionGetUniqueObjects();
+				regressionDecodeEntities();
 				regressionGetFlattenedData();
 				alert('tests passed');
 			}
