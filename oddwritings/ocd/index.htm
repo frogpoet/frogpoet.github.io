@@ -18,7 +18,7 @@
 
 // IT IS OK TO GLOBALLY SEARCH AND REPLACE "Course", "Lecture", "Subject"
 
-		const dateLastUpdated = "2026-09-08";
+		const dateLastUpdated = "2026-09-21";
 
 // info note : getFlattenedData assumes all of the property names within info are unique
 // info note : document.ready adds derived property names to info
@@ -39,7 +39,8 @@
 						{ "thisSubject" : "PDF (Probability Density Function)", "start" : "26:15", "end" : "27:18",},
 						{ "thisSubject" : "Bernoulli Distribution", "start" : "27:48", "end" : "29:19",},
 						{ "thisSubject" : "Uniform Random Variable", "start" : "29:30", "end" : "33:05",},
-						{ "thisSubject" : "Probabilistic Algorithm", "start" : "33:15", "end" : "46:40",},
+						{ "thisSubject" : "Probabilistic Algorithm", "start" : "33:15", "end" : "46:40",
+						  "note" : "A section of the video immediately before 33:15 appears to have been edited out.  It MAY contain something similar to the following setup: Suppose I prepare two boxes each containing an unknown amount of candy, i.e. some amount between 0 and 10 (and suppose the values are not equal). I hand them to you and ask you to choose a box. What’s your chance of choosing the box with the greater number? Clearly, no better than 1/2.  The goal is to pick the box which turns out to have the most candy.",},
 						{ "thisSubject" : "Binomial Distribution", "start" : "47:50", "end" : "1:10:28",},
 						{ "thisSubject" : "CDF Appoximation", "start" : "56:15", "end" : "1:10:28",},
 						],
@@ -1085,6 +1086,7 @@
 						for (let i = 0; i < numFilteredLectures; i++) {
 							const buttonId = "button_" + idProperty + i;
 							const videoId = "video_" + idProperty + i;
+							const note = (typeof filteredLectures[i].note === 'undefined') ? "" : filteredLectures[i].note;
 							const printableDuration = prettyPrintDuration(filteredLectures[i].duration);
 							const printablestart = (typeof filteredLectures[i].start === 'undefined') ? "" : filteredLectures[i].start;
 							const printableend = (typeof filteredLectures[i].end === 'undefined') ? "" : filteredLectures[i].end;
@@ -1093,6 +1095,7 @@
 							htmlClipCards += '<div class="text-right">' + filteredLectures[i].abbrevCourse + '</div>';
 							htmlClipCards += '<div class="text-right">' + filteredLectures[i].thisSubject + '</div>';
 							htmlClipCards += '<div class="text-right">' + filteredLectures[i].date + '</div>';
+							htmlClipCards += '<div class="text-left"><hr>' + note + '</hr></div>';
 							htmlClipCards += '<div class="text-left">' + printableDuration + ' ' + printableTimeRange + '</div>';
 							htmlClipCards += '<button id="' + buttonId + '" class="btn btn-link btn-block text-left dropdown-toggle border" type="button" onclick="displayVideo(\'' + filteredLectures[i].urlClip + '\', \'' + videoId + '\', \'' + buttonId + '\');">  ' + filteredLectures[i].title + '</button><div id="' + videoId + '"></div>';
 							htmlClipCards += '</div>';
